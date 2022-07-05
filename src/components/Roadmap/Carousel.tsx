@@ -9,11 +9,12 @@ interface IStates {
 
 interface Props {
   children: React.ReactNode;
-  _data: string[];
+  _data: any[];
   dragSpeed: number;
   itemWidth: number;
   itemHeight: number;
   itemSideOffsets: number;
+  carouselRef: HTMLDivElement | null;
 }
 class Carousel extends React.Component<Props, IStates> {
   cRef: any;
@@ -95,7 +96,8 @@ class Carousel extends React.Component<Props, IStates> {
   // handle Snap To Sides
   handleSnap = () => {
     // const { isDown, startX, transLeftOffset } = this.state
-    const { _data, itemWidth, itemSideOffsets } = this.props as Props;
+    const { _data, itemWidth, itemSideOffsets, carouselRef } = this
+      .props as Props;
     const carousel = this.cRef.current;
 
     // Resetting
@@ -107,11 +109,11 @@ class Carousel extends React.Component<Props, IStates> {
     const tempThresholdOffset = this.giveMeIntValOf(
       carousel.firstChild.style.transform
     );
+    if (!carouselRef) return;
+    const itemW = carouselRef?.clientWidth;
     // (2) items width - 30(first & last item removed margins) - containerWidth(b/c of ending part)
     const end =
-      _data.length * (itemWidth + 2 * itemSideOffsets) -
-      30 -
-      carousel.offsetWidth;
+      _data.length * (itemW + 2 * itemSideOffsets) - 30 - carousel.offsetWidth;
 
     // (3) check if we passing from threshold ( handeling Snap To Sides )
     if (tempThresholdOffset < 0 || tempThresholdOffset > end) {
