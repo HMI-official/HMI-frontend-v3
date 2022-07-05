@@ -123,7 +123,7 @@ const Title = styled.h1`
   /* margin: 1rem auto; */
   /* font-weight: 800; */
   font-family: "Saira-Black";
-  border-bottom: 2px solid ${(props) => props.theme.body};
+  /* border-bottom: 2px solid ${(props) => props.theme.body}; */
   width: fit-content;
 
   @media (max-width: 40em) {
