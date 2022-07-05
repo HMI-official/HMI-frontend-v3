@@ -1,0 +1,63 @@
+Folder Structure:
+
+    - assets => contains all the assests such as images, audio and svg files
+    - componenets => Files/Sections used to build this portfolio
+    - Icons => contains Icons in component format
+    - GlobalStyles.js => contains global styles for whole application
+    - Themes.js => contains Color and fonts size in variables
+
+
+
+Steps to run
+
+    - Make sure to open this directory in Terminal / CMD
+    - Run npm install
+    - Run npm start
+
+
+
+External Libraries used in this project: 
+
+    - https://styled-components.com/docs/advanced
+    - https://greensock.com/gsap/
+    - https://www.npmjs.com/package/typewriter-effect
+    - https://www.npmjs.com/package/react-confetti 
+    - https://www.npmjs.com/package/react-use	
+    
+Fonts Are from:
+
+    - https://fontsource.org/    
+
+
+Special Thanks to Robert(https://twitter.com/robertbrosma) for creating https://bigheads.io/. 
+
+
+Few tips:
+
+    - If you're using this website make sure you have changed all the required links (social)
+    - All the svg files used in this website are from below websites👇
+      => https://icons8.com
+      => https://freesvg.org/
+      
+      (If you're using this project for commercial use then make sure to use right license if there is any)
+    
+
+Note: Character figures used in this project are from https://bigheads.io/
+      [I'd suggest you to consult it's author if you want to use it in commercial or other projects]
+
+
+Thank You So Much for purchasing this Project and Supporting My Channel!
+
+If you have any question or You want me to make project then You can reach out to me via:
+
+E-mail : codebucks27@gmail.com
+Twitter: https://twitter.com/code_bucks
+Instagram: https://www.instagram.com/code.bucks/
+
+MyChannel: https://www.youtube.com/channel/UCeYt6blRBKuNrEg_-282fSA
+
+
+
+
+
+
