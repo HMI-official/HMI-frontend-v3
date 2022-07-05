@@ -17,8 +17,10 @@ ${
 }
 
 body{
-    font-family: 'Sora', sans-serif;
+    font-family: 'Saira-Light', sans-serif;
     overflow-x: hidden;
+    background-color: ${(props) => props.theme.text};
+    color: ${(props) => props.theme.body};
 }
 
 h1,h2,h3,h4,h5,h6{

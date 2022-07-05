@@ -8,7 +8,8 @@ import Logo from "./Logo";
 
 const Section = styled.section`
   width: 100vw;
-  background-color: ${(props) => props.theme.body};
+  color: ${(props) => props.theme.body};
+  background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`};
 `;
 const NavBar = styled.nav`
   display: flex;
@@ -64,7 +65,7 @@ const Menu = styled.ul<{ click: boolean }>`
 
 const MenuItem = styled.li`
   margin: 0 1rem;
-  color: ${(props) => props.theme.text};
+  /* color: ${(props) => props.theme.text}; */
   cursor: pointer;
 
   &::after {
@@ -195,7 +196,8 @@ const Navigation = () => {
   return (
     <Section id="navigation">
       <NavBar>
-        <Logo />
+        {/* <Logo /> */}
+        <div>logo</div>
         <HamburgerMenu click={click} onClick={() => setClick(!click)}>
           &nbsp;
         </HamburgerMenu>
