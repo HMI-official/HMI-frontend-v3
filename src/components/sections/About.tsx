@@ -60,7 +60,7 @@ const Box = styled.div`
 const Title = styled.h2`
   font-size: ${(props) => props.theme.fontxxl};
   text-transform: capitalize;
-  color: ${(props) => props.theme.body};
+  color: ${(props) => props.theme.primary};
   align-self: flex-start;
   width: 80%;
   margin: 0 auto;

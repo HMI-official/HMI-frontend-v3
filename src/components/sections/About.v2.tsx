@@ -6,8 +6,14 @@ const AboutV2 = () => {
     <Section id="about">
       <Container>
         <Box>
-          <Title>Who are we?</Title>
+          <Title>REAL VALUE PROJECT</Title>
           <SubText>
+            HI-PLANET is an NFT project by High Minded Intelligence, IRL ("in
+            real life") Streetwear fashion company. HI-Planet shares its 50% of
+            net profit to Planet holders in the concept of NFT Utility (which
+            comes from its E-commerce sales).
+            <br />
+            <br />
             HI-Planet was came from the concept of game. Our goal is moving on
             to metaverse and continue Planet story in the metaverse. Become a
             Planet holder and join us !
@@ -78,7 +84,7 @@ const Box = styled.div`
 const Title = styled.h2`
   font-size: ${(props) => props.theme.fontxxl};
   text-transform: capitalize;
-  color: ${(props) => props.theme.body};
+  color: ${(props) => props.theme.primary};
   align-self: flex-start;
   width: 80%;
   margin: 0 auto;

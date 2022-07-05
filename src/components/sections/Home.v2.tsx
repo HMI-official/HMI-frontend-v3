@@ -5,7 +5,7 @@ const HomeV2 = () => {
   return (
     <Section id="home">
       <Video
-        src="/vid/hi-planet-main-vid.mp4"
+        src="/vid/hi-planet-main-vid-v2.mp4"
         autoPlay
         loop
         muted

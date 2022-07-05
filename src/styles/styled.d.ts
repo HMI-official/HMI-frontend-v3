@@ -50,5 +50,6 @@ declare module "styled-components" {
     ["--chakra-colors-teal-700"]: string;
     ["--chakra-colors-teal-800"]: string;
     ["--chakra-colors-teal-900"]: string;
+    primary: string;
   }
 }

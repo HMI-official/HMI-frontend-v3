@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminDashboard from "./routes/admin-dashboard";
 import HomeV2 from "./components/sections/Home.v2";
 import AboutV2 from "./components/sections/About.v2";
+import RoadmapV2 from "./components/sections/Roadmap.v2";
 function App() {
   return (
     <Routes>
@@ -22,7 +23,7 @@ function App() {
             <Navigation />
             <HomeV2 />
             <AboutV2 />
-            <Roadmap />
+            <RoadmapV2 />
             <Showcase />
             <Team />
             <Faq />
