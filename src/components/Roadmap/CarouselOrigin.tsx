@@ -16,7 +16,7 @@ interface Props {
   itemSideOffsets: number;
   carouselRef: HTMLDivElement | null;
 }
-class Carousel extends React.Component<Props, IStates> {
+class CarouselOrigin extends React.Component<Props, IStates> {
   cRef: any;
   constructor(props: Props) {
     super(props);
@@ -53,7 +53,7 @@ class Carousel extends React.Component<Props, IStates> {
       },
       () => {
         // handeling reset the transition
-        const { startX, transLeftOffset, dragSpeed } = this.state as IStates;
+        const { startX, transLeftOffset, dragSpeed } = this.state;
 
         const x = e.pageX - carousel.offsetLeft;
         const walk = (x - startX) * dragSpeed;
@@ -78,8 +78,7 @@ class Carousel extends React.Component<Props, IStates> {
 
   // mouse Move
   handleMouseMove = (e: any) => {
-    const { isDown, startX, transLeftOffset, dragSpeed } = this
-      .state as IStates;
+    const { isDown, startX, transLeftOffset, dragSpeed } = this.state;
     const carousel = this.cRef.current;
 
     if (!isDown) return;
@@ -96,8 +95,7 @@ class Carousel extends React.Component<Props, IStates> {
   // handle Snap To Sides
   handleSnap = () => {
     // const { isDown, startX, transLeftOffset } = this.state
-    const { _data, itemWidth, itemSideOffsets, carouselRef } = this
-      .props as Props;
+    const { _data, itemWidth, itemSideOffsets } = this.props;
     const carousel = this.cRef.current;
 
     // Resetting
@@ -109,20 +107,16 @@ class Carousel extends React.Component<Props, IStates> {
     const tempThresholdOffset = this.giveMeIntValOf(
       carousel.firstChild.style.transform
     );
-    // if (!carouselRef) return;
-    const itemW = carouselRef?.clientWidth;
     // (2) items width - 30(first & last item removed margins) - containerWidth(b/c of ending part)
     const end =
       _data.length * (itemWidth + 2 * itemSideOffsets) -
-      carousel.offsetWidth +
-      30;
-
-    // const end =
-    // _data.length * (itemW + 2 * itemSideOffsets) - 30 - carousel.offsetWidth;
+      30 -
+      carousel.offsetWidth;
 
     // (3) check if we passing from threshold ( handeling Snap To Sides )
     if (tempThresholdOffset < 0 || tempThresholdOffset > end) {
       this.setState({ isDown: false });
+      //   console.log("end", end);
       carousel.firstChild.style.cssText = `
         transform: translateX(${tempThresholdOffset < 0 ? 0 : end}px);
         transition: transform 0.5s cubic-bezier(.25,.72,.51,.96);
@@ -137,13 +131,19 @@ class Carousel extends React.Component<Props, IStates> {
   };
 
   render() {
-    const { _data, itemWidth, itemHeight, itemSideOffsets, children } = this
-      .props as Props;
+    const { _data, itemWidth, itemHeight, itemSideOffsets } = this.props;
 
     const cWrapperStyle = {
       width: `${_data.length * (itemWidth + 2 * itemSideOffsets)}px`,
       height: `${itemHeight}px`,
     };
+
+    // 여기부터 추가
+    const carousel = this.cRef.current;
+    const _end =
+      _data.length * (itemWidth + 2 * itemSideOffsets) -
+      30 -
+      carousel?.offsetWidth;
 
     return (
       <div
@@ -158,14 +158,14 @@ class Carousel extends React.Component<Props, IStates> {
           className="cWrapper"
           style={{
             ...cWrapperStyle,
-            transform: "translateX(0px)",
+            transform: `translateX(${_end}px)`,
           }}
         >
-          {children}
+          {this.props.children}
         </div>
       </div>
     );
   }
 }
 
-export default Carousel;
+export default CarouselOrigin;

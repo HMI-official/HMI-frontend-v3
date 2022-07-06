@@ -1,42 +1,100 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Carousel from "../Roadmap/Carousel";
+import CarouselOrigin from "../Roadmap/CarouselOrigin";
 
-const items = ["one", "two", "three", "four", "five"].reverse();
+const items = ["one", "two", "three", "four", "five"];
 
 const carouselContents = [
   {
     title: "Q1",
     subtitle: "Launch HI-Planet NFT",
     content: [
-      "1-1 ) Build HI-Planet Community",
-      "1-2) Carry our tier 1 marketing to grow Community",
-      "1-3) Launch 3,333 HI-Planet NFTs on ETH Blockchain",
+      {
+        number: "1-1",
+        text: "Build HI-Planet Community",
+      },
+      {
+        number: "1-2",
+        text: "Carry our tier 1 marketing to grow Community",
+      },
+      {
+        number: "1-3",
+        text: "Launch 3,333 HI-Planet NFTs on ETH Blockchain",
+      },
     ],
   },
   {
     title: "Q2",
     subtitle: "Welcome Package",
     content: [
-      '2-1) All HI-Planet holders will receive welcome packages physically which will be directly shipped by "High Minded Intelligence"',
+      {
+        number: "2-1",
+        text: '2-1) All HI-Planet holders will receive welcome packages physically which will be directly shipped by "High Minded Intelligence"',
+      },
     ],
   },
   {
     title: "Q3",
     subtitle: "Community network",
     content: [
-      "3-1) Merch collaboration event with holders",
-      "3-2) Acquisition of land in metaverse",
-      "3-3) Development of studio in metavers where members can hang out and interact together",
+      {
+        number: "3-1",
+        text: "Merch collaboration event with holders",
+      },
+      {
+        number: "3-2",
+        text: "Acquisition of land in metaverse",
+      },
+      {
+        number: "3-3",
+        text: "Development of studio in metavers where members can hang out and interact together",
+      },
     ],
   },
-];
+  {
+    title: "Q4",
+    subtitle: "Community network",
+    content: [
+      {
+        number: "3-1",
+        text: "Merch collaboration event with holders",
+      },
+      {
+        number: "3-2",
+        text: "Acquisition of land in metaverse",
+      },
+      {
+        number: "3-3",
+        text: "Development of studio in metavers where members can hang out and interact together",
+      },
+    ],
+  },
+  {
+    title: "Q5",
+    subtitle: "Community network",
+    content: [
+      {
+        number: "3-1",
+        text: "Merch collaboration event with holders",
+      },
+      {
+        number: "3-2",
+        text: "Acquisition of land in metaverse",
+      },
+      {
+        number: "3-3",
+        text: "Development of studio in metavers where members can hang out and interact together",
+      },
+    ],
+  },
+].reverse();
 
 const setting = {
   dragSpeed: 1.25,
-  itemWidth: 480,
+  itemWidth: 400,
   itemHeight: 180,
-  itemSideOffsets: 20,
+  itemSideOffsets: 15,
 };
 
 const itemStyle = {
@@ -60,8 +118,13 @@ const RoadmapV2 = () => {
   const [carouselRef, setCarouselRef] = React.useState<HTMLDivElement | null>(
     null
   );
+
   const CarouselComponent = (
-    <Carousel _data={carouselContents} carouselRef={carouselRef} {...setting}>
+    <CarouselOrigin
+      _data={carouselContents}
+      carouselRef={carouselRef}
+      {...setting}
+    >
       {carouselContents.map((content, _i) => (
         <RoadmapItemContainer
           key={_i}
@@ -72,34 +135,41 @@ const RoadmapV2 = () => {
           <div className="item1">{content.title}</div>
           <div className="item2">{content.subtitle}</div>
           <CarouselWrapper>
-            <div>
-              <div>1-1) Build HI-Planet Community</div>
-            </div>
-            <div>
-              <span>1-2)</span> Carry our tier 1 marketing to grow Community
-            </div>
-            <div>
-              <span>1-3)</span> Launch 3,333 HI-Planet NFTs on ETH Blockchain
-            </div>
+            {content.content.map((item) => (
+              <div>
+                <span className="number">{item.number})</span>
+                <span>{item.text}</span>
+              </div>
+            ))}
           </CarouselWrapper>
         </RoadmapItemContainer>
       ))}
-    </Carousel>
+    </CarouselOrigin>
   );
   return (
     <Section id="roadmap">
-      <TitleContainer>
-        <Title>ROADMAP</Title>
-      </TitleContainer>
-      <CarouselEl>
-        <Container>{CarouselComponent}</Container>
-      </CarouselEl>
+      <SectionWrapper>
+        <TitleContainer>
+          <Title>ROADMAP</Title>
+        </TitleContainer>
+        <CarouselEl>
+          <Container>{CarouselComponent}</Container>
+        </CarouselEl>
+      </SectionWrapper>
     </Section>
   );
 };
 
 export default RoadmapV2;
 
+const SectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 10rem;
+`;
 const Section = styled.section`
   min-height: 50vh;
   width: 100vw;
@@ -109,7 +179,7 @@ const Section = styled.section`
   /* display: inline-block; */
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
 `;
@@ -136,13 +206,13 @@ const TitleContainer = styled.div`
   width: 90%;
 `;
 const Container = styled.div`
-  width: 100%;
+  width: calc(100% - 8rem);
   height: 80vh;
   /* gap: 1rem; */
   /* background-color: ${(props) => props.theme.body}; */
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
 
@@ -155,15 +225,15 @@ const Container = styled.div`
 `;
 
 const CarouselEl = styled.div`
-  .container {
-    width: 100%;
-    /* height: 100vh; */
-    /* background: rgb(57, 49, 63); */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  /* .container { */
+  width: 100%;
+  /* height: 100vh; */
+  background: rgb(57, 49, 63);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* } */
 
   .container > h1 {
     color: rgb(255, 234, 195);
@@ -171,13 +241,13 @@ const CarouselEl = styled.div`
 
   .carousel {
     /* width: 700px; */
-    width: 100%;
+    max-width: 100%;
     height: 300px;
-    /* background: rgba(201, 165, 118, 0.37); */
-    /* direction: rtl; */
+    background: rgba(201, 165, 118, 0.37);
+    direction: rtl;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     overflow: hidden;
   }
 
@@ -189,16 +259,24 @@ const CarouselEl = styled.div`
   .cWrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
+    /* align-items: center; */
+    align-items: flex-start;
   }
 
   .item {
-    /* background: coral; */
+    background: coral;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: grab;
+  }
+
+  .item p {
+    position: relative;
+    top: -5px;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #fff;
+    user-select: none;
   }
 
   .item:first-child {
@@ -216,6 +294,7 @@ const RoadmapItemContainer = styled.div`
   align-items: center;
   gap: 1rem;
   max-width: 27vw;
+  direction: ltr !important;
   /* width: 100% !important; */
   .item1,
   .item2 {
@@ -228,7 +307,7 @@ const RoadmapItemContainer = styled.div`
     font-size: ${(props) => props.theme.font2xl};
   }
   .item2 {
-    font-size: ${(props) => props.theme.fontlg};
+    font-size: ${(props) => props.theme.fontxl};
   }
 `;
 
@@ -239,18 +318,14 @@ const CarouselWrapper = styled.div`
   align-items: center;
   width: 100%;
   text-align: start;
+  font-size: ${(props) => props.theme.fontlg};
 
   div {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
-    /* align-items: flex-end; */
-    /* text-align: left; */
-    /* flex-direction: row-reverse; */
   }
-  span {
+  .number {
     word-break: keep-all !important;
     display: flex;
-    /* padding: 1rem; */
   }
 `;
