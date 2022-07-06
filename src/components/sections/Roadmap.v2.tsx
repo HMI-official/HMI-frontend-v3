@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
-const isCarouselTest = false;
+const isCarouselTest = true;
 const items = ["one", "two", "three", "four", "five"];
 
 const carouselContents = [
@@ -191,11 +191,13 @@ const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding-right: 10rem;
   /* margin: 1rem auto; */
   /* font-weight: 800; */
   font-family: "Saira-Black";
   /* border-bottom: 2px solid ${(props) => props.theme.body}; */
   width: fit-content;
+  border: 1px solid ${(props) => props.theme.primary};
 
   @media (max-width: 40em) {
     font-size: ${(props) => props.theme.fontxl};
@@ -266,6 +268,7 @@ const CarouselEl = styled.div`
     justify-content: center;
     /* align-items: center; */
     align-items: flex-start;
+    /* gap: 4rem; */
   }
 
   .item {
