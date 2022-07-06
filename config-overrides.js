@@ -21,9 +21,11 @@ module.exports = function override(config) {
       Buffer: ["buffer", "Buffer"],
     }),
   ]);
-  // config.module.rules.push({
-  //   test: /\.svg$/,
-  //   use: ["@svgr/webpack"],
-  // });
+
+  config.module.rules.push({
+    test: /\.svg$/,
+    use: ["@svgr/webpack"],
+  });
+
   return config;
 };

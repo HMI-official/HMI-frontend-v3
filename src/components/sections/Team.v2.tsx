@@ -177,22 +177,20 @@ const ImgContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  :hover {
+    border-color: ${({ theme }) => theme.primary};
+    /* border-color: #00ffeaa3; */
+  }
+  transition: all 0.3s ease-in-out;
 
-  /* cursor: pointer; */
   img {
-    transition: all 0.3s ease-in-out;
-    width: 20rem;
-    height: 20rem;
-    min-height: 20rem;
+    width: 16rem;
+    height: 16rem;
+    min-height: 16rem;
 
     object-fit: cover;
-    border-radius: 20px;
-    /* border-color: rgba(255, 255, 255, 0.5); */
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    :hover {
-      border-color: ${({ theme }) => theme.primary};
-      /* border-color: #00ffeaa3; */
-    }
   }
 
   @media (max-width: 48em) {
@@ -202,8 +200,8 @@ const ImgContainer = styled.div`
     width: 10rem;
   }
 
-  img {
+  /* img {
     width: 100%;
     height: auto;
-  }
+  } */
 `;

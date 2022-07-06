@@ -1,0 +1,9 @@
+/* 여기부터 */
+@font-face {
+  font-family: "Saira-Light";
+  src: ("Saira-Light"), url(./fonts/Saira-Black.otf) format("otf");
+}
+@font-face {
+  font-family: "Saira-Black";
+  src: ("Saira-Black"), url(./fonts/Saira-Light.otf) format("otf");
+}

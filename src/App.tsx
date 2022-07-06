@@ -14,6 +14,8 @@ import RoadmapV2 from "./components/sections/Roadmap.v2";
 import ShowcaseV2 from "./components/sections/Showcase.v2";
 import Benefit from "./components/sections/Benefit";
 import TeamV2 from "./components/sections/Team.v2";
+// import "./styles/fonts.css";
+
 function App() {
   useEffect(() => {
     AOS.init({

@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Saira-Black";
+  font-weight: 800;
+  font-style: normal;
+  src: url("/fonts/Saira-Black.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Saira-Light";
+  font-weight: 300;
+  font-style: normal;
+  src: url("/fonts/Saira-Light.otf") format("truetype");
+}

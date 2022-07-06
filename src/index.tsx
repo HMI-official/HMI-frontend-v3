@@ -7,6 +7,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { light } from "./styles/Themes";
 import { BrowserRouter as Router } from "react-router-dom";
+import "./index.css";
 
 ReactDOM.render(
   <AccountProvider>
