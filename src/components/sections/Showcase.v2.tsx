@@ -30,7 +30,7 @@ const ShowcaseV2 = () => {
   const _arr = Array.from({ length: 4 }, (_, i) => i);
 
   return (
-    <Section>
+    <Section id="showcase">
       <Row direction="none" ref={Row1Ref}>
         {_arr.map((_, i) => TopRowNfts)}
       </Row>

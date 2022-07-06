@@ -15,17 +15,18 @@ export const HMI_HEROS_BG = {
 export const HMI_HEROS_BG_ARR = Object.values(HMI_HEROS_BG);
 
 export const HMI_HERO = {
-  earth: "/images/heros/4.jpg",
-  jupiter: "/images/heros/11.jpg",
-  mars: "/images/heros/13.jpg",
-  mercury: "/images/heros/5.jpg",
-  moon: "/images/heros/3.jpg",
-  neptune: "/images/heros/7.jpg",
-  pluto: "/images/heros/8.jpg",
-  saturn: "/images/heros/12.jpg",
-  sun: "/images/heros/1.jpg", // 없음
-  uranus: "/images/heros/2.jpg",
-  venus: "/images/heros/1.jpg", //없음
+  earth: "/images/heros/4.png",
+  jupiter: "/images/heros/11.png",
+  mars: "/images/heros/13.png",
+  mercury: "/images/heros/5.png",
+  moon: "/images/heros/3.png",
+  neptune: "/images/heros/7.png",
+  pluto: "/images/heros/8.png",
+  saturn: "/images/heros/12.png",
+  sun: "/images/heros/1.png", // 없음
+  uranus: "/images/heros/2.png",
+  venus: "/images/heros/1.png", //없음
+  bigbang: "/images/heros/bigbang.svg",
 };
 
 export const HMI_HERO_ARR = Object.values(HMI_HERO);

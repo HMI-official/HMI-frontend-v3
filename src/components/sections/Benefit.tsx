@@ -53,6 +53,7 @@ const Benefit = () => {
   return (
     <Section>
       <SectionWrapper>
+        <MainTitle>benefits</MainTitle>
         <Row>
           <Item title={benefitData[0].title}>{benefitData[0].content}</Item>
           <Item title={benefitData[1].title}>{benefitData[1].content}</Item>
@@ -68,7 +69,15 @@ const Benefit = () => {
 };
 
 export default Benefit;
-
+const MainTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Saira-Black";
+  color: ${(props) => props.theme.primary};
+  font-size: ${(props) => props.theme.font2xl};
+  text-transform: capitalize;
+`;
 const Row = styled.div`
   display: flex;
   align-items: flex-start;

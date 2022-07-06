@@ -124,7 +124,7 @@ const Image = styled.img`
 
 const Section = styled.section`
   min-height: 50vh;
-  padding: 5rem 0;
+  /* padding: 5rem 0; */
   padding-top: 0;
   width: 100%;
 
