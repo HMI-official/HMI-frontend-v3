@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
-const isCarouselTest = true;
+const isCarouselTest = false;
 const items = ["one", "two", "three", "four", "five"];
+const carouselGap: number = 64; //px
 
 const carouselContents = [
   {
@@ -104,15 +105,6 @@ const itemStyle = {
   margin: `0px ${setting.itemSideOffsets}px`,
 };
 
-interface CarouselProps {
-  dragSpeed: number;
-  itemWidth: number;
-  itemHeight: number;
-  itemSideOffsets: number;
-  children: React.ReactNode;
-  _data: string[];
-}
-
 const RoadmapV2 = () => {
   // const carouselRef = React.useRef<HTMLDivElement | null>(null);
   const [carouselRef, setCarouselRef] = React.useState<HTMLDivElement | null>(
@@ -123,6 +115,7 @@ const RoadmapV2 = () => {
     <CarouselOrigin
       _data={carouselContents}
       carouselRef={carouselRef}
+      carouselGap={carouselGap}
       {...setting}
     >
       {carouselContents.map((content, _i) => (
@@ -268,7 +261,7 @@ const CarouselEl = styled.div`
     justify-content: center;
     /* align-items: center; */
     align-items: flex-start;
-    /* gap: 4rem; */
+    gap: ${carouselGap}px;
   }
 
   .item {
@@ -323,7 +316,7 @@ const RoadmapItemContainer = styled.div`
     content: "";
     position: absolute;
     top: 0;
-    right: -15px;
+    right: -${carouselGap / 2 + 15}px;
     height: 100%;
     width: 1px;
     background: ${(props) => props.theme.gray2};

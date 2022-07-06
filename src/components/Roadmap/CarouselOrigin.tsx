@@ -15,6 +15,7 @@ interface Props {
   itemHeight: number;
   itemSideOffsets: number;
   carouselRef: HTMLDivElement | null;
+  carouselGap: number;
 }
 class CarouselOrigin extends React.Component<Props, IStates> {
   cRef: any;
@@ -95,7 +96,7 @@ class CarouselOrigin extends React.Component<Props, IStates> {
   // handle Snap To Sides
   handleSnap = () => {
     // const { isDown, startX, transLeftOffset } = this.state
-    const { _data, itemWidth, itemSideOffsets } = this.props;
+    const { _data, itemWidth, itemSideOffsets, carouselGap } = this.props;
     const carousel = this.cRef.current;
 
     // Resetting
@@ -111,7 +112,8 @@ class CarouselOrigin extends React.Component<Props, IStates> {
     const end =
       _data.length * (itemWidth + 2 * itemSideOffsets) -
       30 -
-      carousel.offsetWidth;
+      carousel.offsetWidth +
+      carouselGap * (_data.length - 1); // 이거는 갭넣는거
 
     // (3) check if we passing from threshold ( handeling Snap To Sides )
     if (tempThresholdOffset < 0 || tempThresholdOffset > end) {
@@ -131,10 +133,11 @@ class CarouselOrigin extends React.Component<Props, IStates> {
   };
 
   render() {
-    const { _data, itemWidth, itemHeight, itemSideOffsets } = this.props;
+    const { _data, itemWidth, itemHeight, itemSideOffsets, carouselGap } =
+      this.props;
 
     const cWrapperStyle = {
-      width: `${_data.length * (itemWidth + 2 * itemSideOffsets)}px`,
+      width: `${_data.length * (itemWidth + 200 * itemSideOffsets)}px`,
       height: `${itemHeight}px`,
     };
 
@@ -143,8 +146,9 @@ class CarouselOrigin extends React.Component<Props, IStates> {
     const _end =
       _data.length * (itemWidth + 2 * itemSideOffsets) -
       30 -
-      carousel?.offsetWidth;
-
+      carousel?.offsetWidth +
+      carouselGap * (_data.length - 1); // 이거는 갭넣는거
+    //   64 = 4rem == cwrap gap
     return (
       <div
         className="carousel"
