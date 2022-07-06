@@ -5,7 +5,7 @@ import { HMI_HEROS_BG_ARR } from "../../constants/image";
 const slideCardConfig = {
   SLIDER_CARD_WIDTH: "20.625rem",
   SLIDER_CARD_NUMBER: 11,
-  SLIDER_CARD_GAP: "3rem",
+  SLIDER_CARD_GAP: "2rem",
 };
 
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
@@ -42,6 +42,7 @@ export default ShowcaseV2;
 
 const Section = styled.section`
   min-height: 30vh;
+  padding: 5rem 0;
   /* width: 100vw; */
   background-color: ${(props) => props.theme.text};
   display: flex;

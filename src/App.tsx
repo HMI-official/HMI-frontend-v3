@@ -14,6 +14,7 @@ import HomeV2 from "./components/sections/Home.v2";
 import AboutV2 from "./components/sections/About.v2";
 import RoadmapV2 from "./components/sections/Roadmap.v2";
 import ShowcaseV2 from "./components/sections/Showcase.v2";
+import Benefit from "./components/sections/Benefit";
 function App() {
   return (
     <Routes>
@@ -26,6 +27,7 @@ function App() {
             <AboutV2 />
             <RoadmapV2 />
             <ShowcaseV2 />
+            <Benefit />
             <Team />
             <Faq />
             <Footer />
