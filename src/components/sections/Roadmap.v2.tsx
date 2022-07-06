@@ -232,7 +232,6 @@ const CarouselEl = styled.div`
   /* height: 100vh; */
   /* background: rgb(57, 49, 63); */
   background: ${isCarouselTest ? "rgb(57, 49, 63)" : ""};
-  background: ${(props) => `rgb(${props.theme.bodyRgba},14%)`};
 
   display: flex;
   flex-direction: column;
@@ -307,6 +306,8 @@ const RoadmapItemContainer = styled.div`
   position: relative;
   min-height: 340px;
   /* width: 100% !important; */
+  background: ${(props) => `rgb(${props.theme.bodyRgba},14%)`};
+
   .item1,
   .item2 {
     font-family: "Saira-Black";
