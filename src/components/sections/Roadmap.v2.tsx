@@ -3,7 +3,6 @@ import styled from "styled-components";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
 const isCarouselTest = false;
-const items = ["one", "two", "three", "four", "five"];
 const carouselGap: number = 64; //px
 
 const carouselContents = [
@@ -144,7 +143,7 @@ const RoadmapV2 = () => {
     <Section id="roadmap">
       <SectionWrapper>
         <TitleContainer>
-          <Title>ROADMAP</Title>
+          <Title>Roadmap</Title>
         </TitleContainer>
         <CarouselEl>
           <Container>{CarouselComponent}</Container>
@@ -203,7 +202,8 @@ const TitleContainer = styled.div`
 `;
 const Container = styled.div`
   width: calc(100% - 8rem);
-  min-height: 70vh;
+  min-height: 30vh;
+  padding-top: 5rem;
   /* gap: 1rem; */
   /* background-color: ${(props) => props.theme.body}; */
   /* margin: 0 auto; */
@@ -292,12 +292,12 @@ const RoadmapItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start !important;
-  align-items: center;
+  align-items: flex-start !important;
   gap: 1rem;
   max-width: 27vw;
   direction: ltr !important;
   position: relative;
-  min-height: 240px;
+  min-height: 340px;
   /* width: 100% !important; */
   .item1,
   .item2 {
@@ -330,6 +330,7 @@ const CarouselWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 70%;
   text-align: start;
   font-size: ${(props) => props.theme.fontlg};
 
