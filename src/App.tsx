@@ -13,6 +13,7 @@ import AdminDashboard from "./routes/admin-dashboard";
 import HomeV2 from "./components/sections/Home.v2";
 import AboutV2 from "./components/sections/About.v2";
 import RoadmapV2 from "./components/sections/Roadmap.v2";
+import ShowcaseV2 from "./components/sections/Showcase.v2";
 function App() {
   return (
     <Routes>
@@ -24,7 +25,7 @@ function App() {
             <HomeV2 />
             <AboutV2 />
             <RoadmapV2 />
-            <Showcase />
+            <ShowcaseV2 />
             <Team />
             <Faq />
             <Footer />

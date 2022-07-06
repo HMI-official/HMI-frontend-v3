@@ -172,7 +172,7 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  max-width: 1230px;
+  max-width: 1130px;
   /* padding-left: 10rem; */
 `;
 const Section = styled.section`

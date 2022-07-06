@@ -141,7 +141,7 @@ const Section = styled.section`
 const Container = styled.div`
   /* width: 80%; */
   width: 100%;
-  max-width: 1230px;
+  max-width: 1130px;
   /* margin: 0 auto; */
   /* background-color: lightblue; */
 
