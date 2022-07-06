@@ -4,7 +4,8 @@ import { HMI_HEROS_BG_ARR } from "../../constants/image";
 
 const slideCardConfig = {
   SLIDER_CARD_WIDTH: "20.625rem",
-  SLIDER_CARD_NUMBER: 5,
+  SLIDER_CARD_NUMBER: 11,
+  SLIDER_CARD_GAP: "3rem",
 };
 
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
@@ -13,7 +14,7 @@ const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
 
   return (
     <ImgContainer onMouseOver={pause} onMouseOut={play}>
-      <img width={500} height={500} src={img} alt="The HMI" />
+      <img src={img} alt="The HMI" />
     </ImgContainer>
   );
 };
@@ -75,7 +76,7 @@ const slide = keyframes`
   100% {
     transform: translate(
       calc(
-        -${slideCardConfig.SLIDER_CARD_WIDTH}* ${slideCardConfig.SLIDER_CARD_NUMBER} - 2rem * ${slideCardConfig.SLIDER_CARD_NUMBER}
+        -${slideCardConfig.SLIDER_CARD_WIDTH}* ${slideCardConfig.SLIDER_CARD_NUMBER} - ${slideCardConfig.SLIDER_CARD_GAP} * ${slideCardConfig.SLIDER_CARD_NUMBER}
       ),
       0px
     );
@@ -88,17 +89,25 @@ const Row = styled.div<{ direction: string }>`
   box-sizing: content-box;
   margin: 2rem 0;
   display: flex;
+  gap: ${slideCardConfig.SLIDER_CARD_GAP};
 
   animation: ${slide} linear infinite ${(props) => props.direction};
 `;
 const ImgContainer = styled.div`
   width: 20.625rem;
   // 330px = 15rem * 1.5
-  margin: 0 1rem;
+  /* margin: 0 1rem; */
   background-color: ${(props) => props.theme.body};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  border-radius: 20px;
   cursor: pointer;
+  img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
 
   @media (max-width: 48em) {
     width: 12rem;
