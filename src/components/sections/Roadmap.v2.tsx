@@ -162,11 +162,11 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 100%;
-  padding-left: 10rem;
+  width: 80%;
+  /* padding-left: 10rem; */
 `;
 const Section = styled.section`
-  min-height: 100vh;
+  min-height: 50vh;
   width: 100vw;
 
   /* background-color: ${(props) => props.theme.body}; */
@@ -177,6 +177,7 @@ const Section = styled.section`
   /* flex-direction: column; */
   justify-content: center;
   align-items: center;
+  padding: 5rem 0;
 `;
 const Title = styled.h1`
   font-size: ${(props) => props.theme.font3xl};
@@ -191,7 +192,7 @@ const Title = styled.h1`
   font-family: "Saira-Black";
   /* border-bottom: 2px solid ${(props) => props.theme.body}; */
   width: fit-content;
-  border: 1px solid ${(props) => props.theme.primary};
+  /* border: 1px solid ${(props) => props.theme.primary}; */
 
   @media (max-width: 40em) {
     font-size: ${(props) => props.theme.fontxl};
@@ -201,11 +202,12 @@ const Title = styled.h1`
 const TitleContainer = styled.div`
   display: flex;
   width: 90%;
+  padding-bottom: 6rem;
 `;
 const Container = styled.div`
-  width: calc(100% - 8rem);
+  width: calc(100% - 5rem) !important;
   min-height: 30vh;
-  padding-top: 5rem;
+  padding: 1rem 0;
   /* gap: 1rem; */
   /* background-color: ${(props) => props.theme.body}; */
   /* margin: 0 auto; */
@@ -224,15 +226,19 @@ const Container = styled.div`
 
 const CarouselEl = styled.div`
   /* .container { */
-  width: 100%;
+  max-width: 100%;
+  border-radius: 2rem;
+
   /* height: 100vh; */
   /* background: rgb(57, 49, 63); */
   background: ${isCarouselTest ? "rgb(57, 49, 63)" : ""};
+  background: ${(props) => `rgb(${props.theme.bodyRgba},14%)`};
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  /* padding: 0.4rem; */
   /* } */
 
   .container > h1 {

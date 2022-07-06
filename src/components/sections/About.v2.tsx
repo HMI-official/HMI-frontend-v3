@@ -29,44 +29,6 @@ const AboutV2 = () => {
 
 export default AboutV2;
 
-const Section = styled.section`
-  min-height: 100vh;
-  width: 100%;
-  background-color: ${(props) => props.theme.text};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-`;
-
-const Container = styled.div`
-  width: 75%;
-  margin: 0 auto;
-  /* background-color: lightblue; */
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media (max-width: 70em) {
-    width: 85%;
-  }
-
-  @media (max-width: 64em) {
-    width: 100%;
-    flex-direction: column;
-
-    & > *:last-child {
-      width: 80%;
-    }
-  }
-  @media (max-width: 40em) {
-    & > *:last-child {
-      width: 90%;
-    }
-  }
-`;
-
 const Box = styled.div`
   width: 50%;
   height: 100%;
@@ -87,7 +49,7 @@ const Title = styled.h2`
   color: ${(props) => props.theme.primary};
   align-self: flex-start;
   width: 80%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   font-family: "Saira-Black";
 
   @media (max-width: 64em) {
@@ -106,7 +68,7 @@ const SubText = styled.p`
   color: ${(props) => props.theme.body};
   align-self: flex-start;
   width: 80%;
-  margin: 1rem auto;
+  margin: 1rem 0;
   font-weight: 400;
   @media (max-width: 64em) {
     width: 100%;
@@ -158,4 +120,46 @@ const ButtonContainer = styled.div`
 const Image = styled.img`
   width: 20rem;
   border-radius: 1rem;
+`;
+
+const Section = styled.section`
+  min-height: 50vh;
+  padding: 5rem 0;
+  padding-top: 0;
+  width: 100%;
+  background-color: ${(props) => props.theme.text};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  ${Box}:nth-child(1) {
+  }
+`;
+
+const Container = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  /* background-color: lightblue; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 70em) {
+    width: 85%;
+  }
+
+  @media (max-width: 64em) {
+    width: 100%;
+    flex-direction: column;
+
+    & > *:last-child {
+      width: 80%;
+    }
+  }
+  @media (max-width: 40em) {
+    & > *:last-child {
+      width: 90%;
+    }
+  }
 `;
