@@ -76,6 +76,7 @@ const TeamV2 = () => {
   return (
     <Section id="team">
       <Container>
+        <MainTitle>Team</MainTitle>
         <Row>{TopItemComponent}</Row>
         <Row>{BottomItemComponent}</Row>
       </Container>
@@ -119,7 +120,7 @@ const Row = styled.div`
 
 const Section = styled.section`
   min-height: 30vh;
-  padding: 14rem 0;
+  /* padding: 14rem 0; */
   display: flex;
   align-items: center;
   justify-content: center;
