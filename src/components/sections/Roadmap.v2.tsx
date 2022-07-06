@@ -2,10 +2,17 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
-const isCarouselTest = false;
-const carouselGap: number = 208; //px
+
+const carouselConfig = {
+  isCarouselTest: false,
+  carouselGap: 80, //px
+  carouselHeight: 340, //px
+};
 // 10rem = 160px
 // 13 * 16 = 208px
+// 7 * 16 = 112px
+// 6rem = 96px
+// 5rem = 80px
 
 const carouselContents = [
   {
@@ -116,7 +123,7 @@ const RoadmapV2 = () => {
     <CarouselOrigin
       _data={carouselContents}
       carouselRef={carouselRef}
-      carouselGap={carouselGap}
+      carouselGap={carouselConfig.carouselGap}
       {...setting}
     >
       {carouselContents.map((content, _i) => (
@@ -126,17 +133,19 @@ const RoadmapV2 = () => {
           ref={setCarouselRef}
           style={{ ...itemStyle }}
         >
-          <div className="item1">{content.title}</div>
-          <div className="item2">{content.subtitle}</div>
-          <CarouselWrapper>
-            {content.content.map((item) => (
-              <div>
-                <span>
-                  {item.number}) {item.text}
-                </span>
-              </div>
-            ))}
-          </CarouselWrapper>
+          <RoadmapItemWrapper>
+            <div className="item1">{content.title}</div>
+            <div className="item2">{content.subtitle}</div>
+            <CarouselWrapper>
+              {content.content.map((item) => (
+                <div>
+                  <span>
+                    {item.number}) {item.text}
+                  </span>
+                </div>
+              ))}
+            </CarouselWrapper>
+          </RoadmapItemWrapper>
         </RoadmapItemContainer>
       ))}
     </CarouselOrigin>
@@ -145,7 +154,7 @@ const RoadmapV2 = () => {
     <Section id="roadmap">
       <SectionWrapper>
         <TitleContainer>
-          <Title>Roadmap</Title>
+          <Title>ROADMAP</Title>
         </TitleContainer>
         <CarouselEl>
           <Container>{CarouselComponent}</Container>
@@ -180,7 +189,7 @@ const Section = styled.section`
   padding: 5rem 0;
 `;
 const Title = styled.h1`
-  font-size: ${(props) => props.theme.font3xl};
+  font-size: ${(props) => props.theme.font2xl};
   text-transform: capitalize;
   color: ${(props) => props.theme.primary};
   display: flex;
@@ -232,12 +241,12 @@ const CarouselEl = styled.div`
 
   /* height: 100vh; */
   /* background: rgb(57, 49, 63); */
-  background: ${isCarouselTest ? "rgb(57, 49, 63)" : ""};
+  background: ${carouselConfig.isCarouselTest ? "rgb(57, 49, 63)" : ""};
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   /* padding: 0.4rem; */
   /* } */
 
@@ -248,9 +257,11 @@ const CarouselEl = styled.div`
   .carousel {
     /* width: 700px; */
     max-width: 100%;
-    height: 300px;
+    height: ${carouselConfig.carouselHeight}px;
     /* background: rgba(201, 165, 118, 0.37); */
-    background: ${isCarouselTest ? "rgba(201, 165, 118, 0.37)" : ""};
+    background: ${carouselConfig.isCarouselTest
+      ? "rgba(201, 165, 118, 0.37)"
+      : ""};
 
     direction: rtl;
     display: flex;
@@ -269,11 +280,11 @@ const CarouselEl = styled.div`
     justify-content: center;
     /* align-items: center; */
     align-items: flex-start;
-    gap: ${carouselGap}px;
+    gap: ${carouselConfig.carouselGap}px;
   }
 
   .item {
-    background: ${isCarouselTest ? "coral" : ""};
+    background: ${carouselConfig.isCarouselTest ? "coral" : ""};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -296,18 +307,26 @@ const CarouselEl = styled.div`
   }
 `;
 
+const RoadmapItemWrapper = styled.div`
+  padding: 1.5rem;
+  gap: 0.6rem;
+  display: flex;
+  flex-direction: column;
+`;
+
 const RoadmapItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start !important;
   align-items: flex-start !important;
-  gap: 1rem;
+  /* gap: 1rem; */
   max-width: 27vw;
   direction: ltr !important;
   position: relative;
-  min-height: 340px;
+  min-height: ${carouselConfig.carouselHeight}px;
   /* width: 100% !important; */
-  background: ${(props) => `rgb(${props.theme.bodyRgba},14%)`};
+  background: ${(props) => `rgb(${props.theme.bodyRgba},12%)`};
+  border-radius: 1rem;
 
   .item1,
   .item2 {
@@ -320,13 +339,14 @@ const RoadmapItemContainer = styled.div`
     font-size: ${(props) => props.theme.font2xl};
   }
   .item2 {
-    font-size: ${(props) => props.theme.fontxl};
+    font-size: calc(${(props) => props.theme.fontlg} + 0.2rem);
+    padding-bottom: 0.7rem;
   }
   :before {
     content: "";
     position: absolute;
     top: 0;
-    right: -${carouselGap / 2 + 15}px;
+    right: -${carouselConfig.carouselGap / 2 + 15}px;
     height: 100%;
     width: 1px;
     background: ${(props) => props.theme.gray2};
