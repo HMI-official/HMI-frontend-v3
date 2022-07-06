@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Carousel from "../Roadmap/Carousel";
+// import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
-
+const isCarouselTest = false;
 const items = ["one", "two", "three", "four", "five"];
 
 const carouselContents = [
@@ -30,7 +30,7 @@ const carouselContents = [
     content: [
       {
         number: "2-1",
-        text: '2-1) All HI-Planet holders will receive welcome packages physically which will be directly shipped by "High Minded Intelligence"',
+        text: 'All HI-Planet holders will receive welcome packages physically which will be directly shipped by "High Minded Intelligence"',
       },
     ],
   },
@@ -137,8 +137,9 @@ const RoadmapV2 = () => {
           <CarouselWrapper>
             {content.content.map((item) => (
               <div>
-                <span className="number">{item.number})</span>
-                <span>{item.text}</span>
+                <span>
+                  {item.number}) {item.text}
+                </span>
               </div>
             ))}
           </CarouselWrapper>
@@ -171,7 +172,7 @@ const SectionWrapper = styled.div`
   padding-left: 10rem;
 `;
 const Section = styled.section`
-  min-height: 50vh;
+  min-height: 100vh;
   width: 100vw;
 
   /* background-color: ${(props) => props.theme.body}; */
@@ -207,7 +208,7 @@ const TitleContainer = styled.div`
 `;
 const Container = styled.div`
   width: calc(100% - 8rem);
-  height: 80vh;
+  min-height: 70vh;
   /* gap: 1rem; */
   /* background-color: ${(props) => props.theme.body}; */
   /* margin: 0 auto; */
@@ -228,7 +229,9 @@ const CarouselEl = styled.div`
   /* .container { */
   width: 100%;
   /* height: 100vh; */
-  background: rgb(57, 49, 63);
+  /* background: rgb(57, 49, 63); */
+  background: ${isCarouselTest ? "rgb(57, 49, 63)" : ""};
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -243,7 +246,9 @@ const CarouselEl = styled.div`
     /* width: 700px; */
     max-width: 100%;
     height: 300px;
-    background: rgba(201, 165, 118, 0.37);
+    /* background: rgba(201, 165, 118, 0.37); */
+    background: ${isCarouselTest ? "rgba(201, 165, 118, 0.37)" : ""};
+
     direction: rtl;
     display: flex;
     justify-content: flex-start;
@@ -264,7 +269,7 @@ const CarouselEl = styled.div`
   }
 
   .item {
-    background: coral;
+    background: ${isCarouselTest ? "coral" : ""};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,11 +295,13 @@ const CarouselEl = styled.div`
 const RoadmapItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start !important;
   align-items: center;
   gap: 1rem;
   max-width: 27vw;
   direction: ltr !important;
+  position: relative;
+  min-height: 240px;
   /* width: 100% !important; */
   .item1,
   .item2 {
@@ -308,6 +315,16 @@ const RoadmapItemContainer = styled.div`
   }
   .item2 {
     font-size: ${(props) => props.theme.fontxl};
+  }
+  :before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -15px;
+    height: 100%;
+    width: 1px;
+    background: ${(props) => props.theme.gray2};
+    /* transform: ; */
   }
 `;
 
@@ -327,5 +344,6 @@ const CarouselWrapper = styled.div`
   .number {
     word-break: keep-all !important;
     display: flex;
+    min-width: 35px;
   }
 `;
