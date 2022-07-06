@@ -3,7 +3,8 @@ import styled from "styled-components";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
 const isCarouselTest = false;
-const carouselGap: number = 64; //px
+const carouselGap: number = 160; //px
+// 10rem = 160px
 
 const carouselContents = [
   {
@@ -92,7 +93,7 @@ const carouselContents = [
 
 const setting = {
   dragSpeed: 1.25,
-  itemWidth: 400,
+  itemWidth: 330,
   itemHeight: 180,
   itemSideOffsets: 15,
 };
@@ -330,7 +331,7 @@ const CarouselWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 70%;
+  /* max-width: 70%; */
   text-align: start;
   font-size: ${(props) => props.theme.fontlg};
 
