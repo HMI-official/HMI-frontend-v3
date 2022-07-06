@@ -54,7 +54,7 @@ const Item = (props: ItemProps) => {
   return (
     <ItemContainer>
       <ImgContainer>
-        <img src={props.img} alt="The HMI" />
+        <img src={props.img} alt="The HMI" loading="lazy" />
       </ImgContainer>
       <ItemTextContainer>
         <Name>{props.name}</Name>
@@ -90,14 +90,21 @@ const ItemContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* flex: 1; */
 `;
 const ItemTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 1rem;
+  gap: 0.2rem;
 `;
-const Name = styled.span``;
+const Name = styled.span`
+  font-family: "Saira-Black";
+  text-transform: uppercase;
+  font-size: calc(${(props) => props.theme.fontlg} + 0.5rem);
+`;
 const Planet = styled.span``;
 const Role = styled.span``;
 const MainTitle = styled.h2`
@@ -138,8 +145,8 @@ const Container = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  width: 14rem;
-  height: 14rem;
+  width: 20rem;
+  height: 20rem;
 
   display: flex;
   justify-content: center;
@@ -149,15 +156,17 @@ const ImgContainer = styled.div`
   /* cursor: pointer; */
   img {
     transition: all 0.3s ease-in-out;
-    width: 14rem;
+    width: 20rem;
+    height: 20rem;
+    min-height: 20rem;
 
     object-fit: cover;
     border-radius: 20px;
     /* border-color: rgba(255, 255, 255, 0.5); */
     border: 2px solid rgba(255, 255, 255, 0.5);
     :hover {
-      /* border-color: ${({ theme }) => theme.primary}; */
-      border-color: #00ffeaa3;
+      border-color: ${({ theme }) => theme.primary};
+      /* border-color: #00ffeaa3; */
     }
   }
 
