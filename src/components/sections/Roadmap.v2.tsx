@@ -3,8 +3,9 @@ import styled from "styled-components";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
 const isCarouselTest = false;
-const carouselGap: number = 160; //px
+const carouselGap: number = 208; //px
 // 10rem = 160px
+// 13 * 16 = 208px
 
 const carouselContents = [
   {
