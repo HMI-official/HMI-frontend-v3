@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import { useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { HMI_HEROS_BG_ARR } from "../../constants/image";
 
@@ -9,8 +9,10 @@ const slideCardConfig = {
 };
 
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
-  let play = () => (passRef.current.style.animationPlayState = "running");
-  let pause = () => (passRef.current.style.animationPlayState = "paused");
+  const play = () => {};
+  // const play = () => (passRef.current.style.animationPlayState = "running");
+  const pause = () => {};
+  // const pause = () => (passRef.current.style.animationPlayState = "paused");
 
   return (
     <ImgContainer onMouseOver={pause} onMouseOut={play}>
@@ -49,15 +51,8 @@ const Section = styled.section`
   position: relative;
   overflow: hidden;
 
-  & > *:first-child {
-    animation-duration: 15s;
-
-    @media (max-width: 30em) {
-      animation-duration: 15s;
-    }
-  }
   & > *:last-child {
-    animation-duration: 20s;
+    animation-duration: 40s;
     @media (max-width: 30em) {
       animation-duration: 10s;
     }
@@ -97,16 +92,23 @@ const ImgContainer = styled.div`
   width: 20.625rem;
   // 330px = 15rem * 1.5
   /* margin: 0 1rem; */
-  background-color: ${(props) => props.theme.body};
+  /* background-color: ${(props) => props.theme.body}; */
   display: flex;
   justify-content: center;
   align-items: center;
 
-  cursor: pointer;
+  /* cursor: pointer; */
   img {
+    transition: all 0.3s ease-in-out;
     width: 100%;
     object-fit: cover;
     border-radius: 20px;
+    /* border-color: rgba(255, 255, 255, 0.5); */
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    :hover {
+      /* border-color: ${({ theme }) => theme.primary}; */
+      border-color: #00ffeaa3;
+    }
   }
 
   @media (max-width: 48em) {

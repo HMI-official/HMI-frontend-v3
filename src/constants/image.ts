@@ -13,3 +13,19 @@ export const HMI_HEROS_BG = {
 };
 
 export const HMI_HEROS_BG_ARR = Object.values(HMI_HEROS_BG);
+
+export const HMI_HERO = {
+  earth: "/images/heros/4.jpg",
+  jupiter: "/images/heros/11.jpg",
+  mars: "/images/heros/13.jpg",
+  mercury: "/images/heros/5.jpg",
+  moon: "/images/heros/3.jpg",
+  neptune: "/images/heros/7.jpg",
+  pluto: "/images/heros/8.jpg",
+  saturn: "/images/heros/12.jpg",
+  sun: "/images/heros/1.jpg", // 없음
+  uranus: "/images/heros/2.jpg",
+  venus: "/images/heros/1.jpg", //없음
+};
+
+export const HMI_HERO_ARR = Object.values(HMI_HERO);

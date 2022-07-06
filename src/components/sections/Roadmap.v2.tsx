@@ -190,7 +190,7 @@ const Section = styled.section`
   padding: 5rem 0;
 `;
 const Title = styled.h1`
-  font-size: ${(props) => props.theme.font2xl};
+  font-size: calc(${(props) => props.theme.font2xl} + 1rem);
   text-transform: capitalize;
   color: ${(props) => props.theme.primary};
   display: flex;
@@ -212,7 +212,7 @@ const Title = styled.h1`
 const TitleContainer = styled.div`
   display: flex;
   width: 90%;
-  padding-bottom: 6rem;
+  padding-bottom: 1.5rem;
 `;
 const Container = styled.div`
   cursor: grab;
