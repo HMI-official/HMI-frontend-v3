@@ -205,6 +205,7 @@ const TitleContainer = styled.div`
   padding-bottom: 6rem;
 `;
 const Container = styled.div`
+  cursor: grab;
   width: calc(100% - 5rem) !important;
   min-height: 30vh;
   padding: 1rem 0;
