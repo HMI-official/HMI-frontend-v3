@@ -81,6 +81,7 @@ const ItemContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   max-width: 360px;
+  width: 360px;
 `;
 
 const Icon = styled.div`
