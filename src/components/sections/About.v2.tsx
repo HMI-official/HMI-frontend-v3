@@ -127,6 +127,7 @@ const Section = styled.section`
   padding: 5rem 0;
   padding-top: 0;
   width: 100%;
+
   background-color: ${(props) => props.theme.text};
   display: flex;
   justify-content: center;
@@ -138,8 +139,10 @@ const Section = styled.section`
 `;
 
 const Container = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  /* width: 80%; */
+  width: 100%;
+  max-width: 1230px;
+  /* margin: 0 auto; */
   /* background-color: lightblue; */
 
   display: flex;
