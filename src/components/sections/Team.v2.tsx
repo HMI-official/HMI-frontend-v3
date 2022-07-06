@@ -9,6 +9,9 @@ interface ItemProps {
   planet: string;
   role: string;
   img: string;
+  anime: string;
+  delay: number;
+  offset: number;
 }
 
 const teamData: ItemProps[] = [
@@ -17,42 +20,64 @@ const teamData: ItemProps[] = [
     img: HMI_HERO.bigbang,
     planet: "Big Bang",
     role: "The Creator Of HI-Planet",
+    anime: "flip-left",
+    delay: 0,
+    offset: 0,
   },
   {
     name: "Ryan",
     img: HMI_HERO.earth,
     planet: "HI",
     role: "Peacemaker",
+    anime: "flip-left",
+    delay: 150,
+    offset: 0,
   },
   {
     name: "ABE",
     img: HMI_HERO.moon,
     planet: "MOOLU",
     role: "Tech-savvy",
+    anime: "flip-left",
+    delay: 300,
+    offset: 0,
   },
   {
     name: "Push", // 여기가 push
     img: HMI_HERO.neptune,
     planet: "V",
     role: "Wisecracker",
+    anime: "flip-left",
+    delay: 450,
+    offset: 0,
   },
   {
     name: "PARKER",
     img: HMI_HERO.mercury,
     planet: "MERC",
     role: "Motor-Mouth",
+    anime: "flip-left",
+    delay: 600,
+    offset: 0,
   },
   {
     name: "JENNY",
     img: HMI_HERO.mars,
     planet: "MA",
     role: "Avant-Garde",
+    anime: "flip-left",
+    delay: 750,
+    offset: 0,
   },
 ];
 
 const Item = (props: ItemProps) => {
   return (
-    <ItemContainer>
+    <ItemContainer
+      data-aos={props.anime}
+      data-aos-delay={props.delay}
+      data-aos-offset={props.offset}
+    >
       <ImgContainer>
         <img src={props.img} alt="The HMI" loading="lazy" />
       </ImgContainer>
