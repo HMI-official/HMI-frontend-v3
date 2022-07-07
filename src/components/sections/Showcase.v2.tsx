@@ -107,8 +107,8 @@ const ImgContainer = styled.div`
     /* border-color: rgba(255, 255, 255, 0.5); */
     border: 2px solid rgba(255, 255, 255, 0.5);
     :hover {
-      /* border-color: ${({ theme }) => theme.primary}; */
-      border-color: #00ffeaa3;
+      border-color: ${({ theme }) => theme.primary};
+      /* border-color: #00ffeaa3; */
     }
   }
 
