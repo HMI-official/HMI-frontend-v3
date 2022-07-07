@@ -30,6 +30,9 @@ const Story = () => {
             <br />
             <br />
             {text2}
+            <ButtonContainer>
+              <Button>Visit website</Button>
+            </ButtonContainer>
           </Box>
         </BoxContainer>
       </Container>
@@ -115,4 +118,25 @@ const ImgContainer = styled.div`
   @media (max-width: 30em) {
     width: 10rem;
   }
+`;
+
+const Button = styled.button`
+  background: rgba(${({ theme }) => theme.bodyRgba}, 0.2);
+  /* border: none; */
+  color: #fff;
+  font-weight: 900;
+  /* font-family: "Saira-Black"; */
+  border: 1px solid ${({ theme }) => theme.primary};
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  :hover {
+    border: 2px solid ${({ theme }) => theme.primary};
+  }
+`;
+
+const ButtonContainer = styled.div`
+  padding-top: 2rem;
 `;
