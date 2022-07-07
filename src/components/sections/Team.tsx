@@ -126,7 +126,13 @@ const MemberComponent: FC<MemberComponentProps> = (props) => {
   return (
     <Item>
       <ImageContainer>
-        <img width={500} height={400} src={props.img} alt={props.name} />
+        <img
+          width={500}
+          height={400}
+          src={props.img}
+          alt={props.name}
+          loading="lazy"
+        />
       </ImageContainer>
       <Name>{props.name}</Name>
       <Position>{props.position}</Position>

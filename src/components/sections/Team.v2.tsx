@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import styled from "styled-components";
 import { HMI_HERO } from "../../constants/image";
+import Loading from "../Loading";
 
 const teamConfig = {
   gap: "3rem",
@@ -79,7 +81,9 @@ const Item = (props: ItemProps) => {
       data-aos-offset={props.offset}
     >
       <ImgContainer>
-        <img src={props.img} alt="The HMI" loading="lazy" />
+        <Suspense fallback={<Loading />}>
+          <img src={props.img} alt="The HMI" loading="lazy" />
+        </Suspense>
       </ImgContainer>
       <ItemTextContainer>
         <Name>{props.name}</Name>

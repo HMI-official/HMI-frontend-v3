@@ -216,7 +216,8 @@ const TitleContainer = styled.div`
 `;
 const Container = styled.div`
   cursor: grab;
-  width: calc(100% - 5rem) !important;
+  /* width: calc(100% - 5rem) !important; */
+  width: calc(100%) !important;
   min-height: 30vh;
   padding: 1rem 0;
   /* gap: 1rem; */

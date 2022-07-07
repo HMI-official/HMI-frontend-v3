@@ -21,7 +21,8 @@ const Section = styled.section`
 const Title = styled.h1`
   font-size: ${(props) => props.theme.fontxxl};
   text-transform: uppercase;
-  color: ${(props) => props.theme.body};
+  color: ${(props) => props.theme.primary};
+  font-family: "Saira-Black";
 
   margin: 1rem auto;
   border-bottom: 2px solid ${(props) => props.theme.carouselColor};

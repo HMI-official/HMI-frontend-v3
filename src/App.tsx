@@ -14,6 +14,7 @@ import RoadmapV2 from "./components/sections/Roadmap.v2";
 import ShowcaseV2 from "./components/sections/Showcase.v2";
 import Benefit from "./components/sections/Benefit";
 import TeamV2 from "./components/sections/Team.v2";
+import Story from "./components/sections/Story";
 // import "./styles/fonts.css";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <ShowcaseV2 />
             <Benefit />
             <TeamV2 />
+            <Story />
             <Faq />
             <Footer />
             <ScrollToTop />
