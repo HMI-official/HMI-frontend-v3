@@ -3,6 +3,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import Accordion from "../Accordion";
+// import AccordionDemo from "../AccordionDemo";
 
 const Section = styled.section`
   min-height: 100vh;

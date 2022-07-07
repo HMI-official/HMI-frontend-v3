@@ -15,6 +15,7 @@ import ShowcaseV2 from "./components/sections/Showcase.v2";
 import Benefit from "./components/sections/Benefit";
 import TeamV2 from "./components/sections/Team.v2";
 import Story from "./components/sections/Story";
+import AccordionDemo from "./components/AccordionDemo";
 // import "./styles/fonts.css";
 
 function App() {
@@ -45,7 +46,9 @@ function App() {
             <Benefit />
             <TeamV2 />
             <Story />
+            {/* <AccordionDemo /> */}
             <Faq />
+
             <Footer />
             <ScrollToTop />
           </main>

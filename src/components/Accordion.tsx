@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Minus } from "../Icons/Minus";
 import { Plus } from "../Icons/Plus";
 
@@ -10,13 +10,29 @@ const Title = styled.div`
   align-items: center;
   transition: all 0.3s ease-in-out;
 `;
-const Reveal = styled.div<{ clicked: boolean }>`
-  display: ${(props) => (props.clicked ? "inline-block" : "none")};
+const Reveal = styled.div<{ clicked: boolean; h?: number }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   margin-top: 1rem;
   color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.6)`};
   font-size: ${(props) => props.theme.fontsm};
   font-weight: 300;
   line-height: 1.1rem;
+  transition: all 0.3s ease-in-out;
+  height: ${({ clicked, h }) => (clicked ? `${h ?? 0}px` : `auto`)};
+  ${({ clicked, h }) =>
+    clicked
+      ? css`
+          height: ${h}px;
+        `
+      : css`
+          height: 0px;
+        `};
+
+  overflow: hidden;
 `;
 
 const Name = styled.div`
@@ -66,6 +82,8 @@ const Container = styled.div`
     margin: 2rem 0;
   }
 `;
+
+const RevealWrapper = styled.div``;
 interface AccordionProps {
   title: string;
   children: ReactNode;
@@ -74,6 +92,8 @@ interface AccordionProps {
 
 const Accordion: FC<AccordionProps> = ({ title, children, ScrollTrigger }) => {
   const [collapse, setCollapse] = useState(false);
+  const [ref, setRef] = useState<HTMLDivElement | null>(null);
+  console.log(ref?.offsetHeight);
 
   useEffect(() => {
     ScrollTrigger.refresh();
@@ -96,7 +116,9 @@ const Accordion: FC<AccordionProps> = ({ title, children, ScrollTrigger }) => {
           </Indicator>
         )}
       </Title>
-      <Reveal clicked={collapse}>{children}</Reveal>
+      <Reveal clicked={collapse} h={ref?.offsetHeight}>
+        <RevealWrapper ref={setRef}>{children}</RevealWrapper>
+      </Reveal>
     </Container>
   );
 };
