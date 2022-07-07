@@ -183,6 +183,9 @@ const ImageContainer = styled.div`
     #arm {
       /* transform: translateY(-100px); */
       animation: ${upDown} 0.7s ease-in-out infinite;
+      /* delay: 0.3s; */
+      /* animation delay */
+      /* animation-delay: 0.1s; */
     }
     image {
       object-fit: contain;
