@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+const websiteURL = `https://highmindedi.com/`;
+const onClickWebsite = () => {
+  window.open(websiteURL, "_blank");
+};
 
 const text1 = `High Minded Intelligence is a street wear fashion brand that 
 emphasizes the motivational lifestyle and satisfaction of its global 
@@ -31,7 +35,7 @@ const Story = () => {
             <br />
             {text2}
             <ButtonContainer>
-              <Button>Visit website</Button>
+              <Button onClick={onClickWebsite}>Visit website</Button>
             </ButtonContainer>
           </Box>
         </BoxContainer>
