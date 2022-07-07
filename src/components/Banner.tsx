@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { HMI_HERO } from "../constants/image";
 
-import img1 from "../assets/Nfts/bighead.svg";
-import img2 from "../assets/Nfts/bighead-1.svg";
-import img3 from "../assets/Nfts/bighead-2.svg";
-import img4 from "../assets/Nfts/bighead-3.svg";
-import img5 from "../assets/Nfts/bighead-4.svg";
-import img6 from "../assets/Nfts/bighead-5.svg";
+// import img1 from "../assets/Nfts/bighead.svg";
+// import img2 from "../assets/Nfts/bighead-1.svg";
+// import img3 from "../assets/Nfts/bighead-2.svg";
+// import img4 from "../assets/Nfts/bighead-3.svg";
+// import img5 from "../assets/Nfts/bighead-4.svg";
+// import img6 from "../assets/Nfts/bighead-5.svg";
 
 const Section = styled.section`
   width: 100vw;
@@ -134,15 +135,30 @@ const Banner = () => {
   return (
     <Section>
       <ImgContainer>
-        <img width={500} height={400} src={img1} alt="The Weirdos" />
-        <img width={500} height={400} src={img2} alt="The Weirdos" />
-        <img width={500} height={400} src={img3} alt="The Weirdos" />
-        <img width={500} height={400} src={img4} alt="The Weirdos" />
-        <img width={500} height={400} src={img5} alt="The Weirdos" />
-        <img width={500} height={400} src={img6} alt="The Weirdos" />
+        <img
+          width={500}
+          height={400}
+          src={HMI_HERO.bigbang}
+          alt="The Weirdos"
+        />
+        <img width={500} height={400} src={HMI_HERO.earth} alt="The Weirdos" />
+        <img width={500} height={400} src={HMI_HERO.moon} alt="The Weirdos" />
+        <img
+          width={500}
+          height={400}
+          src={HMI_HERO.neptune}
+          alt="The Weirdos"
+        />
+        <img
+          width={500}
+          height={400}
+          src={HMI_HERO.mercury}
+          alt="The Weirdos"
+        />
+        <img width={500} height={400} src={HMI_HERO.mars} alt="The Weirdos" />
       </ImgContainer>
       <Title>
-        Join the <br /> weirdos club{" "}
+        Join the <br /> HI PLANET NFT{" "}
       </Title>
       <BtnContainer>
         <a
