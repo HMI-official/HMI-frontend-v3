@@ -30,3 +30,13 @@ export const HMI_HERO = {
 };
 
 export const HMI_HERO_ARR = Object.values(HMI_HERO);
+
+export const ETC_IMAGES = {
+  machine: "/images/machine-v2.png",
+};
+
+export const SNS = {
+  instagram: "/images/sns/instagram-icon.png",
+  twitter: "/images/sns/twitter.png",
+  discord: "/images/sns/discord.png",
+};

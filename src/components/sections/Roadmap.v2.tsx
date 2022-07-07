@@ -327,7 +327,7 @@ const RoadmapItemContainer = styled.div`
   position: relative;
   min-height: ${carouselConfig.carouselHeight}px;
   /* width: 100% !important; */
-  background: ${(props) => `rgb(${props.theme.bodyRgba},12%)`};
+  background: ${(props) => `rgb(${props.theme.bodyRgba},10%)`};
   border-radius: 1rem;
 
   .item1,

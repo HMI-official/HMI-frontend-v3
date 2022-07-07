@@ -14,7 +14,7 @@ const text2 = `High Minded Intelligence carries with it, its community, sharing
 memories, stories and building relationships that`;
 const Story = () => {
   return (
-    <Section>
+    <Section id="story">
       <Container>
         <Title>Story of HMI</Title>
         <BoxContainer>

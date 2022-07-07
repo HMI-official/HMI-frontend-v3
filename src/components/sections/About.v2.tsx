@@ -1,5 +1,8 @@
 import React from "react";
+import { AiFillInstagram, AiFillTwitterSquare } from "react-icons/ai";
+import { FaDiscord } from "react-icons/fa";
 import styled from "styled-components";
+import { ETC_IMAGES, HMI_HERO } from "../../constants/image";
 
 const AboutV2 = () => {
   return (
@@ -20,7 +23,15 @@ const AboutV2 = () => {
           </SubText>
         </Box>
         <Box>
-          <Image src="/images/heros-bg/earth.jpg" />
+          <ImageContainer>
+            <Machine src={ETC_IMAGES.machine} />
+            <Moon src={HMI_HERO.moon} />
+          </ImageContainer>
+          <SNSContainer>
+            <AiFillInstagram />
+            <AiFillTwitterSquare />
+            <FaDiscord />
+          </SNSContainer>
         </Box>
       </Container>
     </Section>
@@ -82,40 +93,6 @@ const SubText = styled.p`
     font-size: ${(props) => props.theme.fontsm};
   }
 `;
-const SubTextLight = styled.p`
-  font-size: ${(props) => props.theme.fontmd};
-  color: ${(props) => `rgba(${props.theme.bodyRgba},0.6)`};
-  align-self: flex-start;
-  width: 80%;
-  margin: 1rem auto;
-  font-weight: 400;
-
-  @media (max-width: 64em) {
-    width: 100%;
-    text-align: center;
-    font-size: ${(props) => props.theme.fontsm};
-  }
-  @media (max-width: 40em) {
-    font-size: ${(props) => props.theme.fontsm};
-  }
-  @media (max-width: 30em) {
-    font-size: ${(props) => props.theme.fontxs};
-  }
-`;
-const ButtonContainer = styled.div`
-  width: 80%;
-  margin: 1rem auto;
-  display: flex;
-  align-self: flex-start;
-
-  @media (max-width: 64em) {
-    width: 100%;
-
-    button {
-      margin: 0 auto;
-    }
-  }
-`;
 
 const Image = styled.img`
   width: 20rem;
@@ -164,5 +141,45 @@ const Container = styled.div`
     & > *:last-child {
       width: 90%;
     }
+  }
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+`;
+
+const Moon = styled(Image)`
+  z-index: 2;
+
+  /* transform: translateX(-1rem); */
+`;
+
+const Machine = styled(Image)`
+  transform: scaleX(-1) rotate(-10deg) translate(-3.9rem, -3.4rem);
+  z-index: 1;
+  /* transform:  */
+  margin-right: -2rem;
+  animation: rattle infinite linear 0.7s;
+  @keyframes rattle {
+    0% {
+      transform: scaleX(-1) rotate(-7deg) translate(-3.9rem, -3.4rem);
+    }
+    50% {
+      transform: scaleX(-1) rotate(-10deg) translate(-3.9rem, -3.4rem);
+    }
+    100% {
+      transform: scaleX(-1) rotate(-7deg) translate(-3.9rem, -3.4rem);
+    }
+  }
+`;
+
+const SNSContainer = styled.div`
+  font-size: calc(${(props) => props.theme.fontlg} + 0.4rem);
+  gap: 0.4rem;
+  display: flex;
+  align-self: flex-end;
+  color: ${(props) => props.theme.gray3};
+  > svg {
+    cursor: pointer;
   }
 `;
