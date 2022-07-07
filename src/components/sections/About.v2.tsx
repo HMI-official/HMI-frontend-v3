@@ -1,8 +1,11 @@
 import React from "react";
 import { AiFillInstagram, AiFillTwitterSquare } from "react-icons/ai";
 import { FaDiscord } from "react-icons/fa";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ETC_IMAGES, HMI_HERO } from "../../constants/image";
+import { ReactComponent as Moolu } from "../../assets/Nfts/moolu.svg";
+// import MooluSvg from "../../images/heros/Moolu-svg.svg";
+import img1 from "../../assets/Nfts/bighead.svg";
 
 const AboutV2 = () => {
   return (
@@ -25,7 +28,12 @@ const AboutV2 = () => {
         <Box>
           <ImageContainer>
             <Machine src={ETC_IMAGES.machine} />
-            <Moon src={HMI_HERO.moon} />
+            {/* <Moon src={mooluSvg} /> */}
+            <div className="item1">
+              <Moolu />
+            </div>
+            {/* <Moon src={HMI_HERO.moon} /> */}
+            {/* <MooluSvg /> */}
           </ImageContainer>
           <SNSContainer>
             <AiFillInstagram />
@@ -39,6 +47,30 @@ const AboutV2 = () => {
 };
 
 export default AboutV2;
+
+const upDown = keyframes`
+    0% {
+      transform: translateY(60px);
+    }
+    50% {
+      transform: translateY(120px);
+    }
+    100% {
+      transform: translateY(60px);
+    }
+`;
+
+const rattle = keyframes`
+   0% {
+      transform: scaleX(-1) rotate(-7deg) translate(-3.5rem, -3.4rem);
+    }
+    50% {
+      transform: scaleX(-1) rotate(-10deg) translate(-3.5rem, -3.4rem);
+    }
+    100% {
+      transform: scaleX(-1) rotate(-7deg) translate(-3.5rem, -3.4rem);
+    }
+    `;
 
 const Box = styled.div`
   width: 50%;
@@ -146,31 +178,32 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
   display: flex;
+  .item1 {
+    z-index: 2;
+    #arm {
+      /* transform: translateY(-100px); */
+      animation: ${upDown} 0.7s ease-in-out infinite;
+    }
+    image {
+      object-fit: contain;
+    }
+  }
 `;
 
 const Moon = styled(Image)`
   z-index: 2;
-
+  display: flex;
+  width: 20rem;
+  /* object-fit: contain; */
   /* transform: translateX(-1rem); */
 `;
 
 const Machine = styled(Image)`
-  transform: scaleX(-1) rotate(-10deg) translate(-3.9rem, -3.4rem);
+  transform: scaleX(-1) rotate(-10deg) translate(-3.5rem, -3.4rem);
   z-index: 1;
   /* transform:  */
   margin-right: -2rem;
-  animation: rattle infinite linear 0.7s;
-  @keyframes rattle {
-    0% {
-      transform: scaleX(-1) rotate(-7deg) translate(-3.9rem, -3.4rem);
-    }
-    50% {
-      transform: scaleX(-1) rotate(-10deg) translate(-3.9rem, -3.4rem);
-    }
-    100% {
-      transform: scaleX(-1) rotate(-7deg) translate(-3.9rem, -3.4rem);
-    }
-  }
+  animation: ${rattle} infinite linear 0.7s;
 `;
 
 const SNSContainer = styled.div`
