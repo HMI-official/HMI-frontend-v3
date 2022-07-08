@@ -126,6 +126,7 @@ const Content = styled.div`
 const Section = styled.section`
   min-height: 30vh;
   padding: 14rem 0;
+  /* padding-top:7rem */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +138,8 @@ const SectionWrapper = styled.div`
   /* align-items: flex-start; */
   width: 100%;
   max-width: 1130px;
-  gap: calc(${benefitConfig.gap} * 2);
+  gap: ${benefitConfig.gap};
+  /* gap: calc(${benefitConfig.gap} * 2); */
 
   /* padding-left: 10rem; */
 `;
