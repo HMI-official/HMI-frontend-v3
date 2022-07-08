@@ -28,7 +28,7 @@ const Story = () => {
             </ImgContainer>
             <Typo></Typo>
           </Box>
-          <Box>
+          <TextBox>
             {text1}
             <br />
             <br />
@@ -36,8 +36,12 @@ const Story = () => {
             {text2}
             <ButtonContainer>
               <Button onClick={onClickWebsite}>Visit website</Button>
+              <IconContainer>
+                <Icon>tiktok</Icon>
+                <Icon>instagram</Icon>
+              </IconContainer>
             </ButtonContainer>
-          </Box>
+          </TextBox>
         </BoxContainer>
       </Container>
     </Section>
@@ -135,6 +139,7 @@ const Button = styled.button`
   padding: 0.5rem 1rem;
   border: 2px solid rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease-in-out;
+  font-size: ${(props) => props.theme.fontlg};
   cursor: pointer;
   :hover {
     border: 2px solid ${({ theme }) => theme.primary};
@@ -143,4 +148,18 @@ const Button = styled.button`
 
 const ButtonContainer = styled.div`
   padding-top: 2rem;
+  display: flex;
+`;
+
+const TextBox = styled(Box)`
+  padding-top: 2rem;
+`;
+
+const Icon = styled.div``;
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4rem;
+  gap: 2rem;
 `;

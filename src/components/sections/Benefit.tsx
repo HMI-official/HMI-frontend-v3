@@ -29,7 +29,7 @@ const benefitData = [
   },
 ];
 const benefitConfig = {
-  gap: "2rem",
+  gap: "6rem",
 };
 
 interface ItemProps {
@@ -54,15 +54,17 @@ const Benefit = () => {
     <Section>
       <SectionWrapper>
         <MainTitle>benefits</MainTitle>
-        <Row>
+        <Grid>
+          {/* <Row> */}
           <Item title={benefitData[0].title}>{benefitData[0].content}</Item>
           <Item title={benefitData[1].title}>{benefitData[1].content}</Item>
           <Item title={benefitData[2].title}>{benefitData[2].content}</Item>
-        </Row>
-        <Row>
+          {/* </Row> */}
+          {/* <Row> */}
           <Item title={benefitData[3].title}>{benefitData[3].content}</Item>
           <Item title={benefitData[4].title}>{benefitData[4].content}</Item>
-        </Row>
+          {/* </Row> */}
+        </Grid>
       </SectionWrapper>
     </Section>
   );
@@ -73,6 +75,7 @@ const MainTitle = styled.h2`
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-family: "Saira-Black";
   color: ${(props) => props.theme.primary};
   font-size: ${(props) => props.theme.font2xl};
@@ -82,19 +85,21 @@ const Row = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: ${benefitConfig.gap};
+  gap: calc(${benefitConfig.gap});
 `;
 
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-width: 360px;
-  width: 360px;
+  height: 100%;
+  /* max-width: 300px; */
+  /* width: 300px; */
 `;
 
 const Icon = styled.div`
   display: flex;
+  /* justify-content: flex-start; */
   justify-content: center;
   align-items: center;
   img {
@@ -105,15 +110,18 @@ const Icon = styled.div`
 
 const Title = styled.div`
   font-size: ${(props) => props.theme.fontxl};
-  color: ${(props) => props.theme.primary};
   font-family: "Saira-Black";
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  /* justify-content: flex-start; */
+
   align-items: center;
   padding-top: 1rem;
   padding-bottom: 2 rem;
 `;
-const Content = styled.div``;
+const Content = styled.div`
+  font-size: ${(props) => props.theme.fontlg};
+`;
 
 const Section = styled.section`
   min-height: 30vh;
@@ -132,4 +140,14 @@ const SectionWrapper = styled.div`
   gap: calc(${benefitConfig.gap} * 2);
 
   /* padding-left: 10rem; */
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  grid-gap: calc(${benefitConfig.gap});
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  /* max-width: 1130px; */
 `;

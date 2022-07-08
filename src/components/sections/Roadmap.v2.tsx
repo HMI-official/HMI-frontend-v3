@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import Galaxy from "../bgImg/Galaxy";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
 
@@ -160,6 +161,7 @@ const RoadmapV2 = () => {
           <Container>{CarouselComponent}</Container>
         </CarouselEl>
       </SectionWrapper>
+      <Galaxy />
     </Section>
   );
 };
@@ -327,7 +329,7 @@ const RoadmapItemContainer = styled.div`
   position: relative;
   min-height: ${carouselConfig.carouselHeight}px;
   /* width: 100% !important; */
-  background: ${(props) => `rgb(${props.theme.bodyRgba},10%)`};
+  background: ${(props) => `rgb(${props.theme.bodyRgba},8%)`};
   border-radius: 1rem;
 
   .item1,
