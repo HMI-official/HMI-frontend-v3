@@ -152,8 +152,10 @@ a{
  
   }
   ::selection {
-  background: var(--clr-selection-bg);
-  color: var(--clr-selection-text);
+  background:${({ theme }) => theme.selection};
+  /* background: var(--clr-selection-bg); */
+  color: white;
+  /* color: var(--clr-selection-text); */
   }
 `;
 

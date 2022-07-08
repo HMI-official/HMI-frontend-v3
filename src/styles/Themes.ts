@@ -20,6 +20,7 @@ const commonTheme = {
   gray2: "#BEBEBE",
   gray3: "#EBECF0",
   primary: "#00ffeb",
+  selection: "#00ffeaaf",
 
   ["--chakra-colors-purple-100"]: "#E9D8FD",
   ["--chakra-colors-purple-200"]: "#D6BCFA",
