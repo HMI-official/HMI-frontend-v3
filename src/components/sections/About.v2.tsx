@@ -1,11 +1,7 @@
 import React from "react";
-import { AiFillInstagram, AiFillTwitterSquare } from "react-icons/ai";
-import { FaDiscord } from "react-icons/fa";
 import styled, { keyframes } from "styled-components";
-import { ETC_IMAGES, HMI_HERO, SNS } from "../../constants/image";
+import { ETC_IMAGES, SNS } from "../../constants/image";
 import { ReactComponent as Moolu } from "../../assets/Nfts/moolu.svg";
-// import MooluSvg from "../../images/heros/Moolu-svg.svg";
-import img1 from "../../assets/Nfts/bighead.svg";
 import Galaxy from "../bgImg/Galaxy";
 
 const AboutV2 = () => {
@@ -43,9 +39,6 @@ const AboutV2 = () => {
             <Icon>
               <img src={SNS.twitter} alt="twitter" />
             </Icon>
-            {/* <AiFillInstagram /> */}
-            {/* <AiFillTwitterSquare /> */}
-            {/* <FaDiscord /> */}
           </SNSContainer>
         </Box>
       </Container>
@@ -190,11 +183,7 @@ const ImageContainer = styled.div`
   .item1 {
     z-index: 2;
     #arm {
-      /* transform: translateY(-100px); */
       animation: ${upDown} 0.7s ease-in-out infinite;
-      /* delay: 0.3s; */
-      /* animation delay */
-      /* animation-delay: 0.1s; */
     }
     image {
       object-fit: contain;
@@ -209,7 +198,7 @@ const Icon = styled.div`
   align-items: center;
   img {
     cursor: pointer;
-    width: 30px;
+    width: 50px;
     object-fit: contain;
   }
 `;
