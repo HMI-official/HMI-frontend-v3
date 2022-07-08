@@ -3,6 +3,8 @@ import styled, { keyframes } from "styled-components";
 import { ETC_IMAGES, SNS } from "../../constants/image";
 import { ReactComponent as Moolu } from "../../assets/Nfts/moolu.svg";
 import Galaxy from "../bgImg/Galaxy";
+import { ADDRESS } from "../../constants/address";
+import { onClickWebsite } from "../../utils/common";
 
 const AboutV2 = () => {
   return (
@@ -33,10 +35,10 @@ const AboutV2 = () => {
             {/* <MooluSvg /> */}
           </ImageContainer>
           <SNSContainer>
-            <Icon>
+            <Icon onClick={() => onClickWebsite(ADDRESS.discord)}>
               <img src={SNS.discord} alt="discord" />
             </Icon>
-            <Icon>
+            <Icon onClick={() => onClickWebsite(ADDRESS.twitter)}>
               <img src={SNS.twitter} alt="twitter" />
             </Icon>
           </SNSContainer>
@@ -213,7 +215,8 @@ const Machine = styled(Image)`
 
 const SNSContainer = styled.div`
   font-size: calc(${(props) => props.theme.fontlg} + 0.4rem);
-  gap: 0.4rem;
+  /* gap: 0.4rem; */
+  gap: 1rem;
   display: flex;
   align-self: flex-end;
   color: ${(props) => props.theme.gray3};

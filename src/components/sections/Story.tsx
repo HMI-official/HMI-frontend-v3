@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { ADDRESS } from "../../constants/address";
 import { SNS } from "../../constants/image";
-const websiteURL = `https://highmindedi.com/`;
-const onClickWebsite = () => {
-  window.open(websiteURL, "_blank");
-};
+import { onClickWebsite } from "../../utils/common";
+// const websiteURL = `https://highmindedi.com/`;
+// const onClickWebsite = () => {
+//   window.open(websiteURL, "_blank");
+// };
 
 const text1 = `High Minded Intelligence is a street wear fashion brand that 
 emphasizes the motivational lifestyle and satisfaction of its global 
@@ -17,6 +19,7 @@ worn on both casual and formal occasions.
 
 const text2 = `High Minded Intelligence carries with it, its community, sharing 
 memories, stories and building relationships that`;
+
 const Story = () => {
   return (
     <Section id="story">
@@ -36,12 +39,14 @@ const Story = () => {
             <br />
             {text2}
             <ButtonContainer>
-              <Button onClick={onClickWebsite}>Visit website</Button>
+              <Button onClick={() => onClickWebsite(ADDRESS.hmi)}>
+                Visit website
+              </Button>
               <IconContainer>
-                <Icon>
+                <Icon onClick={() => onClickWebsite(ADDRESS.tiktok)}>
                   <img src={SNS.tiktok} alt="tiktok" />
                 </Icon>
-                <Icon>
+                <Icon onClick={() => onClickWebsite(ADDRESS.instagram)}>
                   <img src={SNS.instagram} alt="instagram" />
                 </Icon>
               </IconContainer>
@@ -176,5 +181,5 @@ const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding-left: 4rem;
-  gap: 2rem;
+  gap: 1rem;
 `;
