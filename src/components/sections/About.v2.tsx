@@ -44,7 +44,7 @@ const AboutV2 = () => {
           </SNSContainer>
         </Box>
       </Container>
-      <Galaxy />
+      {/* <Galaxy /> */}
     </Section>
   );
 };
@@ -141,7 +141,7 @@ const Section = styled.section`
   padding-top: 0;
   width: 100%;
 
-  background-color: ${(props) => props.theme.text};
+  /* background-color: ${(props) => props.theme.text}; */
   display: flex;
   justify-content: center;
   align-items: center;

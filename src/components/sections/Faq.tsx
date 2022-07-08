@@ -9,7 +9,7 @@ const Section = styled.section`
   min-height: 100vh;
   height: auto;
   width: 100vw;
-  background-color: ${(props) => props.theme.text};
+  /* background-color: ${(props) => props.theme.text}; */
   position: relative;
   color: ${(props) => props.theme.body};
   overflow: hidden;

@@ -16,6 +16,8 @@ import Benefit from "./components/sections/Benefit";
 import TeamV2 from "./components/sections/Team.v2";
 import Story from "./components/sections/Story";
 import AccordionDemo from "./components/AccordionDemo";
+import Galaxy from "./components/bgImg/Galaxy";
+import styled from "styled-components";
 // import "./styles/fonts.css";
 
 function App() {
@@ -37,7 +39,8 @@ function App() {
       <Route
         path="/"
         element={
-          <main>
+          <Main>
+            <Galaxy />
             <Navigation />
             <HomeV2 />
             <AboutV2 />
@@ -51,7 +54,7 @@ function App() {
 
             <Footer />
             <ScrollToTop />
-          </main>
+          </Main>
         }
       />
       <Route path="/mint" element={<Minting />} />
@@ -61,3 +64,5 @@ function App() {
 }
 
 export default App;
+
+const Main = styled.main``;

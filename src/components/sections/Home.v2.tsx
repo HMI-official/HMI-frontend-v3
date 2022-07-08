@@ -18,6 +18,7 @@ const HomeV2 = () => {
 export default HomeV2;
 const Section = styled.section`
   min-height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
+  background: ${(props) => props.theme.text};
   width: 100vw;
   position: relative;
   display: flex;

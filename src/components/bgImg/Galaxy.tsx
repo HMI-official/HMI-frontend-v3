@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Galaxy = () => {
   return (
     <Container>
-      <TopOverlay />
+      {/* <TopOverlay /> */}
       <img src="/images/bg-imgs/astronomy.png" alt="galaxy" />
       <Overlay />
     </Container>
@@ -15,9 +15,10 @@ export default Galaxy;
 
 const Container = styled.div`
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: -1;
-  opacity: 0.7;
+  opacity: 0.8;
+  top: 0;
 
   img {
     width: 100%;

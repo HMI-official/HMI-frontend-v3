@@ -161,7 +161,7 @@ const RoadmapV2 = () => {
           <Container>{CarouselComponent}</Container>
         </CarouselEl>
       </SectionWrapper>
-      <Galaxy />
+      {/* <Galaxy /> */}
     </Section>
   );
 };

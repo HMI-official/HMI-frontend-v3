@@ -44,7 +44,7 @@ const Section = styled.section`
   min-height: 30vh;
   padding: 5rem 0;
   /* width: 100vw; */
-  background-color: ${(props) => props.theme.text};
+  /* background-color: ${(props) => props.theme.text}; */
   display: flex;
   flex-direction: column;
   justify-content: center;
