@@ -216,9 +216,10 @@ const Machine = styled(Image)`
 const SNSContainer = styled.div`
   font-size: calc(${(props) => props.theme.fontlg} + 0.4rem);
   /* gap: 0.4rem; */
+  padding-left: 4rem;
   gap: 1rem;
   display: flex;
-  align-self: flex-end;
+  align-self: flex-start;
   color: ${(props) => props.theme.gray3};
   > svg {
     cursor: pointer;

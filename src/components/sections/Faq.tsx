@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Accordion from "../Accordion";
 // import AccordionDemo from "../AccordionDemo";
@@ -92,60 +92,37 @@ const Faq = () => {
         <Box>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="WHERE CAN I VIEW MY NFTS?"
+            title="How much reward do I get and through what method?"
           >
-            Once minted or bought simply connect to your OpenSea account to view
-            your NFTs.
+            Our Evangelist will get 20% of entire sales profit. We will take a
+            snapshot of holder’s wallet address and air drop the reward to your
+            wallet directly every quarter
           </Accordion>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="WHAT IS THE METAVERSE?"
+            title="What is the mint date"
           >
-            A metaverse is a network of 3D virtual worlds focused on social
-            connection. In futurism and science fiction, it is often described
-            as a hypothetical iteration of the Internet as a single, universal
-            virtual world that is facilitated by the use of virtual and
-            augmented reality headsets.
-          </Accordion>
-          <Accordion
-            ScrollTrigger={ScrollTrigger}
-            title="WHY DO WE NEED ROYALTIES?"
-          >
-            The amount of royalties was fixed at 5% to finance the Weirdos
-            Club's projects. We have the ambition to organize multiple events
-            around the world in order to strengthen the community and build a
-            network of entrepreneurs and investors with the same mindset and
-            common interests.
+            TBD
           </Accordion>
         </Box>
         <Box>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="HOW CAN I USE MY NFT?"
+            title="What kind of game model are we going to have?"
           >
-            You will be able to use your NFT as an avatar in the Metaverse and
-            our future video game. Holding also means that you are part of an
-            exclusive network of investors and entrepreneurs.
+            We are designing game model at this moment and we will specify it
+            going through the discussions with our Evangelists. All of our OG
+            evangelists will get the benefit of 1:1 free airdrop for every
+            single each phase of new NFT projects.
           </Accordion>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="WHAT ARE THE WEIRDOS?
-"
+            title="How can I see the reward ?"
           >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
-            deserunt consequatur quisquam maxime molestias dolores ipsum,
-            exercitationem vel sint quidem aliquam modi quis impedit corporis
-            unde inventore fugiat provident in.
-          </Accordion>
-          <Accordion
-            ScrollTrigger={ScrollTrigger}
-            title="WHAT IS THE FUSION PROCESS?
-"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel enim
-            veritatis iusto officia. Exercitationem, ducimus reiciendis. Rem,
-            maxime, similique neque minus aliquam dolore doloremque laboriosam,
-            facilis quibusdam unde sint officia.
+            We will share the community’s wallet address and our business
+            operation transparently. We also provide our own customized reward
+            API system for your convenience. Easily go to “Reward” and check
+            your estimated or current reward stats.
           </Accordion>
         </Box>
       </Container>

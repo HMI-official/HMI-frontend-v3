@@ -23,8 +23,8 @@ const Section = styled.section`
   overflow: hidden;
 `;
 const Title = styled.h1`
+  text-transform: uppercase;
   font-size: ${(props) => props.theme.fontxxl};
-  text-transform: capitalize;
   color: ${(props) => props.theme.text};
   display: flex;
   justify-content: center;
@@ -146,7 +146,7 @@ const Team = () => {
       <Suspense fallback={<Loading />}>
         <ConfettiComponent />{" "}
       </Suspense>
-      <Title>Team</Title>
+      <Title>TEAM</Title>
       <Container>
         <MemberComponent img={img1} name="SKYBLAZE" position="founder" />
         <MemberComponent img={img2} name="MEGNUM" position="Co-Founder" />

@@ -24,6 +24,7 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: ${(props) => props.theme.navHeight};
 `;
 
 const Video = styled.video`

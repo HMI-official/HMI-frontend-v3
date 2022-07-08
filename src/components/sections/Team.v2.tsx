@@ -47,7 +47,7 @@ const teamData: ItemProps[] = [
   {
     name: "Push", // 여기가 push
     img: HMI_HERO.neptune,
-    planet: "V",
+    planet: "NEP",
     role: "Wisecracker",
     anime: "flip-left",
     delay: 450,
@@ -143,7 +143,7 @@ const MainTitle = styled.h2`
   font-family: "Saira-Black";
   color: ${(props) => props.theme.primary};
   font-size: ${(props) => props.theme.font2xl};
-  text-transform: capitalize;
+  text-transform: uppercase;
 `;
 const Row = styled.div`
   display: flex;

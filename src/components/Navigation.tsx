@@ -7,6 +7,9 @@ import Button, { WritingButton } from "./Button";
 import Logo from "./Logo";
 
 const Section = styled.section`
+  position: fixed;
+  z-index: 10;
+  top: 0;
   width: 100vw;
   color: ${(props) => props.theme.body};
   background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`};

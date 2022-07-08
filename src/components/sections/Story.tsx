@@ -64,6 +64,7 @@ const Title = styled.h1`
   font-size: ${(props) => props.theme.fontxxl};
   color: ${(props) => props.theme.primary};
   font-family: "Saira-Black";
+  text-transform: uppercase;
 
   /* margin: 1rem auto; */
   /* border-bottom: 2px solid ${(props) => props.theme.carouselColor}; */

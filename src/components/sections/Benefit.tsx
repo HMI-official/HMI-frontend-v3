@@ -79,7 +79,7 @@ const MainTitle = styled.h2`
   font-family: "Saira-Black";
   color: ${(props) => props.theme.primary};
   font-size: ${(props) => props.theme.font2xl};
-  text-transform: capitalize;
+  text-transform: uppercase;
 `;
 const Row = styled.div`
   display: flex;
@@ -109,10 +109,13 @@ const Icon = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: ${(props) => props.theme.fontxl};
+  font-size: calc(${(props) => props.theme.fontxl} - 5px);
   font-family: "Saira-Black";
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  text-transform: uppercase;
+
+  // text break
   /* justify-content: flex-start; */
 
   align-items: center;
