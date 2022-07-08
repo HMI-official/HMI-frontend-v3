@@ -62,6 +62,7 @@ const Title = styled.div`
   font-size: ${({ theme }) => theme.font2xl};
   font-weight: 800;
   flex: 1;
+  font-family: "Saira-Black";
   /* height: 100%; */
   display: flex;
   height: 600px;
