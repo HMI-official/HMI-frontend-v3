@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { SNS } from "../../constants/image";
 const websiteURL = `https://highmindedi.com/`;
 const onClickWebsite = () => {
   window.open(websiteURL, "_blank");
@@ -37,8 +38,12 @@ const Story = () => {
             <ButtonContainer>
               <Button onClick={onClickWebsite}>Visit website</Button>
               <IconContainer>
-                <Icon>tiktok</Icon>
-                <Icon>instagram</Icon>
+                <Icon>
+                  <img src={SNS.tiktok} alt="tiktok" />
+                </Icon>
+                <Icon>
+                  <img src={SNS.instagram} alt="instagram" />
+                </Icon>
               </IconContainer>
             </ButtonContainer>
           </TextBox>
@@ -155,7 +160,17 @@ const TextBox = styled(Box)`
   padding-top: 2rem;
 `;
 
-const Icon = styled.div``;
+const Icon = styled.div`
+  display: flex;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  align-items: center;
+  img {
+    cursor: pointer;
+    width: 50px;
+    object-fit: contain;
+  }
+`;
 const IconContainer = styled.div`
   display: flex;
   justify-content: center;

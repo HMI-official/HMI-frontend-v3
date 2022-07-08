@@ -39,4 +39,5 @@ export const SNS = {
   instagram: "/images/sns/instagram-icon.png",
   twitter: "/images/sns/twitter.png",
   discord: "/images/sns/discord.png",
+  tiktok: "/images/sns/tiktok.png",
 };
