@@ -36,6 +36,7 @@ export const ETC_IMAGES = {
   bg1: "/images/bg-imgs/galaxy-2.jpg",
   bg2: "/images/bg-imgs/galaxy-3.jpg",
   bg3: "/images/bg-imgs/galaxy-4.jpg",
+  logo: "/images/logo.png",
 };
 
 export const SNS = {
@@ -43,4 +44,9 @@ export const SNS = {
   twitter: "/images/sns/twitter.png",
   discord: "/images/sns/discord.png",
   tiktok: "/images/sns/tiktok.png",
+};
+
+export const CLOTHES = {
+  black: "/images/clothes/white_short_sleeve.webp",
+  white: "/images/clothes/dark_short_sleeve.webp",
 };

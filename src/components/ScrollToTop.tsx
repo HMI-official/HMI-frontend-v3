@@ -38,7 +38,7 @@ const ScrollToTop = () => {
   const { y } = useWindowScroll();
 
   const scrollToTop = () => {
-    let element = document.getElementById("navigation");
+    let element = document.getElementById("home");
     if (!element) return;
     element.scrollIntoView({
       behavior: "smooth",

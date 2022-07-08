@@ -1,14 +1,14 @@
-import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import React, { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Accordion from "../Accordion";
 // import AccordionDemo from "../AccordionDemo";
 
 const Section = styled.section`
-  min-height: 100vh;
+  /* min-height: 100vh; */
   height: auto;
   width: 100vw;
+  padding: 4rem 0;
   /* background-color: ${(props) => props.theme.text}; */
   position: relative;
   color: ${(props) => props.theme.body};
@@ -65,27 +65,25 @@ const Box = styled.div`
 `;
 
 const Faq = () => {
-  const ref = useRef(null);
-  gsap.registerPlugin(ScrollTrigger);
+  // const ref = useRef(null);
+  // gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
-    let element = ref.current;
-
-    ScrollTrigger.create({
-      trigger: element,
-      start: "bottom bottom",
-      end: "bottom top",
-      pin: true,
-      pinSpacing: false,
-      scrub: 1,
-      // markers:true,
-    });
-
-    return () => ScrollTrigger.disable();
+    // let element = ref.current;
+    // ScrollTrigger.create({
+    // trigger: element,
+    // start: "bottom bottom",
+    // end: "bottom top",
+    // pin: true,
+    // pinSpacing: false,
+    // scrub: 1,
+    // markers:true,
+    // });
+    // return () => ScrollTrigger.disable();
     // return () => ScrollTrigger.kill();
   }, []);
 
   return (
-    <Section ref={ref} id="faq">
+    <Section id="faq">
       <Title>Faq</Title>
 
       <Container>

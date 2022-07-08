@@ -18,6 +18,8 @@ import Story from "./components/sections/Story";
 import AccordionDemo from "./components/AccordionDemo";
 import Galaxy from "./components/bgImg/Galaxy";
 import styled from "styled-components";
+import FooterV2 from "./components/sections/Footer.v2";
+import Join from "./components/sections/Join";
 // import "./styles/fonts.css";
 
 function App() {
@@ -51,8 +53,9 @@ function App() {
             <Story />
             {/* <AccordionDemo /> */}
             <Faq />
-
-            <Footer />
+            <Join />
+            <FooterV2 />
+            {/* <Footer /> */}
             <ScrollToTop />
           </Main>
         }
