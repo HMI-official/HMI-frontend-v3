@@ -33,6 +33,7 @@ export const HMI_HERO_ARR = Object.values(HMI_HERO);
 
 export const ETC_IMAGES = {
   machine: "/images/machine-v2.png",
+  bg1: "/images/bg-imgs/galaxy-2.jpg",
 };
 
 export const SNS = {

@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { ETC_IMAGES } from "../../constants/image";
 
 const Galaxy = () => {
   return (
     <Container>
       {/* <TopOverlay /> */}
-      <img src="/images/bg-imgs/astronomy.png" alt="galaxy" />
+      <img src={ETC_IMAGES.bg1} alt="galaxy" />
+      {/* <img src="/images/bg-imgs/astronomy.png" alt="galaxy" /> */}
       <Overlay />
     </Container>
   );
