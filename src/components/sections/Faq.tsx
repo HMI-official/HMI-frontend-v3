@@ -65,23 +65,6 @@ const Box = styled.div`
 `;
 
 const Faq = () => {
-  // const ref = useRef(null);
-  // gsap.registerPlugin(ScrollTrigger);
-  useEffect(() => {
-    // let element = ref.current;
-    // ScrollTrigger.create({
-    // trigger: element,
-    // start: "bottom bottom",
-    // end: "bottom top",
-    // pin: true,
-    // pinSpacing: false,
-    // scrub: 1,
-    // markers:true,
-    // });
-    // return () => ScrollTrigger.disable();
-    // return () => ScrollTrigger.kill();
-  }, []);
-
   return (
     <Section id="faq">
       <Title>Faq</Title>

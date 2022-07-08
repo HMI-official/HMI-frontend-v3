@@ -1,10 +1,9 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Minus } from "../Icons/Minus";
 import { Plus } from "../Icons/Plus";
 
 const Title = styled.div`
-  font-size: ${(props) => props.theme.fontsm};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +13,6 @@ const Reveal = styled.div<{ clicked: boolean }>`
   display: ${(props) => (props.clicked ? "inline-block" : "none")};
   margin-top: 1rem;
   color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.6)`};
-  font-size: ${(props) => props.theme.fontsm};
   font-weight: 300;
   line-height: 1.1rem;
 `;
@@ -42,7 +40,7 @@ const Indicator = styled.span`
   }
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ clicked: boolean }>`
   cursor: pointer;
   padding: 1rem 0.5rem;
   display: flex;
@@ -50,6 +48,19 @@ const Container = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.carouselColor};
   margin: 3rem 0;
   transition: all 0.3s ease-in-out;
+  ${({ clicked }) =>
+    clicked &&
+    css`
+      border-bottom-color: ${(props) => props.theme.primary};
+      ${Indicator} {
+        svg {
+          fill: ${(props) => props.theme.primary};
+        }
+      }
+      ${Title} {
+        color: ${(props) => props.theme.primary};
+      }
+    `}
   :hover {
     border-bottom-color: ${(props) => props.theme.primary};
     ${Indicator} {
@@ -81,7 +92,7 @@ const Accordion: FC<AccordionProps> = ({ title, children, ScrollTrigger }) => {
   }, [collapse]);
 
   return (
-    <Container onClick={() => setCollapse(!collapse)}>
+    <Container onClick={() => setCollapse(!collapse)} clicked={collapse}>
       <Title>
         <Name>
           <span>{title}</span>
