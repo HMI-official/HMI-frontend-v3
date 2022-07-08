@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ETC_IMAGES } from "../constants/image";
 import { useAccount } from "../contexts/AccountContext";
 import { cutAccount } from "../hooks";
 import Button, { WritingButton } from "./Button";
@@ -40,6 +41,7 @@ const Menu = styled.ul<{ click: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
   list-style: none;
 
   @media (max-width: 64em) {
@@ -200,7 +202,7 @@ const Navigation = () => {
     <Section id="navigation">
       <NavBar>
         {/* <Logo /> */}
-        <div>logo</div>
+        <Logo />
         <HamburgerMenu click={click} onClick={() => setClick(!click)}>
           &nbsp;
         </HamburgerMenu>
