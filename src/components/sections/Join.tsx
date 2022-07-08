@@ -78,10 +78,27 @@ const Box = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-  width: 50%;
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  /* div { */
+  border-radius: 20px;
+
+  /* } */
+
   img {
-    width: 15rem;
+    width: 100%;
+    min-width: 15rem;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease-in-out;
+
+    :hover {
+      border-color: ${({ theme }) => theme.primary};
+    }
   }
   ${media[768]} {
     width: 14rem;
@@ -104,10 +121,7 @@ const Wrapper = styled.div`
     gap: 2rem;
   }
   .item2 {
-    gap: 1rem;
-    img {
-      border-radius: 1rem;
-    }
+    gap: 3rem;
   }
 
   ${media[768]} {
