@@ -100,7 +100,8 @@ const HamburgerMenu = styled.span<{ click: boolean }>`
   width: ${(props) => (props.click ? "2rem" : "1.5rem")};
 
   height: 2px;
-  background: ${(props) => props.theme.text};
+  background: ${(props) => props.theme.body};
+  /* background: ${(props) => props.theme.text}; */
 
   position: absolute;
   top: 2rem;
@@ -128,7 +129,7 @@ const HamburgerMenu = styled.span<{ click: boolean }>`
     width: ${(props) => (props.click ? "1rem" : "1.5rem")};
     height: 2px;
     right: ${(props) => (props.click ? "-2px" : "0")};
-    background: ${(props) => props.theme.text};
+    background: ${(props) => props.theme.body};
     position: absolute;
     transition: all 0.3s ease;
   }
