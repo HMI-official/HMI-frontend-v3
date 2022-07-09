@@ -136,6 +136,9 @@ const Name = styled.span`
   font-family: "Saira-Black";
   text-transform: uppercase;
   font-size: calc(${(props) => props.theme.fontlg} + 0.5rem);
+  ${media.mobile} {
+    font-size: ${(props) => props.theme.fontlg};
+  }
 `;
 const Planet = styled.span``;
 const Role = styled.span``;
@@ -166,6 +169,9 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${media.mobile} {
+    padding-top: 10rem;
+  }
 `;
 const Container = styled.div`
   display: flex;

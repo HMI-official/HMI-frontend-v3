@@ -87,6 +87,9 @@ const BoxContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
+  ${media.mobile} {
+    gap: 0;
+  }
 `;
 const Box = styled.div`
   font-size: calc(${(props) => props.theme.fontlg} + 0.1rem);
@@ -111,6 +114,9 @@ const Container = styled.div`
   max-width: 1130px;
   ${media[1200]} {
     align-items: center;
+  }
+  ${media.mobile} {
+    /* gap: 1rem; */
   }
 
   /* padding-left: 10rem; */
@@ -140,10 +146,10 @@ const ImgContainer = styled.div`
   }
 
   @media (max-width: 48em) {
-    width: 12rem;
+    /* width: 12rem; */
   }
   @media (max-width: 30em) {
-    width: 10rem;
+    /* width: 10rem; */
   }
 `;
 
@@ -172,6 +178,11 @@ const ButtonContainer = styled.div`
 
 const TextBox = styled(Box)`
   padding-top: 2rem;
+  ${media.mobile} {
+    font-size: ${(props) => props.theme.fontsm};
+
+    line-height: 1.5;
+  }
 `;
 
 const Icon = styled.div`
@@ -183,6 +194,9 @@ const Icon = styled.div`
     cursor: pointer;
     width: 50px;
     object-fit: contain;
+    ${media.mobile} {
+      width: 30px;
+    }
   }
 `;
 const IconContainer = styled.div`
