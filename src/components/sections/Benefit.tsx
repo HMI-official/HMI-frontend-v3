@@ -132,8 +132,9 @@ const Title = styled.div`
 const Content = styled.div`
   font-size: ${(props) => props.theme.fontlg};
   ${media.mobile} {
-    font-size: ${(props) => props.theme.fontsm};
-    max-width: 70%;
+    font-size: ${(props) => props.theme.fontmd};
+    max-width: 80%;
+    line-height: 1.5;
   }
 `;
 

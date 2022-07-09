@@ -119,7 +119,7 @@ const Box = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: ${(props) => props.theme.fontxxl};
+  font-size: ${(props) => props.theme.font2xl};
   text-transform: capitalize;
   color: ${(props) => props.theme.primary};
   align-self: flex-start;
@@ -135,7 +135,7 @@ const Title = styled.h2`
     font-size: ${(props) => props.theme.fontxl};
   }
   @media (max-width: 30em) {
-    font-size: ${(props) => props.theme.fontlg};
+    /* font-size: ${(props) => props.theme.fontlg}; */
   }
 `;
 const SubText = styled.p`
@@ -154,7 +154,7 @@ const SubText = styled.p`
     font-size: ${(props) => props.theme.fontmd};
   }
   @media (max-width: 30em) {
-    font-size: ${(props) => props.theme.fontsm};
+    /* font-size: ${(props) => props.theme.fontsm}; */
   }
 `;
 
@@ -179,6 +179,7 @@ const Section = styled.section`
 
   ${media.mobile} {
     min-height: 0;
+    min-height: 100vh;
   }
 `;
 

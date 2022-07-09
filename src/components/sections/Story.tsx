@@ -82,6 +82,9 @@ const BoxContainer = styled.div`
   > div:nth-child(2) {
     flex: 1;
     max-width: 70%;
+    ${media.mobile} {
+      max-width: 80%;
+    }
   }
   ${media[1200]} {
     flex-direction: column;
@@ -179,8 +182,8 @@ const ButtonContainer = styled.div`
 const TextBox = styled(Box)`
   padding-top: 2rem;
   ${media.mobile} {
-    font-size: ${(props) => props.theme.fontsm};
-
+    font-size: ${(props) => props.theme.fontmd};
+    /* font-size: ${(props) => props.theme.fontsm}; */
     line-height: 1.5;
   }
 `;

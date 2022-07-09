@@ -14,7 +14,8 @@ const Reveal = styled.div<{ clicked: boolean }>`
   margin-top: 1rem;
   color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.6)`};
   font-weight: 300;
-  line-height: 1.1rem;
+  /* line-height: 1.1rem; */
+  line-height: 1.8;
 `;
 
 const Name = styled.div`
