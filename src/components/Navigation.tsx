@@ -217,8 +217,9 @@ const Navigation = () => {
             <Link to="/mint">Mint</Link>
           </MenuItem>
           <MobileBtnComponent />
+          <DesktopBtnComponent />
         </Menu>
-        <DesktopBtnComponent />
+        <div />
       </NavBar>
     </Section>
   );
