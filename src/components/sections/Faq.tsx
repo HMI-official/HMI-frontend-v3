@@ -73,37 +73,37 @@ const Faq = () => {
         <Box>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="How much reward do I get and through what method?"
+            title="When is the mint date ?"
           >
-            Our Evangelist will get 20% of entire sales profit. We will take a
-            snapshot of holder’s wallet address and air drop the reward to your
-            wallet directly every quarter
+            We are targeting to launch in August. The exact date is yet to be
+            determined though; it will be announced in advance.
           </Accordion>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="What is the mint date"
+            title="What is our Total Supply and price ?"
           >
-            TBD
+            Total supply is 3,333 NFTs and the price will be announced in
+            advance.
           </Accordion>
         </Box>
         <Box>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="What kind of game model are we going to have?"
+            title="How will I get the reward and How often ?"
           >
-            We are designing game model at this moment and we will specify it
-            going through the discussions with our Evangelists. All of our OG
-            evangelists will get the benefit of 1:1 free airdrop for every
-            single each phase of new NFT projects.
+            We will take a snapshot with the Token ID-based holder's wallet
+            address and the reward will be airdropped automatically through our
+            system. Payout frequency will be decided by community(Either every
+            quarter or 6months). We will have a vote once we are done minting.
           </Accordion>
           <Accordion
             ScrollTrigger={ScrollTrigger}
-            title="How can I see the reward ?"
+            title="How do I get the Welcome Package ?"
           >
-            We will share the community’s wallet address and our business
-            operation transparently. We also provide our own customized reward
-            API system for your convenience. Easily go to “Reward” and check
-            your estimated or current reward stats.
+            We will give you the promotion code and you will be able to check
+            out your order on Official website of High Minded Intelligence.
+            Entire process will be free including the shipping fee(worldwide
+            international shipping).
           </Accordion>
         </Box>
       </Container>
