@@ -16,7 +16,7 @@ const benefitData = [
   {
     title: "Metaverse Hangout",
     content:
-      "Holders of the Hi-planet NFT will have exclusive access to metaverse communities where there will be events, networking and contests.",
+      'HI-Planet studio will be constructed in metaverse such as "The Sandbox" or "Decentraland"',
   },
   {
     title: "Hi-contests",
@@ -26,7 +26,7 @@ const benefitData = [
   {
     title: "Early game access",
     content:
-      "All holders will be given early access to the metaverse play to earn a game which is in development.",
+      "Our end goal is creating P&E game in Metaverse. Planet holders will get early access with exclusive benefits.",
   },
 ];
 const benefitConfig = {
