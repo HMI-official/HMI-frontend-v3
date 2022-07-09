@@ -158,7 +158,7 @@ const SectionWrapper = styled.div`
   max-width: 1130px;
   gap: ${benefitConfig.gap};
   ${media.mobile} {
-    gap: calc(${benefitConfig.gap} / 2);
+    gap: calc(${benefitConfig.gap});
   }
 `;
 

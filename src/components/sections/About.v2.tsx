@@ -137,6 +137,9 @@ const Title = styled.h2`
   @media (max-width: 30em) {
     /* font-size: ${(props) => props.theme.fontlg}; */
   }
+  ${media.mobile} {
+    padding-bottom: 2rem;
+  }
 `;
 const SubText = styled.p`
   font-size: ${(props) => props.theme.fontlg};
@@ -155,6 +158,9 @@ const SubText = styled.p`
   }
   @media (max-width: 30em) {
     /* font-size: ${(props) => props.theme.fontsm}; */
+  }
+  ${media.mobile} {
+    line-height: 1.3;
   }
 `;
 
@@ -269,6 +275,9 @@ const ImageContainer = styled.div`
         height: 10rem;
       }
     }
+  }
+  ${media.mobile} {
+    padding-top: 4rem;
   }
 `;
 
