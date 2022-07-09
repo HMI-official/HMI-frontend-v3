@@ -39,7 +39,7 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
-  overflow: hidden;
+  overflow-x: scroll;
   gap: 2rem;
 `;
 const Item = styled.div`
