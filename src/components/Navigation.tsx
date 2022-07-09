@@ -13,7 +13,9 @@ const Section = styled.section`
   top: 0;
   width: 100vw;
   color: ${(props) => props.theme.body};
-  background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`};
+  background-color: ${(props) => props.theme.text};
+  /* background-color: ${(props) => `rgba(${props.theme.textRgba}, 1)`}; */
+  /* background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`}; */
 `;
 const NavBar = styled.nav`
   display: flex;
@@ -55,7 +57,8 @@ const Menu = styled.ul<{ click: boolean }>`
     width: 100vw;
     height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
     z-index: 50;
-    background-color: ${(props) => `rgba(${props.theme.bodyRgba},0.85)`};
+    background-color: ${(props) => `rgba(${props.theme.textRgba},0.85)`};
+    /* background-color: ${(props) => `rgba(${props.theme.bodyRgba},0.85)`}; */
     backdrop-filter: blur(2px);
 
     transform: ${(props) =>

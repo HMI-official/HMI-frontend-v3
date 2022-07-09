@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { media } from "../../styles/Themes";
 import Galaxy from "../bgImg/Galaxy";
 // import Carousel from "../Roadmap/Carousel";
 import CarouselOrigin from "../Roadmap/CarouselOrigin";
@@ -199,15 +200,16 @@ const Title = styled.h1`
   justify-content: center;
   align-items: flex-start;
   padding-right: 10rem;
-  /* margin: 1rem auto; */
-  /* font-weight: 800; */
   font-family: "Saira-Black";
-  /* border-bottom: 2px solid ${(props) => props.theme.body}; */
   width: fit-content;
-  /* border: 1px solid ${(props) => props.theme.primary}; */
 
   @media (max-width: 40em) {
     font-size: ${(props) => props.theme.fontxl};
+  }
+  ${media[768]} {
+    padding-right: 0;
+  }
+  ${media.mobile} {
   }
 `;
 
@@ -215,6 +217,11 @@ const TitleContainer = styled.div`
   display: flex;
   width: 90%;
   padding-bottom: 1.5rem;
+  ${media[768]} {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 const Container = styled.div`
   cursor: grab;

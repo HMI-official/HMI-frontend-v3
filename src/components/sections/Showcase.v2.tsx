@@ -1,11 +1,15 @@
 import { useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { HMI_HEROS_BG_ARR } from "../../constants/image";
+import { media } from "../../styles/Themes";
 
 const slideCardConfig = {
   SLIDER_CARD_WIDTH: "20.625rem",
   SLIDER_CARD_NUMBER: 11,
   SLIDER_CARD_GAP: "2rem",
+  TABLET_SLIDER_CARD_WIDTH: "12rem",
+  TABLET_SLIDER_CARD_GAP: "1rem",
+  MOBILE_SLIDER_CARD_WIDTH: "10rem",
 };
 
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
@@ -43,8 +47,6 @@ export default ShowcaseV2;
 const Section = styled.section`
   min-height: 30vh;
   padding: 5rem 0;
-  /* width: 100vw; */
-  /* background-color: ${(props) => props.theme.text}; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +57,7 @@ const Section = styled.section`
   & > *:last-child {
     animation-duration: 40s;
     @media (max-width: 30em) {
-      animation-duration: 10s;
+      animation-duration: 30s;
     }
   }
 `;
@@ -79,6 +81,34 @@ const slide = keyframes`
   }
 `;
 
+const tabletSlide = keyframes`
+ 0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(
+      calc(
+        -${slideCardConfig.TABLET_SLIDER_CARD_WIDTH}* ${slideCardConfig.SLIDER_CARD_NUMBER} - ${slideCardConfig.SLIDER_CARD_GAP} * ${slideCardConfig.SLIDER_CARD_NUMBER}
+      ),
+      0px
+    );
+  }
+`;
+
+const mobileSlide = keyframes`
+ 0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(
+      calc(
+        -${slideCardConfig.MOBILE_SLIDER_CARD_WIDTH}* ${slideCardConfig.SLIDER_CARD_NUMBER} - ${slideCardConfig.SLIDER_CARD_GAP} * ${slideCardConfig.SLIDER_CARD_NUMBER}
+      ),
+      0px
+    );
+  }
+`;
+
 const Row = styled.div<{ direction: string }>`
   /* background-color: lightblue; */
   white-space: nowrap;
@@ -88,6 +118,12 @@ const Row = styled.div<{ direction: string }>`
   gap: ${slideCardConfig.SLIDER_CARD_GAP};
 
   animation: ${slide} linear infinite ${(props) => props.direction};
+  ${media[768]} {
+    animation: ${tabletSlide} linear infinite ${(props) => props.direction};
+  }
+  ${media.mobile} {
+    animation: ${mobileSlide} linear infinite ${(props) => props.direction};
+  }
 `;
 const ImgContainer = styled.div`
   width: 20.625rem;

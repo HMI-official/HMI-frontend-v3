@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { media } from "../../styles/Themes";
 
 const HomeV2 = () => {
   return (
@@ -30,4 +31,8 @@ const Section = styled.section`
 const Video = styled.video`
   width: 60%;
   object-fit: cover;
+  position: absolute;
+  ${media[768]} {
+    width: 100%;
+  }
 `;

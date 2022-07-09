@@ -5,6 +5,7 @@ import { ReactComponent as Moolu } from "../../assets/Nfts/moolu.svg";
 import Galaxy from "../bgImg/Galaxy";
 import { ADDRESS } from "../../constants/address";
 import { onClickWebsite } from "../../utils/common";
+import { media } from "../../styles/Themes";
 
 const AboutV2 = () => {
   return (
@@ -75,6 +76,30 @@ const rattle = keyframes`
     }
     `;
 
+const rattle2 = keyframes`
+   0% {
+      transform: scaleX(-1) rotate(-7deg) translate(-2.2rem, -2rem);
+    }
+    50% {
+      transform: scaleX(-1) rotate(-10deg) translate(-2.2rem, -2rem);
+    }
+    100% {
+      transform: scaleX(-1) rotate(-7deg) translate(-2.2rem, -2rem);
+    }
+`;
+
+const rattle3 = keyframes`
+   0% {
+      transform: scaleX(-1) rotate(-7deg) translate(-0.7rem, -1.3rem);
+    }
+    50% {
+      transform: scaleX(-1) rotate(-10deg) translate(-0.7rem, -1.3rem);
+    }
+    100% {
+      transform: scaleX(-1) rotate(-7deg) translate(-0.7rem, -1.3rem);
+    }
+`;
+
 const Box = styled.div`
   width: 50%;
   height: 100%;
@@ -85,7 +110,11 @@ const Box = styled.div`
   align-items: center;
 
   @media (max-width: 40em) {
-    min-height: 50vh;
+    /* min-height: 0; */
+    min-height: 30vh;
+  }
+  ${media.mobile} {
+    width: 70%;
   }
 `;
 
@@ -147,7 +176,9 @@ const Section = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
-  ${Box}:nth-child(1) {
+
+  ${media.mobile} {
+    min-height: 0;
   }
 `;
 
@@ -180,19 +211,6 @@ const Container = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
-  display: flex;
-  .item1 {
-    z-index: 2;
-    #arm {
-      animation: ${upDown} 0.7s ease-in-out infinite;
-    }
-    image {
-      object-fit: contain;
-    }
-  }
-`;
-
 const Icon = styled.div`
   display: flex;
   /* justify-content: flex-start; */
@@ -202,6 +220,9 @@ const Icon = styled.div`
     cursor: pointer;
     width: 50px;
     object-fit: contain;
+    ${media.mobile} {
+      width: 30px;
+    }
   }
 `;
 
@@ -211,6 +232,43 @@ const Machine = styled(Image)`
   /* transform:  */
   margin-right: -2rem;
   animation: ${rattle} infinite linear 0.7s;
+  object-fit: contain;
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  ${Machine} {
+    ${media.custom(900)} {
+      width: 15rem;
+      animation: ${rattle2} infinite linear 0.7s;
+    }
+    ${media.mobile} {
+      width: 10rem;
+      animation: ${rattle3} infinite linear 0.7s;
+    }
+  }
+  .item1 {
+    z-index: 2;
+
+    #arm {
+      animation: ${upDown} 0.7s ease-in-out infinite;
+    }
+    image {
+      object-fit: contain;
+    }
+    ${media.custom(900)} {
+      svg {
+        width: 15rem;
+        height: 15rem;
+      }
+    }
+    ${media.mobile} {
+      svg {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+  }
 `;
 
 const SNSContainer = styled.div`

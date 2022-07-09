@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import styled from "styled-components";
 import { HMI_HERO } from "../../constants/image";
+import { media } from "../../styles/Themes";
 import Loading from "../Loading";
 
 const teamConfig = {
@@ -106,8 +107,10 @@ const TeamV2 = () => {
     <Section id="team">
       <Container>
         <MainTitle>Team</MainTitle>
-        <Row>{TopItemComponent}</Row>
-        <Row>{BottomItemComponent}</Row>
+        <Grid>
+          {TopItemComponent}
+          {BottomItemComponent}
+        </Grid>
       </Container>
     </Section>
   );
@@ -144,6 +147,9 @@ const MainTitle = styled.h2`
   color: ${(props) => props.theme.primary};
   font-size: ${(props) => props.theme.font2xl};
   text-transform: uppercase;
+  ${media[768]} {
+    font-size: ${(props) => props.theme.fontxl};
+  }
 `;
 const Row = styled.div`
   display: flex;
@@ -189,23 +195,43 @@ const ImgContainer = styled.div`
   }
   transition: all 0.3s ease-in-out;
 
+  ${media.mobile} {
+    width: 15rem;
+    height: 15rem;
+  }
+
   img {
     width: 16rem;
     height: 16rem;
     min-height: 16rem;
 
     object-fit: cover;
-  }
 
-  @media (max-width: 48em) {
-    width: 12rem;
+    @media (max-width: 48em) {
+      width: 12rem;
+      height: 12rem;
+      min-height: 12rem;
+    }
+    @media (max-width: 30em) {
+      width: 10rem;
+      height: 10rem;
+      min-height: 10rem;
+    }
   }
-  @media (max-width: 30em) {
-    width: 10rem;
-  }
+`;
 
-  /* img {
-    width: 100%;
-    height: auto;
-  } */
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: calc(${teamConfig.gap});
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  ${media["1200"]} {
+    grid-template-columns: repeat(2, 300px);
+  }
+  ${media["768"]} {
+    grid-template-columns: repeat(1, 300px);
+  }
+  /* max-width: 1130px; */
 `;

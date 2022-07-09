@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { media } from "../../styles/Themes";
 
 const benefitData = [
   {
@@ -80,12 +81,9 @@ const MainTitle = styled.h2`
   color: ${(props) => props.theme.primary};
   font-size: ${(props) => props.theme.font2xl};
   text-transform: uppercase;
-`;
-const Row = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: calc(${benefitConfig.gap});
+  ${media[768]} {
+    font-size: ${(props) => props.theme.fontxl};
+  }
 `;
 
 const ItemContainer = styled.div`
@@ -93,8 +91,10 @@ const ItemContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
-  /* max-width: 300px; */
-  /* width: 300px; */
+  ${media.mobile} {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Icon = styled.div`
@@ -105,6 +105,9 @@ const Icon = styled.div`
   img {
     width: 100px;
     object-fit: contain;
+    ${media.mobile} {
+      width: 70px;
+    }
   }
 `;
 
@@ -120,10 +123,18 @@ const Title = styled.div`
 
   align-items: center;
   padding-top: 1rem;
-  padding-bottom: 2 rem;
+  padding-bottom: 2rem;
+  ${media.mobile} {
+    font-size: ${(props) => props.theme.fontlg};
+    padding-bottom: 0.5rem;
+  }
 `;
 const Content = styled.div`
   font-size: ${(props) => props.theme.fontlg};
+  ${media.mobile} {
+    font-size: ${(props) => props.theme.fontsm};
+    max-width: 70%;
+  }
 `;
 
 const Section = styled.section`
@@ -133,6 +144,9 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${media.mobile} {
+    padding: 5rem 0;
+  }
 `;
 const SectionWrapper = styled.div`
   display: flex;
@@ -142,9 +156,9 @@ const SectionWrapper = styled.div`
   width: 100%;
   max-width: 1130px;
   gap: ${benefitConfig.gap};
-  /* gap: calc(${benefitConfig.gap} * 2); */
-
-  /* padding-left: 10rem; */
+  ${media.mobile} {
+    gap: calc(${benefitConfig.gap} / 2);
+  }
 `;
 
 const Grid = styled.div`
@@ -154,5 +168,14 @@ const Grid = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  ${media["1200"]} {
+    grid-template-columns: repeat(2, 300px);
+  }
+  ${media["768"]} {
+    grid-template-columns: repeat(1, 300px);
+  }
+  ${media.mobile} {
+    grid-gap: calc(${benefitConfig.gap} / 1.5);
+  }
   /* max-width: 1130px; */
 `;

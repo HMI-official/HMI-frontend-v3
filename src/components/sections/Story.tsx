@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ADDRESS } from "../../constants/address";
 import { SNS } from "../../constants/image";
+import { media } from "../../styles/Themes";
 import { onClickWebsite } from "../../utils/common";
 // const websiteURL = `https://highmindedi.com/`;
 // const onClickWebsite = () => {
@@ -82,6 +83,10 @@ const BoxContainer = styled.div`
     flex: 1;
     max-width: 70%;
   }
+  ${media[1200]} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const Box = styled.div`
   font-size: calc(${(props) => props.theme.fontlg} + 0.1rem);
@@ -104,6 +109,9 @@ const Container = styled.div`
   /* align-items: flex-start; */
   width: 100%;
   max-width: 1130px;
+  ${media[1200]} {
+    align-items: center;
+  }
 
   /* padding-left: 10rem; */
 `;
