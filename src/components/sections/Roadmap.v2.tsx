@@ -236,7 +236,7 @@ const Section = styled.section`
   align-items: center;
   padding: 5rem 0;
   ${media.mobile} {
-    padding: 2rem 0;
+    padding-bottom: 2rem;
   }
 `;
 const Title = styled.h1`
