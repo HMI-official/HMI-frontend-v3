@@ -15,3 +15,13 @@ export interface IMintStatus {
   success: any;
   message: any;
 }
+
+interface ICarouselItem {
+  number: string;
+  text: string;
+}
+export interface ICarouselContent {
+  title: string;
+  subtitle: string;
+  content: ICarouselItem[];
+}
