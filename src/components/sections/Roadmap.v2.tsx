@@ -338,7 +338,6 @@ const RoadmapItemContainer = styled.div`
   /* width: 100% !important; */
   background: ${(props) => `rgb(${props.theme.bodyRgba},8%)`};
   border-radius: 1rem;
-
   .item1,
   .item2 {
     font-family: "Saira-Black";
@@ -362,6 +361,10 @@ const RoadmapItemContainer = styled.div`
     width: 1px;
     background: ${(props) => props.theme.gray2};
     /* transform: ; */
+  }
+  ${media.mobile} {
+    /* 330 */
+    min-width: 330px;
   }
 `;
 
