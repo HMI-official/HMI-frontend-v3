@@ -180,7 +180,7 @@ const Container = styled.div`
   /* align-items: flex-start; */
   width: 100%;
   max-width: 1130px;
-  gap: calc(${teamConfig.gap} * 2);
+  gap: calc(${teamConfig.gap});
 
   /* padding-left: 10rem; */
 `;

@@ -235,6 +235,9 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   padding: 5rem 0;
+  ${media.mobile} {
+    padding: 2rem 0;
+  }
 `;
 const Title = styled.h1`
   font-size: calc(${(props) => props.theme.font2xl} + 1rem);
