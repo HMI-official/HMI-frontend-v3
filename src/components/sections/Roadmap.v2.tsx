@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ICarouselContent } from "../../interfaces";
 import { media } from "../../styles/Themes";
 import CarouselComponent from "../Roadmap/CarouselComponent";
+import MobileCarouselComponent from "../Roadmap/MobileCarouselComponent";
 // import Carousel from "../Roadmap/Carousel";
 // import CarouselOrigin from "../Roadmap/CarouselOrigin";
 
@@ -102,8 +103,92 @@ const carouselContents: ICarouselContent[] = [
   },
 ].reverse();
 
+const carouselContentsForward: ICarouselContent[] = [
+  {
+    title: "Q1",
+    subtitle: "Launch HI-Planet NFT",
+    content: [
+      {
+        number: "1-1",
+        text: "Build HI-Planet Community",
+      },
+      {
+        number: "1-2",
+        text: "Carry our tier 1 marketing to grow Community",
+      },
+      {
+        number: "1-3",
+        text: "Launch 3,333 HI-Planet NFTs on ETH Blockchain",
+      },
+    ],
+  },
+  {
+    title: "Q2",
+    subtitle: "Welcome Package",
+    content: [
+      {
+        number: "2-1",
+        text: 'All HI-Planet holders will receive welcome packages physically which will be directly shipped by "High Minded Intelligence"',
+      },
+    ],
+  },
+  {
+    title: "Q3",
+    subtitle: "Community network",
+    content: [
+      {
+        number: "3-1",
+        text: "Merch collaboration event with holders",
+      },
+      {
+        number: "3-2",
+        text: "Acquisition of land in metaverse",
+      },
+      {
+        number: "3-3",
+        text: "Development of studio in metavers where members can hang out and interact together",
+      },
+    ],
+  },
+  {
+    title: "Q4",
+    subtitle: "Community network",
+    content: [
+      {
+        number: "3-1",
+        text: "Merch collaboration event with holders",
+      },
+      {
+        number: "3-2",
+        text: "Acquisition of land in metaverse",
+      },
+      {
+        number: "3-3",
+        text: "Development of studio in metavers where members can hang out and interact together",
+      },
+    ],
+  },
+  {
+    title: "Q5",
+    subtitle: "Community network",
+    content: [
+      {
+        number: "3-1",
+        text: "Merch collaboration event with holders",
+      },
+      {
+        number: "3-2",
+        text: "Acquisition of land in metaverse",
+      },
+      {
+        number: "3-3",
+        text: "Development of studio in metavers where members can hang out and interact together",
+      },
+    ],
+  },
+];
+
 const RoadmapV2 = () => {
-  const MobileCarouselComponent = <></>;
   return (
     <Section id="roadmap">
       <SectionWrapper>
@@ -111,11 +196,15 @@ const RoadmapV2 = () => {
           <Title>ROADMAP</Title>
         </TitleContainer>
         <CarouselEl>
+          {/* labtop */}
           <Container>
             <CarouselComponent carouselContents={carouselContents} />
           </Container>
-          <MobileContainer>{MobileCarouselComponent}</MobileContainer>
         </CarouselEl>
+        {/* mobile */}
+        <MobileContainer>
+          <MobileCarouselComponent carouselContents={carouselContentsForward} />
+        </MobileContainer>
       </SectionWrapper>
       {/* <Galaxy /> */}
     </Section>
@@ -201,6 +290,10 @@ const Container = styled.div`
 
 const MobileContainer = styled.div`
   display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
   ${media.mobile} {
     display: flex;
   }
