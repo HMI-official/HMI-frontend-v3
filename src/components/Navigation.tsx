@@ -105,11 +105,12 @@ const HamburgerMenu = styled.span<{ click: boolean }>`
 
   position: absolute;
   top: 2rem;
-  left: 50%;
+  left: 90%;
+
   transform: ${(props) =>
     props.click
-      ? "translateX(-50%) rotate(90deg)"
-      : "translateX(-50%) rotate(0)"};
+      ? "translateX(-100%) rotate(90deg)"
+      : "translateX(-100%) rotate(0)"};
 
   display: none;
   justify-content: center;
