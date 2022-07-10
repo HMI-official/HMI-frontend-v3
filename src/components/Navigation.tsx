@@ -13,9 +13,9 @@ const Section = styled.section`
   top: 0;
   width: 100vw;
   color: ${(props) => props.theme.body};
-  background-color: ${(props) => props.theme.text};
+  /* background-color: ${(props) => props.theme.text}; */
   /* background-color: ${(props) => `rgba(${props.theme.textRgba}, 1)`}; */
-  /* background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`}; */
+  background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`};
 `;
 const NavBar = styled.nav`
   display: flex;

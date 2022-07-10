@@ -65,39 +65,14 @@ const carouselContents: ICarouselContent[] = [
       },
     ],
   },
+
   {
     title: "Q4",
-    subtitle: "Community network",
+    subtitle: "Metaverse Game launch ",
     content: [
       {
-        number: "3-1",
-        text: "Merch collaboration event with holders",
-      },
-      {
-        number: "3-2",
-        text: "Acquisition of land in metaverse",
-      },
-      {
-        number: "3-3",
-        text: "Development of studio in metavers where members can hang out and interact together",
-      },
-    ],
-  },
-  {
-    title: "Q5",
-    subtitle: "Community network",
-    content: [
-      {
-        number: "3-1",
-        text: "Merch collaboration event with holders",
-      },
-      {
-        number: "3-2",
-        text: "Acquisition of land in metaverse",
-      },
-      {
-        number: "3-3",
-        text: "Development of studio in metavers where members can hang out and interact together",
+        number: "4-1",
+        text: "The HI-planet story is a game oriented story. And with this will be the development of our P&E game in metaverse.",
       },
     ],
   },
@@ -150,39 +125,14 @@ const carouselContentsForward: ICarouselContent[] = [
       },
     ],
   },
+
   {
     title: "Q4",
-    subtitle: "Community network",
+    subtitle: "Metaverse Game launch ",
     content: [
       {
-        number: "3-1",
-        text: "Merch collaboration event with holders",
-      },
-      {
-        number: "3-2",
-        text: "Acquisition of land in metaverse",
-      },
-      {
-        number: "3-3",
-        text: "Development of studio in metavers where members can hang out and interact together",
-      },
-    ],
-  },
-  {
-    title: "Q5",
-    subtitle: "Community network",
-    content: [
-      {
-        number: "3-1",
-        text: "Merch collaboration event with holders",
-      },
-      {
-        number: "3-2",
-        text: "Acquisition of land in metaverse",
-      },
-      {
-        number: "3-3",
-        text: "Development of studio in metavers where members can hang out and interact together",
+        number: "4-1",
+        text: "The HI-planet story is a game oriented story. And with this will be the development of our P&E game in metaverse.",
       },
     ],
   },
