@@ -17,3 +17,36 @@ export const Button = styled.button`
     border: 2px solid ${({ theme }) => theme.primary};
   }
 `;
+
+export const Button2 = styled.div`
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+
+  width: 170px;
+  height: 60px;
+
+  background: linear-gradient(214.02deg, #b75cff 6.04%, #671ae4 92.95%);
+  border-radius: 10px;
+`;
+
+export const ConnectButton = styled.div`
+  width: 130px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background-image: ${({ theme }) => theme.gradientBg},
+    linear-gradient(214.02deg, #b75cff 6.04%, #671ae4 92.95%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  margin: 10px;
+`;

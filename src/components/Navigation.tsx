@@ -5,6 +5,7 @@ import { ETC_IMAGES } from "../constants/image";
 import { useAccount } from "../contexts/AccountContext";
 import { cutAccount } from "../hooks";
 import Button, { WritingButton } from "./Button";
+import { ConnectButton } from "./common/styles/buttons";
 import Logo from "./Logo";
 
 const Section = styled.section`
@@ -154,14 +155,15 @@ const MobileBtnComponent = () => {
       {!account && (
         <MenuItem>
           <div className="mobile" onClick={getAccount}>
-            <Button text="Connect Wallet" link="#" />
+            <ConnectButton>Connect Wallet</ConnectButton>
+            {/* <Button text="Connect Wallet" link="#" /> */}
           </div>
         </MenuItem>
       )}
       {account && (
         <MenuItem>
           <div className="mobile">
-            <WritingButton> {cutAccount(account)}</WritingButton>
+            <ConnectButton> {cutAccount(account)}</ConnectButton>
           </div>
         </MenuItem>
       )}
@@ -176,12 +178,13 @@ const DesktopBtnComponent = () => {
     <>
       {!account && (
         <div className="desktop" onClick={getAccount}>
-          <Button text="Connect Wallet" link="#" />
+          <ConnectButton>Connect Wallet</ConnectButton>
+          {/* <Button text="Connect Wallet" link="#" /> */}
         </div>
       )}
       {account && (
         <div className="desktop">
-          <WritingButton> {cutAccount(account)}</WritingButton>
+          <ConnectButton> {cutAccount(account)}</ConnectButton>
         </div>
       )}
     </>

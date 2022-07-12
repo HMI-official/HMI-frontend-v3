@@ -21,7 +21,7 @@ const commonTheme = {
   gray3: "#EBECF0",
   primary: "#00ffeb",
   selection: "#00ffeaaf",
-
+  gradientBg: "linear-gradient(113.49deg, #122F79 -30.3%, #181E41 58.12%)",
   ["--chakra-colors-purple-100"]: "#E9D8FD",
   ["--chakra-colors-purple-200"]: "#D6BCFA",
   ["--chakra-colors-purple-300"]: "#B794F4",
