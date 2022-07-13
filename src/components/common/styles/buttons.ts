@@ -45,7 +45,7 @@ export const ConnectButton = styled.div`
   border: 2px solid transparent;
   border-radius: 20px;
   background-image: ${({ theme }) => theme.gradientBg},
-    linear-gradient(214.02deg, #b75cff 6.04%, #671ae4 92.95%);
+    linear-gradient(214.02deg, #00ffeb 6.04%, #671ae4 92.95%);
   background-origin: border-box;
   background-clip: content-box, border-box;
   margin: 10px;

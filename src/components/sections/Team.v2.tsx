@@ -46,7 +46,7 @@ const teamData: ItemProps[] = [
     offset: 0,
   },
   {
-    name: "Push", // 여기가 push
+    name: "NICK", // 여기가 NICK
     img: HMI_HERO.neptune,
     planet: "NEP",
     role: "Wisecracker",

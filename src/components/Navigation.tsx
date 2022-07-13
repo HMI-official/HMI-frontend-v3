@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { AiFillTwitterCircle } from "react-icons/ai";
+// import {  } from "react-icons/ai";
+import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ADDRESS } from "../constants/address";
 import { ETC_IMAGES } from "../constants/image";
 import { useAccount } from "../contexts/AccountContext";
 import { cutAccount } from "../hooks";
+import { onClickWebsite } from "../utils/common";
 import Button, { WritingButton } from "./Button";
 import { ConnectButton } from "./common/styles/buttons";
 import Logo from "./Logo";
@@ -170,7 +175,6 @@ const MobileBtnComponent = () => {
     </>
   );
 };
-
 const DesktopBtnComponent = () => {
   const account = useAccount()?.account;
   const getAccount = useAccount()?.getAccount;
@@ -226,6 +230,15 @@ const Navigation = () => {
           </MenuItem>
           <MobileBtnComponent />
           <DesktopBtnComponent />
+          {/* <FaTwitter /> */}
+          <SNSContainer>
+            <Icon onClick={() => onClickWebsite(ADDRESS.twitter)}>
+              <AiFillTwitterCircle />
+            </Icon>
+            <Icon onClick={() => onClickWebsite(ADDRESS.discord)}>
+              <FaDiscord />
+            </Icon>
+          </SNSContainer>
         </Menu>
         <div />
       </NavBar>
@@ -234,3 +247,17 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
+const SNSContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  padding-left: 1rem;
+  font-size: 1.4rem;
+  svg {
+    cursor: pointer;
+  }
+`;
+
+const Icon = styled.div``;
