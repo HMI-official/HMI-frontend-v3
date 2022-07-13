@@ -35,7 +35,7 @@ const Wrapper = styled.div`
     padding-bottom: 2rem;
   }
   .item2 {
-    /* color: ${({ theme }) => theme.primary}; */
+    color: ${({ theme }) => theme.gray2};
     /* padding-bottom: 1rem; */
   }
   img {
