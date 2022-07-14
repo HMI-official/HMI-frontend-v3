@@ -376,6 +376,9 @@ const Arrow = styled.div`
   top: 50%;
   cursor: pointer;
   font-size: 3rem;
+  ${media[768]} {
+    display: none;
+  }
 `;
 const LeftArrow = styled(Arrow)`
   transform: translate(-150%, -50%);
