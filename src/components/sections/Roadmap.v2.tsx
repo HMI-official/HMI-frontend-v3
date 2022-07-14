@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { createContext, ReactNode, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styled from "styled-components";
 import { ICarouselContent } from "../../interfaces";
@@ -139,8 +139,19 @@ const carouselContentsForward: ICarouselContent[] = [
   },
 ];
 
+// const roadmapContext = createContext<any | null>(null);
 const RoadmapV2 = () => {
-  const carouselRef: HTMLElement | null = document.querySelector(".cWrapper");
+  // const [carouselRef]
+
+  let carouselRef: HTMLElement | null = document.querySelector(".cWrapper");
+  if (window) {
+    setTimeout(() => {
+      carouselRef = document.querySelector(".cWrapper");
+    }, 1000);
+  }
+
+  useEffect(() => {}, []);
+
   const onClickLeftArrow = () => {
     if (!carouselRef) return;
     const getTranslateX = carouselRef.style.transform;
