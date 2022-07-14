@@ -21,8 +21,12 @@ import styled from "styled-components";
 import FooterV2 from "./components/sections/Footer.v2";
 import Join from "./components/sections/Join";
 import ReactGA from "react-ga";
-const TRACKING_ID = process.env.REACT_APP_ANALYTICS_ID!; // OUR_TRACKING_ID
+
+const TRACKING_ID = process.env.REACT_APP_ANALYTICS_ID!;
 ReactGA.initialize(TRACKING_ID);
+ReactGA.pageview(window.location.pathname + window.location.search);
+// const TRACKING_ID = process.env.REACT_APP_ANALYTICS_ID!; // OUR_TRACKING_ID
+// ReactGA.initialize(TRACKING_ID);
 // import "./styles/fonts.css";
 
 function App() {
@@ -39,6 +43,7 @@ function App() {
       AOS.refresh();
     }, 1500);
   }, []);
+  // <Router>
   return (
     <Routes>
       <Route
