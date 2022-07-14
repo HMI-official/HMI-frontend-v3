@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styled from "styled-components";
 import { ICarouselContent } from "../../interfaces";
 import { media } from "../../styles/Themes";
@@ -139,6 +140,44 @@ const carouselContentsForward: ICarouselContent[] = [
 ];
 
 const RoadmapV2 = () => {
+  const carouselRef: HTMLElement | null = document.querySelector(".cWrapper");
+  const onClickLeftArrow = () => {
+    if (!carouselRef) return;
+    const getTranslateX = carouselRef.style.transform;
+    const getTranslateXValue = getTranslateX.split("(")[1];
+    const getTranslateXValueNumber = Number(
+      getTranslateXValue.split(")")[0].split("px")[0]
+    );
+    if (getTranslateXValueNumber >= 520) return;
+    const translateX =
+      getTranslateXValueNumber +
+      carouselConfig.carouselGap +
+      carouselConfig.carouselHeight;
+
+    carouselRef.style.cssText = `
+          transform: translateX(${translateX > 520 ? 520 : translateX}px);
+          transition: transform 0.5s cubic-bezier(.25,.72,.51,.96);
+        `;
+  };
+
+  const onClickRightArrow = () => {
+    if (!carouselRef) return;
+    const getTranslateX = carouselRef.style.transform;
+    const getTranslateXValue = getTranslateX.split("(")[1];
+    const getTranslateXValueNumber = Number(
+      getTranslateXValue.split(")")[0].split("px")[0]
+    );
+    if (getTranslateXValueNumber <= 0) return;
+    const translateX =
+      getTranslateXValueNumber -
+      carouselConfig.carouselGap -
+      carouselConfig.carouselHeight;
+
+    carouselRef.style.cssText = `
+          transform: translateX(${translateX < 0 ? 0 : translateX}px);
+          transition: transform 0.5s cubic-bezier(.25,.72,.51,.96);
+        `;
+  };
   return (
     <Section id="roadmap">
       <SectionWrapper>
@@ -147,9 +186,15 @@ const RoadmapV2 = () => {
         </TitleContainer>
         <CarouselEl>
           {/* labtop */}
+          <LeftArrow onClick={onClickLeftArrow}>
+            <IoIosArrowBack />
+          </LeftArrow>
           <Container>
             <CarouselComponent carouselContents={carouselContents} />
           </Container>
+          <RightArrow onClick={onClickRightArrow}>
+            <IoIosArrowForward />
+          </RightArrow>
         </CarouselEl>
         {/* mobile */}
         <MobileContainer>
@@ -256,6 +301,7 @@ const CarouselEl = styled.div`
   /* .container { */
   max-width: 100%;
   border-radius: 2rem;
+  position: relative;
 
   /* height: 100vh; */
   /* background: rgb(57, 49, 63); */
@@ -323,4 +369,20 @@ const CarouselEl = styled.div`
   .item:last-child {
     margin-left: 0px !important;
   }
+`;
+
+const Arrow = styled.div`
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  font-size: 3rem;
+`;
+const LeftArrow = styled(Arrow)`
+  transform: translate(-150%, -50%);
+  left: 0;
+`;
+const RightArrow = styled(Arrow)`
+  transform: translate(150%, -50%);
+
+  right: 0;
 `;
