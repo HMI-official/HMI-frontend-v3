@@ -378,6 +378,7 @@ const Arrow = styled.div`
   font-size: 3rem;
   ${media[768]} {
     display: none;
+    /* go */
   }
 `;
 const LeftArrow = styled(Arrow)`
