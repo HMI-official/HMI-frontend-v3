@@ -50,3 +50,5 @@ export const CLOTHES = {
   black: "/images/clothes/white_short_sleeve.webp",
   white: "/images/clothes/dark_short_sleeve.webp",
 };
+
+export const HMI_GIF = "/images/hiplanet-gif.gif";

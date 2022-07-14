@@ -4,6 +4,7 @@ import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
 import { BsQuestionOctagon } from "react-icons/bs";
+import { HMI_GIF } from "../constants/image";
 import { Link } from "react-router-dom";
 // import ElectricLoader from "../components/ElectricLoader";
 // import { initOnboard } from '../hooks/onboard'
@@ -231,6 +232,12 @@ const Button = styled.button<{ isNotValid?: boolean }>`
   }
 `;
 
+const MainImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 const ImgWarpper = styled.div`
   border: 2px solid ${(props) => props.theme.gray3};
   border-radius: 10px;
@@ -240,16 +247,18 @@ const ImgWarpper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  background-image: url("./images/random-card-bg-img.png"),
+  overflow: hidden;
+  /* background-image: url("./images/random-card-bg-img.png"),
     radial-gradient(at 40% 20%, hsla(28, 100%, 74%, 1) 0px, transparent 50%),
     radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
     radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
     radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 1) 0px, transparent 50%),
     radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 1) 0px, transparent 50%),
     radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%);
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
-
+    radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%); */
+  /* background-image: url(${HMI_GIF}) cover no-repeat; */
+  /* background-repeat: repeat, no-repeat, no-repeat, no-repeat; */
+  /* background: url(${HMI_GIF}) no-repeat center; */
   .icon {
     /* color: black; */
     font-size: 4rem;
@@ -486,8 +495,9 @@ const Minting: FC = () => {
               <Box className="box1">
                 <ImgWarpper>
                   {/* <img src={img1} alt="hero" /> */}
-                  <BsQuestionOctagon className="icon" />
+                  {/* <BsQuestionOctagon className="icon" /> */}
                   {/* <ElectricLoader /> */}
+                  <MainImg src={HMI_GIF} alt="gif" />
 
                   <Indicator>
                     <span>{totalMinted}</span> \ {maxSupply}
