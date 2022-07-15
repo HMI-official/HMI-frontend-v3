@@ -111,10 +111,11 @@ const Minting: FC = () => {
   };
 
   const handlePublicMint = async () => {
+    const _wallet = wallet?.accounts[0]?.address!;
     // fot loading
     setIsMinting(true);
     // get status
-    const { success, status } = await publicMint(mintAmount);
+    const { success, status } = await publicMint(mintAmount, _wallet);
     // set status
 
     setMintStatus({
@@ -143,6 +144,16 @@ const Minting: FC = () => {
 
     init();
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(async () => {
+      setTotalMinted(await getTotalMinted());
+      console.log("total minted", totalMinted);
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [totalMinted]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 500);
@@ -177,8 +188,25 @@ const Minting: FC = () => {
     if (!wallet)
       return <Button onClick={onClickConnect}>connect wallet</Button>;
     if (wallet && isNotValid)
-      return <Button isNotValid={isNotValid}>not abled</Button>;
+      return <Button isNotValid={isNotValid}>disabled</Button>;
     if (wallet) return <Button onClick={onClickMint}>Pay with ETH</Button>;
+  };
+
+  const CreditCardButtonComponent = () => {
+    const isNotValid = paused || (!isPreSale && !isPublicSale);
+    const _style = { marginTop: "1rem" };
+    if (isNotValid)
+      return (
+        <Button isNotValid={isNotValid} style={_style}>
+          disabled
+        </Button>
+      );
+    if (!isNotValid)
+      return (
+        <Button onClick={() => setIsPaymentModalOpen(true)} style={_style}>
+          Pay with Credit Card
+        </Button>
+      );
   };
 
   const TitleComponent = () => {
@@ -237,7 +265,7 @@ const Minting: FC = () => {
                     <AiOutlinePlus />
                   </button>
                 </Counter>
-                <div>Max Mint Amount: 10</div>
+                <div>Max Mint Amount: {config.maxMintAmount}</div>
                 <Receipt>
                   <div className="item1"> Total</div>{" "}
                   <div className="item2">
@@ -251,12 +279,7 @@ const Minting: FC = () => {
                   </div>
                 </Receipt>
                 {ButtonComponent()}
-                <Button
-                  onClick={() => setIsPaymentModalOpen(true)}
-                  style={{ marginTop: "1rem" }}
-                >
-                  Pay with Credit Card
-                </Button>
+                {CreditCardButtonComponent()}
                 {/* <Button>MINT</Button> */}
                 {/* </Wrapper> */}
               </Box>
@@ -508,24 +531,10 @@ const ImgWarpper = styled.div`
   align-items: center;
   position: relative;
   overflow: hidden;
-  /* background-image: url("./images/random-card-bg-img.png"),
-    radial-gradient(at 40% 20%, hsla(28, 100%, 74%, 1) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 1) 0px, transparent 50%),
-    radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%); */
-  /* background-image: url(${HMI_GIF}) cover no-repeat; */
-  /* background-repeat: repeat, no-repeat, no-repeat, no-repeat; */
-  /* background: url(${HMI_GIF}) no-repeat center; */
+
   .icon {
-    /* color: black; */
     font-size: 4rem;
     text-shadow: 4px 2px 2px gray;
-    /* text-transform: uppercase; */
-    /* background: linear-gradient(to right, #30cfd0 0%, #330867 100%); */
-    /* -webkit-background-clip: text; */
   }
 
   img {

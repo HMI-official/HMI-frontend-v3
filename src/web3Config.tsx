@@ -4,23 +4,118 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "uri",
-        type: "string",
-      },
-      {
-        internalType: "bytes32",
-        name: "merkleroot",
-        type: "bytes32",
-      },
-      {
         internalType: "address",
-        name: "_proxyRegistryAddress",
+        name: "_to",
         type: "address",
       },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
     ],
+    name: "airdrop",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
+  },
+  {
+    inputs: [],
+    name: "ApprovalCallerNotOwnerNorApproved",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "ApprovalQueryForNonexistentToken",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "approve",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ApproveToCaller",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "BalanceQueryForZeroAddress",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "InvalidQueryRange",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "MintERC2309QuantityExceedsLimit",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "MintToZeroAddress",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "MintZeroQuantity",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "OwnerQueryForNonexistentToken",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "OwnershipNotInitializedForExtraData",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "TransferCallerNotOwnerNorApproved",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "TransferFromIncorrectOwner",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "TransferToNonERC721ReceiverImplementer",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "TransferToZeroAddress",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "URIQueryForNonexistentToken",
+    type: "error" as AbiType,
   },
   {
     anonymous: false,
@@ -73,46 +168,34 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "approve",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "to",
-        type: "address",
+        internalType: "uint256",
+        name: "fromTokenId",
+        type: "uint256",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "amount",
+        name: "toTokenId",
         type: "uint256",
       },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
     ],
-    name: "ERC20PaymentReleased",
+    name: "ConsecutiveTransfer",
     type: "event",
   },
   {
@@ -135,77 +218,15 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "event",
   },
   {
-    anonymous: false,
     inputs: [
       {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        indexed: false,
         internalType: "uint256",
-        name: "shares",
-        type: "uint256",
-      },
-    ],
-    name: "PayeeAdded",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "PaymentReceived",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "PaymentReleased",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
+        name: "_mintAmount",
         type: "uint256",
       },
       {
         internalType: "bytes32[]",
-        name: "_proof",
+        name: "_merkleProof",
         type: "bytes32[]",
       },
     ],
@@ -218,8 +239,13 @@ export const MINT_NFT_ABI: AbiItem[] = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_amount",
+        name: "_mintAmount",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
       },
     ],
     name: "publicSaleMint",
@@ -228,46 +254,8 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address payable",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "release",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "release",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "reveal",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -344,12 +332,12 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "_newBaseExtension",
-        type: "string",
+        internalType: "uint256",
+        name: "_currentPhase",
+        type: "uint256",
       },
     ],
-    name: "setBaseExtension",
+    name: "setCurrentPhase",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -357,12 +345,25 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "_tokenBaseURI",
-        type: "string",
+        internalType: "uint256",
+        name: "_maxMintAmountPerTx",
+        type: "uint256",
       },
     ],
-    name: "setBaseURI",
+    name: "setMaxMintAmountPerTx",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_maxSupply",
+        type: "uint256",
+      },
+    ],
+    name: "setMaxSupply",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -371,7 +372,7 @@ export const MINT_NFT_ABI: AbiItem[] = [
     inputs: [
       {
         internalType: "bytes32",
-        name: "merkleroot",
+        name: "_merkleRoot",
         type: "bytes32",
       },
     ],
@@ -383,12 +384,107 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "_phase",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_phaseMaxSupply",
+        type: "uint256",
+      },
+      {
         internalType: "string",
-        name: "_notRevealedURI",
+        name: "_tokenURI",
         type: "string",
       },
+      {
+        internalType: "uint256",
+        name: "_publicSalePriceForEther",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_presalePriceForEther",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_revealed",
+        type: "bool",
+      },
     ],
-    name: "setNotRevealedURI",
+    name: "setPhaseInfo",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_cost",
+        type: "uint256",
+      },
+    ],
+    name: "setPresalePrice",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_cost",
+        type: "uint256",
+      },
+    ],
+    name: "setPublicSalePrice",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_phase",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_revealed",
+        type: "bool",
+      },
+    ],
+    name: "setRevealed",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_fee",
+        type: "uint256",
+      },
+    ],
+    name: "setRoyaltyFee",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_totalPhaseNumber",
+        type: "uint256",
+      },
+    ],
+    name: "setTotalPhaseNumber",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -476,8 +572,55 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    stateMutability: "payable",
-    type: "receive" as AbiType,
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "_phaseInfo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "phase",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "phaseMaxSupply",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "tokenURI",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "publicSalePrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "presalePrice",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "revealed",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
@@ -532,12 +675,94 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "baseURI",
+    name: "currentPhase",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint256",
         name: "",
-        type: "string",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "explicitOwnershipOf",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "addr",
+            type: "address",
+          },
+          {
+            internalType: "uint64",
+            name: "startTimestamp",
+            type: "uint64",
+          },
+          {
+            internalType: "bool",
+            name: "burned",
+            type: "bool",
+          },
+          {
+            internalType: "uint24",
+            name: "extraData",
+            type: "uint24",
+          },
+        ],
+        internalType: "struct IERC721A.TokenOwnership",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
+      },
+    ],
+    name: "explicitOwnershipsOf",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "addr",
+            type: "address",
+          },
+          {
+            internalType: "uint64",
+            name: "startTimestamp",
+            type: "uint64",
+          },
+          {
+            internalType: "bool",
+            name: "burned",
+            type: "bool",
+          },
+          {
+            internalType: "uint24",
+            name: "extraData",
+            type: "uint24",
+          },
+        ],
+        internalType: "struct IERC721A.TokenOwnership[]",
+        name: "",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",
@@ -565,17 +790,81 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "_uri",
-        type: "string",
+        internalType: "uint256",
+        name: "_tokenId",
+        type: "uint256",
       },
       {
+        internalType: "string",
+        name: "_tokenURI",
+        type: "string",
+      },
+    ],
+    name: "getTokenURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
-        name: "tokenId",
+        name: "_phase",
         type: "uint256",
       },
     ],
-    name: "getURI",
+    name: "getTotalPhaseInfo",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "phase",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "phaseMaxSupply",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "tokenURI",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "publicSalePrice",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "presalePrice",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "revealed",
+            type: "bool",
+          },
+        ],
+        internalType: "struct HMI.PhaseInfo",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "hiddenURI",
     outputs: [
       {
         internalType: "string",
@@ -612,6 +901,19 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
+    name: "maxMintAmountPerTx",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "maxSupply",
     outputs: [
       {
@@ -625,12 +927,12 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "name",
+    name: "merkleRoot",
     outputs: [
       {
-        internalType: "string",
+        internalType: "bytes32",
         name: "",
-        type: "string",
+        type: "bytes32",
       },
     ],
     stateMutability: "view",
@@ -638,7 +940,7 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "notRevealedUri",
+    name: "name",
     outputs: [
       {
         internalType: "string",
@@ -695,25 +997,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "index",
-        type: "uint256",
-      },
-    ],
-    name: "payee",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "presaleM",
     outputs: [
@@ -721,6 +1004,19 @@ export const MINT_NFT_ABI: AbiItem[] = [
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "presalePrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -740,19 +1036,21 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    inputs: [
+    inputs: [],
+    name: "publicSalePrice",
+    outputs: [
       {
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    name: "released",
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "royaltyFee",
     outputs: [
       {
         internalType: "uint256",
@@ -766,61 +1064,26 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "account",
-        type: "address",
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
       },
-    ],
-    name: "released",
-    outputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "value",
         type: "uint256",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "revealed",
+    name: "royaltyInfo",
     outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "root",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
       {
         internalType: "address",
-        name: "account",
+        name: "receiver",
         type: "address",
       },
-    ],
-    name: "shares",
-    outputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "royaltyAmount",
         type: "uint256",
       },
     ],
@@ -862,8 +1125,56 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+    ],
+    name: "tokensOfOwner",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
         internalType: "uint256",
-        name: "tokenId",
+        name: "start",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "stop",
+        type: "uint256",
+      },
+    ],
+    name: "tokensOfOwnerIn",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_tokenId",
         type: "uint256",
       },
     ],
@@ -879,40 +1190,8 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
-      },
-    ],
-    name: "totalReleased",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "totalReleased",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalShares",
+    name: "totalPhaseNumber",
     outputs: [
       {
         internalType: "uint256",
@@ -1168,7 +1447,7 @@ export const config = {
   GET_NFT_ABI,
   MINT_NFT_ADDRESS,
   GET_NFT_ADDRESS,
-  maxMintAmount: 10,
+  maxMintAmount: 5,
   presaleMaxMintAmount: 3,
   price: 0.01,
 };
