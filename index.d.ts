@@ -3,7 +3,9 @@
 declare interface Window {
   ethereum: any;
 }
+// npm i --save-dev @types/usewinter__checkout
 
+declare module "@usewinter/checkout";
 declare module "*.gif";
 declare module "*.png";
 declare module "*.mp4";

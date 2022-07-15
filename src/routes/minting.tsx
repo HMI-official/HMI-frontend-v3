@@ -3,13 +3,13 @@ import styled, { css, ThemeProvider } from "styled-components";
 import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
-import { BsQuestionOctagon } from "react-icons/bs";
 import { HMI_GIF } from "../constants/image";
 import { Link } from "react-router-dom";
 // import ElectricLoader from "../components/ElectricLoader";
 // import { initOnboard } from '../hooks/onboard'
 import { useConnectWallet, useSetChain, useWallets } from "@web3-onboard/react";
 // import useWeb3Onboard from "../hooks/useWeb3Onboard ";
+import { WinterCheckout } from "@usewinter/checkout";
 
 import { initOnboard } from "../utils/onboard";
 import { OnboardAPI } from "@web3-onboard/core";
@@ -29,6 +29,245 @@ import { IMintStatus } from "../interfaces";
 import { config } from "../web3Config";
 import Loading from "../components/Loading";
 import LoadComponent from "../utils/LoadComponent";
+
+const Minting: FC = () => {
+  // const { initOnboard } = useWeb3Onboard();
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const [{ chains, connectedChain, settingChain }, setChain] = useSetChain();
+  const connectedWallets = useWallets();
+  const [onboard, setOnboard] = useState<OnboardAPI | null>(null);
+  const [mintAmount, setMintAmount] = useState<number>(1);
+  const [maxMintAmount, setMaxMintAmount] = useState<number>(6);
+  const [isMinting, setIsMinting] = useState<boolean>(false);
+  const [mintStatus, setMintStatus] = useState<IMintStatus | null>(null);
+  const [maxSupply, setMaxSupply] = useState<number>(0);
+  const [totalMinted, setTotalMinted] = useState<number>(0);
+  const [paused, setPaused] = useState<boolean>(false);
+  const [isPublicSale, setIsPublicSale] = useState<boolean>(false);
+  const [isPreSale, setIsPreSale] = useState<boolean>(false);
+
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  // const initOnboard =
+
+  // FIXME:  setting onboard
+  // initialize onboard
+  useEffect(() => setOnboard(initOnboard), []);
+
+  // set local storage if wallet is connected
+  useEffect(() => {
+    if (!connectedWallets.length) return;
+
+    const connectedWalletsLabelArray = connectedWallets.map(
+      ({ label }) => label
+    );
+    window.localStorage.setItem(
+      "connectedWallets",
+      JSON.stringify(connectedWalletsLabelArray)
+    );
+  }, [connectedWallets]);
+
+  // if local storage has connected wallets, set them to connectedWallets
+  useEffect(() => {
+    if (!onboard) return;
+    const previouslyConnectedWallets = JSON.parse(
+      window.localStorage.getItem("connectedWallets") || "123"
+    );
+
+    if (previouslyConnectedWallets?.length) {
+      async function setWalletFromLocalStorage() {
+        await connect({
+          autoSelect: {
+            label: previouslyConnectedWallets[0],
+            disableModals: true,
+          },
+        });
+      }
+
+      setWalletFromLocalStorage();
+    }
+  }, [onboard, connect]);
+
+  // FIXME: onClick events
+  const handleIncrementMintAmount = () => {
+    if (mintAmount < maxMintAmount) setMintAmount(mintAmount + 1);
+  };
+
+  const handleDecrementMintAmount = () => {
+    if (mintAmount > 1) setMintAmount(mintAmount - 1);
+  };
+
+  const handlePresaleMint = async () => {
+    setIsMinting(true);
+
+    const { success, status } = await presaleMint(mintAmount);
+
+    setMintStatus({
+      success,
+      message: status,
+    });
+    setIsMinting(false);
+  };
+
+  const handlePublicMint = async () => {
+    // fot loading
+    setIsMinting(true);
+    // get status
+    const { success, status } = await publicMint(mintAmount);
+    // set status
+
+    setMintStatus({
+      success,
+      message: status,
+    });
+
+    setIsMinting(false);
+    // console.log(status);
+  };
+
+  useEffect(() => {
+    const init = async () => {
+      setMaxSupply(await getMaxSupply());
+      setTotalMinted(await getTotalMinted());
+
+      setPaused(await isPausedState());
+      setIsPublicSale(await isPublicSaleState());
+      const _isPreSale = await isPreSaleState();
+      setIsPreSale(_isPreSale);
+
+      setMaxMintAmount(
+        isPreSale ? config.presaleMaxMintAmount : config.maxMintAmount
+      );
+    };
+
+    init();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 500);
+    return () => {
+      setIsLoaded(false);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  // FIXME: components
+  const ButtonComponent = () => {
+    const isNotValid = paused || (!isPreSale && !isPublicSale);
+
+    const onClickConnect = () =>
+      connect({ autoSelect: { label: "string", disableModals: false } });
+
+    const onClickMint = () => {
+      if (isNotValid) return;
+      isPreSale ? handlePresaleMint() : handlePublicMint();
+    };
+
+    if (isMinting) return <Button isNotValid={isMinting}>ON PROCESS</Button>;
+
+    if (!wallet) return <Button onClick={onClickConnect}>Connect</Button>;
+    if (wallet && isNotValid)
+      return <Button isNotValid={isNotValid}>not abled</Button>;
+    if (wallet) return <Button onClick={onClickMint}>MINT</Button>;
+  };
+
+  const TitleComponent = () => {
+    if (paused || (!isPreSale && !isPublicSale)) return "Paused";
+    // if() return "Public Sale";
+    if (isPreSale) return "Pre-Sale";
+    if (!isPreSale) return "Public Sale";
+  };
+  const StatusComponent = () => (
+    <StatusWrapper>{mintStatus?.message}</StatusWrapper>
+  );
+
+  // console.log(mintStatus);
+
+  return (
+    <ThemeProvider theme={dark}>
+      <Section>
+        <LoadComponent loaded={isLoaded}>
+          <Cover src="/images/blur.jpeg" alt="" />
+          <ModalContainer>
+            <Header>
+              <div className="item1">
+                <Link to="/">
+                  <IoIosArrowBack />
+                </Link>
+              </div>
+              <h1>{TitleComponent()}</h1>
+              {wallet && <h3>{cutAccount(wallet?.accounts[0]?.address)}</h3>}
+              {!wallet && <h3>connect wallet</h3>}
+              {wallet && (
+                <DisconnectButton
+                  onClick={() => disconnect({ label: wallet.label })}
+                >
+                  disconnect
+                </DisconnectButton>
+              )}
+            </Header>
+            <Body>
+              <Box className="box1">
+                <ImgWarpper>
+                  {/* <img src={img1} alt="hero" /> */}
+                  {/* <BsQuestionOctagon className="icon" /> */}
+                  {/* <ElectricLoader /> */}
+                  <MainImg src={HMI_GIF} alt="gif" />
+
+                  <Indicator>
+                    <span>{totalMinted}</span> \ {maxSupply}
+                  </Indicator>
+                </ImgWarpper>
+              </Box>
+              <Box className="box2">
+                {/* <Wrapper> */}
+                <Counter>
+                  <button onClick={handleDecrementMintAmount}>
+                    <AiOutlineMinus />
+                  </button>
+                  <p>{mintAmount}</p>
+                  <button onClick={handleIncrementMintAmount}>
+                    <AiOutlinePlus />
+                  </button>
+                </Counter>
+                <div>Max Mint Amount: 10</div>
+                <Receipt>
+                  <div className="item1"> Total</div>{" "}
+                  <div className="item2">
+                    <span>
+                      {Number.parseFloat(
+                        (config.price * mintAmount).toString()
+                      ).toFixed(2)}
+                      ETH
+                    </span>{" "}
+                    <span>+ GAS</span>
+                  </div>
+                </Receipt>
+                {ButtonComponent()}
+                {/* <Button>MINT</Button> */}
+                {/* </Wrapper> */}
+              </Box>
+            </Body>
+            <Footer>
+              {StatusComponent()}
+              <h2>CONTRACT ADDRESS</h2>
+              <a
+                href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <p>{config.MINT_NFT_ADDRESS}</p>
+              </a>
+            </Footer>
+          </ModalContainer>
+        </LoadComponent>
+        <WinterCheckout projectId={3238} production={false} showModal={true} />
+      </Section>
+    </ThemeProvider>
+  );
+};
+
+export default Minting;
+
 const Section = styled.section`
   display: flex;
   overflow: hidden;
@@ -315,240 +554,3 @@ const StatusWrapper = styled.div`
 
   word-break: break-word;
 `;
-
-const Minting: FC = () => {
-  // const { initOnboard } = useWeb3Onboard();
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
-  const [{ chains, connectedChain, settingChain }, setChain] = useSetChain();
-  const connectedWallets = useWallets();
-  const [onboard, setOnboard] = useState<OnboardAPI | null>(null);
-  const [mintAmount, setMintAmount] = useState<number>(1);
-  const [maxMintAmount, setMaxMintAmount] = useState<number>(6);
-  const [isMinting, setIsMinting] = useState<boolean>(false);
-  const [mintStatus, setMintStatus] = useState<IMintStatus | null>(null);
-  const [maxSupply, setMaxSupply] = useState<number>(0);
-  const [totalMinted, setTotalMinted] = useState<number>(0);
-  const [paused, setPaused] = useState<boolean>(false);
-  const [isPublicSale, setIsPublicSale] = useState<boolean>(false);
-  const [isPreSale, setIsPreSale] = useState<boolean>(false);
-
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  // const initOnboard =
-
-  // FIXME:  setting onboard
-  // initialize onboard
-  useEffect(() => setOnboard(initOnboard), []);
-
-  // set local storage if wallet is connected
-  useEffect(() => {
-    if (!connectedWallets.length) return;
-
-    const connectedWalletsLabelArray = connectedWallets.map(
-      ({ label }) => label
-    );
-    window.localStorage.setItem(
-      "connectedWallets",
-      JSON.stringify(connectedWalletsLabelArray)
-    );
-  }, [connectedWallets]);
-
-  // if local storage has connected wallets, set them to connectedWallets
-  useEffect(() => {
-    if (!onboard) return;
-    const previouslyConnectedWallets = JSON.parse(
-      window.localStorage.getItem("connectedWallets") || "123"
-    );
-
-    if (previouslyConnectedWallets?.length) {
-      async function setWalletFromLocalStorage() {
-        await connect({
-          autoSelect: {
-            label: previouslyConnectedWallets[0],
-            disableModals: true,
-          },
-        });
-      }
-
-      setWalletFromLocalStorage();
-    }
-  }, [onboard, connect]);
-
-  // FIXME: onClick events
-  const handleIncrementMintAmount = () => {
-    if (mintAmount < maxMintAmount) setMintAmount(mintAmount + 1);
-  };
-
-  const handleDecrementMintAmount = () => {
-    if (mintAmount > 1) setMintAmount(mintAmount - 1);
-  };
-
-  const handlePresaleMint = async () => {
-    setIsMinting(true);
-
-    const { success, status } = await presaleMint(mintAmount);
-
-    setMintStatus({
-      success,
-      message: status,
-    });
-    setIsMinting(false);
-  };
-
-  const handlePublicMint = async () => {
-    // fot loading
-    setIsMinting(true);
-    // get status
-    const { success, status } = await publicMint(mintAmount);
-    // set status
-
-    setMintStatus({
-      success,
-      message: status,
-    });
-
-    setIsMinting(false);
-    // console.log(status);
-  };
-
-  useEffect(() => {
-    const init = async () => {
-      setMaxSupply(await getMaxSupply());
-      setTotalMinted(await getTotalMinted());
-
-      setPaused(await isPausedState());
-      setIsPublicSale(await isPublicSaleState());
-      const _isPreSale = await isPreSaleState();
-      setIsPreSale(_isPreSale);
-
-      setMaxMintAmount(
-        isPreSale ? config.presaleMaxMintAmount : config.maxMintAmount
-      );
-    };
-
-    init();
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 500);
-    return () => {
-      setIsLoaded(false);
-      clearTimeout(timer);
-    };
-  }, []);
-
-  // FIXME: components
-  const ButtonComponent = () => {
-    const isNotValid = paused || (!isPreSale && !isPublicSale);
-
-    const onClickConnect = () =>
-      connect({ autoSelect: { label: "string", disableModals: false } });
-
-    const onClickMint = () => {
-      if (isNotValid) return;
-      isPreSale ? handlePresaleMint() : handlePublicMint();
-    };
-
-    if (isMinting) return <Button isNotValid={isMinting}>ON PROCESS</Button>;
-
-    if (!wallet) return <Button onClick={onClickConnect}>Connect</Button>;
-    if (wallet && isNotValid)
-      return <Button isNotValid={isNotValid}>not abled</Button>;
-    if (wallet) return <Button onClick={onClickMint}>MINT</Button>;
-  };
-
-  const TitleComponent = () => {
-    if (paused || (!isPreSale && !isPublicSale)) return "Paused";
-    // if() return "Public Sale";
-    if (isPreSale) return "Pre-Sale";
-    if (!isPreSale) return "Public Sale";
-  };
-  const StatusComponent = () => (
-    <StatusWrapper>{mintStatus?.message}</StatusWrapper>
-  );
-
-  // console.log(mintStatus);
-
-  return (
-    <ThemeProvider theme={dark}>
-      <Section>
-        <LoadComponent loaded={isLoaded}>
-          <Cover src="/images/blur.jpeg" alt="" />
-          <ModalContainer>
-            <Header>
-              <div className="item1">
-                <Link to="/">
-                  <IoIosArrowBack />
-                </Link>
-              </div>
-              <h1>{TitleComponent()}</h1>
-              {wallet && <h3>{cutAccount(wallet?.accounts[0]?.address)}</h3>}
-              {!wallet && <h3>connect wallet</h3>}
-              {wallet && (
-                <DisconnectButton
-                  onClick={() => disconnect({ label: wallet.label })}
-                >
-                  disconnect
-                </DisconnectButton>
-              )}
-            </Header>
-            <Body>
-              <Box className="box1">
-                <ImgWarpper>
-                  {/* <img src={img1} alt="hero" /> */}
-                  {/* <BsQuestionOctagon className="icon" /> */}
-                  {/* <ElectricLoader /> */}
-                  <MainImg src={HMI_GIF} alt="gif" />
-
-                  <Indicator>
-                    <span>{totalMinted}</span> \ {maxSupply}
-                  </Indicator>
-                </ImgWarpper>
-              </Box>
-              <Box className="box2">
-                {/* <Wrapper> */}
-                <Counter>
-                  <button onClick={handleDecrementMintAmount}>
-                    <AiOutlineMinus />
-                  </button>
-                  <p>{mintAmount}</p>
-                  <button onClick={handleIncrementMintAmount}>
-                    <AiOutlinePlus />
-                  </button>
-                </Counter>
-                <div>Max Mint Amount: 10</div>
-                <Receipt>
-                  <div className="item1"> Total</div>{" "}
-                  <div className="item2">
-                    <span>
-                      {Number.parseFloat(
-                        (config.price * mintAmount).toString()
-                      ).toFixed(2)}
-                      ETH
-                    </span>{" "}
-                    <span>+ GAS</span>
-                  </div>
-                </Receipt>
-                {ButtonComponent()}
-                {/* <Button>MINT</Button> */}
-                {/* </Wrapper> */}
-              </Box>
-            </Body>
-            <Footer>
-              {StatusComponent()}
-              <h2>CONTRACT ADDRESS</h2>
-              <a
-                href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <p>{config.MINT_NFT_ADDRESS}</p>
-              </a>
-            </Footer>
-          </ModalContainer>
-        </LoadComponent>
-      </Section>
-    </ThemeProvider>
-  );
-};
-
-export default Minting;
