@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import styled, { css, ThemeProvider } from "styled-components";
 import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -27,11 +27,10 @@ import { IMintStatus } from "../interfaces";
 // import { config } from "process";
 
 import { config } from "../web3Config";
-import Loading from "../components/Loading";
 import LoadComponent from "../utils/LoadComponent";
+import { throttle } from "../utils/common";
 
 const Minting: FC = () => {
-  // const { initOnboard } = useWeb3Onboard();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [{ chains, connectedChain, settingChain }, setChain] = useSetChain();
   const connectedWallets = useWallets();
@@ -45,9 +44,12 @@ const Minting: FC = () => {
   const [paused, setPaused] = useState<boolean>(false);
   const [isPublicSale, setIsPublicSale] = useState<boolean>(false);
   const [isPreSale, setIsPreSale] = useState<boolean>(false);
-
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   // const initOnboard =
+
+  if (window) {
+  }
 
   // FIXME:  setting onboard
   // initialize onboard
@@ -150,6 +152,14 @@ const Minting: FC = () => {
     };
   }, []);
 
+  if (typeof window !== "undefined") {
+    window.addEventListener("message", (event) => {
+      if (event.data === "closeWinterCheckoutModal") {
+        setIsPaymentModalOpen(false);
+      }
+    });
+  }
+
   // FIXME: components
   const ButtonComponent = () => {
     const isNotValid = paused || (!isPreSale && !isPublicSale);
@@ -164,10 +174,11 @@ const Minting: FC = () => {
 
     if (isMinting) return <Button isNotValid={isMinting}>ON PROCESS</Button>;
 
-    if (!wallet) return <Button onClick={onClickConnect}>Connect</Button>;
+    if (!wallet)
+      return <Button onClick={onClickConnect}>connect wallet</Button>;
     if (wallet && isNotValid)
       return <Button isNotValid={isNotValid}>not abled</Button>;
-    if (wallet) return <Button onClick={onClickMint}>MINT</Button>;
+    if (wallet) return <Button onClick={onClickMint}>Pay with ETH</Button>;
   };
 
   const TitleComponent = () => {
@@ -208,9 +219,6 @@ const Minting: FC = () => {
             <Body>
               <Box className="box1">
                 <ImgWarpper>
-                  {/* <img src={img1} alt="hero" /> */}
-                  {/* <BsQuestionOctagon className="icon" /> */}
-                  {/* <ElectricLoader /> */}
                   <MainImg src={HMI_GIF} alt="gif" />
 
                   <Indicator>
@@ -243,6 +251,12 @@ const Minting: FC = () => {
                   </div>
                 </Receipt>
                 {ButtonComponent()}
+                <Button
+                  onClick={() => setIsPaymentModalOpen(true)}
+                  style={{ marginTop: "1rem" }}
+                >
+                  Pay with Credit Card
+                </Button>
                 {/* <Button>MINT</Button> */}
                 {/* </Wrapper> */}
               </Box>
@@ -260,7 +274,12 @@ const Minting: FC = () => {
             </Footer>
           </ModalContainer>
         </LoadComponent>
-        <WinterCheckout projectId={3238} production={false} showModal={true} />
+        <WinterCheckout
+          projectId={3238}
+          production={false}
+          setOpenModal={setIsPaymentModalOpen}
+          showModal={isPaymentModalOpen}
+        />
       </Section>
     </ThemeProvider>
   );
@@ -437,7 +456,7 @@ const Receipt = styled.div`
 `;
 const Button = styled.button<{ isNotValid?: boolean }>`
   width: 100%;
-  font-size: ${(props) => props.theme.fontxl};
+  font-size: calc(${(props) => props.theme.fontxl} - 7px);
   margin-top: 3.4rem;
   border-radius: 10px;
   padding: 0.4rem 0;
@@ -457,7 +476,7 @@ const Button = styled.button<{ isNotValid?: boolean }>`
   );
   `};
   text-align: center;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -480,8 +499,10 @@ const MainImg = styled.img`
 const ImgWarpper = styled.div`
   border: 2px solid ${(props) => props.theme.gray3};
   border-radius: 10px;
-  width: 280px;
-  height: 280px;
+  /* width: 280px; */
+  width: 340px;
+  height: 340px;
+  /* height: 280px; */
   display: flex;
   justify-content: center;
   align-items: center;
