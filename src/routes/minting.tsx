@@ -317,9 +317,12 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   color: ${(props) => props.theme.text};
+  ${media[768]} {
+    overflow-y: auto;
+  }
 `;
 
 const Cover = styled.img`
@@ -378,6 +381,11 @@ const Header = styled.div`
     font-weight: 400;
     color: ${(props) => props.theme.gray3};
   }
+  ${media[768]} {
+    .item1 {
+      left: 3%;
+    }
+  }
 `;
 const Body = styled.div`
   display: flex;
@@ -385,6 +393,10 @@ const Body = styled.div`
   margin-top: 3rem;
   .box2 {
     margin-left: 2rem;
+    ${media[768]} {
+      /* margin-left: 0; */
+      margin-right: 2rem;
+    }
 
     > div:nth-child(2) {
       padding-top: 1.2rem;
@@ -394,6 +406,14 @@ const Body = styled.div`
   .box1 {
     align-items: flex-start;
     justify-content: flex-start;
+    ${media[768]} {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  ${media[768]} {
+    gap: 4rem;
+    flex-direction: column;
   }
 `;
 
@@ -406,8 +426,7 @@ const Footer = styled.div`
   p {
     font-weight: 200;
     cursor: pointer;
-    /* color: #8e95a2; */
-    /* color: ${(props) => props.theme.gray1}; */
+    word-break: break-all;
   }
 `;
 const Box = styled.div`
@@ -529,7 +548,7 @@ const ImgWarpper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   .icon {
     font-size: 4rem;
