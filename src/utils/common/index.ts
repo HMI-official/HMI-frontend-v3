@@ -16,13 +16,14 @@ export const throttle = (callback: Function, delay: number) => {
 
 export const diffDay = (): ITime => {
   //make this date: SAT, Aug 27th - 2pm PST
-  // 2022년 8월 27일 오후 2시 CALIFORNIA TIME
-  const date = new Date(2022, 7, 27, 14, 0, 0);
-  const now = new Date();
-  // const diff = date.getTime() - now.getTime();
+  // 2022년 8월 27일 오후 2시 PST
+  const date = new Date("2022-08-27T14:00:00.000Z");
 
-  // const masTime = new Date("2022-12-25");
-  // const todayTime = new Date();
+  // const date = new Date(2022, 7, 27, 14, 0, 0);
+  // now pst date
+
+  const now = new Date();
+
   const diff = Number(date) - Number(now);
 
   const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
