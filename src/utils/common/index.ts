@@ -29,7 +29,7 @@ export const diffDay = (): ITime => {
   const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const diffMin = Math.floor((diff / (1000 * 60)) % 60);
   const diffSec = Math.floor((diff / 1000) % 60);
-  console.log(diffDay, "|", diffHour, "|", diffMin, "|", diffSec);
+  // console.log(diffDay, "|", diffHour, "|", diffMin, "|", diffSec);
 
   return { day: diffDay, hour: diffHour, min: diffMin, sec: diffSec };
 };
