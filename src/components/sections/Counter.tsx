@@ -48,7 +48,7 @@ const Counter = () => {
       <Container>
         <ModalWindow>
           <Title>
-            Wait for it! HMI NFT will be <br /> available for minting in:{" "}
+            Wait for it! HI PLANET NFT will be <br /> available for minting in:{" "}
           </Title>
           <TimeContainer>
             <TimeItem time={time?.day ?? 0} indicator="days" />
@@ -142,7 +142,6 @@ const InfoContainer = styled.div`
   }
   padding-bottom: 2rem;
 `;
-const SNSContainer = styled.div``;
 
 const TimeItemContainer = styled.div`
   display: flex;
