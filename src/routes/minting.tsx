@@ -427,6 +427,9 @@ const Footer = styled.div`
     font-weight: 200;
     cursor: pointer;
     word-break: break-all;
+    ${media[768]} {
+      padding: 0 1rem;
+    }
   }
 `;
 const Box = styled.div`
