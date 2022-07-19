@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { MINTING_DATE } from "../../constants";
 // import { MINTING_DATE } from "../../constants/address";
 import { ITime } from "../../interfaces/counter";
+import { media } from "../../styles/Themes";
 import { diffDay } from "../../utils/common";
 import { ConnectButton } from "../common/styles/buttons";
 
@@ -107,6 +108,9 @@ const Container = styled.div`
       width: 90%;
     }
   }
+  ${media[768]} {
+    background: black;
+  }
 `;
 const ModalWindow = styled.div`
   width: 100%;
@@ -135,12 +139,16 @@ const TimeContainer = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   gap: 2rem;
+  align-self: flex-start;
   .item1 {
     text-transform: capitalize;
     padding-right: 0.1rem;
     color: ${({ theme }) => theme.gray2};
   }
   padding-bottom: 2rem;
+  ${media[768]} {
+    flex-direction: column;
+  }
 `;
 
 const TimeItemContainer = styled.div`
@@ -176,6 +184,15 @@ const TimeItemContainer = styled.div`
       position: absolute;
       left: 100%;
       transform: translateX(50%);
+      ${media[768]} {
+        transform: translateX(110%);
+      }
+    }
+  }
+  ${media[768]} {
+    > div {
+      font-size: ${({ theme }) => theme.fontxl};
+      width: 3rem;
     }
   }
 `;
