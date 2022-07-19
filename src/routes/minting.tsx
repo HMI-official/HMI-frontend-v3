@@ -551,7 +551,7 @@ const ImgWarpper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
 
   .icon {
     font-size: 4rem;
