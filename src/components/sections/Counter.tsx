@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { MINTING_DATE } from "../../constants";
+// import { MINTING_DATE } from "../../constants/address";
 import { ITime } from "../../interfaces/counter";
 import { diffDay } from "../../utils/common";
 import { ConnectButton } from "../common/styles/buttons";
@@ -36,7 +38,7 @@ const Counter = () => {
   const [time, setTime] = useState<ITime | null>(null);
   useEffect(() => {
     const timer = setInterval(() => {
-      const _time = diffDay();
+      const _time = diffDay(MINTING_DATE);
       setTime(_time);
     }, 1000);
     return () => clearInterval(timer);
@@ -82,7 +84,7 @@ const Section = styled.section`
 const Container = styled.div`
   width: 100%;
   max-width: 1130px;
-  background: #161238;
+  background: #151328;
   border-radius: 0.5rem;
 
   display: flex;
@@ -158,7 +160,10 @@ const TimeItemContainer = styled.div`
     align-items: center;
     font-size: ${({ theme }) => theme.font2xl};
     font-family: "Saira-Black";
-    border: 1px solid ${({ theme }) => theme.primary};
+    /* border: 1px solid ${({ theme }) => theme.primary}; */
+    /* border: 1px solid ${({ theme }) => theme.selection}; */
+    border: 2px solid #0faa9d;
+
     padding: 1.245rem 0.4rem;
     width: 5rem;
     border-radius: 0.5rem;
