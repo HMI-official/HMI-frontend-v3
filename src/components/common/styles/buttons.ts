@@ -49,4 +49,8 @@ export const ConnectButton = styled.div`
   background-origin: border-box;
   background-clip: content-box, border-box;
   margin: 10px;
+  transition: all 0.3s ease-in-out;
+  :hover {
+    border: 2px solid ${({ theme }) => theme.primary};
+  }
 `;

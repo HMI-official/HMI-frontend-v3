@@ -48,9 +48,6 @@ const Minting: FC = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   // const initOnboard =
 
-  if (window) {
-  }
-
   // FIXME:  setting onboard
   // initialize onboard
   useEffect(() => setOnboard(initOnboard), []);
@@ -124,6 +121,9 @@ const Minting: FC = () => {
     });
 
     setIsMinting(false);
+
+    if (success) setTotalMinted(await getTotalMinted());
+
     // console.log(status);
   };
 
@@ -148,7 +148,6 @@ const Minting: FC = () => {
   useEffect(() => {
     const timer = setInterval(async () => {
       setTotalMinted(await getTotalMinted());
-      console.log("total minted", totalMinted);
     }, 1000);
     return () => {
       clearInterval(timer);
