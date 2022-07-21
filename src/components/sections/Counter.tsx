@@ -17,6 +17,7 @@ interface InfoItemProps {
   title: string;
   description: string;
 }
+
 const TimeItem = (props: TimeItemProps) => {
   return (
     <TimeItemContainer>
@@ -63,7 +64,9 @@ const Counter = () => {
             <InfoItem title="mint date" description="SAT, Aug 27th - 2pm PST" />
           </InfoContainer>
           <Link to="/mint">
-            <ConnectButton>Mint</ConnectButton>
+            <MintButtonWrapper>
+              <ConnectButton>Mint</ConnectButton>
+            </MintButtonWrapper>
           </Link>
         </ModalWindow>
       </Container>
@@ -72,6 +75,17 @@ const Counter = () => {
 };
 
 export default Counter;
+
+const MintButtonWrapper = styled.div`
+  // when window size is bigger than 1440px
+  @media (min-width: 1440px) {
+    > div {
+      font-size: 1.4rem;
+      width: calc(130px * 1.2);
+      height: calc(40px * 1.2);
+    }
+  }
+`;
 
 const Section = styled.section`
   min-height: 50vh;
@@ -85,7 +99,7 @@ const Section = styled.section`
 const Container = styled.div`
   width: 100%;
   max-width: 1130px;
-  background: #151328;
+  /* background: #151328; */
   border-radius: 0.5rem;
 
   display: flex;
@@ -139,7 +153,6 @@ const TimeContainer = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   gap: 2rem;
-  align-self: flex-start;
   .item1 {
     text-transform: capitalize;
     padding-right: 0.1rem;
@@ -148,6 +161,7 @@ const InfoContainer = styled.div`
   padding-bottom: 2rem;
   ${media[768]} {
     flex-direction: column;
+    align-self: flex-start;
   }
 `;
 
