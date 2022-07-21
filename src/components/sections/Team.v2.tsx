@@ -55,7 +55,7 @@ const teamData: ItemProps[] = [
     offset: 0,
   },
   {
-    name: "PARKER",
+    name: "Casey",
     img: HMI_HERO.mercury,
     planet: "MERC",
     role: "Motor-Mouth",
