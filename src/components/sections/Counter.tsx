@@ -50,7 +50,7 @@ const Counter = () => {
       <Container>
         <ModalWindow>
           <Title>
-            Wait for it! HI PLANET NFT will be <br /> available for minting in:{" "}
+            HI PLANET NFT will be <br /> available for minting in:{" "}
           </Title>
           <TimeContainer>
             <TimeItem time={time?.day ?? 0} indicator="days" />
@@ -61,7 +61,7 @@ const Counter = () => {
           <InfoContainer>
             <InfoItem title="price" description="$200 USD" />
             <InfoItem title="total supply" description="3,333" />
-            <InfoItem title="mint date" description="SAT, Aug 27th - 2pm PST" />
+            <InfoItem title="mint date" description="SAT, Aug 25th - 2pm PST" />
           </InfoContainer>
           <Link to="/mint">
             <MintButtonWrapper>
