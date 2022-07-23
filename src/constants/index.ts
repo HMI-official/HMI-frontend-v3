@@ -1,3 +1,3 @@
 export const SLIDER_CARD_WIDTH = "15rem";
 export const SLIDER_CARD_NUMBER = 5;
-export const MINTING_DATE = "2022-08-25T14:00:00.000Z";
+export const MINTING_DATE = "8/25/2022 2:00:00 PM PST";

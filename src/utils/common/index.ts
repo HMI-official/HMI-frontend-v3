@@ -18,10 +18,8 @@ export const diffDay = (mintingDate: string): ITime => {
   //make this date: SAT, Aug 27th - 2pm PST
   // 2022년 8월 27일 오후 2시 PST
   const date = new Date(mintingDate);
-
   // const date = new Date(2022, 7, 27, 14, 0, 0);
   // now pst date
-
   const now = new Date();
 
   const diff = Number(date) - Number(now);
@@ -33,5 +31,47 @@ export const diffDay = (mintingDate: string): ITime => {
   const diffSec = Math.floor((diff / 1000) % 60);
   // console.log(diffDay, "|", diffHour, "|", diffMin, "|", diffSec);
 
-  return { day: diffDay, hour: diffHour, min: diffMin, sec: diffSec };
+  return { day: diffDay, hour: diffHour - 1, min: diffMin, sec: diffSec };
+};
+
+// 아직 안쓰는 것들
+
+const getUTC = (date: Date) => {
+  const utcDate = new Date(date.getTime());
+  utcDate.setMinutes(utcDate.getMinutes() + utcDate.getTimezoneOffset());
+  return utcDate;
+};
+
+const getPST = (date: Date) => {
+  const utcDate = getUTC(date);
+  const HOUR = 3600000;
+  // 왜 한시간 더 넣어야 하는지 모르겠어
+  const timeDiff = 8 - 1; // UTC +8
+  const pstDate = new Date(utcDate.getTime() + HOUR * -timeDiff);
+  return pstDate;
+};
+
+const getFixedDate = (date: {
+  mon: number;
+  day: number;
+  year: number;
+  hour: number;
+  minute: number;
+  second: number;
+  timezone: "UTC" | "PST";
+}) => {
+  const { mon, day, year, hour, minute, second, timezone } = date;
+  const _string = `${mon}/${day}/${year} ${hour}:${minute}:${second} ${timezone}`;
+
+  const dt = new Date(_string);
+  return dt;
+};
+
+const diffDay_v2 = (date1: Date, date2: Date): ITime => {
+  const diff = date2.getTime() - date1.getTime();
+  const day = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hour = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const sec = Math.floor((diff % (1000 * 60)) / 1000);
+  return { day, hour, min, sec };
 };

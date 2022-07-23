@@ -36,6 +36,17 @@ const InfoItem = (props: InfoItemProps) => {
   );
 };
 
+// const getUTC = (date: Date) => {
+//   const utc = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+//   return utc;
+// };
+// const getPST = (date: Date) => {
+//   const HOUR = 3600000;
+//   const DAY = HOUR * 24;
+//   const pst = new Date(date.getTime() + HOUR * 8 - DAY);
+//   return pst;
+// };
+
 const Counter = () => {
   const [time, setTime] = useState<ITime | null>(null);
   useEffect(() => {
@@ -45,6 +56,7 @@ const Counter = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, [time]);
+
   return (
     <Section>
       <Container>
