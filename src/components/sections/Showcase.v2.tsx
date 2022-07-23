@@ -7,9 +7,9 @@ const slideCardConfig = {
   SLIDER_CARD_WIDTH: "20.625rem",
   SLIDER_CARD_NUMBER: 11,
   SLIDER_CARD_GAP: "2rem",
-  TABLET_SLIDER_CARD_WIDTH: "12rem",
+  TABLET_SLIDER_CARD_WIDTH: "15rem",
   TABLET_SLIDER_CARD_GAP: "1rem",
-  MOBILE_SLIDER_CARD_WIDTH: "10rem",
+  MOBILE_SLIDER_CARD_WIDTH: "15rem",
 };
 
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
@@ -123,6 +123,7 @@ const Row = styled.div<{ direction: string }>`
   }
   ${media.mobile} {
     animation: ${mobileSlide} linear infinite ${(props) => props.direction};
+    animation-duration: 70s !important;
   }
 `;
 const ImgContainer = styled.div`
@@ -149,10 +150,10 @@ const ImgContainer = styled.div`
   }
 
   @media (max-width: 48em) {
-    width: 12rem;
+    width: ${slideCardConfig.SLIDER_CARD_WIDTH};
   }
   @media (max-width: 30em) {
-    width: 10rem;
+    width: ${slideCardConfig.MOBILE_SLIDER_CARD_WIDTH};
   }
 
   img {
