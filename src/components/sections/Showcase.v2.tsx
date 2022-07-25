@@ -120,6 +120,7 @@ const Row = styled.div<{ direction: string }>`
   animation: ${slide} linear infinite ${(props) => props.direction};
   ${media[768]} {
     animation: ${tabletSlide} linear infinite ${(props) => props.direction};
+    
   }
   ${media.mobile} {
     animation: ${mobileSlide} linear infinite ${(props) => props.direction};
