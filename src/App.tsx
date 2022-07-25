@@ -22,6 +22,7 @@ import FooterV2 from "./components/sections/Footer.v2";
 import Join from "./components/sections/Join";
 import ReactGA from "react-ga";
 import Counter from "./components/sections/Counter";
+import Vimeo from "./components/sections/Vimeo";
 
 const TRACKING_ID = process.env.REACT_APP_ANALYTICS_ID!;
 ReactGA.initialize(TRACKING_ID);
@@ -60,6 +61,7 @@ function App() {
             <ShowcaseV2 />
             <Benefit />
             <TeamV2 />
+            <Vimeo />
             <Story />
             {/* <AccordionDemo /> */}
             <Faq />

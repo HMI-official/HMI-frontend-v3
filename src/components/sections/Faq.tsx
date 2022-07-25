@@ -26,7 +26,7 @@ const Title = styled.h1`
   font-family: "Saira-Black";
 
   margin: 1rem auto;
-  border-bottom: 2px solid ${(props) => props.theme.carouselColor};
+  /* border-bottom: 2px solid ${(props) => props.theme.carouselColor}; */
   width: fit-content;
 
   @media (max-width: 48em) {
