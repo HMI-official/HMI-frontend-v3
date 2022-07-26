@@ -81,14 +81,13 @@ const Container = styled.div<{ clicked: boolean }>`
 interface AccordionProps {
   title: string;
   children: ReactNode;
-  ScrollTrigger: any;
 }
 
-const Accordion: FC<AccordionProps> = ({ title, children, ScrollTrigger }) => {
+const Accordion: FC<AccordionProps> = ({ title, children }) => {
   const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
-    ScrollTrigger.refresh();
+    // ScrollTrigger.refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collapse]);
 

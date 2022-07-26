@@ -71,35 +71,23 @@ const Faq = () => {
 
       <Container>
         <Box>
-          <Accordion
-            ScrollTrigger={ScrollTrigger}
-            title="When is the mint date ?"
-          >
+          <Accordion title="When is the mint date ?">
             We are targeting to launch in August. The exact date is yet to be
             determined though; it will be announced in advance.
           </Accordion>
-          <Accordion
-            ScrollTrigger={ScrollTrigger}
-            title="What is our Total Supply and price ?"
-          >
+          <Accordion title="What is our Total Supply and price ?">
             Total supply is 3,333 NFTs and the price will be announced in
             advance.
           </Accordion>
         </Box>
         <Box>
-          <Accordion
-            ScrollTrigger={ScrollTrigger}
-            title="How will I get the reward and How often ?"
-          >
+          <Accordion title="How will I get the reward and How often ?">
             We will take a snapshot with the Token ID-based holder's wallet
             address and the reward will be airdropped automatically through our
             system. Payout frequency will be decided by community(Either every
             quarter or 6months). We will have a vote once we are done minting.
           </Accordion>
-          <Accordion
-            ScrollTrigger={ScrollTrigger}
-            title="How do I get the Welcome Package ?"
-          >
+          <Accordion title="How do I get the Welcome Package ?">
             We will give you the promotion code and you will be able to check
             out your order on Official website of High Minded Intelligence.
             Entire process will be free including the shipping fee(worldwide
