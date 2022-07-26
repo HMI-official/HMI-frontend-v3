@@ -32,12 +32,15 @@ const MainTitle = styled.h2`
 `;
 
 const Section = styled.section`
-  padding-top: 14rem;
+  padding: 14rem 0;
   min-height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  ${media[768]} {
+    padding: 7rem 0;
+  }
 `;
 
 const VimeoContainer = styled.div`
@@ -53,6 +56,7 @@ const VimeoContainer = styled.div`
     /* justify-content: center; */
     ${media[768]} {
       width: 90% !important;
+      height: auto !important;
     }
   }
 `;

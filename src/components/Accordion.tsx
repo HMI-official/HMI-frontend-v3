@@ -86,10 +86,7 @@ interface AccordionProps {
 const Accordion: FC<AccordionProps> = ({ title, children }) => {
   const [collapse, setCollapse] = useState(false);
 
-  useEffect(() => {
-    // ScrollTrigger.refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collapse]);
+  useEffect(() => {}, [collapse]);
 
   return (
     <Container onClick={() => setCollapse(!collapse)} clicked={collapse}>
