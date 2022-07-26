@@ -24,51 +24,53 @@ memories, stories and building relationships that`;
 const Join = () => {
   return (
     <Section>
-      <Title>Explore Our Brand High Minded Intelligence</Title>
-      <Wrapper>
-        <Box className="item1">
-          {/* <TextBox> */}
-          {text1}
-          <br />
-          <br />
-          <br />
-          {text2}
-          <ButtonContainer>
-            <Button onClick={() => onClickWebsite(ADDRESS.hmi)}>
-              Visit website
-            </Button>
-            <IconContainer>
-              <Icon onClick={() => onClickWebsite(ADDRESS.tiktok)}>
-                <img src={SNS.tiktok} alt="tiktok" />
-              </Icon>
-              <Icon onClick={() => onClickWebsite(ADDRESS.instagram)}>
-                <img src={SNS.instagram} alt="instagram" />
-              </Icon>
-            </IconContainer>
-          </ButtonContainer>
-          {/* </TextBox> */}
-        </Box>
-        <Box className="item2" style={{ fontSize: "1.3rem" }}>
-          <ImgWrapper
-            onClick={() =>
-              window.open(
-                "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-with-big-hi-planet-logo"
-              )
-            }
-          >
-            <img src={CLOTHES.black} alt="black sleeve" />
-          </ImgWrapper>
-          <ImgWrapper
-            onClick={() =>
-              window.open(
-                "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-1"
-              )
-            }
-          >
-            <img src={CLOTHES.white} alt="white_sleeve" />
-          </ImgWrapper>
-        </Box>
-      </Wrapper>
+      <Container>
+        <Title>Story of HMI</Title>
+        <Wrapper>
+          <Box className="item1">
+            {/* <TextBox> */}
+            {text1}
+            <br />
+            <br />
+            <br />
+            {text2}
+            <ButtonContainer>
+              <Button onClick={() => onClickWebsite(ADDRESS.hmi)}>
+                Visit website
+              </Button>
+              <IconContainer>
+                <Icon onClick={() => onClickWebsite(ADDRESS.tiktok)}>
+                  <img src={SNS.tiktok} alt="tiktok" />
+                </Icon>
+                <Icon onClick={() => onClickWebsite(ADDRESS.instagram)}>
+                  <img src={SNS.instagram} alt="instagram" />
+                </Icon>
+              </IconContainer>
+            </ButtonContainer>
+            {/* </TextBox> */}
+          </Box>
+          <Box className="item2" style={{ fontSize: "1.3rem" }}>
+            <ImgWrapper
+              onClick={() =>
+                window.open(
+                  "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-with-big-hi-planet-logo"
+                )
+              }
+            >
+              <img src={CLOTHES.black} alt="black sleeve" />
+            </ImgWrapper>
+            <ImgWrapper
+              onClick={() =>
+                window.open(
+                  "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-1"
+                )
+              }
+            >
+              <img src={CLOTHES.white} alt="white_sleeve" />
+            </ImgWrapper>
+          </Box>
+        </Wrapper>
+      </Container>
     </Section>
   );
 };
@@ -86,6 +88,14 @@ const Section = styled.section`
   flex-direction: column;
   gap: 2rem;
 `;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
+`;
 const Title = styled.div`
   font-size: ${({ theme }) => theme.font2xl};
   font-weight: 800;
@@ -97,6 +107,8 @@ const Title = styled.div`
   color: ${({ theme }) => theme.primary};
   /* margin: 1rem auto; */
   max-width: 80%;
+  /* text-align: start; */
+  align-self: flex-start;
 
   ${media[768]} {
     font-size: ${({ theme }) => theme.fontxl};
@@ -143,7 +155,7 @@ const Wrapper = styled.div`
   display: flex;
   position: relative;
   /* flex-direction: row; */
-  max-width: 80%;
+  /* max-width: 80%; */
   width: 100%;
   padding: 1rem 0;
   align-items: center;
