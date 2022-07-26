@@ -62,7 +62,7 @@ function App() {
             <Benefit />
             <TeamV2 />
             <Vimeo />
-            <Story />
+            {/* <Story /> */}
             {/* <AccordionDemo /> */}
             <Faq />
             <Join />

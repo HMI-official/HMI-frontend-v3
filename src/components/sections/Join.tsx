@@ -1,27 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-import { CLOTHES } from "../../constants/image";
+import { ADDRESS } from "../../constants/address";
+import { CLOTHES, SNS } from "../../constants/image";
 import { media } from "../../styles/Themes";
+import { onClickWebsite } from "../../utils/common";
 import { Button } from "../common/styles/buttons";
 // import CommonBtn from "../button/CommonBtn";
 // import AutoHeightImage from "../common/AutoHeightImage";
 // import { Section, Wrapper } from "../common/styles/page";
 
+const text1 = `High Minded Intelligence is a street wear fashion brand that 
+emphasizes the motivational lifestyle and satisfaction of its global 
+community. Founded in downtown Los Angeles by Sean Beck. 
+HMI was inspired by the cultural lifestyle of the California and 
+New York artists, musicians and residents., thus delivering 
+a rigid street fashion with a mix of classic design that can be 
+worn on both casual and formal occasions.
+`;
+
+const text2 = `High Minded Intelligence carries with it, its community, sharing 
+memories, stories and building relationships that`;
+
 const Join = () => {
   return (
     <Section>
+      <Title>Explore Our Brand High Minded Intelligence</Title>
       <Wrapper>
         <Box className="item1">
-          <Title>
-            Explore Our Brand
-            <br />
-            High Minded Intelligence
-          </Title>
+          {/* <TextBox> */}
+          {text1}
+          <br />
+          <br />
+          <br />
+          {text2}
           <ButtonContainer>
-            <Button onClick={() => window.open("https://highmindedi.com/")}>
-              Visit Website
+            <Button onClick={() => onClickWebsite(ADDRESS.hmi)}>
+              Visit website
             </Button>
+            <IconContainer>
+              <Icon onClick={() => onClickWebsite(ADDRESS.tiktok)}>
+                <img src={SNS.tiktok} alt="tiktok" />
+              </Icon>
+              <Icon onClick={() => onClickWebsite(ADDRESS.instagram)}>
+                <img src={SNS.instagram} alt="instagram" />
+              </Icon>
+            </IconContainer>
           </ButtonContainer>
+          {/* </TextBox> */}
         </Box>
         <Box className="item2" style={{ fontSize: "1.3rem" }}>
           <ImgWrapper
@@ -57,6 +82,9 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
 `;
 const Title = styled.div`
   font-size: ${({ theme }) => theme.font2xl};
@@ -66,6 +94,10 @@ const Title = styled.div`
   /* height: 100%; */
   display: flex;
   height: 600px;
+  color: ${({ theme }) => theme.primary};
+  /* margin: 1rem auto; */
+  max-width: 80%;
+
   ${media[768]} {
     font-size: ${({ theme }) => theme.fontxl};
     /* line-height: 1.2; */
@@ -78,7 +110,8 @@ const Box = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-  width: 15rem;
+  /* min-width: 15rem; */
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,9 +152,18 @@ const Wrapper = styled.div`
     flex-direction: column;
     height: 100%;
     gap: 2rem;
+    font-size: calc(${(props) => props.theme.fontlg} + 0.1rem);
+    ${media.mobile} {
+      font-size: ${(props) => props.theme.fontmd};
+      /* font-size: ${(props) => props.theme.fontsm}; */
+      line-height: 1.5;
+    }
   }
   .item2 {
     gap: 3rem;
+  }
+  ${media[1200]} {
+    flex-direction: column;
   }
 
   ${media[768]} {
@@ -135,9 +177,34 @@ const Wrapper = styled.div`
       gap: 1rem;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      /* text-align: center; */
     }
   }
 `;
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4rem;
+  gap: 1rem;
+`;
+
+const Icon = styled.div`
+  display: flex;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  align-items: center;
+  img {
+    cursor: pointer;
+    width: 50px;
+    object-fit: contain;
+    ${media.mobile} {
+      width: 30px;
+    }
+  }
+`;

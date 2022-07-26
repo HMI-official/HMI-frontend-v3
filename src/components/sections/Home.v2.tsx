@@ -20,7 +20,7 @@ export default HomeV2;
 const Section = styled.section`
   min-height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
   background: ${(props) => props.theme.text};
-  width: 100vw;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;

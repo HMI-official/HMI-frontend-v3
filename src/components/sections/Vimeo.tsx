@@ -47,6 +47,10 @@ const VimeoContainer = styled.div`
   width: 100%;
   > div {
     width: 100%;
+    height: 460px !important;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
     ${media[768]} {
       width: 90% !important;
     }
