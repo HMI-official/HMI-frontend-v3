@@ -9,6 +9,10 @@ import { onClickWebsite } from "../../utils/common";
 import { media } from "../../styles/Themes";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 
+const localConfig = {
+  isReversed: false,
+};
+
 const AboutV2 = () => {
   return (
     <Section id="about">
@@ -30,8 +34,10 @@ const AboutV2 = () => {
         <Box>
           <ImageContainer>
             <MachineContainer>
-              <Machine src={ETC_IMAGES.machine} />
+              <Machine src={ETC_IMAGES.machineDollar} />
+              {/* <Machine src={ETC_IMAGES.machine} /> */}
               {/* <DollarContainer> */}
+              {/* <CgDollar /> */}
               {/* <AiOutlineDollarCircle /> */}
               {/* </DollarContainer> */}
             </MachineContainer>
@@ -71,14 +77,30 @@ const upDown = keyframes`
 const rattle = keyframes`
    0% {
       transform: scaleX(-1) rotate(-7deg) translate(-3.5rem, -3.4rem);
+      /* transform: scaleX(-1) rotate(-7deg) translate(-3.5rem, -3.4rem); */
     }
     50% {
       transform: scaleX(-1) rotate(-10deg) translate(-3.5rem, -3.4rem);
+      /* transform: scaleX(-1) rotate(-10deg) translate(-3.5rem, -3.4rem); */
     }
     100% {
       transform: scaleX(-1) rotate(-7deg) translate(-3.5rem, -3.4rem);
     }
     `;
+
+const rattleDollar = keyframes`
+0% {
+   transform: rotate(-4deg) translate(2.4rem, -1rem);
+   /* transform: rotate(-7deg) translate(2.4rem, -1rem); */
+ }
+ 50% {
+   transform: rotate(-1deg) translate(2.4rem, -1rem);
+   /* transform: rotate(-4deg) translate(2.4rem, -1rem); */
+ }
+ 100% {
+   transform: rotate(-4deg) translate(2.4rem, -1rem);
+ }
+ `;
 
 const rattle2 = keyframes`
    0% {
@@ -90,6 +112,20 @@ const rattle2 = keyframes`
     100% {
       transform: scaleX(-1) rotate(-7deg) translate(-2.2rem, -2rem);
     }
+`;
+
+const rattleDollar2 = keyframes`
+0% {
+   transform: rotate(-4deg) translate(1.4rem, -0.2rem);
+   /* transform: rotate(-7deg) translate(1.4rem, -0.2rem); */
+ }
+ 50% {
+   transform: rotate(-1deg) translate(1.4rem, -0.2rem);
+   /* transform: rotate(-4deg) translate(1.4rem, -0.2rem); */
+ }
+ 100% {
+   transform: rotate(-4deg) translate(1.4rem, -0.2rem);
+ }
 `;
 
 const rattle3 = keyframes`
@@ -104,17 +140,18 @@ const rattle3 = keyframes`
     }
 `;
 
-const rattleDollar = keyframes`
-    0% {
-      transform: rotate(-3.5deg)
-    }
-    50% {
-      transform: rotate(0deg)
-
-    }
-    100% {
-      transform: rotate(-3.5deg)
-    }
+const rattleDollar3 = keyframes`
+0% {
+   transform: rotate(-4deg) translate(0.2rem, -0.2rem);
+   /* transform: rotate(-7deg) translate(0.2rem, -0.2rem); */
+ }
+ 50% {
+   transform: rotate(-1deg) translate(0.2rem, -0.2rem);
+   /* transform: rotate(-4deg) translate(0.2rem, -0.2rem); */
+ }
+ 100% {
+   transform: rotate(-4deg) translate(0.2rem, -0.2rem);
+ }
 `;
 
 const Box = styled.div`
@@ -255,7 +292,7 @@ const Machine = styled(Image)`
   z-index: 1;
   /* transform:  */
   margin-right: -2rem;
-  animation: ${rattle} infinite linear 0.7s;
+  animation: ${rattleDollar} infinite linear 0.7s;
   object-fit: contain;
 `;
 
@@ -268,11 +305,11 @@ const ImageContainer = styled.div`
   ${Machine} {
     ${media.custom(900)} {
       width: 15rem;
-      animation: ${rattle2} infinite linear 0.7s;
+      animation: ${rattleDollar2} infinite linear 0.7s;
     }
     ${media.mobile} {
       width: 10rem;
-      animation: ${rattle3} infinite linear 0.7s;
+      animation: ${rattleDollar3} infinite linear 0.7s;
     }
   }
   .item1 {
