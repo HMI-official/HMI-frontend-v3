@@ -31,7 +31,7 @@ export const diffDay = (mintingDate: string): ITime => {
   const diffSec = Math.floor((diff / 1000) % 60);
   // console.log(diffDay, "|", diffHour, "|", diffMin, "|", diffSec);
 
-  return { day: diffDay, hour: diffHour - 1, min: diffMin, sec: diffSec };
+  return { day: diffDay, hour: diffHour, min: diffMin, sec: diffSec };
 };
 
 // 아직 안쓰는 것들

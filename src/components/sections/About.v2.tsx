@@ -3,9 +3,11 @@ import styled, { keyframes } from "styled-components";
 import { ETC_IMAGES, SNS } from "../../constants/image";
 import { ReactComponent as Moolu } from "../../assets/Nfts/moolu.svg";
 import Galaxy from "../bgImg/Galaxy";
+import { CgDollar } from "react-icons/cg";
 import { ADDRESS } from "../../constants/address";
 import { onClickWebsite } from "../../utils/common";
 import { media } from "../../styles/Themes";
+import { AiOutlineDollarCircle } from "react-icons/ai";
 
 const AboutV2 = () => {
   return (
@@ -27,13 +29,15 @@ const AboutV2 = () => {
         </Box>
         <Box>
           <ImageContainer>
-            <Machine src={ETC_IMAGES.machine} />
-            {/* <Moon src={mooluSvg} /> */}
+            <MachineContainer>
+              <Machine src={ETC_IMAGES.machine} />
+              {/* <DollarContainer> */}
+              {/* <AiOutlineDollarCircle /> */}
+              {/* </DollarContainer> */}
+            </MachineContainer>
             <div className="item1">
               <Moolu />
             </div>
-            {/* <Moon src={HMI_HERO.moon} /> */}
-            {/* <MooluSvg /> */}
           </ImageContainer>
           <SNSContainer>
             <Icon onClick={() => onClickWebsite(ADDRESS.discord)}>
@@ -97,6 +101,19 @@ const rattle3 = keyframes`
     }
     100% {
       transform: scaleX(-1) rotate(-7deg) translate(-0.7rem, -1.3rem);
+    }
+`;
+
+const rattleDollar = keyframes`
+    0% {
+      transform: rotate(-3.5deg)
+    }
+    50% {
+      transform: rotate(0deg)
+
+    }
+    100% {
+      transform: rotate(-3.5deg)
     }
 `;
 
@@ -242,6 +259,10 @@ const Machine = styled(Image)`
   object-fit: contain;
 `;
 
+const MachineContainer = styled.div`
+  position: relative;
+`;
+
 const ImageContainer = styled.div`
   display: flex;
   ${Machine} {
@@ -292,4 +313,22 @@ const SNSContainer = styled.div`
   > svg {
     cursor: pointer;
   }
+`;
+
+const DollarContainer = styled.div`
+  position: absolute;
+  z-index: 2;
+  left: 7rem;
+  top: 50%;
+  font-size: 2rem;
+  animation: ${rattleDollar} infinite linear 0.7s;
+
+  // dollar color
+  /* color: #6b8068; */
+  color: black;
+  /* transform: scaleX(-1) rotate(-10deg) translate(-3.5rem, -3.4rem); */
+  /* transform:  */
+
+  /* margin-right: -6rem; */
+  /* color: ${(props) => props.theme.text}; */
 `;
