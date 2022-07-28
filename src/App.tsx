@@ -64,8 +64,8 @@ function App() {
             <Vimeo />
             {/* <Story /> */}
             {/* <AccordionDemo /> */}
-            <Faq />
             <Join />
+            <Faq />
             <FooterV2 />
             {/* <Footer /> */}
             <ScrollToTop />

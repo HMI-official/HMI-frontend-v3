@@ -79,7 +79,7 @@ export default Join;
 
 const Section = styled.section`
   min-height: 30vh;
-  padding: 10rem 0;
+  padding: 5rem 0;
   padding-bottom: 7rem;
   display: flex;
   align-items: center;
