@@ -30,6 +30,8 @@ import { IMintStatus } from "../interfaces";
 import { config } from "../web3Config";
 import LoadComponent from "../utils/LoadComponent";
 import { throttle } from "../utils/common";
+import { WINTER_WALLET_PROJECT_ID } from "../constants/winter-wallet";
+import WlModal from "../components/mint/WlModal";
 
 const Minting: FC = () => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -48,6 +50,10 @@ const Minting: FC = () => {
   const [isOgSale, setIsOgSale] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
+  // const [isOgPaymentModalOpen, setIsOgPaymentModalOpen] =
+  //   useState<boolean>(false);
+  const [isWlPaymentModalOpen, setIsWlPaymentModalOpen] =
+    useState<boolean>(false);
   // const initOnboard =
 
   // FIXME:  setting onboard
@@ -168,6 +174,8 @@ const Minting: FC = () => {
     window.addEventListener("message", (event) => {
       if (event.data === "closeWinterCheckoutModal") {
         setIsPaymentModalOpen(false);
+        // setIsOgPaymentModalOpen(false);
+        setIsWlPaymentModalOpen(false);
       }
     });
   }
@@ -194,17 +202,31 @@ const Minting: FC = () => {
   };
 
   const CreditCardButtonComponent = () => {
-    const isNotValid = paused || (!isPreSale && !isPublicSale);
+    const isNotValid = paused || (!isPreSale && !isPublicSale) || isOgSale;
     const _style = { marginTop: "1rem" };
+    const onClickPayment = () => {
+      switch (true) {
+        case isPreSale:
+          setIsWlPaymentModalOpen(true);
+          break;
+        case isPublicSale:
+          setIsPaymentModalOpen(true);
+          break;
+        default:
+          break;
+      }
+    };
+
     if (isNotValid)
       return (
         <Button isNotValid={isNotValid} style={_style}>
           disabled
         </Button>
       );
+
     if (!isNotValid)
       return (
-        <Button onClick={() => setIsPaymentModalOpen(true)} style={_style}>
+        <Button onClick={onClickPayment} style={_style}>
           Pay with Credit Card
         </Button>
       );
@@ -299,11 +321,23 @@ const Minting: FC = () => {
           </ModalContainer>
         </LoadComponent>
         <WinterCheckout
-          projectId={3238}
+          projectId={WINTER_WALLET_PROJECT_ID.publicSale}
           production={false}
-          setOpenModal={setIsPaymentModalOpen}
+          // setOpenModal={setIsPaymentModalOpen}
           showModal={isPaymentModalOpen}
         />
+
+        <WinterCheckout
+          projectId={WINTER_WALLET_PROJECT_ID.presale}
+          production={false}
+          showModal={isWlPaymentModalOpen}
+          // Extra mint params are params besides 'address, amount, proof'
+          // The key needs to exactly match the name of the param provided to Winter
+          // The value will be passed in as the param
+          extraMintParams={{ proof: 1 }}
+        />
+
+        <WlModal />
       </Section>
     </ThemeProvider>
   );
