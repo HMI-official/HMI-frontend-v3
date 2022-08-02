@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styled, { css, ThemeProvider } from "styled-components";
 import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -19,6 +19,7 @@ import {
   getTotalMinted,
   isPausedState,
   isPreSaleState,
+  isOgSaleState,
   isPublicSaleState,
   presaleMint,
   publicMint,
@@ -44,6 +45,7 @@ const Minting: FC = () => {
   const [paused, setPaused] = useState<boolean>(false);
   const [isPublicSale, setIsPublicSale] = useState<boolean>(false);
   const [isPreSale, setIsPreSale] = useState<boolean>(false);
+  const [isOgSale, setIsOgSale] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   // const initOnboard =
@@ -134,8 +136,8 @@ const Minting: FC = () => {
 
       setPaused(await isPausedState());
       setIsPublicSale(await isPublicSaleState());
-      const _isPreSale = await isPreSaleState();
-      setIsPreSale(_isPreSale);
+      setIsPreSale(await isPreSaleState());
+      setIsOgSale(await isOgSaleState());
 
       setMaxMintAmount(
         isPreSale ? config.presaleMaxMintAmount : config.maxMintAmount
@@ -271,7 +273,7 @@ const Minting: FC = () => {
                     <span>
                       {Number.parseFloat(
                         (config.price * mintAmount).toString()
-                      ).toFixed(2)}
+                      ).toFixed(3)}
                       ETH
                     </span>{" "}
                     <span>+ GAS</span>

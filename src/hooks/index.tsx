@@ -3,25 +3,12 @@ import { Contract } from "web3-eth-contract";
 import { useEffect, useState } from "react";
 import TimeAgo from "javascript-time-ago";
 // import en from "javascript-time-ago/locale/en.json";
-import {
-  GET_NFT_ABI,
-  GET_NFT_ADDRESS,
-  MINT_NFT_ABI,
-  MINT_NFT_ADDRESS,
-  SALE_NFT_ABI,
-  SALE_NFT_ADDRESS,
-} from "../web3Config";
+import { MINT_NFT_ABI, MINT_NFT_ADDRESS } from "../web3Config";
 
 export const useWeb3 = () => {
   const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
 
   const [mintNFTContract, setMintNFTContract] = useState<Contract | undefined>(
-    undefined
-  );
-  const [saleNFTContract, setSaleNFTContract] = useState<Contract | undefined>(
-    undefined
-  );
-  const [getNFTContract, setGetNFTContract] = useState<Contract | undefined>(
     undefined
   );
 
@@ -33,11 +20,9 @@ export const useWeb3 = () => {
   useEffect(() => {
     if (!web3) return;
     setMintNFTContract(new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_ADDRESS));
-    setSaleNFTContract(new web3.eth.Contract(SALE_NFT_ABI, SALE_NFT_ADDRESS));
-    setGetNFTContract(new web3.eth.Contract(GET_NFT_ABI, GET_NFT_ADDRESS));
   }, [web3]);
 
-  return { web3, mintNFTContract, saleNFTContract, getNFTContract };
+  return { web3, mintNFTContract };
 };
 
 export const cutAccount = (account: string | undefined) =>

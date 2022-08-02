@@ -199,6 +199,24 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "event",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_mintAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "bytes32[]",
+        name: "_merkleProof",
+        type: "bytes32[]",
+      },
+    ],
+    name: "ogSaleMint",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -223,6 +241,11 @@ export const MINT_NFT_ABI: AbiItem[] = [
         internalType: "uint256",
         name: "_mintAmount",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
       },
       {
         internalType: "bytes32[]",
@@ -332,12 +355,12 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_currentPhase",
-        type: "uint256",
+        internalType: "string",
+        name: "_tokenBaseURI",
+        type: "string",
       },
     ],
-    name: "setCurrentPhase",
+    name: "setBaseURI",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -376,7 +399,7 @@ export const MINT_NFT_ABI: AbiItem[] = [
         type: "bytes32",
       },
     ],
-    name: "setMerkleRoot",
+    name: "setOgMerkleRoot",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -385,36 +408,24 @@ export const MINT_NFT_ABI: AbiItem[] = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_phase",
+        name: "_limit",
         type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_phaseMaxSupply",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "_tokenURI",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "_publicSalePriceForEther",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_presalePriceForEther",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_revealed",
-        type: "bool",
       },
     ],
-    name: "setPhaseInfo",
+    name: "setOgSaleAmountLimit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_limit",
+        type: "uint256",
+      },
+    ],
+    name: "setPresaleAmountLimit",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -449,24 +460,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_phase",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_revealed",
-        type: "bool",
-      },
-    ],
-    name: "setRevealed",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
         name: "_fee",
         type: "uint256",
       },
@@ -479,12 +472,19 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_totalPhaseNumber",
-        type: "uint256",
+        internalType: "bytes32",
+        name: "_merkleRoot",
+        type: "bytes32",
       },
     ],
-    name: "setTotalPhaseNumber",
+    name: "setWlMerkleRoot",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toggleOgSaleM",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -581,42 +581,17 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint256",
+        internalType: "address",
         name: "",
-        type: "uint256",
+        type: "address",
       },
     ],
-    name: "_phaseInfo",
+    name: "_ogSaleClaimed",
     outputs: [
       {
         internalType: "uint256",
-        name: "phase",
+        name: "",
         type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "phaseMaxSupply",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "tokenURI",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "publicSalePrice",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "presalePrice",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "revealed",
-        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -675,7 +650,20 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "currentPhase",
+    name: "baseURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ether001",
     outputs: [
       {
         internalType: "uint256",
@@ -812,57 +800,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_phase",
-        type: "uint256",
-      },
-    ],
-    name: "getTotalPhaseInfo",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "phase",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "phaseMaxSupply",
-            type: "uint256",
-          },
-          {
-            internalType: "string",
-            name: "tokenURI",
-            type: "string",
-          },
-          {
-            internalType: "uint256",
-            name: "publicSalePrice",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "presalePrice",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "revealed",
-            type: "bool",
-          },
-        ],
-        internalType: "struct HMI.PhaseInfo",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "hiddenURI",
     outputs: [
@@ -927,7 +864,20 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "merkleRoot",
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ogMerkleRoot",
     outputs: [
       {
         internalType: "bytes32",
@@ -940,12 +890,25 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "name",
+    name: "ogSaleAmountLimit",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint256",
         name: "",
-        type: "string",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ogSaleM",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -998,6 +961,19 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
+    name: "presaleAmountLimit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "presaleM",
     outputs: [
       {
@@ -1043,6 +1019,19 @@ export const MINT_NFT_ABI: AbiItem[] = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "revealed",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -1191,19 +1180,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
   {
     inputs: [],
-    name: "totalPhaseNumber",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "totalSupply",
     outputs: [
       {
@@ -1215,129 +1191,14 @@ export const MINT_NFT_ABI: AbiItem[] = [
     stateMutability: "view",
     type: "function",
   },
-];
-
-export const SALE_NFT_ABI: AbiItem[] = [
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_mintGemToken",
-        type: "address",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "constructor",
-  },
   {
     inputs: [],
-    name: "getOnSaleGemToken",
+    name: "wlMerkleRoot",
     outputs: [
       {
-        internalType: "uint256[]",
+        internalType: "bytes32",
         name: "",
-        type: "uint256[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "getTokenPrice",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "mintGemToken",
-    outputs: [
-      {
-        internalType: "contract MintGemToken",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "onSaleGemToken",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "purchaseGemToken",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_tokenId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_price",
-        type: "uint256",
-      },
-    ],
-    name: "setForSaleGemToken",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "tokenPrices",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        type: "bytes32",
       },
     ],
     stateMutability: "view",
@@ -1345,109 +1206,16 @@ export const SALE_NFT_ABI: AbiItem[] = [
   },
 ];
 
-export const GET_NFT_ABI: AbiItem[] = [
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_gms",
-        type: "address",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "constructor",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_tokenOwner",
-        type: "address",
-      },
-    ],
-    name: "getLatestToken",
-    outputs: [
-      {
-        internalType: "uint256[2]",
-        name: "",
-        type: "uint256[2]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_tokenOwner",
-        type: "address",
-      },
-    ],
-    name: "getMyNfts",
-    outputs: [
-      {
-        internalType: "uint256[]",
-        name: "",
-        type: "uint256[]",
-      },
-      {
-        internalType: "uint256[]",
-        name: "",
-        type: "uint256[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_tokenOwner",
-        type: "address",
-      },
-    ],
-    name: "getUserTokenLength",
-    outputs: [
-      {
-        internalType: "uint256[2]",
-        name: "",
-        type: "uint256[2]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "gms",
-    outputs: [
-      {
-        internalType: "contract GMS",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-];
-
-export const MINT_NFT_ADDRESS = "0xd80Fe7215554cd4533F8b5ea99be38c0E386d793";
-
-export const SALE_NFT_ADDRESS = "0x5958A71b0607Cde827864f7b4A4428308EfD49DB";
-
-export const GET_NFT_ADDRESS = "0x9cff75736dfE38AFC4963CAd12BE4b7a1240894E";
+export const MINT_NFT_ADDRESS = "0xf5E246cB3e52D7D900F0c4dd7e7AB94b271d833E";
 
 export const MERKEL_ROOT =
   "0x74f4666169faccda89a45d47ab1997a62f24c3cd534a01539db8f0e40d3eb8b1";
 export const config = {
   MINT_NFT_ABI,
-  GET_NFT_ABI,
   MINT_NFT_ADDRESS,
-  GET_NFT_ADDRESS,
   maxMintAmount: 5,
   presaleMaxMintAmount: 3,
-  price: 0.01,
+  price: 0.001,
+  wlPrice: 0.001,
+  ogPrice: 0,
 };

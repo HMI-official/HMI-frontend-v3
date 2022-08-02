@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillTwitterCircle } from "react-icons/ai";
 // import {  } from "react-icons/ai";
-import { FaDiscord, FaTwitter } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ADDRESS } from "../constants/address";
