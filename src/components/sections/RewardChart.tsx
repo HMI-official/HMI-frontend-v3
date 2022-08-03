@@ -19,6 +19,6 @@ const Section = styled.section`
 `;
 const Image = styled.img`
   /* width: 100%; */
-  max-width: 1000px;
+  max-width: 1300px;
   object-fit: contain;
 `;
