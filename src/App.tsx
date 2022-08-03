@@ -23,6 +23,7 @@ import Join from "./components/sections/Join";
 import ReactGA from "react-ga";
 import Counter from "./components/sections/Counter";
 import Vimeo from "./components/sections/Vimeo";
+import RewardChart from "./components/sections/RewardChart";
 
 const TRACKING_ID = process.env.REACT_APP_ANALYTICS_ID!;
 ReactGA.initialize(TRACKING_ID);
@@ -57,6 +58,7 @@ function App() {
             <HomeV2 />
             <Counter />
             <AboutV2 />
+            <RewardChart />
             <RoadmapV2 />
             <ShowcaseV2 />
             <Benefit />
