@@ -396,7 +396,10 @@ const Minting: FC = () => {
             // The key needs to exactly match the name of the param provided to Winter
             // The value will be passed in as the param
             walletAddress={winterWlWallet}
-            extraMintParams={{ proof: getWlProof(winterWlWallet) }}
+            extraMintParams={{
+              proof: getWlProof(winterWlWallet),
+              extraPram: "123123",
+            }}
           />
 
           {isWinterWlModalOpen && (

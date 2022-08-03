@@ -210,6 +210,11 @@ export const MINT_NFT_ABI: AbiItem[] = [
         name: "_merkleProof",
         type: "bytes32[]",
       },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
+      },
     ],
     name: "ogSaleMint",
     outputs: [],
@@ -1206,10 +1211,8 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
 ];
 
-export const MINT_NFT_ADDRESS = "0xf5E246cB3e52D7D900F0c4dd7e7AB94b271d833E";
+export const MINT_NFT_ADDRESS = "0x960AdB4011D5F72a7b062D158Ae8C20FB46e661c";
 
-export const MERKEL_ROOT =
-  "0x74f4666169faccda89a45d47ab1997a62f24c3cd534a01539db8f0e40d3eb8b1";
 export const config = {
   MINT_NFT_ABI,
   MINT_NFT_ADDRESS,

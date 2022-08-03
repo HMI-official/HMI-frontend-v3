@@ -34,6 +34,7 @@ export const getWlProof = (wallet: string | null | undefined) => {
   const { wlMerkleTree } = WL_MERKLE_INFO;
   const leaf = keccak256(wallet);
   const proof = wlMerkleTree.getHexProof(leaf);
+  // console.log(proof);
   return proof;
 };
 export const getOgWalletIsValid = (wallet: string) => {

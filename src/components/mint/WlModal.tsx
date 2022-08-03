@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import styled from "styled-components";
 import { useMintConfig } from "../../routes/minting";
-import { getWlWalletIsValid } from "../../utils/merkleTree";
+import { getWlProof, getWlWalletIsValid } from "../../utils/merkleTree";
 import { errorNotify } from "../../utils/toast";
 import {
   Body,
@@ -31,6 +31,7 @@ const WlModal: FC<WlModalProps> = ({
 
   const onClickConfirm = () => {
     const isValid = getWlWalletIsValid(winterWlWallet);
+    console.log(getWlProof(winterWlWallet));
     if (!isValid) return errorNotify("please connect your wl wallet");
     setIsWinterWlModalOpen(false);
     handleClickWlModalConfirm();
