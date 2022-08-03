@@ -53,5 +53,8 @@ declare module "styled-components" {
     primary: string;
     selection: string;
     gradientBg: string;
+    fonts: {
+      saira: string;
+    };
   }
 }

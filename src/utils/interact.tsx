@@ -7,7 +7,7 @@ import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
 // import whitelist from ""
 // const whitelist = require("../scripts/whitelist.js");
 
-const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_RPC_URL!);
+export const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_RPC_URL!);
 
 // const contract = require("../artifacts/contracts/BoredApe.sol/BoredApe.json");
 const mintNFTContract = new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_ADDRESS);

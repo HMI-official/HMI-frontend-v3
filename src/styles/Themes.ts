@@ -42,6 +42,9 @@ const commonTheme = {
   ["--chakra-colors-teal-700"]: "#285E61",
   ["--chakra-colors-teal-800"]: "#234E52",
   ["--chakra-colors-teal-900"]: "#1D4044",
+  fonts: {
+    saira: "Saira",
+  },
 };
 
 export const light: DefaultTheme = {
