@@ -1,5 +1,15 @@
-import { FC, useEffect, useState } from "react";
+import {
+  createContext,
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { ToastContainer, toast } from "react-toastify";
 import styled, { css, ThemeProvider } from "styled-components";
+import { keccak256 } from "web3-utils";
+
 import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
@@ -32,6 +42,26 @@ import LoadComponent from "../utils/LoadComponent";
 import { throttle } from "../utils/common";
 import { WINTER_WALLET_PROJECT_ID } from "../constants/winter-wallet";
 import WlModal from "../components/mint/WlModal";
+import { WL_MERKLE_INFO } from "../constants/merkleRoot";
+import { errorNotify, toastNotify } from "../utils/toast";
+import { getWlProof, getWlWalletIsValid } from "../utils/merkleTree";
+
+interface IContext {
+  winterWlWallet: string;
+  setWinterWlWallet: React.Dispatch<React.SetStateAction<string>>;
+  isWinterWlModalOpen: boolean;
+  setIsWinterWlModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const context = {
+  winterWlWallet: "",
+  setWinterWlWallet: () => {},
+  isWinterWlModalOpen: false,
+  setIsWinterWlModalOpen: () => {},
+};
+
+const MintConfigContext = createContext<IContext>(context);
+export const useMintConfig = (): IContext => useContext(MintConfigContext);
 
 const Minting: FC = () => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -50,51 +80,28 @@ const Minting: FC = () => {
   const [isOgSale, setIsOgSale] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
-  // const [isOgPaymentModalOpen, setIsOgPaymentModalOpen] =
-  //   useState<boolean>(false);
   const [isWlPaymentModalOpen, setIsWlPaymentModalOpen] =
     useState<boolean>(false);
-  // const initOnboard =
 
-  // FIXME:  setting onboard
-  // initialize onboard
-  useEffect(() => setOnboard(initOnboard), []);
+  const [winterWlWallet, setWinterWlWallet] = useState<string>(
+    wallet?.accounts[0].address ?? ""
+  );
 
-  // set local storage if wallet is connected
-  useEffect(() => {
-    if (!connectedWallets.length) return;
-
-    const connectedWalletsLabelArray = connectedWallets.map(
-      ({ label }) => label
-    );
-    window.localStorage.setItem(
-      "connectedWallets",
-      JSON.stringify(connectedWalletsLabelArray)
-    );
-  }, [connectedWallets]);
-
-  // if local storage has connected wallets, set them to connectedWallets
-  useEffect(() => {
-    if (!onboard) return;
-    const previouslyConnectedWallets = JSON.parse(
-      window.localStorage.getItem("connectedWallets") || "123"
-    );
-
-    if (previouslyConnectedWallets?.length) {
-      async function setWalletFromLocalStorage() {
-        await connect({
-          autoSelect: {
-            label: previouslyConnectedWallets[0],
-            disableModals: true,
-          },
-        });
-      }
-
-      setWalletFromLocalStorage();
-    }
-  }, [onboard, connect]);
+  const userWallet = wallet?.accounts[0].address;
+  const [isWinterWlModalOpen, setIsWinterWlModalOpen] =
+    useState<boolean>(false);
 
   // FIXME: onClick events
+
+  const closeWlModal = () => {
+    setIsWinterWlModalOpen(false);
+    setWinterWlWallet("");
+  };
+
+  const handleClickWlModalConfirm = () => {
+    setIsWlPaymentModalOpen(true);
+  };
+
   const handleIncrementMintAmount = () => {
     if (mintAmount < maxMintAmount) setMintAmount(mintAmount + 1);
   };
@@ -135,6 +142,44 @@ const Minting: FC = () => {
     // console.log(status);
   };
 
+  // FIXME:  setting onboard
+  // initialize onboard
+  useEffect(() => setOnboard(initOnboard), []);
+
+  // set local storage if wallet is connected
+  useEffect(() => {
+    if (!connectedWallets.length) return;
+
+    const connectedWalletsLabelArray = connectedWallets.map(
+      ({ label }) => label
+    );
+    window.localStorage.setItem(
+      "connectedWallets",
+      JSON.stringify(connectedWalletsLabelArray)
+    );
+  }, [connectedWallets]);
+
+  // if local storage has connected wallets, set them to connectedWallets
+  useEffect(() => {
+    if (!onboard) return;
+    const previouslyConnectedWallets = JSON.parse(
+      window.localStorage.getItem("connectedWallets") || "123"
+    );
+
+    if (previouslyConnectedWallets?.length) {
+      async function setWalletFromLocalStorage() {
+        await connect({
+          autoSelect: {
+            label: previouslyConnectedWallets[0],
+            disableModals: true,
+          },
+        });
+      }
+
+      setWalletFromLocalStorage();
+    }
+  }, [onboard, connect]);
+
   useEffect(() => {
     const init = async () => {
       setMaxSupply(await getMaxSupply());
@@ -170,12 +215,18 @@ const Minting: FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!userWallet) return;
+    setWinterWlWallet(userWallet);
+  }, [userWallet]);
+
   if (typeof window !== "undefined") {
     window.addEventListener("message", (event) => {
       if (event.data === "closeWinterCheckoutModal") {
         setIsPaymentModalOpen(false);
         // setIsOgPaymentModalOpen(false);
         setIsWlPaymentModalOpen(false);
+        setWinterWlWallet("");
       }
     });
   }
@@ -204,10 +255,14 @@ const Minting: FC = () => {
   const CreditCardButtonComponent = () => {
     const isNotValid = paused || (!isPreSale && !isPublicSale) || isOgSale;
     const _style = { marginTop: "1rem" };
+
+    const isValid = getWlWalletIsValid(userWallet);
     const onClickPayment = () => {
       switch (true) {
         case isPreSale:
-          setIsWlPaymentModalOpen(true);
+          setIsWinterWlModalOpen(true);
+          if (!userWallet) return;
+          setWinterWlWallet(userWallet);
           break;
         case isPublicSale:
           setIsPaymentModalOpen(true);
@@ -243,102 +298,117 @@ const Minting: FC = () => {
   );
 
   // console.log(mintStatus);
+  const value = {
+    winterWlWallet,
+    setWinterWlWallet,
+    isWinterWlModalOpen,
+    setIsWinterWlModalOpen,
+  };
 
   return (
     <ThemeProvider theme={dark}>
-      <Section>
-        <LoadComponent loaded={isLoaded}>
-          <Cover src="/images/blur.jpeg" alt="" />
-          <ModalContainer>
-            <Header>
-              <div className="item1">
-                <Link to="/">
-                  <IoIosArrowBack />
-                </Link>
-              </div>
-              <h1>{TitleComponent()}</h1>
-              {wallet && <h3>{cutAccount(wallet?.accounts[0]?.address)}</h3>}
-              {!wallet && <h3>connect wallet</h3>}
-              {wallet && (
-                <DisconnectButton
-                  onClick={() => disconnect({ label: wallet.label })}
+      <MintConfigContext.Provider value={value}>
+        <Section>
+          <LoadComponent loaded={isLoaded}>
+            <Cover src="/images/blur.jpeg" alt="" />
+            <ModalContainer>
+              <Header>
+                <div className="item1">
+                  <Link to="/">
+                    <IoIosArrowBack />
+                  </Link>
+                </div>
+                <h1>{TitleComponent()}</h1>
+                {wallet && <h3>{cutAccount(wallet?.accounts[0]?.address)}</h3>}
+                {!wallet && <h3>connect wallet</h3>}
+                {wallet && (
+                  <DisconnectButton
+                    onClick={() => disconnect({ label: wallet.label })}
+                  >
+                    disconnect
+                  </DisconnectButton>
+                )}
+              </Header>
+              <Body>
+                <Box className="box1">
+                  <ImgWarpper>
+                    <MainImg src={HMI_GIF} alt="gif" />
+
+                    <Indicator>
+                      <span>{totalMinted}</span> \ {maxSupply}
+                    </Indicator>
+                  </ImgWarpper>
+                </Box>
+                <Box className="box2">
+                  {/* <Wrapper> */}
+                  <Counter>
+                    <button onClick={handleDecrementMintAmount}>
+                      <AiOutlineMinus />
+                    </button>
+                    <p>{mintAmount}</p>
+                    <button onClick={handleIncrementMintAmount}>
+                      <AiOutlinePlus />
+                    </button>
+                  </Counter>
+                  <div>Max Mint Amount: {config.maxMintAmount}</div>
+                  <Receipt>
+                    <div className="item1"> Total</div>{" "}
+                    <div className="item2">
+                      <span>
+                        {Number.parseFloat(
+                          (config.price * mintAmount).toString()
+                        ).toFixed(3)}
+                        ETH
+                      </span>{" "}
+                      <span>+ GAS</span>
+                    </div>
+                  </Receipt>
+                  {ButtonComponent()}
+                  {CreditCardButtonComponent()}
+                  {/* <Button>MINT</Button> */}
+                  {/* </Wrapper> */}
+                </Box>
+              </Body>
+              <Footer>
+                {StatusComponent()}
+                <h2>CONTRACT ADDRESS</h2>
+                <a
+                  href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  disconnect
-                </DisconnectButton>
-              )}
-            </Header>
-            <Body>
-              <Box className="box1">
-                <ImgWarpper>
-                  <MainImg src={HMI_GIF} alt="gif" />
+                  <p>{config.MINT_NFT_ADDRESS}</p>
+                </a>
+              </Footer>
+            </ModalContainer>
+          </LoadComponent>
+          <WinterCheckout
+            projectId={WINTER_WALLET_PROJECT_ID.publicSale}
+            production={false}
+            showModal={isPaymentModalOpen}
+          />
 
-                  <Indicator>
-                    <span>{totalMinted}</span> \ {maxSupply}
-                  </Indicator>
-                </ImgWarpper>
-              </Box>
-              <Box className="box2">
-                {/* <Wrapper> */}
-                <Counter>
-                  <button onClick={handleDecrementMintAmount}>
-                    <AiOutlineMinus />
-                  </button>
-                  <p>{mintAmount}</p>
-                  <button onClick={handleIncrementMintAmount}>
-                    <AiOutlinePlus />
-                  </button>
-                </Counter>
-                <div>Max Mint Amount: {config.maxMintAmount}</div>
-                <Receipt>
-                  <div className="item1"> Total</div>{" "}
-                  <div className="item2">
-                    <span>
-                      {Number.parseFloat(
-                        (config.price * mintAmount).toString()
-                      ).toFixed(3)}
-                      ETH
-                    </span>{" "}
-                    <span>+ GAS</span>
-                  </div>
-                </Receipt>
-                {ButtonComponent()}
-                {CreditCardButtonComponent()}
-                {/* <Button>MINT</Button> */}
-                {/* </Wrapper> */}
-              </Box>
-            </Body>
-            <Footer>
-              {StatusComponent()}
-              <h2>CONTRACT ADDRESS</h2>
-              <a
-                href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <p>{config.MINT_NFT_ADDRESS}</p>
-              </a>
-            </Footer>
-          </ModalContainer>
-        </LoadComponent>
-        <WinterCheckout
-          projectId={WINTER_WALLET_PROJECT_ID.publicSale}
-          production={false}
-          // setOpenModal={setIsPaymentModalOpen}
-          showModal={isPaymentModalOpen}
-        />
+          <WinterCheckout
+            projectId={WINTER_WALLET_PROJECT_ID.presale}
+            production={false}
+            showModal={isWlPaymentModalOpen}
+            // Extra mint params are params besides 'address, amount, proof'
+            // The key needs to exactly match the name of the param provided to Winter
+            // The value will be passed in as the param
+            walletAddress={winterWlWallet}
+            extraMintParams={{ proof: getWlProof(winterWlWallet) }}
+          />
 
-        <WinterCheckout
-          projectId={WINTER_WALLET_PROJECT_ID.presale}
-          production={false}
-          showModal={isWlPaymentModalOpen}
-          // Extra mint params are params besides 'address, amount, proof'
-          // The key needs to exactly match the name of the param provided to Winter
-          // The value will be passed in as the param
-          extraMintParams={{ proof: 1 }}
-        />
-
-        <WlModal />
-      </Section>
+          {isWinterWlModalOpen && (
+            <WlModal
+              isOpen={isWinterWlModalOpen}
+              closeWlModal={closeWlModal}
+              handleClickWlModalConfirm={handleClickWlModalConfirm}
+            />
+          )}
+          <ToastContainer />
+        </Section>
+      </MintConfigContext.Provider>
     </ThemeProvider>
   );
 };

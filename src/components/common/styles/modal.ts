@@ -22,8 +22,9 @@ export const Window = styled.div`
   background-color: #fff;
   border-radius: 1rem;
   padding: 1rem;
-  width: 20rem;
-  height: 8rem;
+  width: 22rem;
+  /* height: 8rem; */
+  gap: 1rem;
   > div {
     width: 80%;
   }

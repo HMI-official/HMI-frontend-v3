@@ -8,7 +8,7 @@ import { ThemeProvider } from "styled-components";
 import { light } from "./styles/Themes";
 import { BrowserRouter, Router } from "react-router-dom";
 import "./index.css";
-
+import "react-toastify/dist/ReactToastify.css";
 ReactDOM.render(
   <AccountProvider>
     <ThemeProvider theme={light}>
