@@ -3,8 +3,11 @@ import styled from "styled-components";
 const RewardChart = () => {
   return (
     <Section>
-      <Title> POTENTIAL REWARD</Title>
-      <Image src="images/hmi-reward-chart-tp.png" />
+      <Container>
+        <Title> POTENTIAL REWARD</Title>
+        <Image src="images/hmi-reward-chart-tp-v3.png" />
+        <Image src="images/hmi-reward-chart-tp-bottom.png" />
+      </Container>
     </Section>
   );
 };
@@ -18,10 +21,19 @@ const Section = styled.section`
   justify-content: center;
   padding: 8rem 0;
 `;
+
+const Container = styled.div`
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 const Image = styled.img`
   /* width: 100%; */
   /* width: 1300px; */
-  max-width: 80%;
+  /* max-width: 80%; */
+  width: 100%;
   object-fit: contain;
 `;
 
@@ -33,8 +45,9 @@ const Title = styled.h2`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
+  padding: 1rem 0;
   font-family: "Saira-Black", sans-serif;
   @media (max-width: 64em) {
     width: 100%;
