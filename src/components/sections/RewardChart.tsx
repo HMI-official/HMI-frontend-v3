@@ -31,7 +31,7 @@ const Title = styled.h2`
   color: ${(props) => props.theme.primary};
   /* align-self: center; */
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 80%;
   margin: 0 auto;
