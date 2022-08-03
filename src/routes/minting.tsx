@@ -83,9 +83,9 @@ const Minting: FC = () => {
   const [isWlPaymentModalOpen, setIsWlPaymentModalOpen] =
     useState<boolean>(false);
 
-  const [winterWlWallet, setWinterWlWallet] = useState<string>(
-    wallet?.accounts[0].address ?? ""
-  );
+  // const [winterWlWallet, setWinterWlWallet] = useState<string>(
+  //   wallet?.accounts[0].address ?? ""
+  // );
 
   const userWallet = wallet?.accounts[0].address;
   const [isWinterWlModalOpen, setIsWinterWlModalOpen] =
@@ -93,14 +93,14 @@ const Minting: FC = () => {
 
   // FIXME: onClick events
 
-  const closeWlModal = () => {
-    setIsWinterWlModalOpen(false);
-    setWinterWlWallet("");
-  };
+  // const closeWlModal = () => {
+  //   setIsWinterWlModalOpen(false);
+  //   setWinterWlWallet("");
+  // };
 
-  const handleClickWlModalConfirm = () => {
-    setIsWlPaymentModalOpen(true);
-  };
+  // const handleClickWlModalConfirm = () => {
+  //   setIsWlPaymentModalOpen(true);
+  // };
 
   const handleIncrementMintAmount = () => {
     if (mintAmount < maxMintAmount) setMintAmount(mintAmount + 1);
@@ -215,10 +215,10 @@ const Minting: FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (!userWallet) return;
-    setWinterWlWallet(userWallet);
-  }, [userWallet]);
+  // useEffect(() => {
+  //   if (!userWallet) return;
+  //   setWinterWlWallet(userWallet);
+  // }, [userWallet]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("message", (event) => {
@@ -226,7 +226,7 @@ const Minting: FC = () => {
         setIsPaymentModalOpen(false);
         // setIsOgPaymentModalOpen(false);
         setIsWlPaymentModalOpen(false);
-        setWinterWlWallet("");
+        // setWinterWlWallet("");
       }
     });
   }
@@ -256,13 +256,13 @@ const Minting: FC = () => {
     const isNotValid = paused || (!isPreSale && !isPublicSale) || isOgSale;
     const _style = { marginTop: "1rem" };
 
-    const isValid = getWlWalletIsValid(userWallet);
+    // const isValid = getWlWalletIsValid(userWallet);
     const onClickPayment = () => {
       switch (true) {
         case isPreSale:
-          setIsWinterWlModalOpen(true);
-          if (!userWallet) return;
-          setWinterWlWallet(userWallet);
+          setIsWlPaymentModalOpen(true);
+          // if (!userWallet) return;
+          // setWinterWlWallet(userWallet);
           break;
         case isPublicSale:
           setIsPaymentModalOpen(true);
@@ -299,116 +299,116 @@ const Minting: FC = () => {
 
   // console.log(mintStatus);
   const value = {
-    winterWlWallet,
-    setWinterWlWallet,
-    isWinterWlModalOpen,
-    setIsWinterWlModalOpen,
+    // winterWlWallet,
+    // setWinterWlWallet,
+    // isWinterWlModalOpen,
+    // setIsWinterWlModalOpen,
   };
 
   return (
     <ThemeProvider theme={dark}>
-      <MintConfigContext.Provider value={value}>
-        <Section>
-          <LoadComponent loaded={isLoaded}>
-            <Cover src="/images/blur.jpeg" alt="" />
-            <ModalContainer>
-              <Header>
-                <div className="item1">
-                  <Link to="/">
-                    <IoIosArrowBack />
-                  </Link>
-                </div>
-                <h1>{TitleComponent()}</h1>
-                {wallet && <h3>{cutAccount(wallet?.accounts[0]?.address)}</h3>}
-                {!wallet && <h3>connect wallet</h3>}
-                {wallet && (
-                  <DisconnectButton
-                    onClick={() => disconnect({ label: wallet.label })}
-                  >
-                    disconnect
-                  </DisconnectButton>
-                )}
-              </Header>
-              <Body>
-                <Box className="box1">
-                  <ImgWarpper>
-                    <MainImg src={HMI_GIF} alt="gif" />
-
-                    <Indicator>
-                      <span>{totalMinted}</span> \ {maxSupply}
-                    </Indicator>
-                  </ImgWarpper>
-                </Box>
-                <Box className="box2">
-                  {/* <Wrapper> */}
-                  <Counter>
-                    <button onClick={handleDecrementMintAmount}>
-                      <AiOutlineMinus />
-                    </button>
-                    <p>{mintAmount}</p>
-                    <button onClick={handleIncrementMintAmount}>
-                      <AiOutlinePlus />
-                    </button>
-                  </Counter>
-                  <div>Max Mint Amount: {config.maxMintAmount}</div>
-                  <Receipt>
-                    <div className="item1"> Total</div>{" "}
-                    <div className="item2">
-                      <span>
-                        {Number.parseFloat(
-                          (config.price * mintAmount).toString()
-                        ).toFixed(3)}
-                        ETH
-                      </span>{" "}
-                      <span>+ GAS</span>
-                    </div>
-                  </Receipt>
-                  {ButtonComponent()}
-                  {CreditCardButtonComponent()}
-                  {/* <Button>MINT</Button> */}
-                  {/* </Wrapper> */}
-                </Box>
-              </Body>
-              <Footer>
-                {StatusComponent()}
-                <h2>CONTRACT ADDRESS</h2>
-                <a
-                  href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+      {/* <MintConfigContext.Provider value={value}> */}
+      <Section>
+        <LoadComponent loaded={isLoaded}>
+          <Cover src="/images/blur.jpeg" alt="" />
+          <ModalContainer>
+            <Header>
+              <div className="item1">
+                <Link to="/">
+                  <IoIosArrowBack />
+                </Link>
+              </div>
+              <h1>{TitleComponent()}</h1>
+              {wallet && <h3>{cutAccount(wallet?.accounts[0]?.address)}</h3>}
+              {!wallet && <h3>connect wallet</h3>}
+              {wallet && (
+                <DisconnectButton
+                  onClick={() => disconnect({ label: wallet.label })}
                 >
-                  <p>{config.MINT_NFT_ADDRESS}</p>
-                </a>
-              </Footer>
-            </ModalContainer>
-          </LoadComponent>
-          <WinterCheckout
-            projectId={WINTER_WALLET_PROJECT_ID.publicSale}
-            production={false}
-            showModal={isPaymentModalOpen}
-          />
+                  disconnect
+                </DisconnectButton>
+              )}
+            </Header>
+            <Body>
+              <Box className="box1">
+                <ImgWarpper>
+                  <MainImg src={HMI_GIF} alt="gif" />
 
-          <WinterCheckout
-            projectId={WINTER_WALLET_PROJECT_ID.presale}
-            production={false}
-            showModal={isWlPaymentModalOpen}
-            // Extra mint params are params besides 'address, amount, proof'
-            // The key needs to exactly match the name of the param provided to Winter
-            // The value will be passed in as the param
-            walletAddress={winterWlWallet}
-            extraMintParams={{ proof: getWlProof(winterWlWallet) }}
-          />
+                  <Indicator>
+                    <span>{totalMinted}</span> \ {maxSupply}
+                  </Indicator>
+                </ImgWarpper>
+              </Box>
+              <Box className="box2">
+                {/* <Wrapper> */}
+                <Counter>
+                  <button onClick={handleDecrementMintAmount}>
+                    <AiOutlineMinus />
+                  </button>
+                  <p>{mintAmount}</p>
+                  <button onClick={handleIncrementMintAmount}>
+                    <AiOutlinePlus />
+                  </button>
+                </Counter>
+                <div>Max Mint Amount: {config.maxMintAmount}</div>
+                <Receipt>
+                  <div className="item1"> Total</div>{" "}
+                  <div className="item2">
+                    <span>
+                      {Number.parseFloat(
+                        (config.price * mintAmount).toString()
+                      ).toFixed(3)}
+                      ETH
+                    </span>{" "}
+                    <span>+ GAS</span>
+                  </div>
+                </Receipt>
+                {ButtonComponent()}
+                {CreditCardButtonComponent()}
+                {/* <Button>MINT</Button> */}
+                {/* </Wrapper> */}
+              </Box>
+            </Body>
+            <Footer>
+              {StatusComponent()}
+              <h2>CONTRACT ADDRESS</h2>
+              <a
+                href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <p>{config.MINT_NFT_ADDRESS}</p>
+              </a>
+            </Footer>
+          </ModalContainer>
+        </LoadComponent>
+        <WinterCheckout
+          projectId={WINTER_WALLET_PROJECT_ID.publicSale}
+          production={false}
+          showModal={isPaymentModalOpen}
+        />
 
-          {isWinterWlModalOpen && (
+        <WinterCheckout
+          projectId={WINTER_WALLET_PROJECT_ID.presale}
+          production={false}
+          showModal={isWlPaymentModalOpen}
+          // Extra mint params are params besides 'address, amount, proof'
+          // The key needs to exactly match the name of the param provided to Winter
+          // The value will be passed in as the param
+          // walletAddress={winterWlWallet}
+        />
+        {/* extraMintParams={{ proof: getWlProof(winterWlWallet) }} */}
+
+        {/* {isWinterWlModalOpen && (
             <WlModal
               isOpen={isWinterWlModalOpen}
               closeWlModal={closeWlModal}
               handleClickWlModalConfirm={handleClickWlModalConfirm}
             />
-          )}
-          <ToastContainer />
-        </Section>
-      </MintConfigContext.Provider>
+          )} */}
+        <ToastContainer />
+      </Section>
+      {/* </MintConfigContext.Provider> */}
     </ThemeProvider>
   );
 };

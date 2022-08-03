@@ -83,6 +83,7 @@ export const presaleMint = async (mintAmount: number) => {
     window.ethereum.selectedAddress,
     "latest"
   );
+  console.log(window.ethereum.selectedAddress, mintAmount, proof);
 
   // Set up our Ethereum transaction
   const tx = {
@@ -91,8 +92,9 @@ export const presaleMint = async (mintAmount: number) => {
     value: parseInt(
       web3.utils.toWei(String(config.wlPrice * mintAmount), "ether")
     ).toString(16), // hex
+    // .publicSaleMint(mintAmount, wallet)
     data: mintNFTContract.methods
-      .presaleMint(window.ethereum.selectedAddress, mintAmount, proof)
+      .presaleMint(mintAmount, window.ethereum.selectedAddress, proof)
       .encodeABI(),
     nonce: nonce.toString(16),
   };
