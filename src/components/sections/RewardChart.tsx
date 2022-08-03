@@ -23,7 +23,7 @@ const Section = styled.section`
 `;
 
 const Container = styled.div`
-  max-width: 80%;
+  max-width: 1130px;
   display: flex;
   flex-direction: column;
   align-items: center;
