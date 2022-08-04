@@ -40,6 +40,11 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   overflow-x: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
   gap: 2rem;
 `;
 const Item = styled.div`
