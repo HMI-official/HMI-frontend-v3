@@ -13,7 +13,7 @@ import Button, { WritingButton } from "./Button";
 import { ConnectButton } from "./common/styles/buttons";
 import Logo from "./Logo";
 
-const Section = styled.section`
+const Section = styled.section<{ click: boolean }>`
   position: fixed;
   z-index: 10;
   top: 0;
@@ -21,7 +21,10 @@ const Section = styled.section`
   color: ${(props) => props.theme.body};
   /* background-color: ${(props) => props.theme.text}; */
   /* background-color: ${(props) => `rgba(${props.theme.textRgba}, 1)`}; */
-  background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.2)`};
+  transition: all 0.3s ease-in-out;
+  background-color: ${({ click, theme }) =>
+    click ? "rgba(32,32,32,0.85)" : `rgba(${theme.bodyRgba}, 0.2)`};
+  /* background-color:  */
 `;
 const NavBar = styled.nav`
   display: flex;
@@ -211,7 +214,7 @@ const Navigation = () => {
   };
 
   return (
-    <Section id="navigation">
+    <Section id="navigation" click={click}>
       <NavBar>
         {/* <Logo /> */}
         <Logo />
