@@ -38,6 +38,7 @@ export const ETC_IMAGES = {
   bg2: "/images/bg-imgs/galaxy-3.jpg",
   bg3: "/images/bg-imgs/galaxy-4.jpg",
   logo: "/images/logo.png",
+  crown: "/images/crown.png",
 };
 
 export const SNS = {

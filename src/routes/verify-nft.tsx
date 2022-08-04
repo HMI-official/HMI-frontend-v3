@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { fetchWallet } from "../api/verify-nft";
+import { ETC_IMAGES } from "../constants/image";
 import { useAccount } from "../contexts/AccountContext";
 import { signAccount } from "../utils/wallet";
 
@@ -12,8 +13,18 @@ const tokenInfoInitialState: ITokenInfo = {
   accessToken: "",
   tokenType: "",
 };
+
+interface IVerified {
+  verified: boolean;
+  message: string;
+  sent: boolean;
+  wallet?: string;
+}
+
+const verifyInit = { verified: false, message: "", sent: false };
 const VerifyNft = () => {
   const [tokenInfo, setTokenInfo] = useState<ITokenInfo>(tokenInfoInitialState);
+  const [verified, setVerified] = useState<IVerified>(verifyInit);
   const getAccount = useAccount()?.getAccount;
 
   const onClickVerify = async () => {
@@ -34,8 +45,10 @@ const VerifyNft = () => {
     const { status, message: resultMsg, data } = result;
     if (status) {
       const { wallet } = data;
+      setVerified({ verified: true, message: resultMsg, sent: true, wallet });
     } else {
       console.log(resultMsg);
+      setVerified({ verified: false, message: resultMsg, sent: true });
     }
   };
 
@@ -51,6 +64,24 @@ const VerifyNft = () => {
     };
     init();
   }, []);
+
+  const StatusComponent = (
+    <StatusContainer isSent={verified.sent}>
+      <div className="status__message">
+        <StatusTitle>{verified.message}</StatusTitle>
+      </div>
+      <div className="status__wallet">{verified.wallet}</div>
+      <TokenInfoContainer>
+        <StatusTitle>HI-PLANET TOKEN NUMBER</StatusTitle>
+        <span>3</span>
+      </TokenInfoContainer>
+      <CouponInfoContainer>
+        <StatusTitle>Coupon Number</StatusTitle>
+        <span>123123123123</span>
+      </CouponInfoContainer>
+    </StatusContainer>
+  );
+
   return (
     <Section>
       <span className="title">verify wallet</span>
@@ -59,12 +90,9 @@ const VerifyNft = () => {
           verify
         </span>
       </div>
-      <div className="status__container">
-        <div className="status__message">
-          <div></div>
-        </div>
-        <div className="status__wallet"></div>
-      </div>
+      {verified.sent && StatusComponent}
+
+      <Image src={ETC_IMAGES.crown} />
     </Section>
   );
 };
@@ -91,6 +119,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   .btn__container {
     display: flex;
@@ -158,32 +187,64 @@ const Section = styled.section`
     top: 0;
     border-radius: 10px;
   }
+`;
 
-  .status__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid #ccc; */
-    border-radius: 10px;
-    flex-direction: column;
-    padding: 1rem;
-    visibility: hidden;
+const StatusContainer = styled.div<{ isSent: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  /* border: 1px solid #ccc; */
+  border-radius: 10px;
+  flex-direction: column;
+  padding: 1rem;
+  visibility: ${({ isSent }) => (isSent ? "visible" : "hidden")};
 
-    background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
 
-    /* width: 300px; */
-    /* height: 300px; */
-  }
+  /* width: 300px; */
+  /* height: 300px; */
   .status__message {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
   }
-  .status__message > div {
-    color: var(--primary);
-  }
+  /* .status__message > div { */
+  /* color: var(--primary); */
+  /* } */
   .status__wallet {
     word-break: break-all;
   }
+`;
+
+const TokenInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const StatusTitle = styled.span`
+  font-weight: 600;
+  background: ${(props) => props.theme["--chakra-colors-teal-400"]};
+  text-transform: uppercase;
+`;
+
+const CouponInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  position: absolute;
+  width: 30rem;
+  object-fit: contain;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: -1;
+  opacity: 0.24;
 `;
