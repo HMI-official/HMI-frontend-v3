@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../../styles/Themes";
 
 const RewardChart = () => {
   return (
@@ -57,6 +58,8 @@ const Title = styled.h2`
     font-size: ${(props) => props.theme.fontxl};
   }
   @media (max-width: 30em) {
-    font-size: ${(props) => props.theme.fontlg};
+  }
+  ${media[768]} {
+    justify-content: center;
   }
 `;
