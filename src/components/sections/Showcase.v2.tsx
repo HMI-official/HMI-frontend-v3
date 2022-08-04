@@ -16,11 +16,6 @@ const slideCardConfig = {
   MOBILE_SLIDER_CARD_WIDTH: "15rem",
 };
 
-// const showcaseArr = [...HMI_HEROS_BG_ARR, ...HMI_DIAMOND_HEROS_BG_ARR];
-// showcaseArr[1] = showcaseArr[showcaseArr.length - 1];
-// showcaseArr[4] = showcaseArr[showcaseArr.length - 2];
-// showcaseArr[7] = showcaseArr[showcaseArr.length - 3];
-
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
   const play = () => {};
   // const play = () => (passRef.current.style.animationPlayState = "running");
@@ -64,9 +59,9 @@ const Section = styled.section`
   overflow: hidden;
 
   & > *:last-child {
-    animation-duration: 40s;
+    animation-duration: 100s;
     @media (max-width: 30em) {
-      animation-duration: 30s;
+      animation-duration: 80s;
     }
   }
 `;
@@ -132,7 +127,7 @@ const Row = styled.div<{ direction: string }>`
   }
   ${media.mobile} {
     animation: ${mobileSlide} linear infinite ${(props) => props.direction};
-    animation-duration: 70s !important;
+    animation-duration: 90s !important;
   }
 `;
 const ImgContainer = styled.div`
