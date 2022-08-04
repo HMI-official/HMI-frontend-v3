@@ -1,16 +1,25 @@
 import { useRef } from "react";
 import styled, { keyframes } from "styled-components";
-import { HMI_HEROS_BG_ARR } from "../../constants/image";
+import {
+  HMI_DIAMOND_HEROS_BG_ARR,
+  HMI_HEROS_BG_ARR,
+  HMI_HEROS_BG_SHOWCASE_ARR,
+} from "../../constants/image";
 import { media } from "../../styles/Themes";
 
 const slideCardConfig = {
   SLIDER_CARD_WIDTH: "20.625rem",
-  SLIDER_CARD_NUMBER: 11,
+  SLIDER_CARD_NUMBER: 11 + 3,
   SLIDER_CARD_GAP: "2rem",
   TABLET_SLIDER_CARD_WIDTH: "15rem",
   TABLET_SLIDER_CARD_GAP: "1rem",
   MOBILE_SLIDER_CARD_WIDTH: "15rem",
 };
+
+// const showcaseArr = [...HMI_HEROS_BG_ARR, ...HMI_DIAMOND_HEROS_BG_ARR];
+// showcaseArr[1] = showcaseArr[showcaseArr.length - 1];
+// showcaseArr[4] = showcaseArr[showcaseArr.length - 2];
+// showcaseArr[7] = showcaseArr[showcaseArr.length - 3];
 
 const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
   const play = () => {};
@@ -27,7 +36,7 @@ const NftItem = ({ img, passRef }: { img: string; passRef: any }) => {
 const ShowcaseV2 = () => {
   const Row1Ref = useRef<HTMLDivElement | null>(null);
 
-  const TopRowNfts = HMI_HEROS_BG_ARR.map((img) => (
+  const TopRowNfts = HMI_HEROS_BG_SHOWCASE_ARR.map((img) => (
     <NftItem img={img} passRef={Row1Ref} />
   ));
 
