@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { fetchWallet } from "../api/verify-nft";
 import { ETC_IMAGES } from "../constants/image";
 import { useAccount } from "../contexts/AccountContext";
+import { onClickWebsite } from "../utils/common";
 import { signAccount } from "../utils/wallet";
 
 interface ITokenInfo {
@@ -65,20 +66,39 @@ const VerifyNft = () => {
     init();
   }, []);
 
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (!body) return;
+    body.style.backgroundImage =
+      "linear-gradient(to right, #434343 10%, black 100%)";
+    // /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
+    return () => {
+      body.style.backgroundImage = "";
+    };
+  }, []);
+
   const StatusComponent = (
     <StatusContainer isSent={verified.sent}>
       <div className="status__message">
         <StatusTitle>{verified.message}</StatusTitle>
       </div>
       <div className="status__wallet">{verified.wallet}</div>
-      <TokenInfoContainer>
+      <TokenInfoContainer verified={verified.verified}>
         <StatusTitle>HI-PLANET TOKEN NUMBER</StatusTitle>
         <span>3</span>
       </TokenInfoContainer>
-      <CouponInfoContainer>
-        <StatusTitle>Coupon Number</StatusTitle>
-        <span>123123123123</span>
+      <CouponInfoContainer verified={verified.verified}>
+        <StatusTitle>Welcome-Package Coupon</StatusTitle>
+        <span>962175644437991505/1004634382205714433</span>
       </CouponInfoContainer>
+      <LinkContainer verified={verified.verified}>
+        <StatusTitle
+          style={{ cursor: "pointer" }}
+          onClick={() => onClickWebsite("https://highmindedi.com/")}
+        >
+          go to HMI hompage
+        </StatusTitle>
+      </LinkContainer>
     </StatusContainer>
   );
 
@@ -86,9 +106,11 @@ const VerifyNft = () => {
     <Section>
       <span className="title">verify wallet</span>
       <div className="btn__container">
-        <span className="bn5" onClick={onClickVerify}>
-          verify
-        </span>
+        {!verified.verified && (
+          <span className="bn5" onClick={onClickVerify}>
+            verify
+          </span>
+        )}
       </div>
       {verified.sent && StatusComponent}
 
@@ -114,6 +136,7 @@ const glowingbn5 = keyframes`
 const Section = styled.section`
   width: 100vw;
   height: 100vh;
+  /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
 
   display: flex;
   flex-direction: column;
@@ -131,6 +154,7 @@ const Section = styled.section`
     padding-bottom: 1rem;
     font-size: 1.5rem;
     font-weight: 800;
+    text-transform: capitalize;
   }
   .bn5 {
     padding: 0.6em 2em;
@@ -199,7 +223,6 @@ const StatusContainer = styled.div<{ isSent: boolean }>`
   flex-direction: column;
   padding: 1rem;
   visibility: ${({ isSent }) => (isSent ? "visible" : "hidden")};
-
   background: rgba(255, 255, 255, 0.2);
 
   /* width: 300px; */
@@ -218,8 +241,8 @@ const StatusContainer = styled.div<{ isSent: boolean }>`
   }
 `;
 
-const TokenInfoContainer = styled.div`
-  display: flex;
+const TokenInfoContainer = styled.div<{ verified: boolean }>`
+  display: ${({ verified }) => (verified ? "flex" : "none")};
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -231,11 +254,26 @@ const StatusTitle = styled.span`
   text-transform: uppercase;
 `;
 
-const CouponInfoContainer = styled.div`
-  display: flex;
+const CouponInfoContainer = styled.div<{ verified: boolean }>`
+  display: ${({ verified }) => (verified ? "flex" : "none")};
   justify-content: center;
   flex-direction: column;
   align-items: center;
+`;
+
+const LinkContainer = styled.div<{ verified: boolean }>`
+  display: ${({ verified }) => (verified ? "flex" : "none")};
+  padding-top: 1rem;
+  span {
+    border-radius: 0.2rem;
+    padding: 0.3rem;
+    border: 1px solid white;
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+    :hover {
+      border-color: ${(props) => props.theme["--chakra-colors-teal-400"]};
+    }
+  }
 `;
 
 const Image = styled.img`
