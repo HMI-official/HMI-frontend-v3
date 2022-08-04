@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { fetchWallet } from "../api/verify-nft";
+import { useAccount } from "../contexts/AccountContext";
 import { signAccount } from "../utils/wallet";
 
 interface ITokenInfo {
@@ -13,9 +14,12 @@ const tokenInfoInitialState: ITokenInfo = {
 };
 const VerifyNft = () => {
   const [tokenInfo, setTokenInfo] = useState<ITokenInfo>(tokenInfoInitialState);
+  const getAccount = useAccount()?.getAccount;
 
   const onClickVerify = async () => {
-    const account = "";
+    if (!getAccount) return;
+    const account = await getAccount();
+    if (!account) return;
     const { signature, message } = await signAccount(account);
     const { accessToken, tokenType } = tokenInfo;
     if (accessToken.length === 0 || tokenType.length === 0) return;
@@ -25,6 +29,7 @@ const VerifyNft = () => {
       message,
       token: `${tokenType} ${accessToken}`,
     });
+    console.log(result);
     if (!result) return;
     const { status, message: resultMsg, data } = result;
     if (status) {

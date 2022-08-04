@@ -297,14 +297,6 @@ const Minting: FC = () => {
     <StatusWrapper>{mintStatus?.message}</StatusWrapper>
   );
 
-  // console.log(mintStatus);
-  const value = {
-    // winterWlWallet,
-    // setWinterWlWallet,
-    // isWinterWlModalOpen,
-    // setIsWinterWlModalOpen,
-  };
-
   return (
     <ThemeProvider theme={dark}>
       {/* <MintConfigContext.Provider value={value}> */}
@@ -397,15 +389,7 @@ const Minting: FC = () => {
           // The value will be passed in as the param
           // walletAddress={winterWlWallet}
         />
-        {/* extraMintParams={{ proof: getWlProof(winterWlWallet) }} */}
 
-        {/* {isWinterWlModalOpen && (
-            <WlModal
-              isOpen={isWinterWlModalOpen}
-              closeWlModal={closeWlModal}
-              handleClickWlModalConfirm={handleClickWlModalConfirm}
-            />
-          )} */}
         <ToastContainer />
       </Section>
       {/* </MintConfigContext.Provider> */}

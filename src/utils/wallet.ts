@@ -5,11 +5,9 @@ export const cutAccount = (wallet: string) =>
 
 export const signAccount = async (account: string) => {
   const message = `sign to verify your wallet ${account}`;
-  const signature = await web3.eth.personal.sign(
-    message,
-    account,
-    "this is password"
-  );
+  // const decodedWallet = await web3.eth.accounts.recover(message, signiture);
+
+  const signature = await web3.eth.personal.sign(message, account, "password");
   return { signature, message };
 };
 
