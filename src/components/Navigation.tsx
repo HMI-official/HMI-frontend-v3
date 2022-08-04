@@ -113,7 +113,7 @@ const HamburgerMenu = styled.span<{ click: boolean }>`
   /* background: ${(props) => props.theme.text}; */
 
   position: absolute;
-  top: 2rem;
+  /* top: 2rem; */
   left: 90%;
 
   transform: ${(props) =>
