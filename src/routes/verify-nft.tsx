@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { fetchWallet } from "../api/verify-nft";
 import { ETC_IMAGES } from "../constants/image";
 import { useAccount } from "../contexts/AccountContext";
+import { media } from "../styles/Themes";
 import { onClickWebsite } from "../utils/common";
 import { signAccount } from "../utils/wallet";
 
@@ -285,4 +286,10 @@ const Image = styled.img`
   transform: translate(50%, -50%);
   z-index: -1;
   opacity: 0.24;
+  ${media[768]} {
+    width: 20rem;
+  }
+  ${media.mobile} {
+    width: 15rem;
+  }
 `;
