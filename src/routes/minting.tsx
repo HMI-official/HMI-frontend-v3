@@ -215,11 +215,6 @@ const Minting: FC = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (!userWallet) return;
-  //   setWinterWlWallet(userWallet);
-  // }, [userWallet]);
-
   if (typeof window !== "undefined") {
     window.addEventListener("message", (event) => {
       if (event.data === "closeWinterCheckoutModal") {
@@ -291,7 +286,8 @@ const Minting: FC = () => {
     if (paused || (!isPreSale && !isPublicSale)) return "Paused";
     // if() return "Public Sale";
     if (isPreSale) return "Pre-Sale";
-    if (!isPreSale) return "Public Sale";
+    if (isPublicSale) return "Public Sale";
+    if (isOgSale) return "OG Sale";
   };
   const StatusComponent = () => (
     <StatusWrapper>{mintStatus?.message}</StatusWrapper>

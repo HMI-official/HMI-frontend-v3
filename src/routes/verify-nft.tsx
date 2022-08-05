@@ -81,21 +81,22 @@ const VerifyNft = () => {
   const StatusComponent = (
     <StatusContainer isSent={verified.sent}>
       <div className="status__message">
-        <StatusTitle>{verified.message}</StatusTitle>
+        <StatusTitle isHighlighted={false}>{verified.message}</StatusTitle>
       </div>
       <div className="status__wallet">{verified.wallet}</div>
       <TokenInfoContainer verified={verified.verified}>
-        <StatusTitle>HI-PLANET TOKEN NUMBER</StatusTitle>
+        <StatusTitle isHighlighted={false}>HI-PLANET TOKEN NUMBER</StatusTitle>
         <span>3</span>
       </TokenInfoContainer>
       <CouponInfoContainer verified={verified.verified}>
-        <StatusTitle>Welcome-Package Coupon</StatusTitle>
+        <StatusTitle isHighlighted={false}>Welcome-Package Coupon</StatusTitle>
         <span>962175644437991505/1004634382205714433</span>
       </CouponInfoContainer>
       <LinkContainer verified={verified.verified}>
         <StatusTitle
           style={{ cursor: "pointer" }}
           onClick={() => onClickWebsite("https://highmindedi.com/")}
+          isHighlighted={false}
         >
           go to HMI hompage
         </StatusTitle>
@@ -240,6 +241,10 @@ const StatusContainer = styled.div<{ isSent: boolean }>`
   .status__wallet {
     word-break: break-all;
   }
+
+  > div {
+    /* border-bottom: 1px solid #ccc; */
+  }
 `;
 
 const TokenInfoContainer = styled.div<{ verified: boolean }>`
@@ -249,10 +254,13 @@ const TokenInfoContainer = styled.div<{ verified: boolean }>`
   flex-direction: column;
 `;
 
-const StatusTitle = styled.span`
-  font-weight: 600;
-  background: ${(props) => props.theme["--chakra-colors-teal-400"]};
+const StatusTitle = styled.span<{ isHighlighted: boolean }>`
+  /* isHighlighted */
+  font-size: 1.2rem;
+  font-weight: 700;
   text-transform: uppercase;
+  background: ${(props) =>
+    props.isHighlighted ? props.theme["--chakra-colors-teal-400"] : "none"};
 `;
 
 const CouponInfoContainer = styled.div<{ verified: boolean }>`
