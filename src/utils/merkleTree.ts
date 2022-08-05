@@ -17,7 +17,7 @@ export const getLeaf = (wallet: any) => buf2hex(keccak256(wallet));
 export const getProof = (tree: MerkleTree, leaf: string) =>
   tree.getProof(leaf).map((x) => buf2hex(x.data));
 
-const buf2hex = (x: Buffer) => "0x" + x.toString("hex");
+export const buf2hex = (x: Buffer) => "0x" + x.toString("hex");
 
 export const getWlWalletIsValid = (wallet: string | null | undefined) => {
   if (!wallet) return false;

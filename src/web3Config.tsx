@@ -20,6 +20,29 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_mintAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "bytes32[]",
+        name: "_merkleProof",
+        type: "bytes32[]",
+      },
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address",
+      },
+    ],
+    name: "ogSaleMint",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
     inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -197,29 +220,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
     ],
     name: "ConsecutiveTransfer",
     type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_mintAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes32[]",
-        name: "_merkleProof",
-        type: "bytes32[]",
-      },
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-    ],
-    name: "ogSaleMint",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
   },
   {
     anonymous: false,
@@ -516,6 +516,13 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "toggleReveal",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -611,6 +618,25 @@ export const MINT_NFT_ABI: AbiItem[] = [
       },
     ],
     name: "_presaleClaimed",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "_stakingBegin",
     outputs: [
       {
         internalType: "uint256",
@@ -775,6 +801,44 @@ export const MINT_NFT_ABI: AbiItem[] = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "getTimeGap",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "getTokenStakingBegin",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -1211,13 +1275,14 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
 ];
 
-export const MINT_NFT_ADDRESS = "0x960AdB4011D5F72a7b062D158Ae8C20FB46e661c";
-
+export const MINT_NFT_ADDRESS = "0x3643dEb9bE9350DDED1D065e3CC5F9f753e10BD9";
+//
 export const config = {
   MINT_NFT_ABI,
   MINT_NFT_ADDRESS,
   maxMintAmount: 5,
   presaleMaxMintAmount: 3,
+  ogMaxMintAmount: 1,
   price: 0.001,
   wlPrice: 0.001,
   ogPrice: 0,

@@ -32,6 +32,7 @@ import {
   isOgSaleState,
   isPublicSaleState,
   presaleMint,
+  ogSaleMint,
   publicMint,
 } from "../utils/interact";
 import { IMintStatus } from "../interfaces";
@@ -83,31 +84,47 @@ const Minting: FC = () => {
   const [isWlPaymentModalOpen, setIsWlPaymentModalOpen] =
     useState<boolean>(false);
 
-  // const [winterWlWallet, setWinterWlWallet] = useState<string>(
-  //   wallet?.accounts[0].address ?? ""
-  // );
-
   const userWallet = wallet?.accounts[0].address;
-  const [isWinterWlModalOpen, setIsWinterWlModalOpen] =
-    useState<boolean>(false);
 
   // FIXME: onClick events
 
-  // const closeWlModal = () => {
-  //   setIsWinterWlModalOpen(false);
-  //   setWinterWlWallet("");
-  // };
-
-  // const handleClickWlModalConfirm = () => {
-  //   setIsWlPaymentModalOpen(true);
-  // };
-
+  const getMaxMintAmount = async (
+    _isPublicSale: boolean,
+    _isPreSale: boolean,
+    _isOgSale: boolean
+  ) => {
+    switch (true) {
+      case await _isPublicSale:
+        console.log("public sale");
+        return config.maxMintAmount;
+      case await _isPreSale:
+        console.log("pre sale");
+        return config.presaleMaxMintAmount;
+      case await _isOgSale:
+        console.log("og sale");
+        return config.ogMaxMintAmount;
+      default:
+        return config.maxMintAmount;
+    }
+  };
   const handleIncrementMintAmount = () => {
     if (mintAmount < maxMintAmount) setMintAmount(mintAmount + 1);
   };
 
   const handleDecrementMintAmount = () => {
     if (mintAmount > 1) setMintAmount(mintAmount - 1);
+  };
+
+  const handleOgSaleMint = async () => {
+    setIsMinting(true);
+
+    const { success, status } = await ogSaleMint(mintAmount);
+
+    setMintStatus({
+      success,
+      message: status,
+    });
+    setIsMinting(false);
   };
 
   const handlePresaleMint = async () => {
@@ -186,13 +203,21 @@ const Minting: FC = () => {
       setTotalMinted(await getTotalMinted());
 
       setPaused(await isPausedState());
-      setIsPublicSale(await isPublicSaleState());
-      setIsPreSale(await isPreSaleState());
-      setIsOgSale(await isOgSaleState());
+      const _isPublicSale = await isPublicSaleState();
+      const _isPreSale = await isPreSaleState();
+      const _isOgSale = await isOgSaleState();
+      setIsPublicSale(_isPublicSale);
+      setIsPreSale(_isPreSale);
+      setIsOgSale(_isOgSale);
 
-      setMaxMintAmount(
-        isPreSale ? config.presaleMaxMintAmount : config.maxMintAmount
+      const _maxMintAmount = await getMaxMintAmount(
+        _isPublicSale,
+        _isPreSale,
+        _isOgSale
       );
+      console.log(`maxMintAmount: ${_maxMintAmount}`);
+
+      setMaxMintAmount(_maxMintAmount);
     };
 
     init();
@@ -219,23 +244,33 @@ const Minting: FC = () => {
     window.addEventListener("message", (event) => {
       if (event.data === "closeWinterCheckoutModal") {
         setIsPaymentModalOpen(false);
-        // setIsOgPaymentModalOpen(false);
         setIsWlPaymentModalOpen(false);
-        // setWinterWlWallet("");
       }
     });
   }
 
   // FIXME: components
   const ButtonComponent = () => {
-    const isNotValid = paused || (!isPreSale && !isPublicSale);
+    const isNotValid = paused || (!isPreSale && !isPublicSale && !isOgSale);
 
     const onClickConnect = () =>
       connect({ autoSelect: { label: "string", disableModals: false } });
 
     const onClickMint = () => {
       if (isNotValid) return;
-      isPreSale ? handlePresaleMint() : handlePublicMint();
+      switch (true) {
+        case isOgSale:
+          handleOgSaleMint();
+          break;
+        case isPreSale:
+          handlePresaleMint();
+          break;
+        case isPublicSale:
+          handlePublicMint();
+          break;
+        default:
+          break;
+      }
     };
 
     if (isMinting) return <Button isNotValid={isMinting}>ON PROCESS</Button>;
@@ -256,8 +291,6 @@ const Minting: FC = () => {
       switch (true) {
         case isPreSale:
           setIsWlPaymentModalOpen(true);
-          // if (!userWallet) return;
-          // setWinterWlWallet(userWallet);
           break;
         case isPublicSale:
           setIsPaymentModalOpen(true);
@@ -283,11 +316,10 @@ const Minting: FC = () => {
   };
 
   const TitleComponent = () => {
-    if (paused || (!isPreSale && !isPublicSale)) return "Paused";
-    // if() return "Public Sale";
+    if (paused || (!isPreSale && !isPublicSale && !isOgSale)) return "Paused";
+    if (isOgSale) return "OG Mint";
     if (isPreSale) return "Pre-Sale";
     if (isPublicSale) return "Public Sale";
-    if (isOgSale) return "OG Sale";
   };
   const StatusComponent = () => (
     <StatusWrapper>{mintStatus?.message}</StatusWrapper>
@@ -370,6 +402,7 @@ const Minting: FC = () => {
             </Footer>
           </ModalContainer>
         </LoadComponent>
+
         <WinterCheckout
           projectId={WINTER_WALLET_PROJECT_ID.publicSale}
           production={false}
@@ -380,10 +413,6 @@ const Minting: FC = () => {
           projectId={WINTER_WALLET_PROJECT_ID.presale}
           production={false}
           showModal={isWlPaymentModalOpen}
-          // Extra mint params are params besides 'address, amount, proof'
-          // The key needs to exactly match the name of the param provided to Winter
-          // The value will be passed in as the param
-          // walletAddress={winterWlWallet}
         />
 
         <ToastContainer />

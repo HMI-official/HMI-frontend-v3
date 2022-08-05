@@ -4,6 +4,7 @@ import { MerkleTree } from "merkletreejs";
 import { keccak256 } from "web3-utils";
 import { whitelist } from "../data/whitelist";
 import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
+import { getLeaf, getProof } from "./merkleTree";
 // import whitelist from ""
 // const whitelist = require("../scripts/whitelist.js");
 
@@ -83,7 +84,7 @@ export const presaleMint = async (mintAmount: number) => {
     window.ethereum.selectedAddress,
     "latest"
   );
-  console.log(window.ethereum.selectedAddress, mintAmount, proof);
+  // console.log(window.ethereum.selectedAddress, mintAmount, proof);
 
   // Set up our Ethereum transaction
   const tx = {
@@ -134,11 +135,13 @@ export const ogSaleMint = async (mintAmount: number) => {
     };
   }
   const { ogMerkleTree, ogRoot } = OG_MERKLE_INFO;
-  const leaf = keccak256(window.ethereum.selectedAddress);
-  const proof = ogMerkleTree.getHexProof(leaf);
+  const leaf = getLeaf(window.ethereum.selectedAddress);
+  const proof = getProof(ogMerkleTree, leaf);
 
   // Verify Merkle Proof
   const isValid = ogMerkleTree.verify(proof, leaf, ogRoot);
+  console.log(ogRoot);
+  console.log(`isValid: ${isValid}`);
 
   if (!isValid) {
     return {
@@ -160,7 +163,7 @@ export const ogSaleMint = async (mintAmount: number) => {
       web3.utils.toWei(String(config.ogPrice * mintAmount), "ether")
     ).toString(16), // hex
     data: mintNFTContract.methods
-      .ogSaleMint(window.ethereum.selectedAddress, mintAmount, proof)
+      .ogSaleMint(mintAmount, proof, window.ethereum.selectedAddress)
       .encodeABI(),
     nonce: nonce.toString(16),
   };
