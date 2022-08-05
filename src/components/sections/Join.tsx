@@ -94,7 +94,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 80%;
+  /* max-width: 80%; */
+  max-width: 1130px;
 `;
 const Title = styled.div`
   font-size: ${({ theme }) => theme.font2xl};
@@ -172,7 +173,7 @@ const Wrapper = styled.div`
     }
   }
   .item2 {
-    gap: 3rem;
+    gap: 1rem;
   }
   ${media[1200]} {
     flex-direction: column;

@@ -35,7 +35,11 @@ const Title = styled.h1`
 `;
 
 const Container = styled.div`
-  width: 75%;
+  /* width: 75%; */
+  width: 100%;
+
+  max-width: 1130px;
+
   margin: 2rem auto;
 
   display: flex;

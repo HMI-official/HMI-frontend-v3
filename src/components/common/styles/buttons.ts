@@ -4,7 +4,7 @@ export const Button = styled.button`
   background: rgba(${({ theme }) => theme.bodyRgba}, 0.2);
   /* border: none; */
   color: #fff;
-  font-weight: 900;
+  font-weight: 700;
   /* font-family: "Saira-Black"; */
   border: 1px solid ${({ theme }) => theme.primary};
   border-radius: 0.5rem;

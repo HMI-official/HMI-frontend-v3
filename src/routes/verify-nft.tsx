@@ -83,14 +83,16 @@ const VerifyNft = () => {
       <div className="status__message">
         <StatusTitle isHighlighted={false}>{verified.message}</StatusTitle>
       </div>
-      <div className="status__wallet">{verified.wallet}</div>
+      <div className="status__wallet">
+        <StatusText>{verified.wallet}</StatusText>
+      </div>
       <TokenInfoContainer verified={verified.verified}>
         <StatusTitle isHighlighted={false}>HI-PLANET TOKEN NUMBER</StatusTitle>
-        <span>3</span>
+        <StatusText>3</StatusText>
       </TokenInfoContainer>
       <CouponInfoContainer verified={verified.verified}>
         <StatusTitle isHighlighted={false}>Welcome-Package Coupon</StatusTitle>
-        <span>962175644437991505/1004634382205714433</span>
+        <StatusText>962175644437991505/1004634382205714433</StatusText>
       </CouponInfoContainer>
       <LinkContainer verified={verified.verified}>
         <StatusTitle
@@ -261,6 +263,10 @@ const StatusTitle = styled.span<{ isHighlighted: boolean }>`
   text-transform: uppercase;
   background: ${(props) =>
     props.isHighlighted ? props.theme["--chakra-colors-teal-400"] : "none"};
+`;
+
+const StatusText = styled.span`
+  color: #ccc;
 `;
 
 const CouponInfoContainer = styled.div<{ verified: boolean }>`
