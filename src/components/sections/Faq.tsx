@@ -76,12 +76,17 @@ const Faq = () => {
       <Container>
         <Box>
           <Accordion title="When is the mint date ?">
-            We are targeting to launch in August. The exact date is yet to be
-            determined though; it will be announced in advance.
+            Our Public mint date is 8/25/2022 2pm PST. WL and OG mint will be
+            announced soon.
           </Accordion>
           <Accordion title="What is our Total Supply and price ?">
-            Total supply is 3,333 NFTs and the price will be announced in
-            advance.
+            3,333 NFTs. Total of 11 Planets will have 303 each army behind
+            <br />
+            OG : Free mint
+            <br />
+            WL Price : $150 USD
+            <br />
+            Public Sales : $200 USD
           </Accordion>
         </Box>
         <Box>
