@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.2",
+    "@crossmint/client-sdk-react-ui": "^0.1.7-alpha.3",
     "@fontsource/akaya-telivigala": "^4.5.2",
     "@fontsource/sora": "^4.5.3",
     "@radix-ui/colors": "^0.1.8",

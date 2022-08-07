@@ -1,15 +1,8 @@
-import {
-  createContext,
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, FC, useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import styled, { css, ThemeProvider } from "styled-components";
 import { keccak256 } from "web3-utils";
-
+import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
@@ -19,7 +12,7 @@ import { Link } from "react-router-dom";
 // import { initOnboard } from '../hooks/onboard'
 import { useConnectWallet, useSetChain, useWallets } from "@web3-onboard/react";
 // import useWeb3Onboard from "../hooks/useWeb3Onboard ";
-import { WinterCheckout } from "@usewinter/checkout";
+// import { WinterCheckout } from "@usewinter/checkout";
 
 import { initOnboard } from "../utils/onboard";
 import { OnboardAPI } from "@web3-onboard/core";
@@ -41,11 +34,12 @@ import { IMintStatus } from "../interfaces";
 import { config } from "../web3Config";
 import LoadComponent from "../utils/LoadComponent";
 import { throttle } from "../utils/common";
-import { WINTER_WALLET_PROJECT_ID } from "../constants/winter-wallet";
-import WlModal from "../components/mint/WlModal";
-import { WL_MERKLE_INFO } from "../constants/merkleRoot";
-import { errorNotify, toastNotify } from "../utils/toast";
-import { getWlProof, getWlWalletIsValid } from "../utils/merkleTree";
+// import { WINTER_WALLET_PROJECT_ID } from "../constants/winter-wallet";
+// import WlModal from "../components/mint/WlModal";
+// import { WL_MERKLE_INFO } from "../constants/merkleRoot";
+// import { errorNotify, toastNotify } from "../utils/toast";
+// import { getWlProof, getWlWalletIsValid } from "../utils/merkleTree";
+import { crossmintConfig } from "../config/crossmint";
 
 interface IContext {
   winterWlWallet: string;
@@ -387,6 +381,14 @@ const Minting: FC = () => {
                 {CreditCardButtonComponent()}
                 {/* <Button>MINT</Button> */}
                 {/* </Wrapper> */}
+                <CrossmintPayButton
+                  collectionTitle={crossmintConfig.collectionTitle}
+                  collectionDescription={crossmintConfig.collectionDescription}
+                  collectionPhoto={crossmintConfig.collectionPhoto}
+                  clientId={crossmintConfig.clientId}
+                  environment={crossmintConfig.environment}
+                  mintConfig={crossmintConfig.mintConfig as any}
+                />
               </Box>
             </Body>
             <Footer>
@@ -403,17 +405,17 @@ const Minting: FC = () => {
           </ModalContainer>
         </LoadComponent>
 
-        <WinterCheckout
+        {/* <WinterCheckout
           projectId={WINTER_WALLET_PROJECT_ID.publicSale}
           production={false}
           showModal={isPaymentModalOpen}
-        />
+        /> */}
 
-        <WinterCheckout
+        {/* <WinterCheckout
           projectId={WINTER_WALLET_PROJECT_ID.presale}
           production={false}
           showModal={isWlPaymentModalOpen}
-        />
+        /> */}
 
         <ToastContainer />
       </Section>
