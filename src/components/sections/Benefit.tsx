@@ -14,6 +14,11 @@ const benefitData = [
       "All community members of the Hi-planet NFT will have access to merch giveaways from the company as a welcome package to the Hi-planet community.",
   },
   {
+    title: "Degen Planet",
+    content:
+      "There will be incentives for early minters of the Hi Planet Collection, Such as automatic OG or WL to Degen Planet. For more details about Degen planet, please check our Discord",
+  },
+  {
     title: "Metaverse Hangout",
     content:
       'HI-Planet studio will be constructed in metaverse such as "The Sandbox" or "Decentraland"',
@@ -57,13 +62,19 @@ const Benefit = () => {
         <MainTitle>benefits</MainTitle>
         <Grid>
           {/* <Row> */}
-          <Item title={benefitData[0].title}>{benefitData[0].content}</Item>
-          <Item title={benefitData[1].title}>{benefitData[1].content}</Item>
-          <Item title={benefitData[2].title}>{benefitData[2].content}</Item>
+          {benefitData.map((item, index) => (
+            <Item key={index} title={item.title}>
+              {item.content}
+            </Item>
+          ))}
+          {/* <Item title={benefitData[0].title}>{benefitData[0].content}</Item> */}
+          {/* <Item title={benefitData[1].title}>{benefitData[1].content}</Item> */}
+          {/* <Item title={benefitData[2].title}>{benefitData[2].content}</Item> */}
           {/* </Row> */}
           {/* <Row> */}
-          <Item title={benefitData[3].title}>{benefitData[3].content}</Item>
-          <Item title={benefitData[4].title}>{benefitData[4].content}</Item>
+          {/* <Item title={benefitData[3].title}>{benefitData[3].content}</Item> */}
+          {/* <Item title={benefitData[4].title}>{benefitData[4].content}</Item> */}
+          {/* <Item title={benefitData[5].title}>{benefitData[5].content}</Item> */}
           {/* </Row> */}
         </Grid>
       </SectionWrapper>
