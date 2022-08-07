@@ -9,7 +9,7 @@ import { media } from "../../styles/Themes";
 
 const slideCardConfig = {
   SLIDER_CARD_WIDTH: "20.625rem",
-  SLIDER_CARD_NUMBER: 11 + 3,
+  SLIDER_CARD_NUMBER: 11 + 5,
   SLIDER_CARD_GAP: "2rem",
   TABLET_SLIDER_CARD_WIDTH: "15rem",
   TABLET_SLIDER_CARD_GAP: "1rem",
