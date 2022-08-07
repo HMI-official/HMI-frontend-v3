@@ -35,6 +35,8 @@ export const HMI_DIAMOND_HEROS_BG = {
   diamond1: "/images/heros-diamond/hero-diamond-1.png",
   diamond2: "/images/heros-diamond/hero-diamond-2.png",
   diamond3: "/images/heros-diamond/hero-diamond-3.png",
+  diamond4: "/images/heros-diamond/hero-diamond-4.png",
+  diamond5: "/images/heros-diamond/hero-diamond-5.png",
 };
 
 export const HMI_HEROS_BG_SHOWCASE = {
@@ -46,11 +48,13 @@ export const HMI_HEROS_BG_SHOWCASE = {
   moon: "/images/heros-bg/moon.jpg",
   dia2: HMI_DIAMOND_HEROS_BG.diamond2,
   neptune: "/images/heros-bg/neptune.jpg",
+  dia4: HMI_DIAMOND_HEROS_BG.diamond4,
   pluto: "/images/heros-bg/pluto.jpg",
   saturn: "/images/heros-bg/saturn.jpg",
   dia3: HMI_DIAMOND_HEROS_BG.diamond3,
   sun: "/images/heros-bg/sun.jpg",
   uranus: "/images/heros-bg/uranus.jpg",
+  dia5: HMI_DIAMOND_HEROS_BG.diamond5,
   venus: "/images/heros-bg/venus.jpg",
 };
 
