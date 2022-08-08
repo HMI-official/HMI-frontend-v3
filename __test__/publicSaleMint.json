@@ -14,14 +14,9 @@
       "internalType": "address",
       "name": "receiver",
       "type": "address"
-    },
-    {
-      "internalType": "bytes32[]",
-      "name": "_merkleProof",
-      "type": "bytes32[]"
     }
   ],
-  "name": "presaleMint",
+  "name": "publicSaleMint",
   "outputs": [],
   "stateMutability": "payable",
   "type": "function"

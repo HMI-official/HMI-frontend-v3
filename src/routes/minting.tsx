@@ -1,7 +1,7 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import styled, { css, ThemeProvider } from "styled-components";
-import { keccak256 } from "web3-utils";
+// import { keccak256 } from "web3-utils";
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 import { dark, media } from "../styles/Themes";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -34,34 +34,22 @@ import { IMintStatus } from "../interfaces";
 import { config } from "../web3Config";
 import LoadComponent from "../utils/LoadComponent";
 import { throttle } from "../utils/common";
-// import { WINTER_WALLET_PROJECT_ID } from "../constants/winter-wallet";
-// import WlModal from "../components/mint/WlModal";
-// import { WL_MERKLE_INFO } from "../constants/merkleRoot";
 // import { errorNotify, toastNotify } from "../utils/toast";
 // import { getWlProof, getWlWalletIsValid } from "../utils/merkleTree";
-import { crossmintConfig } from "../config/crossmint";
-
-interface IContext {
-  winterWlWallet: string;
-  setWinterWlWallet: React.Dispatch<React.SetStateAction<string>>;
-  isWinterWlModalOpen: boolean;
-  setIsWinterWlModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const context = {
-  winterWlWallet: "",
-  setWinterWlWallet: () => {},
-  isWinterWlModalOpen: false,
-  setIsWinterWlModalOpen: () => {},
-};
-
-const MintConfigContext = createContext<IContext>(context);
-export const useMintConfig = (): IContext => useContext(MintConfigContext);
+import { publicCrossmintConfig, wlCrossmintConfig } from "../config/crossmint";
+import {
+  IMintComponentConfig,
+  mintCommonConfigInit,
+} from "../interfaces/crossmint";
+import { getLeaf, getProof } from "../utils/merkleTree";
+import { WL_MERKLE_INFO } from "../constants/merkleRoot";
 
 const Minting: FC = () => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [{ chains, connectedChain, settingChain }, setChain] = useSetChain();
   const connectedWallets = useWallets();
+  const userWallet = wallet?.accounts[0].address;
+
   const [onboard, setOnboard] = useState<OnboardAPI | null>(null);
   const [mintAmount, setMintAmount] = useState<number>(1);
   const [maxMintAmount, setMaxMintAmount] = useState<number>(6);
@@ -74,11 +62,12 @@ const Minting: FC = () => {
   const [isPreSale, setIsPreSale] = useState<boolean>(false);
   const [isOgSale, setIsOgSale] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
-  const [isWlPaymentModalOpen, setIsWlPaymentModalOpen] =
-    useState<boolean>(false);
-
-  const userWallet = wallet?.accounts[0].address;
+  const [mintConfig, setMintConfig] =
+    useState<IMintComponentConfig>(mintCommonConfigInit);
+  const crossmintConfig = () => {
+    if (isPreSale) return wlCrossmintConfig;
+    if (!isPreSale) return publicCrossmintConfig;
+  };
 
   // FIXME: onClick events
 
@@ -157,6 +146,27 @@ const Minting: FC = () => {
   // initialize onboard
   useEffect(() => setOnboard(initOnboard), []);
 
+  useEffect(() => {
+    if (!userWallet || isOgSale) return;
+    const main = async () => {
+      const _leaf = getLeaf(userWallet);
+      console.log(userWallet);
+      let _mintConfig: IMintComponentConfig = {
+        totalPrice: isPreSale
+          ? (mintAmount * config.wlPrice).toString()
+          : (mintAmount * config.price).toString(),
+        _mintAmount: mintAmount,
+        receiver: userWallet,
+      };
+      // _merkleProof: getProof(WL_MERKLE_INFO.wlMerkleTree, _leaf),
+      const proof = getProof(WL_MERKLE_INFO.wlMerkleTree, _leaf);
+      // console.log(proof);
+      if (isPreSale) _mintConfig = { ..._mintConfig, _merkleProof: proof };
+      setMintConfig(_mintConfig);
+    };
+    main();
+  }, [userWallet, mintAmount, isPreSale]);
+
   // set local storage if wallet is connected
   useEffect(() => {
     if (!connectedWallets.length) return;
@@ -234,15 +244,6 @@ const Minting: FC = () => {
     };
   }, []);
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("message", (event) => {
-      if (event.data === "closeWinterCheckoutModal") {
-        setIsPaymentModalOpen(false);
-        setIsWlPaymentModalOpen(false);
-      }
-    });
-  }
-
   // FIXME: components
   const ButtonComponent = () => {
     const isNotValid = paused || (!isPreSale && !isPublicSale && !isOgSale);
@@ -273,40 +274,7 @@ const Minting: FC = () => {
       return <Button onClick={onClickConnect}>connect wallet</Button>;
     if (wallet && isNotValid)
       return <Button isNotValid={isNotValid}>disabled</Button>;
-    if (wallet) return <Button onClick={onClickMint}>Pay with ETH</Button>;
-  };
-
-  const CreditCardButtonComponent = () => {
-    const isNotValid = paused || (!isPreSale && !isPublicSale) || isOgSale;
-    const _style = { marginTop: "1rem" };
-
-    // const isValid = getWlWalletIsValid(userWallet);
-    const onClickPayment = () => {
-      switch (true) {
-        case isPreSale:
-          setIsWlPaymentModalOpen(true);
-          break;
-        case isPublicSale:
-          setIsPaymentModalOpen(true);
-          break;
-        default:
-          break;
-      }
-    };
-
-    if (isNotValid)
-      return (
-        <Button isNotValid={isNotValid} style={_style}>
-          disabled
-        </Button>
-      );
-
-    if (!isNotValid)
-      return (
-        <Button onClick={onClickPayment} style={_style}>
-          Pay with Credit Card
-        </Button>
-      );
+    if (wallet) return <Button onClick={onClickMint}>Buy with ETH</Button>;
   };
 
   const TitleComponent = () => {
@@ -378,16 +346,25 @@ const Minting: FC = () => {
                   </div>
                 </Receipt>
                 {ButtonComponent()}
-                {CreditCardButtonComponent()}
+                {/* CreditCardButtonComponent() */}
                 {/* <Button>MINT</Button> */}
                 {/* </Wrapper> */}
                 <CrossmintPayButton
-                  collectionTitle={crossmintConfig.collectionTitle}
-                  collectionDescription={crossmintConfig.collectionDescription}
-                  collectionPhoto={crossmintConfig.collectionPhoto}
-                  clientId={crossmintConfig.clientId}
-                  environment={crossmintConfig.environment}
-                  mintConfig={crossmintConfig.mintConfig as any}
+                  collectionTitle={
+                    crossmintConfig()?.collectionTitle ?? "smth went wrong"
+                  }
+                  collectionDescription={
+                    crossmintConfig()?.collectionDescription ??
+                    "smth went wrong"
+                  }
+                  collectionPhoto={
+                    crossmintConfig()?.collectionPhoto ?? "smth went wrong"
+                  }
+                  clientId={crossmintConfig()?.clientId ?? "smth went wrong"}
+                  environment={
+                    crossmintConfig()?.environment ?? "smth went wrong"
+                  }
+                  mintConfig={mintConfig as any}
                 />
               </Box>
             </Body>
@@ -405,16 +382,10 @@ const Minting: FC = () => {
           </ModalContainer>
         </LoadComponent>
 
-        {/* <WinterCheckout
-          projectId={WINTER_WALLET_PROJECT_ID.publicSale}
-          production={false}
-          showModal={isPaymentModalOpen}
-        /> */}
-
-        {/* <WinterCheckout
-          projectId={WINTER_WALLET_PROJECT_ID.presale}
-          production={false}
-          showModal={isWlPaymentModalOpen}
+        {/* <WalletModal
+          handleClickWalletModalConfirm={() => {}}
+          isOpen={isWalletModalOpen}
+          closeWalletModal={() => setIsWalletModalOpen(false)}
         /> */}
 
         <ToastContainer />

@@ -1207,7 +1207,10 @@ export const MINT_NFT_ABI: AbiItem[] = [
   },
 ];
 
-export const MINT_NFT_ADDRESS = "0xC3441afD07A9266D8441F15A7c43d9667B287879";
+// 생각해보니까 가능할듯
+// 왜냐면 하나만 (히든 이미지)포인팅하고 있다가 리빌로 풀면 유저들이 직접 새로고침 해야하니까 그거 하면 한개씩 자동으로 되는거니까
+
+export const MINT_NFT_ADDRESS = "0xd3Fa8Aa78b1c3106d45Bb9Dd0e2A2C3D9B7d5801";
 //
 export const config = {
   MINT_NFT_ABI,

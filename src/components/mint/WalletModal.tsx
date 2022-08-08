@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
 import styled from "styled-components";
-import { useMintConfig } from "../../routes/minting";
+// import { useMintConfig } from "../../routes/minting";
 import { getWlProof, getWlWalletIsValid } from "../../utils/merkleTree";
 import { errorNotify } from "../../utils/toast";
 import {
@@ -14,27 +14,30 @@ import {
 
 interface WlModalProps {
   isOpen: boolean;
-  closeWlModal: () => void;
-  handleClickWlModalConfirm: () => void;
+  handleClickWalletModalConfirm: () => void;
+  closeWalletModal: () => void;
 }
 
-const WlModal: FC<WlModalProps> = ({
+const WalletModal: FC<WlModalProps> = ({
   isOpen,
-  closeWlModal,
-  handleClickWlModalConfirm,
+  handleClickWalletModalConfirm,
+  closeWalletModal,
 }) => {
-  const { winterWlWallet, setWinterWlWallet, setIsWinterWlModalOpen } =
-    useMintConfig();
+  // const { winterWlWallet, setWinterWlWallet, setIsWinterWlModalOpen } =
+  //   useMintConfig();
+  const winterWlWallet = "0x";
+  const setWinterWlWallet = () => {};
+  const setIsWinterWlModalOpen = () => {};
   const onChangeWl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWinterWlWallet(e.target.value);
+    // setWinterWlWallet(e.target.value);
   };
 
   const onClickConfirm = () => {
     const isValid = getWlWalletIsValid(winterWlWallet);
     console.log(getWlProof(winterWlWallet));
     if (!isValid) return errorNotify("please connect your wl wallet");
-    setIsWinterWlModalOpen(false);
-    handleClickWlModalConfirm();
+    // setIsWinterWlModalOpen(false);
+    handleClickWalletModalConfirm();
   };
 
   useEffect(() => {
@@ -69,7 +72,7 @@ const WlModal: FC<WlModalProps> = ({
           <Btn isDark={true} onClick={onClickConfirm}>
             confirm
           </Btn>
-          <Btn isDark={false} onClick={closeWlModal}>
+          <Btn isDark={false} onClick={closeWalletModal}>
             cancel
           </Btn>
         </Footer>
@@ -78,7 +81,7 @@ const WlModal: FC<WlModalProps> = ({
   );
 };
 
-export default WlModal;
+export default WalletModal;
 
 const Input = styled.input`
   width: 100%;
