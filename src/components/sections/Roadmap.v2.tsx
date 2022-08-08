@@ -53,8 +53,8 @@ const carouselContents: ICarouselContent[] = [
     subtitle: "Degen Planet",
     content: [
       {
-        number: "",
-        text: 'Evil side of Hi Planet appears. More lore is coming on the way and Hi Planet holders will get benefit for minting "Degen Planet" such as OG and WL.',
+        number: "3-1",
+        text: '- Evil side of Hi Planet appears. More lore is coming on the way and Hi Planet holders will get benefit for minting "Degen Planet" such as OG and WL. Total supply of 1k collection with 0.33 SOL for WL and 0.66 SOL for Public',
       },
     ],
   },
@@ -82,7 +82,7 @@ const carouselContents: ICarouselContent[] = [
     subtitle: "Metaverse Game launch ",
     content: [
       {
-        number: "",
+        number: "5-1",
         text: "The HI-planet story is a game oriented story. And with this will be the development of our P&E game in metaverse.",
       },
     ],
@@ -120,29 +120,39 @@ const carouselContentsForward: ICarouselContent[] = [
   },
   {
     title: "Q3",
-    subtitle: "Community network",
+    subtitle: "Degen Planet",
     content: [
       {
         number: "3-1",
+        text: '- Evil side of Hi Planet appears. More lore is coming on the way and Hi Planet holders will get benefit for minting "Degen Planet" such as OG and WL. Total supply of 1k collection with 0.33 SOL for WL and 0.66 SOL for Public',
+      },
+    ],
+  },
+  {
+    title: "Q4",
+    subtitle: "Community network",
+    content: [
+      {
+        number: "4-1",
         text: "Merch collaboration event with holders",
       },
       {
-        number: "3-2",
+        number: "4-2",
         text: "Acquisition of land in metaverse",
       },
       {
-        number: "3-3",
+        number: "4-3",
         text: "Development of studio in metavers where members can hang out and interact together",
       },
     ],
   },
 
   {
-    title: "Q4",
+    title: "Q5",
     subtitle: "Metaverse Game launch ",
     content: [
       {
-        number: "4-1",
+        number: "5-1",
         text: "The HI-planet story is a game oriented story. And with this will be the development of our P&E game in metaverse.",
       },
     ],
@@ -169,14 +179,15 @@ const RoadmapV2 = () => {
     const getTranslateXValueNumber = Number(
       getTranslateXValue.split(")")[0].split("px")[0]
     );
-    if (getTranslateXValueNumber >= 520) return;
+    if (getTranslateXValueNumber >= 960) return;
+    // 960 - 520
     const translateX =
       getTranslateXValueNumber +
       carouselConfig.carouselGap +
       carouselConfig.carouselHeight;
 
     carouselRef.style.cssText = `
-          transform: translateX(${translateX > 520 ? 520 : translateX}px);
+          transform: translateX(${translateX > 960 ? 960 : translateX}px);
           transition: transform 0.5s cubic-bezier(.25,.72,.51,.96);
         `;
   };
