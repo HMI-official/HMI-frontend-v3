@@ -64,10 +64,11 @@ export const presaleMint = async (mintAmount: number) => {
       status: "To be able to mint, you need to connect your wallet",
     };
   }
+  const _wallet = window.ethereum.selectedAddress;
 
   const { wlMerkleTree, wlRoot } = WL_MERKLE_INFO;
 
-  const leaf = keccak256(window.ethereum.selectedAddress);
+  const leaf = keccak256(_wallet);
   const proof = wlMerkleTree.getHexProof(leaf);
 
   // Verify Merkle Proof
@@ -80,22 +81,18 @@ export const presaleMint = async (mintAmount: number) => {
     };
   }
 
-  const nonce = await web3.eth.getTransactionCount(
-    window.ethereum.selectedAddress,
-    "latest"
-  );
+  const nonce = await web3.eth.getTransactionCount(_wallet, "latest");
   // console.log(window.ethereum.selectedAddress, mintAmount, proof);
-
   // Set up our Ethereum transaction
   const tx = {
     to: config.MINT_NFT_ADDRESS,
-    from: window.ethereum.selectedAddress,
+    from: _wallet,
     value: parseInt(
       web3.utils.toWei(String(config.wlPrice * mintAmount), "ether")
     ).toString(16), // hex
     // .publicSaleMint(mintAmount, wallet)
     data: mintNFTContract.methods
-      .presaleMint(mintAmount, window.ethereum.selectedAddress, proof)
+      .presaleMint(mintAmount, _wallet, _wallet, proof)
       .encodeABI(),
     nonce: nonce.toString(16),
   };
@@ -134,14 +131,16 @@ export const ogSaleMint = async (mintAmount: number) => {
       status: "To be able to mint, you need to connect your wallet",
     };
   }
+
+  const _wallet = window.ethereum.selectedAddress;
   const { ogMerkleTree, ogRoot } = OG_MERKLE_INFO;
-  const leaf = getLeaf(window.ethereum.selectedAddress);
+  const leaf = getLeaf(_wallet);
   const proof = getProof(ogMerkleTree, leaf);
 
   // Verify Merkle Proof
   const isValid = ogMerkleTree.verify(proof, leaf, ogRoot);
-  console.log(ogRoot);
-  console.log(`isValid: ${isValid}`);
+  // console.log(ogRoot);
+  // console.log(`isValid: ${isValid}`);
 
   if (!isValid) {
     return {
@@ -150,20 +149,17 @@ export const ogSaleMint = async (mintAmount: number) => {
     };
   }
 
-  const nonce = await web3.eth.getTransactionCount(
-    window.ethereum.selectedAddress,
-    "latest"
-  );
+  const nonce = await web3.eth.getTransactionCount(_wallet, "latest");
 
   // Set up our Ethereum transaction
   const tx = {
     to: config.MINT_NFT_ADDRESS,
-    from: window.ethereum.selectedAddress,
+    from: _wallet,
     value: parseInt(
       web3.utils.toWei(String(config.ogPrice * mintAmount), "ether")
     ).toString(16), // hex
     data: mintNFTContract.methods
-      .ogSaleMint(mintAmount, proof, window.ethereum.selectedAddress)
+      .ogSaleMint(mintAmount, proof, _wallet)
       .encodeABI(),
     nonce: nonce.toString(16),
   };
@@ -217,7 +213,7 @@ export const publicMint = async (mintAmount: number, wallet: string) => {
       web3.utils.toWei(String(config.price * mintAmount), "ether")
     ).toString(16), // hex
     data: mintNFTContract.methods
-      .publicSaleMint(mintAmount, wallet)
+      .publicSaleMint(mintAmount, wallet, wallet)
       .encodeABI(),
     nonce: nonce.toString(16),
   };
