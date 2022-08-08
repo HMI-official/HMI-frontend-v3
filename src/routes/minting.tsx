@@ -365,6 +365,9 @@ const Minting: FC = () => {
                     crossmintConfig()?.environment ?? "smth went wrong"
                   }
                   mintConfig={mintConfig as any}
+                  disabled={
+                    !userWallet || (!isPreSale && !isPublicSale && !isOgSale)
+                  }
                 />
               </Box>
             </Body>
@@ -381,16 +384,8 @@ const Minting: FC = () => {
             </Footer>
           </ModalContainer>
         </LoadComponent>
-
-        {/* <WalletModal
-          handleClickWalletModalConfirm={() => {}}
-          isOpen={isWalletModalOpen}
-          closeWalletModal={() => setIsWalletModalOpen(false)}
-        /> */}
-
         <ToastContainer />
       </Section>
-      {/* </MintConfigContext.Provider> */}
     </ThemeProvider>
   );
 };
