@@ -18,7 +18,7 @@ const MobileCarouselComponent: FC<CarouselProps> = ({ carouselContents }) => {
               {content.content.map((item) => (
                 <div>
                   <span>
-                    {item.number}) {item.text}
+                    {item.number} {item.number.length > 0 && ")"} {item.text}
                   </span>
                 </div>
               ))}
