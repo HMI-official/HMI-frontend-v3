@@ -53,8 +53,8 @@ const carouselContents: ICarouselContent[] = [
     subtitle: "Degen Planet",
     content: [
       {
-        number: "2-1",
-        text: '- Evil side of Hi Planet appears. More lore is coming on the way and Hi Planet holders will get benefit for minting "Degen Planet" such as OG and WL. Total supply of 1k collection with 0.33 SOL for WL and 0.66 SOL for Public',
+        number: "",
+        text: 'Evil side of Hi Planet appears. More lore is coming on the way and Hi Planet holders will get benefit for minting "Degen Planet" such as OG and WL.',
       },
     ],
   },
@@ -82,7 +82,7 @@ const carouselContents: ICarouselContent[] = [
     subtitle: "Metaverse Game launch ",
     content: [
       {
-        number: "5-1",
+        number: "",
         text: "The HI-planet story is a game oriented story. And with this will be the development of our P&E game in metaverse.",
       },
     ],
