@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { HMI_HEROS_BG_SHOWCASE_ARR } from "../constants/image";
+import { media } from "../styles/Themes";
 
 const planets = [
   "earth",
@@ -74,6 +75,8 @@ const Section = styled.section`
 `;
 
 const PlanetFilterContainer = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   /* flex: 1; */
   flex-direction: column;
@@ -82,15 +85,20 @@ const PlanetFilterContainer = styled.div`
   text-transform: uppercase;
   font-weight: 800;
   padding: 8rem 0;
+  width: 100%;
   .title {
     font-size: ${({ theme }) => theme.fontxl};
     padding: 0.5rem;
     margin: 0.2rem 0;
   }
   flex: 1;
+  ${media.custom(1024)} {
+    display: none;
+  }
 `;
 const RightContainer = styled.div`
   padding: 8rem 3rem;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -108,8 +116,12 @@ const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 1.5rem;
-
-  /* grid-auto-rows: minmax(15rem, auto); */
+  ${media[1200]} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  ${media.custom(1024)} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Wrapper = styled.div`
@@ -122,6 +134,7 @@ const Wrapper = styled.div`
 
 const PlanetFilterContent = styled.div`
   font-size: ${({ theme }) => theme.fontmd};
+  /* width: 100%; */
   > div {
     text-transform: capitalize;
     padding: 0.5rem;
@@ -157,6 +170,9 @@ const RankFilterContainer = styled.div`
   :hover {
     background-color: ${({ theme }) => theme.colors.gray300};
   }
+  ${media.custom(1024)} {
+    width: auto;
+  }
 `;
 const ButtonContainer = styled.div`
   display: flex;
@@ -166,6 +182,9 @@ const ButtonContainer = styled.div`
   background: ${({ theme }) => theme.colors.gray600};
   border-radius: 0.5rem;
   font-size: ${({ theme }) => theme.fontlg};
+  ${media[768]} {
+    font-size: ${({ theme }) => theme.fontmd};
+  }
 `;
 
 const CardEl = styled.div``;
