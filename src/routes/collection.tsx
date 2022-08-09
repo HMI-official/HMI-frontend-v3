@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { HMI_HEROS_BG_SHOWCASE_ARR } from "../constants/image";
+import { fakeDataRanks } from "../data/metadata";
 import { media } from "../styles/Themes";
 
 const planets = [
@@ -18,12 +19,14 @@ const planets = [
 
 const ranks = ["silver", "gold", "diamond"];
 
+console.log(fakeDataRanks);
+
 const Collection = () => {
   const planetFilters = planets.map((planet, index) => {
     return (
       <FilterBtnContainer key={planet}>
         <div>{planet}</div>
-        <div className="number">X{index + 1}</div>
+        <div className="number">X{fakeDataRanks.planets[planet]}</div>
       </FilterBtnContainer>
     );
   });
@@ -33,7 +36,7 @@ const Collection = () => {
       <RankFilterContainer key={rank}>
         <div>{rank} </div>
         <div className="multiple">X</div>
-        <div className="number"> {index + 1}</div>
+        <div className="number"> {fakeDataRanks.ranks[rank]}</div>
       </RankFilterContainer>
     );
   });
