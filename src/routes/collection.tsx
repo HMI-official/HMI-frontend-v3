@@ -106,7 +106,7 @@ const TopFilterContainer = styled.div`
 `;
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 20%);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 1.5rem;
 
   /* grid-auto-rows: minmax(15rem, auto); */
