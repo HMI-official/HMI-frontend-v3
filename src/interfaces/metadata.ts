@@ -1,6 +1,8 @@
 export interface IMetadata {
   name: string;
   image: string;
-  crown: "Diamond" | "Gold" | "Silver";
+  crown: crown;
   planet: string;
 }
+
+export type crown = "Diamond" | "Gold" | "Silver";

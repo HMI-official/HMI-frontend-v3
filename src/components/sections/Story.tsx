@@ -119,7 +119,7 @@ const Container = styled.div`
     align-items: center;
   }
   ${media.mobile} {
-    /* gap: 1rem; */
+    /* max-width: 70% !important; */
   }
 
   /* padding-left: 10rem; */

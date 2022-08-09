@@ -96,6 +96,9 @@ const Container = styled.div`
   justify-content: center;
   /* max-width: 80%; */
   max-width: 1130px;
+  ${media.mobile} {
+    max-width: 70%;
+  }
 `;
 const Title = styled.div`
   font-size: ${({ theme }) => theme.font2xl};
