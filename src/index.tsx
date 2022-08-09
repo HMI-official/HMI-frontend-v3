@@ -9,11 +9,14 @@ import { light } from "./styles/Themes";
 import { BrowserRouter, Router } from "react-router-dom";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
+import Layout from "./components/layout";
 ReactDOM.render(
   <AccountProvider>
     <ThemeProvider theme={light}>
       <BrowserRouter>
-        <App />
+        <Layout>
+          <App />
+        </Layout>
       </BrowserRouter>
       <GlobalStyles />
     </ThemeProvider>

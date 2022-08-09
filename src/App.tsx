@@ -25,6 +25,8 @@ import Counter from "./components/sections/Counter";
 import Vimeo from "./components/sections/Vimeo";
 import RewardChart from "./components/sections/RewardChart";
 import VerifyNft from "./routes/verify-nft";
+import Collection from "./routes/collection";
+import RewardPanel from "./routes/reward-panel";
 
 const TRACKING_ID = process.env.REACT_APP_ANALYTICS_ID!;
 ReactGA.initialize(TRACKING_ID);
@@ -55,7 +57,7 @@ function App() {
         element={
           <Main>
             <Galaxy />
-            <Navigation />
+            {/* <Navigation /> */}
             <HomeV2 />
             <Counter />
             <AboutV2 />
@@ -76,8 +78,11 @@ function App() {
         }
       />
       <Route path="/mint" element={<Minting />} />
-      <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      {/* <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
       <Route path="/verify-nft" element={<VerifyNft />} />
+      <Route path="/collection" element={<Collection />} />
+      <Route path="/reward-panel" element={<RewardPanel />} />
+      {/* collection */}
     </Routes>
   );
 }
