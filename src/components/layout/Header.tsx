@@ -199,11 +199,11 @@ const DesktopBtnComponent = () => {
 
 const Header = () => {
   const [click, setClick] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const scrollTo = (id: string) => {
     let element = document.getElementById(id);
-    // navigate(`/#${id}`);
+    navigate(`/#${id}`);
     if (!element) return;
     element.scrollIntoView({
       behavior: "smooth",
