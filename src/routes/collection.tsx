@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { flash } from "../components/common/styles/keyframe";
 import { HMI_HEROS_BG_SHOWCASE_ARR } from "../constants/image";
 import { PLANET_NAMES, PLANET_RANKS } from "../constants/planet";
-import { fakeDataRanks } from "../data/metadata";
+import { fakeDataRanks, fakeMetadata } from "../data/metadata";
+import { IMetadata } from "../interfaces/metadata";
 import { media } from "../styles/Themes";
 
 // const ranks = ["silver", "gold", "diamond"];
@@ -12,6 +14,7 @@ import { media } from "../styles/Themes";
 const Collection = () => {
   const [currRanks, setCurrRanks] = useState<string[]>([]);
   const [currPlanets, setCurrPlanets] = useState<string[]>([]);
+  const [filterd, setFilterd] = useState<IMetadata[]>([]);
 
   const onClickRank = (rank: string) => {
     if (currRanks.includes(rank)) {
@@ -30,8 +33,18 @@ const Collection = () => {
   };
 
   useEffect(() => {
-    console.log(`currRanks: ${currRanks}`);
-    console.log(`currPlanets: ${currPlanets}`);
+    const filterdRanks = fakeMetadata.filter((r) =>
+      currRanks.includes(r.crown.toLowerCase())
+    );
+    const filterdPlanets = fakeMetadata.filter((p) =>
+      currPlanets.includes(p.planet.toLowerCase())
+    );
+
+    const _flatten = [...new Set([...filterdRanks, ...filterdPlanets])];
+    // consol
+
+    // console.log(_flatten);
+    setFilterd(_flatten);
   }, [currRanks, currPlanets]);
 
   useEffect(() => {
@@ -75,6 +88,17 @@ const Collection = () => {
       </CardEl>
     );
   });
+
+  const filterdCards = filterd.map((item, index) => {
+    const random = Math.floor(Math.random() * 10000);
+    return (
+      <CardEl key={item.image + random}>
+        <Image src={item.image} />
+      </CardEl>
+    );
+  });
+
+  const isClickedFilter = currRanks.length > 0 || currPlanets.length > 0;
   return (
     <Section id="collection">
       <Wrapper>
@@ -86,7 +110,9 @@ const Collection = () => {
           <TopFilterContainer>
             <ButtonContainer>{RankFilter}</ButtonContainer>
           </TopFilterContainer>
-          <CardContainer>{Cards}</CardContainer>
+          <CardContainer>
+            {isClickedFilter ? filterdCards : Cards}
+          </CardContainer>
         </RightContainer>
       </Wrapper>
     </Section>
@@ -229,7 +255,9 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const CardEl = styled.div``;
+const CardEl = styled.div`
+  animation: ${flash} 0.5s linear;
+`;
 const Image = styled.img`
   /* max-width: 12rem; */
   width: 100%;

@@ -1,10 +1,5 @@
+import { IMetadata } from "../interfaces/metadata";
 import { HMI_HEROS_BG, HMI_HEROS_BG_SHOWCASE } from "./../constants/image";
-interface IMetadata {
-  name: string;
-  image: string;
-  crown: "Diamond" | "Gold" | "Silver";
-  planet: string;
-}
 
 export const fakeMetadata: IMetadata[] = [
   {
