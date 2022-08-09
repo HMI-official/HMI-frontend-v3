@@ -33,7 +33,7 @@ import { IMintStatus } from "../interfaces";
 
 import { config } from "../web3Config";
 import LoadComponent from "../utils/LoadComponent";
-import { throttle } from "../utils/common";
+import { cutdDecimalZero, throttle } from "../utils/common";
 // import { errorNotify, toastNotify } from "../utils/toast";
 // import { getWlProof, getWlWalletIsValid } from "../utils/merkleTree";
 import { publicCrossmintConfig, wlCrossmintConfig } from "../config/crossmint";
@@ -337,9 +337,10 @@ const Minting: FC = () => {
                   <div className="item1"> Total</div>{" "}
                   <div className="item2">
                     <span>
-                      {Number.parseFloat(
-                        (config.price * mintAmount).toString()
-                      ).toFixed(3)}
+                      {cutdDecimalZero(
+                        config.price * mintAmount,
+                        config.price.toString().length
+                      )}
                       ETH
                     </span>{" "}
                     <span>+ GAS</span>
