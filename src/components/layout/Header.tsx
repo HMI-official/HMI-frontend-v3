@@ -164,7 +164,6 @@ const MobileBtnComponent = () => {
         <MenuItem>
           <div className="mobile" onClick={getAccount}>
             <ConnectButton>Connect Wallet</ConnectButton>
-            {/* <Button text="Connect Wallet" link="#" /> */}
           </div>
         </MenuItem>
       )}
@@ -222,6 +221,7 @@ const Header = () => {
           &nbsp;
         </HamburgerMenu>
         <Menu click={click}>
+          {/* <MenuItem onClick={() => scrollTo("home")}>Home</MenuItem> */}
           <MenuItem onClick={() => scrollTo("home")}>Home</MenuItem>
           <MenuItem onClick={() => scrollTo("about")}>About</MenuItem>
           <MenuItem onClick={() => scrollTo("roadmap")}>Roadmap</MenuItem>
@@ -230,7 +230,9 @@ const Header = () => {
           <MenuItem onClick={() => scrollTo("faq")}>Faq</MenuItem>
           <MenuItem>
             <Link to="/">Mint</Link>
-            {/* <Link to="/mint">Mint</Link> */}
+          </MenuItem>
+          <MenuItem>
+            <Link to="/collection">Collection</Link>
           </MenuItem>
           <MobileBtnComponent />
           <DesktopBtnComponent />
