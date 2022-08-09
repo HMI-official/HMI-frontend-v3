@@ -1,47 +1,66 @@
-import { useEffect } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import { HMI_HEROS_BG_SHOWCASE_ARR } from "../constants/image";
+import { PLANET_NAMES, PLANET_RANKS } from "../constants/planet";
 import { fakeDataRanks } from "../data/metadata";
 import { media } from "../styles/Themes";
 
-const planets = [
-  "earth",
-  "moon",
-  "mars",
-  "jupiter",
-  "saturn",
-  "sun",
-  "venus",
-  "mercury",
-  "neptune",
-  "pluto",
-  "saturn",
-];
+// const ranks = ["silver", "gold", "diamond"];
 
-const ranks = ["silver", "gold", "diamond"];
-
-console.log(fakeDataRanks);
+// console.log(fakeDataRanks);
 
 const Collection = () => {
+  const [currRanks, setCurrRanks] = useState<string[]>([]);
+  const [currPlanets, setCurrPlanets] = useState<string[]>([]);
+
+  const onClickRank = (rank: string) => {
+    if (currRanks.includes(rank)) {
+      setCurrRanks(currRanks.filter((r) => r !== rank));
+    } else {
+      setCurrRanks([...currRanks, rank]);
+    }
+  };
+
+  const onClickPlanet = (planet: string) => {
+    if (currPlanets.includes(planet)) {
+      setCurrPlanets(currPlanets.filter((p) => p !== planet));
+    } else {
+      setCurrPlanets([...currPlanets, planet]);
+    }
+  };
+
+  useEffect(() => {
+    console.log(`currRanks: ${currRanks}`);
+    console.log(`currPlanets: ${currPlanets}`);
+  }, [currRanks, currPlanets]);
+
   useEffect(() => {
     // scroll to top
     window.scrollTo(0, 0);
-    // window.addEventListener("load", load);
-    // return () => window.removeEventListener("load", load);
   }, []);
 
-  const planetFilters = planets.map((planet, index) => {
+  const planetFilters = PLANET_NAMES.map((planet, index) => {
+    const isClicked = currPlanets.includes(planet);
     return (
-      <FilterBtnContainer key={planet}>
+      <FilterBtnContainer
+        key={planet + index}
+        onClick={() => onClickPlanet(planet)}
+        isClicked={isClicked}
+      >
         <div>{planet}</div>
         <div className="number">X{fakeDataRanks.planets[planet]}</div>
       </FilterBtnContainer>
     );
   });
 
-  const RankFilter = ranks.map((rank, index) => {
+  const RankFilter = PLANET_RANKS.map((rank, index) => {
+    const isClicked = currRanks.includes(rank);
     return (
-      <RankFilterContainer key={rank}>
+      <RankFilterContainer
+        key={rank + index}
+        onClick={() => onClickRank(rank)}
+        isClicked={isClicked}
+      >
         <div>{rank} </div>
         <div className="multiple">X</div>
         <div className="number"> {fakeDataRanks.ranks[rank]}</div>
@@ -101,6 +120,7 @@ const PlanetFilterContainer = styled.div`
     font-size: ${({ theme }) => theme.fontxl};
     padding: 0.5rem;
     margin: 0.2rem 0;
+    padding-top: 0;
   }
   flex: 1;
   ${media.custom(1024)} {
@@ -151,22 +171,29 @@ const PlanetFilterContent = styled.div`
     padding: 0.5rem;
     cursor: pointer;
     border-radius: 0.5rem;
-    :hover {
-      background-color: ${({ theme }) => theme.colors.gray600};
-    }
   }
 `;
 
-const FilterBtnContainer = styled.div`
+const FilterBtnContainer = styled.div<{ isClicked: boolean }>`
   display: flex;
+  margin: 0.5rem 0;
   .number {
     display: flex;
     justify-content: flex-end;
     flex: 1;
   }
+  ${({ isClicked }) =>
+    isClicked &&
+    css`
+      background-color: ${({ theme }) => theme.colors.gray600};
+    `}
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.gray600};
+  }
 `;
-const RankFilterContainer = styled.div`
-  transition: all 0.2s ease-in-out;
+const RankFilterContainer = styled.div<{ isClicked: boolean }>`
+  transition: all 0.1s ease-in-out;
   display: flex;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -176,10 +203,14 @@ const RankFilterContainer = styled.div`
   .multiple {
     margin-left: 0.5rem;
   }
-  .number {
-  }
+  ${({ isClicked }) =>
+    isClicked &&
+    css`
+      background-color: ${({ theme }) => theme.colors.gray500};
+    `}
+
   :hover {
-    background-color: ${({ theme }) => theme.colors.gray300};
+    background-color: ${({ theme }) => theme.colors.gray500};
   }
   ${media.custom(1024)} {
     width: auto;

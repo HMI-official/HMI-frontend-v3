@@ -6,19 +6,6 @@ interface IMetadata {
   planet: string;
 }
 
-const planets = [
-  "earth",
-  "moon",
-  "mars",
-  "jupiter",
-  "saturn",
-  "sun",
-  "venus",
-  "mercury",
-  "neptune",
-  "pluto",
-  "saturn",
-];
 export const fakeMetadata: IMetadata[] = [
   {
     name: "HI-PLANET #1",
