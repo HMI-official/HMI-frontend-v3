@@ -54,7 +54,7 @@ export const fakeMetadata: IMetadata[] = [
     name: "HI-PLANET #8",
     image: HMI_HEROS_BG_SHOWCASE.dia3,
     crown: "Diamond",
-    planet: "Earth",
+    planet: "Venus",
   },
   {
     name: "HI-PLANET #9",
@@ -74,7 +74,7 @@ export const fakeMetadata: IMetadata[] = [
     name: "HI-PLANET #11",
     image: HMI_HEROS_BG_SHOWCASE.dia4,
     crown: "Diamond",
-    planet: "Venus",
+    planet: "Earth",
   },
 
   {
