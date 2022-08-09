@@ -6,7 +6,7 @@ import { AccountProvider } from "./contexts/AccountContext";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { light } from "./styles/Themes";
-import { BrowserRouter, Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/layout";

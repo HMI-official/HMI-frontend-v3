@@ -49,7 +49,7 @@ const Collection = () => {
     );
   });
   return (
-    <Section>
+    <Section id="collection">
       <Wrapper>
         <PlanetFilterContainer>
           <div className="title">planets</div>

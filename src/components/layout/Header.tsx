@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiFillTwitterCircle } from "react-icons/ai";
 // import {  } from "react-icons/ai";
 import { FaDiscord } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ADDRESS } from "../../constants/address";
 import { ETC_IMAGES } from "../../constants/image";
@@ -90,7 +90,7 @@ const MenuItem = styled.li`
     display: block;
     width: 0%;
     height: 2px;
-    background: ${(props) => props.theme.text};
+    background: ${(props) => props.theme.body};
     transition: width 0.3s ease;
   }
   &:hover::after {
@@ -199,9 +199,11 @@ const DesktopBtnComponent = () => {
 
 const Header = () => {
   const [click, setClick] = useState(false);
+  // const navigate = useNavigate();
 
   const scrollTo = (id: string) => {
     let element = document.getElementById(id);
+    // navigate(`/#${id}`);
     if (!element) return;
     element.scrollIntoView({
       behavior: "smooth",
@@ -232,7 +234,7 @@ const Header = () => {
             <Link to="/">Mint</Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/collection">Collection</Link>
+            <Link to="/collection">My Collection</Link>
           </MenuItem>
           <MobileBtnComponent />
           <DesktopBtnComponent />

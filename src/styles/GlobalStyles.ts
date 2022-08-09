@@ -15,6 +15,12 @@ ${
     margin: 0;
     padding: 0;
 }
+html{
+  scroll-behavior: smooth;
+    transition: scroll 3s ease-in-out !important;
+  /* transition: scroll 0.3s cubic-bezier(0.0, 0.0, 0.58, 1.0); */
+  scroll-snap-type: y proximity ;
+}
 
 body{
     font-family: 'Saira', sans-serif;
