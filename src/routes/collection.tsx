@@ -159,7 +159,7 @@ const RightContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  min-height: 50vh;
+  min-height: 100vh;
   gap: 1rem;
   flex: 4;
 `;
