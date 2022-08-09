@@ -98,7 +98,8 @@ const MenuItem = styled.li`
   }
 
   @media (max-width: 64em) {
-    margin: 1rem 0;
+    /* margin: 1rem 0; */
+    margin: 0.8rem 0;
 
     &::after {
       display: none;
@@ -231,10 +232,14 @@ const Header = () => {
           <MenuItem onClick={() => scrollTo("team")}>Team</MenuItem>
           <MenuItem onClick={() => scrollTo("faq")}>Faq</MenuItem>
           <MenuItem>
-            <Link to="/">Mint</Link>
+            <Link to="/" onClick={() => setClick(!click)}>
+              Mint
+            </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/collection">My Collection</Link>
+            <Link to="/collection" onClick={() => setClick(!click)}>
+              My Collection
+            </Link>
           </MenuItem>
           <MobileBtnComponent />
           <DesktopBtnComponent />
