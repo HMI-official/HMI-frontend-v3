@@ -59,7 +59,7 @@ export const fakeMetadata: IMetadata[] = [
   {
     name: "HI-PLANET #9",
     image: HMI_HEROS_BG.pluto,
-    crown: "Gold",
+    crown: "Silver",
     planet: "Pluto",
   },
 
