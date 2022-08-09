@@ -76,9 +76,8 @@ const diffDay_v2 = (date1: Date, date2: Date): ITime => {
   return { day, hour, min, sec };
 };
 
-export const cutdDecimalZero = (num: number, maxLenth: number) => {
+export const cutDecimalZero = (num: number, maxLenth: number): number => {
   const num2String = num.toString().slice(0, maxLenth);
-  // console.log(`num2String : ${num2String}`);
   while (true) {
     if (num2String[num2String.length - 1] === "0") {
       num2String.slice(0, num2String.length - 1);
@@ -87,6 +86,5 @@ export const cutdDecimalZero = (num: number, maxLenth: number) => {
     }
   }
   const num2Float = Number.parseFloat(num2String);
-  // console.log(`num2Float : ${num2Float}`);
   return num2Float;
 };

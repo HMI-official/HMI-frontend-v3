@@ -33,7 +33,7 @@ import { IMintStatus } from "../interfaces";
 
 import { config } from "../web3Config";
 import LoadComponent from "../utils/LoadComponent";
-import { cutdDecimalZero, throttle } from "../utils/common";
+import { cutDecimalZero } from "../utils/common";
 // import { errorNotify, toastNotify } from "../utils/toast";
 // import { getWlProof, getWlWalletIsValid } from "../utils/merkleTree";
 import { publicCrossmintConfig, wlCrossmintConfig } from "../config/crossmint";
@@ -64,6 +64,36 @@ const Minting: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [mintConfig, setMintConfig] =
     useState<IMintComponentConfig>(mintCommonConfigInit);
+
+  // 5개 넘기면 10% 할인
+  // 10개는 20% 할인
+  // const totalPrice = isPreSale
+  //   ? cutDecimalZero(
+  //       config.wlPrice * mintAmount,
+  //       config.wlPrice.toString().length
+  //     )
+  //   : cutDecimalZero(config.price * mintAmount, config.price.toString().length);
+
+  const wlTotalPrice = cutDecimalZero(
+    config.wlPrice * mintAmount,
+    config.wlPrice.toString().length
+  );
+
+  const totalPublicPrice = () => {
+    const _length = config.price.toString().length + 1;
+
+    switch (true) {
+      case mintAmount >= 1 && mintAmount < 5:
+        return cutDecimalZero(config.price * mintAmount, _length);
+      case mintAmount >= 5 && mintAmount < 10:
+        return cutDecimalZero(config.price * 0.9 * mintAmount, _length);
+      case mintAmount >= 10:
+        return cutDecimalZero(config.price * 0.8 * mintAmount, _length);
+      default:
+        return cutDecimalZero(config.price * mintAmount, _length);
+    }
+  };
+
   const crossmintConfig = () => {
     if (isPreSale) return wlCrossmintConfig;
     if (!isPreSale) return publicCrossmintConfig;
@@ -150,11 +180,11 @@ const Minting: FC = () => {
     if (!userWallet || isOgSale) return;
     const main = async () => {
       const _leaf = getLeaf(userWallet);
-      console.log(userWallet);
+      // console.log(userWallet);
       let _mintConfig: IMintComponentConfig = {
         totalPrice: isPreSale
-          ? (mintAmount * config.wlPrice).toString()
-          : (mintAmount * config.price).toString(),
+          ? wlTotalPrice.toString()
+          : totalPublicPrice().toString(),
         _mintAmount: mintAmount,
         receiver: userWallet,
       };
@@ -337,10 +367,7 @@ const Minting: FC = () => {
                   <div className="item1"> Total</div>{" "}
                   <div className="item2">
                     <span>
-                      {cutdDecimalZero(
-                        config.price * mintAmount,
-                        config.price.toString().length
-                      )}
+                      {isPreSale ? wlTotalPrice : totalPublicPrice()}
                       ETH
                     </span>{" "}
                     <span>+ GAS</span>
