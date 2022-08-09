@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { HMI_HEROS_BG_SHOWCASE_ARR } from "../constants/image";
 import { fakeDataRanks } from "../data/metadata";
@@ -22,6 +23,13 @@ const ranks = ["silver", "gold", "diamond"];
 console.log(fakeDataRanks);
 
 const Collection = () => {
+  useEffect(() => {
+    // scroll to top
+    window.scrollTo(0, 0);
+    // window.addEventListener("load", load);
+    // return () => window.removeEventListener("load", load);
+  }, []);
+
   const planetFilters = planets.map((planet, index) => {
     return (
       <FilterBtnContainer key={planet}>
