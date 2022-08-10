@@ -103,18 +103,24 @@ const Collection = () => {
   return (
     <Section id="collection">
       <Wrapper>
-        <PlanetFilterContainer>
-          <div className="title">planets</div>
-          <PlanetFilterContent>{planetFilters}</PlanetFilterContent>
-        </PlanetFilterContainer>
-        <RightContainer>
-          <TopFilterContainer>
-            <ButtonContainer>{RankFilter}</ButtonContainer>
-          </TopFilterContainer>
-          <CardContainer>
-            {isClickedFilter ? filterdCards : Cards}
-          </CardContainer>
-        </RightContainer>
+        <IndicatorContainer>
+          <Indicator isClicked={true}>Collections</Indicator>
+          <Indicator isClicked={false}>Claim</Indicator>
+        </IndicatorContainer>
+        <Container>
+          <PlanetFilterContainer>
+            <div className="title">planets</div>
+            <PlanetFilterContent>{planetFilters}</PlanetFilterContent>
+          </PlanetFilterContainer>
+          <RightContainer>
+            <TopFilterContainer>
+              <ButtonContainer>{RankFilter}</ButtonContainer>
+            </TopFilterContainer>
+            <CardContainer>
+              {isClickedFilter ? filterdCards : Cards}
+            </CardContainer>
+          </RightContainer>
+        </Container>
       </Wrapper>
     </Section>
   );
@@ -131,9 +137,39 @@ const Section = styled.section`
   justify-content: center;
 `;
 
+const IndicatorContainer = styled.div`
+  margin: 0 0.5rem;
+  gap: 0.5rem;
+  display: flex;
+  border-bottom: 2px solid ${(props) => props.theme.colors.gray500};
+  /* padding-bottom: 1rem; */
+`;
+const Indicator = styled.span<{ isClicked: boolean }>`
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: ${(props) => props.theme.primary};
+  padding: 0.5rem;
+  cursor: pointer;
+  position: relative;
+
+  ::before {
+    display: ${(props) => (props.isClicked ? "block" : "none")};
+    content: "";
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    transform: translateY(50%);
+    background-color: ${(props) => props.theme.primary};
+  }
+  /* border-bottom: 2px solid ${(props) => props.theme.primary}; */
+  /* height: 100%; */
+`;
+
 const PlanetFilterContainer = styled.div`
   position: sticky;
-  top: 0;
+  top: ${({ theme }) => theme.navHeight};
   display: flex;
   /* flex: 1; */
   flex-direction: column;
@@ -141,7 +177,7 @@ const PlanetFilterContainer = styled.div`
   height: 100%;
   text-transform: uppercase;
   font-weight: 800;
-  padding: 8rem 0;
+  /* padding: 8rem 0; */
   width: 100%;
   .title {
     font-size: ${({ theme }) => theme.fontxl};
@@ -155,7 +191,7 @@ const PlanetFilterContainer = styled.div`
   }
 `;
 const RightContainer = styled.div`
-  padding: 8rem 3rem;
+  padding: 0 3rem;
   width: 100%;
 
   display: flex;
@@ -186,8 +222,17 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 90%;
+  /* gap: 3rem; */
+  padding: 8rem 0;
+
+  flex-direction: column;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
   gap: 3rem;
-  /* flex-direction: column; */
+  padding-top: 3rem;
 `;
 
 const PlanetFilterContent = styled.div`
