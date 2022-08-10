@@ -97,7 +97,7 @@ const Container = styled.div`
   /* max-width: 80%; */
   max-width: 1130px;
   ${media.mobile} {
-    max-width: 70%;
+    max-width: 80%;
   }
 `;
 const Title = styled.div`

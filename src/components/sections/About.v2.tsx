@@ -168,7 +168,7 @@ const Box = styled.div`
     min-height: 30vh;
   }
   ${media.mobile} {
-    width: 70%;
+    width: 80%;
   }
 `;
 
