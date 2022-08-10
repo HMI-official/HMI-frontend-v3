@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import Img from "react-optimized-image";
 import { flash } from "../components/common/styles/keyframe";
 import { HMI_HEROS_BG_SHOWCASE_ARR } from "../constants/image";
 import { PLANET_NAMES, PLANET_RANKS } from "../constants/planet";
