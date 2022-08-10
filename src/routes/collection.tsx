@@ -159,7 +159,7 @@ const Indicator = styled.span<{ isClicked: boolean }>`
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 2px;
+    height: 1px;
     transform: translateY(50%);
     background-color: ${(props) => props.theme.primary};
   }
@@ -169,7 +169,7 @@ const Indicator = styled.span<{ isClicked: boolean }>`
 
 const PlanetFilterContainer = styled.div`
   position: sticky;
-  top: ${({ theme }) => theme.navHeight};
+  top: calc(${({ theme }) => theme.navHeight} + 1rem);
   display: flex;
   /* flex: 1; */
   flex-direction: column;
@@ -192,11 +192,12 @@ const PlanetFilterContainer = styled.div`
 `;
 const RightContainer = styled.div`
   padding: 0 3rem;
+  padding-right: 0;
   width: 100%;
 
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 70vh;
   gap: 1rem;
   flex: 4;
 `;
