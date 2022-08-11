@@ -15,15 +15,25 @@ module.exports = function override(config) {
   });
 
   config.resolve.fallback = fallback;
+
   config.plugins = (config.plugins || []).concat([
     new webpack.ProvidePlugin({
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
     }),
   ]);
-  // config.module.rules.push({
-  //   test: /\.svg$/,
-  //   use: ["@svgr/webpack"],
+
+  // config.module.mix.options({
+  //   legacyNodePolyfills: false,
   // });
+  config.module.rules.push({
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: "javascript/auto",
+    resolve: {
+      fullySpecified: false,
+    },
+  });
+
   return config;
 };

@@ -1,5 +1,7 @@
 import { Suspense, useState } from "react";
 import styled from "styled-components";
+import { AnimatePresence } from "framer-motion";
+
 import { HMI_HERO, TEAM_IMAGES } from "../../constants/image";
 import { media } from "../../styles/Themes";
 import Loading from "../Loading";
@@ -125,9 +127,11 @@ const TeamV2 = () => {
           {BottomItemComponent}
         </Grid>
       </Container>
-      {isOpen && (
-        <TeamModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <TeamModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
+        )}
+      </AnimatePresence>
     </Section>
   );
 };
