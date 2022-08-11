@@ -8,6 +8,8 @@ import { ADDRESS } from "../../constants/address";
 import { onClickWebsite } from "../../utils/common";
 import { media } from "../../styles/Themes";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import { motion } from "framer-motion";
+import { titleVariants } from "../common/styles/framer-motion";
 
 const localConfig = {
   isReversed: false,
@@ -18,7 +20,14 @@ const AboutV2 = () => {
     <Section id="about">
       <Container>
         <Box>
-          <Title>REAL VALUE PROJECT</Title>
+          <Title
+            variants={titleVariants}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: false, amount: 0.06 }}
+          >
+            REAL VALUE PROJECT
+          </Title>
           <SubText>
             HI-PLANET is an NFT project by High Minded Intelligence, IRL ("in
             real life") Streetwear fashion company. HI-Planet shares its 50% of
@@ -172,7 +181,7 @@ const Box = styled.div`
   }
 `;
 
-const Title = styled.h2`
+const Title = styled(motion.h2)`
   font-size: ${(props) => props.theme.font2xl};
   text-transform: capitalize;
   color: ${(props) => props.theme.primary};

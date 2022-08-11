@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -7,6 +8,7 @@ import { ITime } from "../../interfaces/counter";
 import { media } from "../../styles/Themes";
 import { diffDay } from "../../utils/common";
 import { ConnectButton } from "../common/styles/buttons";
+import { titleVariants } from "../common/styles/framer-motion";
 
 interface TimeItemProps {
   time: number;
@@ -61,7 +63,12 @@ const Counter = () => {
     <Section>
       <Container>
         <ModalWindow>
-          <Title>
+          <Title
+            variants={titleVariants}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: false, amount: 0.06 }}
+          >
             HI PLANET NFT will be <br /> available for minting in:{" "}
           </Title>
           <TimeContainer>
@@ -149,7 +156,7 @@ const ModalWindow = styled.div`
   padding: 5rem 0;
 `;
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   text-align: center;
 `;
 const TimeContainer = styled.div`

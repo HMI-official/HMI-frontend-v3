@@ -1,6 +1,6 @@
 import { ReactNode, Suspense, useState } from "react";
 import styled from "styled-components";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { HMI_HERO, TEAM_IMAGES } from "../../constants/image";
 import { media } from "../../styles/Themes";
@@ -10,6 +10,7 @@ import {
   IModalMemberInfo,
   modalMemberInfoInit,
 } from "../../interfaces/section";
+import { titleVariants } from "../common/styles/framer-motion";
 
 const teamConfig = {
   gap: "3rem",
@@ -252,7 +253,14 @@ const TeamV2 = () => {
   return (
     <Section id="team">
       <Container>
-        <MainTitle>Team</MainTitle>
+        <MainTitle
+          variants={titleVariants}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 0.06 }}
+        >
+          Team
+        </MainTitle>
         <Grid>
           {TopItemComponent}
           {BottomItemComponent}
@@ -297,7 +305,7 @@ const Name = styled.span`
 `;
 const Planet = styled.span``;
 const Role = styled.span``;
-const MainTitle = styled.h2`
+const MainTitle = styled(motion.h2)`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,11 +1,20 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { media } from "../../styles/Themes";
+import { titleVariants } from "../common/styles/framer-motion";
 
 const RewardChart = () => {
   return (
     <Section>
       <Container>
-        <Title> POTENTIAL REWARD</Title>
+        <Title
+          variants={titleVariants}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 0.06 }}
+        >
+          POTENTIAL REWARD
+        </Title>
         <Image src="images/hmi-reward-chart-tp-v3.png" />
         <Image src="images/hmi-reward-chart-tp-bottom.png" />
       </Container>
@@ -38,7 +47,7 @@ const Image = styled.img`
   object-fit: contain;
 `;
 
-const Title = styled.h2`
+const Title = styled(motion.h2)`
   font-size: ${(props) => props.theme.fontxxl};
   text-transform: capitalize;
   color: ${(props) => props.theme.primary};

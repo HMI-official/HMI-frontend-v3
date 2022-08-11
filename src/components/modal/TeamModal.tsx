@@ -31,6 +31,11 @@ const TeamModal: FC<Props> = ({
       document.body.style.overflowY = "auto";
     };
   }, []);
+
+  // transition={{
+  //   duration: 0.2,
+  //   bounce: 0,
+  // }}
   return (
     <Overlay
       isOpen={isOpen}

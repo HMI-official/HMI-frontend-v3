@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 import { media } from "../../styles/Themes";
-
+import { motion, Variants } from "framer-motion";
+import { useWindowDimensions } from "../../hooks/useWindowDimensions";
 const benefitData = [
   {
     title: "Passive income",
@@ -41,41 +42,102 @@ const benefitConfig = {
 interface ItemProps {
   title: string;
   children: ReactNode;
+  duration: number;
 }
-const Item = ({ title, children }: ItemProps) => {
+const Item = ({ title, children, duration }: ItemProps) => {
   return (
-    <ItemContainer>
+    <ItemContainer
+      variants={titleVariants}
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: false, amount: 0.1 }}
+    >
       <Icon>
         <img src="/images/crown.png" alt="crown" />
       </Icon>
-      <Title>{title}</Title>
-      <Content>{children}</Content>
+      <Title
+        variants={titleVariants}
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {title}
+      </Title>
+      <ContentContainer>
+        <Content
+          variants={contentVariants(duration)}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {children}
+        </Content>
+      </ContentContainer>
     </ItemContainer>
   );
 };
 
+const titleVariants: Variants = {
+  offscreen: {
+    y: 50,
+    opacity: 0,
+  },
+  onscreen: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.3,
+    },
+  },
+};
+
+const contentVariants = (dur: number): Variants => {
+  return {
+    offscreen: {
+      x: -50,
+      opacity: 0,
+    },
+    onscreen: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        bounce: 0,
+        duration: dur,
+      },
+    },
+  };
+};
+const durations = [0.1, 0.4, 0.7, 0.1, 0.4, 0.7];
+
 const Benefit = () => {
+  const { width, height } = useWindowDimensions();
+  console.log(width, height);
   // const Item =
   return (
     <Section>
       <SectionWrapper>
-        <MainTitle>benefits</MainTitle>
+        <MainTitle
+          variants={titleVariants}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 0.06 }}
+        >
+          benefits
+        </MainTitle>
         <Grid>
           {/* <Row> */}
           {benefitData.map((item, index) => (
-            <Item key={index} title={item.title}>
+            <Item
+              key={index}
+              title={item.title}
+              duration={width > 768 ? durations[index] * 2 : 0.8}
+            >
               {item.content}
             </Item>
           ))}
-          {/* <Item title={benefitData[0].title}>{benefitData[0].content}</Item> */}
-          {/* <Item title={benefitData[1].title}>{benefitData[1].content}</Item> */}
-          {/* <Item title={benefitData[2].title}>{benefitData[2].content}</Item> */}
-          {/* </Row> */}
-          {/* <Row> */}
-          {/* <Item title={benefitData[3].title}>{benefitData[3].content}</Item> */}
-          {/* <Item title={benefitData[4].title}>{benefitData[4].content}</Item> */}
-          {/* <Item title={benefitData[5].title}>{benefitData[5].content}</Item> */}
-          {/* </Row> */}
         </Grid>
       </SectionWrapper>
     </Section>
@@ -83,7 +145,7 @@ const Benefit = () => {
 };
 
 export default Benefit;
-const MainTitle = styled.h2`
+const MainTitle = styled(motion.h2)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +159,7 @@ const MainTitle = styled.h2`
   }
 `;
 
-const ItemContainer = styled.div`
+const ItemContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -108,7 +170,7 @@ const ItemContainer = styled.div`
   }
 `;
 
-const Icon = styled.div`
+const Icon = styled(motion.div)`
   display: flex;
   /* justify-content: flex-start; */
   justify-content: center;
@@ -122,7 +184,7 @@ const Icon = styled.div`
   }
 `;
 
-const Title = styled.div`
+const Title = styled(motion.div)`
   font-size: calc(${(props) => props.theme.fontxl} - 5px);
   font-family: "Saira-Black";
   display: flex;
@@ -140,7 +202,14 @@ const Title = styled.div`
     padding-bottom: 0.5rem;
   }
 `;
-const Content = styled.div`
+
+const ContentContainer = styled.div`
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Content = styled(motion.div)`
   font-size: ${(props) => props.theme.fontlg};
   ${media.mobile} {
     font-size: ${(props) => props.theme.fontmd};

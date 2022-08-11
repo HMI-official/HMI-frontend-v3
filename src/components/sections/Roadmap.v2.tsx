@@ -1,8 +1,10 @@
+import { motion } from "framer-motion";
 import React, { createContext, ReactNode, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styled from "styled-components";
 import { ICarouselContent } from "../../interfaces";
 import { media } from "../../styles/Themes";
+import { titleVariants } from "../common/styles/framer-motion";
 import CarouselComponent from "../Roadmap/CarouselComponent";
 import MobileCarouselComponent from "../Roadmap/MobileCarouselComponent";
 // import Carousel from "../Roadmap/Carousel";
@@ -214,7 +216,14 @@ const RoadmapV2 = () => {
     <Section id="roadmap">
       <SectionWrapper>
         <TitleContainer>
-          <Title>ROADMAP</Title>
+          <Title
+            variants={titleVariants}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: false, amount: 0.06 }}
+          >
+            ROADMAP
+          </Title>
         </TitleContainer>
         <CarouselEl>
           {/* labtop */}
@@ -266,7 +275,7 @@ const Section = styled.section`
     padding-bottom: 2rem;
   }
 `;
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   font-size: calc(${(props) => props.theme.font2xl} + 1rem);
   text-transform: capitalize;
   color: ${(props) => props.theme.primary};

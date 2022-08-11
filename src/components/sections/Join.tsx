@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { ADDRESS } from "../../constants/address";
@@ -5,6 +6,7 @@ import { CLOTHES, SNS } from "../../constants/image";
 import { media } from "../../styles/Themes";
 import { onClickWebsite } from "../../utils/common";
 import { Button } from "../common/styles/buttons";
+import { titleVariants } from "../common/styles/framer-motion";
 // import CommonBtn from "../button/CommonBtn";
 // import AutoHeightImage from "../common/AutoHeightImage";
 // import { Section, Wrapper } from "../common/styles/page";
@@ -25,7 +27,14 @@ const Join = () => {
   return (
     <Section>
       <Container>
-        <Title>Story of HMI</Title>
+        <Title
+          variants={titleVariants}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 0.06 }}
+        >
+          Story of HMI
+        </Title>
         <Wrapper>
           <Box className="item1">
             {/* <TextBox> */}
@@ -100,7 +109,7 @@ const Container = styled.div`
     max-width: 80%;
   }
 `;
-const Title = styled.div`
+const Title = styled(motion.div)`
   font-size: ${({ theme }) => theme.font2xl};
   font-weight: 800;
   flex: 1;
