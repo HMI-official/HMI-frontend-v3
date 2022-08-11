@@ -70,6 +70,7 @@ const Header = styled.div`
   font-size: 1.5rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
+  text-transform: uppercase;
 `;
 const Body = styled.div``;
 
