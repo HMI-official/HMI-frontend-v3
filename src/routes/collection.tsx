@@ -7,6 +7,7 @@ import { PLANET_NAMES, PLANET_RANKS } from "../constants/planet";
 import { fakeDataRanks, fakeMetadata } from "../data/metadata";
 import { IMetadata } from "../interfaces/metadata";
 import { media } from "../styles/Themes";
+import RewardItemComponent from "../components/collection/RewardItemComponent";
 
 // const ranks = ["silver", "gold", "diamond"];
 
@@ -103,10 +104,29 @@ const Collection = () => {
   return (
     <Section id="collection">
       <Wrapper>
-        <IndicatorContainer>
-          <Indicator isClicked={true}>Collections</Indicator>
-          <Indicator isClicked={false}>Claim</Indicator>
-        </IndicatorContainer>
+        <Stats>
+          <RewardBox>
+            <div className="reward__item1">
+              <RewardItemComponent title="expected reward" content="$4982.00" />
+              <RewardItemComponent
+                title="total rewarded dollar"
+                content="$10982.00"
+              />
+            </div>
+            <div className="reward__item2">
+              <RewardItemComponent
+                title="total rewarded dollar"
+                content="$10982.00"
+                desc="(only tokens which you’re holding for 1 month are possible to claim)"
+              />
+              <ClaimButton>Claim</ClaimButton>
+            </div>
+          </RewardBox>
+          <TwitterBox>
+            <span>verify twitter</span>
+            <div>check icon</div>
+          </TwitterBox>
+        </Stats>
         <Container>
           <PlanetFilterContainer>
             <div className="title">planets</div>
@@ -200,6 +220,9 @@ const RightContainer = styled.div`
   min-height: 70vh;
   gap: 1rem;
   flex: 4;
+  ${media.mobile} {
+    padding: 0;
+  }
 `;
 const TopFilterContainer = styled.div`
   display: flex;
@@ -291,10 +314,10 @@ const RankFilterContainer = styled.div<{ isClicked: boolean }>`
 `;
 const ButtonContainer = styled.div`
   display: flex;
-  /* gap: 0.2rem; */
   margin: 0.2rem 0;
 
-  background: ${({ theme }) => theme.colors.gray600};
+  background: #2c2c2c;
+
   border-radius: 0.5rem;
   font-size: ${({ theme }) => theme.fontlg};
   ${media[768]} {
@@ -310,4 +333,53 @@ const Image = styled.img`
   width: 100%;
   object-fit: contain;
   border-radius: 0.7rem;
+`;
+
+const Stats = styled.div`
+  display: flex;
+  flex: 1;
+  gap: 6rem;
+  /* padding: 1rem; */
+`;
+const RewardBox = styled.div`
+  flex: 2;
+  background: #2c2c2c;
+  display: flex;
+  border-radius: 0.75rem;
+
+  .reward__item2,
+  .reward__item1 {
+    flex: 1;
+    padding: 2rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const TwitterBox = styled.div`
+  flex: 1;
+  background: #2c2c2c;
+  padding: 1rem;
+  border-radius: 0.75rem;
+
+  > span {
+    font-size: 1.3rem;
+    padding-bottom: 0.4rem;
+    color: ${(props) => props.theme.colors.gray300};
+    font-weight: 200;
+  }
+`;
+
+const ClaimButton = styled.div`
+  width: 100%;
+  border: 2px solid ${({ theme }) => theme.primary};
+  padding: 0.6rem 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 300;
 `;

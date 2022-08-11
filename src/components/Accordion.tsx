@@ -104,11 +104,9 @@ const Accordion: FC<AccordionProps> = ({ title, children }) => {
         <Indicator>{collapse ? <Minus /> : <Plus />}</Indicator>
       </Title>
       <RevealContainer height={height} clicked={collapse}>
-        {/* {collapse && ( */}
         <Reveal clicked={collapse} ref={ref}>
           {children}
         </Reveal>
-        {/* )} */}
       </RevealContainer>
     </Container>
   );
