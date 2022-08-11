@@ -365,7 +365,7 @@ const RewardBox = styled.div`
 const TwitterBox = styled.div`
   flex: 1;
   background: #2c2c2c;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 0.75rem;
   display: flex;
   flex-direction: column;
