@@ -1,5 +1,7 @@
-import React, { FC, ReactNode, useEffect, useState } from "react";
+import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { Minus } from "../Icons/Minus";
 import { Plus } from "../Icons/Plus";
 
@@ -9,12 +11,14 @@ const Title = styled.div`
   align-items: center;
   transition: all 0.3s ease-in-out;
 `;
-const Reveal = styled.div<{ clicked: boolean }>`
-  display: ${(props) => (props.clicked ? "inline-block" : "none")};
+// display: ${(props) => (props.clicked ? "inline-block" : "none")};
+const Reveal = styled(motion.div)<{ clicked: boolean }>`
+  position: absolute;
+  top: 0;
+  display: flex;
   margin-top: 1rem;
   color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.6)`};
   font-weight: 300;
-  /* line-height: 1.1rem; */
   line-height: 1.8;
 `;
 
@@ -85,8 +89,11 @@ interface AccordionProps {
 
 const Accordion: FC<AccordionProps> = ({ title, children }) => {
   const [collapse, setCollapse] = useState(false);
-
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {}, [collapse]);
+  // console.log(ref.current?.clientHeight);
+  const height = ref.current?.offsetHeight ?? 0;
+  console.log(height);
 
   return (
     <Container onClick={() => setCollapse(!collapse)} clicked={collapse}>
@@ -94,20 +101,27 @@ const Accordion: FC<AccordionProps> = ({ title, children }) => {
         <Name>
           <span>{title}</span>
         </Name>
-        {collapse ? (
-          <Indicator>
-            <Minus />
-          </Indicator>
-        ) : (
-          <Indicator>
-            <Plus />
-          </Indicator>
-        )}
+        <Indicator>{collapse ? <Minus /> : <Plus />}</Indicator>
       </Title>
-
-      <Reveal clicked={collapse}>{children}</Reveal>
+      <RevealContainer height={height} clicked={collapse}>
+        {/* {collapse && ( */}
+        <Reveal clicked={collapse} ref={ref}>
+          {children}
+        </Reveal>
+        {/* )} */}
+      </RevealContainer>
     </Container>
   );
 };
 
 export default Accordion;
+
+const RevealContainer = styled.div<{ height: number; clicked: boolean }>`
+  overflow: hidden;
+  position: relative;
+  height: ${(props) =>
+    props.clicked ? `calc(${props.height}px + 1rem)` : "0px"};
+  transition: all 0.3s ease-in-out;
+
+  /* display: flex; */
+`;

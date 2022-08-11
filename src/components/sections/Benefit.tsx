@@ -114,7 +114,7 @@ const durations = [0.1, 0.4, 0.7, 0.1, 0.4, 0.7];
 
 const Benefit = () => {
   const { width, height } = useWindowDimensions();
-  console.log(width, height);
+  // console.log(width, height);
   // const Item =
   return (
     <Section>
