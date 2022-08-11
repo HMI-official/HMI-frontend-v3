@@ -77,7 +77,7 @@ const Join = () => {
             <ImgWrapper
               onClick={() =>
                 window.open(
-                  "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-with-big-hi-planet-logo"
+                  "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-1"
                 )
               }
             >
