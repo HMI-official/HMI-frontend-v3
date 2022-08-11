@@ -11,7 +11,7 @@ export const Overlay = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
 `;
 export const Window = styled.div`
   position: relative;
@@ -26,7 +26,7 @@ export const Window = styled.div`
   /* height: 8rem; */
   gap: 1rem;
   > div {
-    width: 80%;
+    width: 90%;
   }
 `;
 

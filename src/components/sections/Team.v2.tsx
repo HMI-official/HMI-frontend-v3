@@ -1,13 +1,15 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import styled from "styled-components";
 import { HMI_HERO, TEAM_IMAGES } from "../../constants/image";
 import { media } from "../../styles/Themes";
 import Loading from "../Loading";
+import TeamModal from "../modal/TeamModal";
 
 const teamConfig = {
   gap: "3rem",
 };
-interface ItemProps {
+
+interface IMember {
   name: string;
   planet: string;
   role: string;
@@ -16,8 +18,11 @@ interface ItemProps {
   delay: number;
   offset: number;
 }
+interface ItemProps extends IMember {
+  onClickMember: () => void;
+}
 
-const teamData: ItemProps[] = [
+const teamData: IMember[] = [
   {
     name: "Sean",
     img: TEAM_IMAGES.sean,
@@ -81,7 +86,7 @@ const Item = (props: ItemProps) => {
       data-aos-delay={props.delay}
       data-aos-offset={props.offset}
     >
-      <ImgContainer>
+      <ImgContainer onClick={props.onClickMember}>
         <Suspense fallback={<Loading />}>
           <img src={props.img} alt="The HMI" loading="lazy" />
         </Suspense>
@@ -96,13 +101,21 @@ const Item = (props: ItemProps) => {
 };
 
 const TeamV2 = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const onClickMember = () => setIsOpen(true);
+  const handleCloseModal = () => setIsOpen(false);
+
   const TopItemComponent = teamData
     .slice(0, 3)
-    .map((member) => <Item key={member.name} {...member} />);
+    .map((member) => (
+      <Item key={member.name} {...member} onClickMember={onClickMember} />
+    ));
 
   const BottomItemComponent = teamData
     .slice(3, 6)
-    .map((member) => <Item key={member.name} {...member} />);
+    .map((member) => (
+      <Item key={member.name} {...member} onClickMember={onClickMember} />
+    ));
   return (
     <Section id="team">
       <Container>
@@ -112,6 +125,9 @@ const TeamV2 = () => {
           {BottomItemComponent}
         </Grid>
       </Container>
+      {isOpen && (
+        <TeamModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
+      )}
     </Section>
   );
 };
