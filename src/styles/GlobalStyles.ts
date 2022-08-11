@@ -168,8 +168,6 @@ Black 900 */
   --clr-selection-text: #f4f0f0;
   --clr-background: #06070a;
 
-
-
   --color-light: white;
   --color-dark: #212121;
   --color-signal: #fab700;
