@@ -8,6 +8,7 @@ import { fakeDataRanks, fakeMetadata } from "../data/metadata";
 import { IMetadata } from "../interfaces/metadata";
 import { media } from "../styles/Themes";
 import RewardItemComponent from "../components/collection/RewardItemComponent";
+import Check from "../components/Icons/Check";
 
 // const ranks = ["silver", "gold", "diamond"];
 
@@ -124,7 +125,9 @@ const Collection = () => {
           </RewardBox>
           <TwitterBox>
             <span>verify twitter</span>
-            <div>check icon</div>
+            <div>
+              <Check />
+            </div>
           </TwitterBox>
         </Stats>
         <Container>
@@ -354,6 +357,8 @@ const RewardBox = styled.div`
     gap: 1rem;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-between;
   }
 `;
 
@@ -362,6 +367,8 @@ const TwitterBox = styled.div`
   background: #2c2c2c;
   padding: 1rem;
   border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
 
   > span {
     font-size: 1.3rem;
@@ -369,10 +376,16 @@ const TwitterBox = styled.div`
     color: ${(props) => props.theme.colors.gray300};
     font-weight: 200;
   }
+  > div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const ClaimButton = styled.div`
-  width: 100%;
+  /* width: 100%; */
   border: 2px solid ${({ theme }) => theme.primary};
   padding: 0.6rem 0.4rem;
   display: flex;
