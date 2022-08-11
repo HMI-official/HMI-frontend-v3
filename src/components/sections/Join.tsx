@@ -138,6 +138,7 @@ const Title = styled(motion.div)`
 const Box = styled(motion.div)`
   flex: 1;
   display: flex;
+  overflow: hidden;
 `;
 
 const ImgWrapper = styled.div`
