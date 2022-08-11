@@ -39,6 +39,7 @@ a{
 }
 
   @font-face {
+    font-display: fallback;
     font-family: "NotoSans";
     font-weight: normal;
     font-style: normal;
@@ -47,6 +48,7 @@ a{
 
 
   @font-face {
+    font-display: fallback;
     font-family: "NotoSans Thin";
     font-weight: normal;
     font-style: normal;
@@ -54,6 +56,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 100;
     font-style: normal;
@@ -61,6 +64,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 200;
     font-style: normal;
@@ -68,6 +72,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 300;
     font-style: normal;
@@ -75,6 +80,7 @@ a{
   }
     
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 400;
     font-style: normal;
@@ -82,6 +88,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 500;
     font-style: normal;
@@ -89,6 +96,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 600;
     font-style: normal;
@@ -96,6 +104,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 700;
     font-style: normal;
@@ -103,6 +112,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 800;
     font-style: normal;
@@ -110,6 +120,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Montserrat";
     font-weight: 900;
     font-style: normal;
@@ -121,6 +132,7 @@ a{
 
   /* Thin 100 */
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 100;
     font-style: normal;
@@ -129,13 +141,16 @@ a{
   /* 200 */
   /* ExtraLight 200 */
  @font-face {
+  font-display: fallback;
     font-family:"Saira";  
     font-weight: 200;
     font-style: normal;
     src: url("/fonts/Saira-ExtraLight.ttf") format("truetype");
+    font-display: block;
   }
 /* 300 */
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 300;
     font-style: normal;
@@ -143,6 +158,7 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Saira-Light";  
     font-weight: 300;
     font-style: normal;
@@ -153,6 +169,7 @@ a{
 /* Regular 400 */
 
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 400;
     font-style: normal;
@@ -163,6 +180,7 @@ a{
   /* 500 */
   /* Medium 500 */
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 500;
     font-style: normal;
@@ -171,6 +189,7 @@ a{
   /* SemiBold 600 */
 
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 600;
     font-style: normal;
@@ -180,6 +199,7 @@ a{
 /* Bold 700 */
 
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 700;
     font-style: normal;
@@ -188,6 +208,7 @@ a{
   /* ExtraBold 800 */
 
   @font-face {
+    font-display: fallback;
     font-family:"Saira";  
     font-weight: 800;
     font-style: normal;
@@ -195,12 +216,14 @@ a{
   }
 
   @font-face {
+    font-display: fallback;
     font-family:"Saira";
     font-weight: 900;
     font-style: normal;
     src: url("/fonts/Saira-Black.ttf") format("truetype");
   }
   @font-face {
+    font-display: fallback;
     font-family:"Saira-Black";
     font-weight: 900;
     font-style: normal;

@@ -6,6 +6,7 @@ import Accordion from "../Accordion";
 
 const Section = styled.section`
   /* min-height: 100vh; */
+  font-family: "Saira" !important;
   height: auto;
   width: 100vw;
   padding: 4rem 0;
