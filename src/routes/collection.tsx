@@ -108,16 +108,19 @@ const Collection = () => {
         <Stats>
           <RewardBox>
             <div className="reward__item1">
-              <RewardItemComponent title="expected reward" content="$4982.00" />
               <RewardItemComponent
-                title="total rewarded dollar"
+                title="Expected rewards"
+                content="$4982.00"
+              />
+              <RewardItemComponent
+                title="Total rewarded dollar"
                 content="$10982.00"
               />
             </div>
             <div className="reward__item2">
               <RewardItemComponent
-                title="total rewarded dollar"
-                content="$10982.00"
+                title="Rewards"
+                content="$1098.00"
                 desc="(only tokens which you’re holding for 1 month are possible to claim)"
               />
               <ClaimButton>Claim</ClaimButton>
