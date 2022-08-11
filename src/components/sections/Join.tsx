@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, motionValue } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { ADDRESS } from "../../constants/address";
@@ -6,7 +6,11 @@ import { CLOTHES, SNS } from "../../constants/image";
 import { media } from "../../styles/Themes";
 import { onClickWebsite } from "../../utils/common";
 import { Button } from "../common/styles/buttons";
-import { titleVariants } from "../common/styles/framer-motion";
+import {
+  subtitleVariants,
+  subtitleVariantsR,
+  titleVariants,
+} from "../common/styles/framer-motion";
 // import CommonBtn from "../button/CommonBtn";
 // import AutoHeightImage from "../common/AutoHeightImage";
 // import { Section, Wrapper } from "../common/styles/page";
@@ -38,11 +42,22 @@ const Join = () => {
         <Wrapper>
           <Box className="item1">
             {/* <TextBox> */}
-            {text1}
-            <br />
-            <br />
-            <br />
-            {text2}
+            <Text
+              variants={subtitleVariants}
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, amount: 0.06 }}
+            >
+              {text1}
+            </Text>
+            <Text
+              variants={subtitleVariantsR}
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, amount: 0.06 }}
+            >
+              {text2}
+            </Text>
             <ButtonContainer>
               <Button onClick={() => onClickWebsite(ADDRESS.hmi)}>
                 Visit website
@@ -66,16 +81,7 @@ const Join = () => {
                 )
               }
             >
-              <img src={CLOTHES.black} alt="black sleeve" />
-            </ImgWrapper>
-            <ImgWrapper
-              onClick={() =>
-                window.open(
-                  "https://highmindedi.com/products/copy-of-hi-planet-classic-t-shirt-1"
-                )
-              }
-            >
-              <img src={CLOTHES.white} alt="white_sleeve" />
+              <img src={CLOTHES.white} alt="white sleeve" />
             </ImgWrapper>
           </Box>
         </Wrapper>
@@ -129,7 +135,7 @@ const Title = styled(motion.div)`
   }
 `;
 
-const Box = styled.div`
+const Box = styled(motion.div)`
   flex: 1;
   display: flex;
 `;
@@ -147,7 +153,8 @@ const ImgWrapper = styled.div`
   /* } */
 
   img {
-    width: 100%;
+    width: 25rem;
+    /* width: 100%; */
     min-width: 15rem;
     border-radius: 20px;
     object-fit: cover;
@@ -232,4 +239,8 @@ const Icon = styled.div`
       width: 30px;
     }
   }
+`;
+
+const Text = styled(motion.span)`
+  font-weight: 200;
 `;

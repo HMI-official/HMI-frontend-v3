@@ -9,7 +9,10 @@ import { onClickWebsite } from "../../utils/common";
 import { media } from "../../styles/Themes";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { titleVariants } from "../common/styles/framer-motion";
+import {
+  subtitleVariants,
+  titleVariants,
+} from "../common/styles/framer-motion";
 
 const localConfig = {
   isReversed: false,
@@ -28,17 +31,25 @@ const AboutV2 = () => {
           >
             REAL VALUE PROJECT
           </Title>
-          <SubText>
-            HI-PLANET is an NFT project by High Minded Intelligence, IRL ("in
-            real life") Streetwear fashion company. HI-Planet shares its 50% of
-            net profit to Planet holders in the concept of NFT Utility (which
-            comes from its E-commerce sales).
-            <br />
-            <br />
-            HI-Planet was came from the concept of game. Our goal is moving on
-            to metaverse and continue Planet story in the metaverse. Become a
-            Planet holder and join us !
-          </SubText>
+          {/* subtitleVariants */}
+          <SubTextContainer>
+            <SubText
+              variants={subtitleVariants}
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, amount: 0.06 }}
+            >
+              HI-PLANET is an NFT project by High Minded Intelligence, IRL ("in
+              real life") Streetwear fashion company. HI-Planet shares its 50%
+              of net profit to Planet holders in the concept of NFT Utility
+              (which comes from its E-commerce sales).
+              <br />
+              <br />
+              HI-Planet was came from the concept of game. Our goal is moving on
+              to metaverse and continue Planet story in the metaverse. Become a
+              Planet holder and join us !
+            </SubText>
+          </SubTextContainer>
         </Box>
         <Box>
           <ImageContainer>
@@ -204,16 +215,21 @@ const Title = styled(motion.h2)`
     padding-bottom: 2rem;
   }
 `;
-const SubText = styled.p`
+
+const SubTextContainer = styled.div`
+  overflow: hidden;
+`;
+const SubText = styled(motion.p)`
   font-size: ${(props) => props.theme.fontlg};
   color: ${(props) => props.theme.body};
   align-self: flex-start;
   width: 80%;
   margin: 1rem 0;
-  font-weight: 400;
+  font-weight: 200;
+  /* font-weight: 400; */
   @media (max-width: 64em) {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     font-size: ${(props) => props.theme.fontmd};
   }
   @media (max-width: 40em) {
