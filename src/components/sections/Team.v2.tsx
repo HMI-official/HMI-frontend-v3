@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { ReactNode, Suspense, useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 
@@ -6,6 +6,10 @@ import { HMI_HERO, TEAM_IMAGES } from "../../constants/image";
 import { media } from "../../styles/Themes";
 import Loading from "../Loading";
 import TeamModal from "../modal/TeamModal";
+import {
+  IModalMemberInfo,
+  modalMemberInfoInit,
+} from "../../interfaces/section";
 
 const teamConfig = {
   gap: "3rem",
@@ -19,6 +23,8 @@ interface IMember {
   anime: string;
   delay: number;
   offset: number;
+  desc: ReactNode;
+  linkedin: string;
 }
 interface ItemProps extends IMember {
   onClickMember: () => void;
@@ -33,6 +39,8 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 0,
     offset: 0,
+    desc: `With over 20 years of experience, Sean has been engaged into sales and marketing, specializing in the sport and fashion apparel industry. This vast experience and demonstrated history of working in the fashion industry has made him a great leader. As a founder of HI-Planet NFT, Sean works with the team to lead the way in trend forecasting, business development and partnerships. He brings with him AO Apparel, the manufacturing company under Sean's control, as our main key to success for profit sharing model.`,
+    linkedin: "",
   },
   {
     name: "Ryan",
@@ -42,6 +50,21 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 150,
     offset: 0,
+    desc: (
+      <span>
+        Ryan is an owner of a crypto mining business; he has handled more than
+        200+ mining systems and is currently managing a datacenter.
+        Additionally, he has been servicing over 50 customers.
+        <br /> He knows how value and real utility is important when it comes to
+        an NFT; he is confident to display the HI-Planet NFT project to the
+        world. As a co-founder of HPN, Ryan takes on the role to lead the
+        project in a realistic way with the ambition to ensure HI-Planet's
+        success.
+        <br />
+        <br />
+      </span>
+    ),
+    linkedin: `https://www.linkedin.com/in/ryan-lee-594b441b6/`,
   },
   {
     name: "NICK",
@@ -51,6 +74,19 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 300,
     offset: 0,
+    desc: (
+      <span>
+        Nick is a design engineer for General Motors with a Master's in
+        Engineering Management and a Bachelors of Science in Mechanical
+        Engineering. With a very detailed oriented mind he can help to ensure a
+        smooth operating project with many interesting twists and turns for the
+        Planeteers. With 6 months of NFT experience he has minted 14 projects in
+        that time. These various projects have given him expansive knowledge in
+        valuable utilities for NFT holders. <br />
+        <br />
+      </span>
+    ),
+    linkedin: `https://www.linkedin.com/in/nicholas-m-rowe/`,
   },
   {
     name: "CASEY", // 여기가 NICK
@@ -60,6 +96,19 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 450,
     offset: 0,
+    desc: (
+      <span>
+        Casey Gordon lives in Southwest Florida and has been working in the
+        restaurant industry for the past 20 years. He has been investing in
+        cryptocurrency for about 8 years now. The whole NFT world fascinates him
+        and he could easily spend hours researching/developing ideas/shilling
+        NFT projects. He is a moderator in multiple projects both ETH and SOL.
+        And now the community manager for Hi Planet!
+        <br />
+        <br />
+      </span>
+    ),
+    linkedin: "https://www.linkedin.com/in/casey-gordon-037419a/",
   },
   {
     name: "TONY",
@@ -69,6 +118,24 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 600,
     offset: 0,
+    desc: (
+      <span>
+        Tony has over 20 years of Marketing & Branding experience. He has worked
+        with major brands like Target, Apple, Ford, and Universal. He has
+        pioneered startups and mid-level companies to heighten branding and
+        profitability. He has been a leading force in media as well with
+        significant celebrity relationships, procuring partnerships with
+        companies Jack Daniels, Converse, Nike, PAC-SUN, and Forever21.
+        <br />
+        His vast network and vision have created growth in companies over the
+        last five years of a multiple of 10x. Tony is a leading technologist and
+        entrepreneur. He is currently the Co-Founder & CEO of Crowds by
+        Crowdstarter and the Wolphbrain Group.
+        <br />
+        <br />
+      </span>
+    ),
+    linkedin: "https://www.linkedin.com/in/tony-harvey-12880324/",
   },
   {
     name: "JENNY",
@@ -78,6 +145,19 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 750,
     offset: 0,
+    desc: (
+      <span>
+        Jenny has been working for over 20 years as a fashion designer with her
+        entire career stemming from Los Angeles, California. Through all of the
+        glamour of LA, she has found the time and inspiration to create our NFT
+        characters, bringing Hi Planet to life. She has accumulated vast
+        experiences which range from starting, establishing, and developing a
+        brand to production line management.
+        <br />
+        <br />
+      </span>
+    ),
+    linkedin: "https://www.linkedin.com/in/jennykim1977/",
   },
 ];
 
@@ -104,19 +184,34 @@ const Item = (props: ItemProps) => {
 
 const TeamV2 = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const onClickMember = () => setIsOpen(true);
+  const [memberInfo, setMemberInfo] =
+    useState<IModalMemberInfo>(modalMemberInfoInit);
+
+  const onClickMember = (member: IMember) => {
+    const { name, desc, linkedin } = member;
+    setIsOpen(true);
+    setMemberInfo({ name, desc, linkedin });
+  };
   const handleCloseModal = () => setIsOpen(false);
 
   const TopItemComponent = teamData
     .slice(0, 3)
     .map((member) => (
-      <Item key={member.name} {...member} onClickMember={onClickMember} />
+      <Item
+        key={member.name}
+        {...member}
+        onClickMember={() => onClickMember(member)}
+      />
     ));
 
   const BottomItemComponent = teamData
     .slice(3, 6)
     .map((member) => (
-      <Item key={member.name} {...member} onClickMember={onClickMember} />
+      <Item
+        key={member.name}
+        {...member}
+        onClickMember={() => onClickMember(member)}
+      />
     ));
   return (
     <Section id="team">
@@ -129,7 +224,11 @@ const TeamV2 = () => {
       </Container>
       <AnimatePresence>
         {isOpen && (
-          <TeamModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
+          <TeamModal
+            isOpen={isOpen}
+            handleCloseModal={handleCloseModal}
+            {...memberInfo}
+          />
         )}
       </AnimatePresence>
     </Section>

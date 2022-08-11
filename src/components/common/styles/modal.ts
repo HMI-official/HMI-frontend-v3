@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
 
-export const Overlay = styled.div<{ isOpen: boolean }>`
+export const Overlay = styled(motion.div)<{ isOpen: boolean }>`
   top: 0;
   left: 0;
   position: fixed;
@@ -13,7 +14,7 @@ export const Overlay = styled.div<{ isOpen: boolean }>`
   justify-content: center;
   color: ${({ theme }) => theme.text};
 `;
-export const Window = styled.div`
+export const Window = styled(motion.div)`
   position: relative;
   display: flex;
   flex-direction: column;

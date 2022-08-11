@@ -1,15 +1,23 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { onClickWebsite } from "../../utils/common";
 import { Overlay, Window } from "../common/styles/modal";
-
-const text = `Ryan is an owner of a crypto mining business; he has handled more than 200+ mining systems and is currently managing a datacenter. Additionally, he has been servicing over 50 customers.\n
-He knows how value and real utility is important when it comes to an NFT; he is confident to display the HI-Planet NFT project to the world. As a co-founder of HPN, Ryan takes on the role to lead the project in a realistic way with the ambition to ensure HI-Planet's success.`;
+import LinkedIn from "../Icons/LinkedIn";
 
 interface Props {
   isOpen: boolean;
   handleCloseModal: () => void;
+  name: string;
+  desc: ReactNode;
+  linkedin: string;
 }
-const TeamModal: FC<Props> = ({ isOpen, handleCloseModal }) => {
+const TeamModal: FC<Props> = ({
+  isOpen,
+  handleCloseModal,
+  name,
+  desc,
+  linkedin,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const onClickClose = (e: any) => {
@@ -24,12 +32,32 @@ const TeamModal: FC<Props> = ({ isOpen, handleCloseModal }) => {
     };
   }, []);
   return (
-    <Overlay isOpen={isOpen} onClick={onClickClose}>
-      <Window ref={ref}>
+    <Overlay
+      isOpen={isOpen}
+      onTap={onClickClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Window
+        ref={ref}
+        initial={{ transform: "translateY(100%)" }}
+        animate={{ transform: "translateY(0%)" }}
+        exit={{ transform: "translateY(200%)" }}
+      >
         <Header>
-          <span>Ryan</span>
+          <span>{name}</span>
         </Header>
-        <Body>{text}</Body>
+        <Body>
+          {desc}
+          {linkedin.length !== 0 && (
+            <IconContainer>
+              <Icon onClick={() => onClickWebsite(linkedin)}>
+                <LinkedIn />
+              </Icon>
+            </IconContainer>
+          )}
+        </Body>
       </Window>
     </Overlay>
   );
@@ -44,3 +72,14 @@ const Header = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
 `;
 const Body = styled.div``;
+
+const IconContainer = styled.div`
+  display: flex;
+`;
+
+const Icon = styled.div`
+  cursor: pointer;
+  svg {
+    fill: #0a66c2;
+  }
+`;
