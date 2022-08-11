@@ -39,7 +39,22 @@ const teamData: IMember[] = [
     anime: "flip-left",
     delay: 0,
     offset: 0,
-    desc: `With over 20 years of experience, Sean has been engaged into sales and marketing, specializing in the sport and fashion apparel industry. This vast experience and demonstrated history of working in the fashion industry has made him a great leader. As a founder of HI-Planet NFT, Sean works with the team to lead the way in trend forecasting, business development and partnerships. He brings with him AO Apparel, the manufacturing company under Sean's control, as our main key to success for profit sharing model.`,
+    desc: (
+      <span>
+        With over 20 years of experience, Sean has been engaged into sales and
+        marketing, specializing in the sport and fashion apparel industry.{" "}
+        <br />
+        <br />
+        This vast experience and demonstrated history of working in the fashion
+        industry has made him a great leader.
+        <br /> <br /> As a founder of HI-Planet NFT, Sean works with the team to
+        lead the way in trend forecasting, business development and
+        partnerships.
+        <br />
+        <br /> He brings with him AO Apparel, the manufacturing company under
+        Sean's control, as our main key to success for profit sharing model.
+      </span>
+    ),
     linkedin: "",
   },
   {
@@ -54,12 +69,16 @@ const teamData: IMember[] = [
       <span>
         Ryan is an owner of a crypto mining business; he has handled more than
         200+ mining systems and is currently managing a datacenter.
+        <br />
+        <br />
         Additionally, he has been servicing over 50 customers.
+        <br />
         <br /> He knows how value and real utility is important when it comes to
         an NFT; he is confident to display the HI-Planet NFT project to the
-        world. As a co-founder of HPN, Ryan takes on the role to lead the
-        project in a realistic way with the ambition to ensure HI-Planet's
-        success.
+        world. <br />
+        <br />
+        As a co-founder of HPN, Ryan takes on the role to lead the project in a
+        realistic way with the ambition to ensure HI-Planet's success.
         <br />
         <br />
       </span>
@@ -78,10 +97,16 @@ const teamData: IMember[] = [
       <span>
         Nick is a design engineer for General Motors with a Master's in
         Engineering Management and a Bachelors of Science in Mechanical
-        Engineering. With a very detailed oriented mind he can help to ensure a
-        smooth operating project with many interesting twists and turns for the
-        Planeteers. With 6 months of NFT experience he has minted 14 projects in
-        that time. These various projects have given him expansive knowledge in
+        Engineering.
+        <br />
+        <br /> With a very detailed oriented mind he can help to ensure a smooth
+        operating project with many interesting twists and turns for the
+        Planeteers.
+        <br />
+        <br /> With 6 months of NFT experience he has minted 14 projects in that
+        time.
+        <br />
+        <br /> These various projects have given him expansive knowledge in
         valuable utilities for NFT holders. <br />
         <br />
       </span>
@@ -99,11 +124,15 @@ const teamData: IMember[] = [
     desc: (
       <span>
         Casey Gordon lives in Southwest Florida and has been working in the
-        restaurant industry for the past 20 years. He has been investing in
-        cryptocurrency for about 8 years now. The whole NFT world fascinates him
-        and he could easily spend hours researching/developing ideas/shilling
-        NFT projects. He is a moderator in multiple projects both ETH and SOL.
-        And now the community manager for Hi Planet!
+        restaurant industry for the past 20 years.
+        <br />
+        <br /> He has been investing in cryptocurrency for about 8 years now.
+        <br />
+        <br /> The whole NFT world fascinates him and he could easily spend
+        hours researching/developing ideas/shilling NFT projects.
+        <br />
+        <br /> He is a moderator in multiple projects both ETH and SOL. And now
+        the community manager for Hi Planet!
         <br />
         <br />
       </span>
@@ -121,16 +150,21 @@ const teamData: IMember[] = [
     desc: (
       <span>
         Tony has over 20 years of Marketing & Branding experience. He has worked
-        with major brands like Target, Apple, Ford, and Universal. He has
-        pioneered startups and mid-level companies to heighten branding and
-        profitability. He has been a leading force in media as well with
-        significant celebrity relationships, procuring partnerships with
-        companies Jack Daniels, Converse, Nike, PAC-SUN, and Forever21.
+        with major brands like Target, Apple, Ford, and Universal.
+        <br />
+        <br /> He has pioneered startups and mid-level companies to heighten
+        branding and profitability.
+        <br />
+        <br /> He has been a leading force in media as well with significant
+        celebrity relationships, procuring partnerships with companies Jack
+        Daniels, Converse, Nike, PAC-SUN, and Forever21.
+        <br />
         <br />
         His vast network and vision have created growth in companies over the
-        last five years of a multiple of 10x. Tony is a leading technologist and
-        entrepreneur. He is currently the Co-Founder & CEO of Crowds by
-        Crowdstarter and the Wolphbrain Group.
+        last five years of a multiple of 10x. <br />
+        <br />
+        Tony is a leading technologist and entrepreneur. He is currently the
+        Co-Founder & CEO of Crowds by Crowdstarter and the Wolphbrain Group.
         <br />
         <br />
       </span>
@@ -148,11 +182,13 @@ const teamData: IMember[] = [
     desc: (
       <span>
         Jenny has been working for over 20 years as a fashion designer with her
-        entire career stemming from Los Angeles, California. Through all of the
-        glamour of LA, she has found the time and inspiration to create our NFT
-        characters, bringing Hi Planet to life. She has accumulated vast
-        experiences which range from starting, establishing, and developing a
-        brand to production line management.
+        entire career stemming from Los Angeles, California. <br />
+        <br />
+        Through all of the glamour of LA, she has found the time and inspiration
+        to create our NFT characters, bringing Hi Planet to life. <br />
+        <br />
+        She has accumulated vast experiences which range from starting,
+        establishing, and developing a brand to production line management.
         <br />
         <br />
       </span>

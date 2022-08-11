@@ -49,7 +49,7 @@ const TeamModal: FC<Props> = ({
           <span>{name}</span>
         </Header>
         <Body>
-          {desc}
+          <Desc> {desc}</Desc>
           {linkedin.length !== 0 && (
             <IconContainer>
               <Icon onClick={() => onClickWebsite(linkedin)}>
@@ -83,4 +83,8 @@ const Icon = styled.div`
   svg {
     fill: #0a66c2;
   }
+`;
+
+const Desc = styled.div`
+  /* font-size: 1.1rem; */
 `;
