@@ -188,7 +188,7 @@ const Container = styled.div`
 const ImgContainer = styled.div`
   /* width: 20rem; */
   /* height: 20rem; */
-
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
