@@ -84,3 +84,12 @@ export const CLOTHES = {
 };
 
 export const HMI_GIF = "/images/hiplanet-gif.gif";
+
+export const TEAM_IMAGES = {
+  sean: "/images/team/Sean.jpg",
+  ryan: "/images/team/Ryan.jpg",
+  nick: "/images/team/Nick.jpg",
+  casey: "/images/team/Casey.jpg",
+  tony: "/images/team/Tony.jpg",
+  jenny: "/images/team/Jenny.jpg",
+};

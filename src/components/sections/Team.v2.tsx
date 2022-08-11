@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import styled from "styled-components";
-import { HMI_HERO } from "../../constants/image";
+import { HMI_HERO, TEAM_IMAGES } from "../../constants/image";
 import { media } from "../../styles/Themes";
 import Loading from "../Loading";
 
@@ -20,8 +20,8 @@ interface ItemProps {
 const teamData: ItemProps[] = [
   {
     name: "Sean",
-    img: HMI_HERO.bigbang,
-    planet: "Big Bang",
+    img: TEAM_IMAGES.sean,
+    planet: "FOUNDER",
     role: "The Creator Of HI-Planet",
     anime: "flip-left",
     delay: 0,
@@ -29,35 +29,35 @@ const teamData: ItemProps[] = [
   },
   {
     name: "Ryan",
-    img: HMI_HERO.earth,
-    planet: "HI",
+    img: TEAM_IMAGES.ryan,
+    planet: "CO-FOUNDER",
     role: "Peacemaker",
     anime: "flip-left",
     delay: 150,
     offset: 0,
   },
   {
-    name: "ABE",
-    img: HMI_HERO.moon,
-    planet: "MOOLU",
+    name: "NICK",
+    img: TEAM_IMAGES.nick,
+    planet: "PROJECT MANAGER",
     role: "Tech-savvy",
     anime: "flip-left",
     delay: 300,
     offset: 0,
   },
   {
-    name: "NICK", // 여기가 NICK
-    img: HMI_HERO.neptune,
-    planet: "NEP",
-    role: "Wisecracker",
+    name: "CASEY", // 여기가 NICK
+    img: TEAM_IMAGES.casey,
+    planet: "COMMUNITY MANAGER",
+    role: "COMMUNITY MANAGER",
     anime: "flip-left",
     delay: 450,
     offset: 0,
   },
   {
-    name: "Casey",
-    img: HMI_HERO.mercury,
-    planet: "MERC",
+    name: "TONY",
+    img: TEAM_IMAGES.tony,
+    planet: "ADVISER(MARKETING)",
     role: "Motor-Mouth",
     anime: "flip-left",
     delay: 600,
@@ -65,8 +65,8 @@ const teamData: ItemProps[] = [
   },
   {
     name: "JENNY",
-    img: HMI_HERO.mars,
-    planet: "MA",
+    img: TEAM_IMAGES.jenny,
+    planet: "DESIGN & ARTIST",
     role: "Avant-Garde",
     anime: "flip-left",
     delay: 750,
@@ -89,7 +89,7 @@ const Item = (props: ItemProps) => {
       <ItemTextContainer>
         <Name>{props.name}</Name>
         <Planet>{props.planet}</Planet>
-        <Role>{props.role}</Role>
+        {/* <Role>{props.role}</Role> */}
       </ItemTextContainer>
     </ItemContainer>
   );
@@ -186,14 +186,16 @@ const Container = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  width: 20rem;
-  height: 20rem;
+  /* width: 20rem; */
+  /* height: 20rem; */
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-radius: 20px;
+  border-radius: 50%;
+
+  overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.5);
   :hover {
     border-color: ${({ theme }) => theme.primary};
@@ -202,15 +204,14 @@ const ImgContainer = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${media.mobile} {
-    width: 15rem;
-    height: 15rem;
+    /* width: 15rem; */
+    /* height: 15rem; */
   }
 
   img {
     width: 16rem;
     height: 16rem;
     min-height: 16rem;
-
     object-fit: cover;
 
     @media (max-width: 48em) {
