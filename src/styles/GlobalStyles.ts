@@ -11,6 +11,10 @@ ${
 } */
 }
 
+/* html.wf-loading * { */
+     /* opacity: 0; */
+ /* } */
+
 *,*::before,*::after{
     margin: 0;
     padding: 0;
@@ -140,108 +144,7 @@ a{
     src: url("/fonts/Montserrat-Black.ttf") format("truetype");
   }
 
-
-
-
-  /* Thin 100 */
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 100;
-    font-style: normal;
-    src: url("/fonts/Saira-Thin.ttf") format("truetype");
-  }
-  /* 200 */
-  /* ExtraLight 200 */
- @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 200;
-    font-style: normal;
-    src: url("/fonts/Saira-ExtraLight.ttf") format("truetype");
-    font-display: block;
-  }
-/* 300 */
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 300;
-    font-style: normal;
-    src: url("/fonts/Saira-Light.ttf") format("truetype");
-  }
-
-  @font-face {
-    font-display: block;
-    font-family:"Saira-Light";  
-    font-weight: 300;
-    font-style: normal;
-    src: url("/fonts/Saira-Light.ttf") format("truetype");
-  }
-
-  /* 400 */
-/* Regular 400 */
-
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 400;
-    font-style: normal;
-    src: url("/fonts/Saira-Regular.ttf") format("truetype");
-  }
-
-
-  /* 500 */
-  /* Medium 500 */
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 500;
-    font-style: normal;
-    src: url("/fonts/Saira-Medium.ttf") format("truetype");
-  }
-  /* SemiBold 600 */
-
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 600;
-    font-style: normal;
-    src: url("/fonts/Saira-SemiBold.ttf") format("truetype");
-  }
-
-/* Bold 700 */
-
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 700;
-    font-style: normal;
-    src: url("/fonts/Saira-Bold.ttf") format("truetype");
-  }
-  /* ExtraBold 800 */
-
-  @font-face {
-    font-display: block;
-    font-family:"Saira";  
-    font-weight: 800;
-    font-style: normal;
-    src: url("/fonts/Saira-ExtraBold.ttf") format("truetype");
-  }
-
-  @font-face {
-    font-display: block;
-    font-family:"Saira";
-    font-weight: 900;
-    font-style: normal;
-    src: url("/fonts/Saira-Black.ttf") format("truetype");
-  }
-  @font-face {
-    font-display: block;
-    font-family:"Saira-Black";
-    font-weight: 900;
-    font-style: normal;
-    src: url("/fonts/Saira-Black.ttf") format("truetype");
-  }
+   
 /* Thin 100
 ExtraLight 200
 Light 300
