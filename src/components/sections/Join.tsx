@@ -156,7 +156,7 @@ const ImgWrapper = styled.div`
   img {
     width: 25rem;
     /* width: 100%; */
-    min-width: 15rem;
+    min-width: 14rem;
     border-radius: 20px;
     object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.5);
@@ -167,7 +167,7 @@ const ImgWrapper = styled.div`
     }
   }
   ${media[768]} {
-    width: 14rem;
+    width: 15rem;
   }
 `;
 
