@@ -108,13 +108,10 @@ const Minting: FC = () => {
   ) => {
     switch (true) {
       case await _isPublicSale:
-        console.log("public sale");
         return config.maxMintAmount;
       case await _isPreSale:
-        console.log("pre sale");
         return config.presaleMaxMintAmount;
       case await _isOgSale:
-        console.log("og sale");
         return config.ogMaxMintAmount;
       default:
         return config.maxMintAmount;
@@ -157,7 +154,11 @@ const Minting: FC = () => {
     // fot loading
     setIsMinting(true);
     // get status
-    const { success, status } = await publicMint(mintAmount, _wallet);
+    const { success, status } = await publicMint(
+      mintAmount,
+      _wallet,
+      mintConfig.totalPrice
+    );
     // set status
 
     setMintStatus({
@@ -177,14 +178,28 @@ const Minting: FC = () => {
   useEffect(() => setOnboard(initOnboard), []);
 
   useEffect(() => {
-    if (!userWallet || isOgSale) return;
+    console.log(mintConfig);
+  }, [mintConfig]);
+
+  useEffect(() => {
+    if (!userWallet) return;
     const main = async () => {
       const _leaf = getLeaf(userWallet);
       // console.log(userWallet);
+      console.log(`isPreSales: ${isPreSale}`);
+      console.log(`isPublicSale: ${isPublicSale}`);
+      console.log(`isOgSale: ${isOgSale}`);
+      const _totalPrice = () => {
+        if (isPreSale) {
+          return wlTotalPrice.toString();
+        } else if (isOgSale) {
+          return "0";
+        } else {
+          return totalPublicPrice().toString();
+        }
+      };
       let _mintConfig: IMintComponentConfig = {
-        totalPrice: isPreSale
-          ? wlTotalPrice.toString()
-          : totalPublicPrice().toString(),
+        totalPrice: _totalPrice(),
         _mintAmount: mintAmount,
         receiver: userWallet,
       };
@@ -195,7 +210,7 @@ const Minting: FC = () => {
       setMintConfig(_mintConfig);
     };
     main();
-  }, [userWallet, mintAmount, isPreSale]);
+  }, [userWallet, mintAmount, isPreSale, isOgSale]);
 
   // set local storage if wallet is connected
   useEffect(() => {
@@ -249,7 +264,7 @@ const Minting: FC = () => {
         _isPreSale,
         _isOgSale
       );
-      console.log(`maxMintAmount: ${_maxMintAmount}`);
+      // console.log(`maxMintAmount: ${_maxMintAmount}`);
 
       setMaxMintAmount(_maxMintAmount);
     };
@@ -322,7 +337,7 @@ const Minting: FC = () => {
       {/* <MintConfigContext.Provider value={value}> */}
       <Section>
         <LoadComponent loaded={isLoaded}>
-          <Cover src="/images/blur.jpeg" alt="" />
+          {/* <Cover src="/images/blur.jpeg" alt="" /> */}
           <ModalContainer>
             <Header>
               <div className="item1">
@@ -367,7 +382,7 @@ const Minting: FC = () => {
                   <div className="item1"> Total</div>{" "}
                   <div className="item2">
                     <span>
-                      {isPreSale ? wlTotalPrice : totalPublicPrice()}
+                      {mintConfig.totalPrice}
                       ETH
                     </span>{" "}
                     <span>+ GAS</span>
@@ -428,7 +443,7 @@ const Section = styled.section`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh + ${(props) => props.theme.navHeight});
   position: relative;
   color: ${(props) => props.theme.text};
   ${media[768]} {

@@ -1,4 +1,10 @@
-import { config, MINT_NFT_ABI, MINT_NFT_ADDRESS } from "../web3Config";
+import {
+  config,
+  MINT_NFT_ABI,
+  MINT_NFT_ADDRESS,
+  PROXY_ABI,
+  PROXY_CONTRACT_ADDRESS,
+} from "../web3Config";
 import { createAlchemyWeb3 } from "@alch/alchemy-web3";
 import { MerkleTree } from "merkletreejs";
 import { keccak256 } from "web3-utils";
@@ -12,6 +18,7 @@ export const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_RPC_URL!);
 
 // const contract = require("../artifacts/contracts/BoredApe.sol/BoredApe.json");
 const mintNFTContract = new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_ADDRESS);
+const proxyContract = new web3.eth.Contract(PROXY_ABI, PROXY_CONTRACT_ADDRESS);
 
 // Calculate merkle root from the whitelist array
 // const wlLeafNodes = whitelist.map((addr: string) => keccak256(addr));
@@ -28,32 +35,42 @@ export const getTotalMinted = async () => {
 };
 
 export const getMaxSupply = async () => {
-  const maxSupply = await mintNFTContract.methods.maxSupply().call();
+  const maxSupply = await proxyContract.methods.getMaxSupply().call();
   return maxSupply;
 };
 
 export const isPausedState = async () => {
-  const paused = await mintNFTContract.methods.paused().call();
+  const paused = await proxyContract.methods.paused().call();
   return paused;
 };
 
 export const isPublicSaleState = async () => {
-  const publicSale = await mintNFTContract.methods.publicM().call();
-  return publicSale;
+  try {
+    const publicSale = await proxyContract.methods.publicM().call();
+    return publicSale;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 export const isOgSaleState = async () => {
-  const ogSale = await mintNFTContract.methods.ogSaleM().call();
-  return ogSale;
+  try {
+    const ogSale = await proxyContract.methods.ogsaleM().call();
+    return ogSale;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 export const isPreSaleState = async () => {
-  const preSale = await mintNFTContract.methods.presaleM().call();
+  const preSale = await proxyContract.methods.presaleM().call();
   return preSale;
 };
 
 export const getPrice = async () => {
-  const price = await mintNFTContract.methods.price().call();
+  const price = await proxyContract.methods.price().call();
   return price;
 };
 
@@ -158,9 +175,7 @@ export const ogSaleMint = async (mintAmount: number) => {
     value: parseInt(
       web3.utils.toWei(String(config.ogPrice * mintAmount), "ether")
     ).toString(16), // hex
-    data: mintNFTContract.methods
-      .ogSaleMint(mintAmount, proof, _wallet)
-      .encodeABI(),
+    data: mintNFTContract.methods.ogSaleMint(proof).encodeABI(),
     nonce: nonce.toString(16),
   };
 
@@ -191,7 +206,11 @@ export const ogSaleMint = async (mintAmount: number) => {
   }
 };
 
-export const publicMint = async (mintAmount: number, wallet: string) => {
+export const publicMint = async (
+  mintAmount: number,
+  wallet: string,
+  price: string
+) => {
   if (!window.ethereum.selectedAddress) {
     return {
       success: false,
@@ -209,9 +228,7 @@ export const publicMint = async (mintAmount: number, wallet: string) => {
   const tx = {
     to: config.MINT_NFT_ADDRESS,
     from: window.ethereum.selectedAddress,
-    value: parseInt(
-      web3.utils.toWei(String(config.price * mintAmount), "ether")
-    ).toString(16), // hex
+    value: parseInt(web3.utils.toWei(String(price), "ether")).toString(16), // hex
     data: mintNFTContract.methods
       .publicSaleMint(mintAmount, wallet, wallet)
       .encodeABI(),
