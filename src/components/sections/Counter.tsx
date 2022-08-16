@@ -80,7 +80,7 @@ const Counter = () => {
           <InfoContainer>
             <InfoItem title="price" description="$200 USD" />
             <InfoItem title="total supply" description="3,333" />
-            <InfoItem title="mint date" description="THU, Aug 25th - 2pm PST" />
+            <InfoItem title="mint date" description="THU, Sep 8th - 2pm PST" />
           </InfoContainer>
           <Link to="/">
             {/* <Link to="/mint"> */}

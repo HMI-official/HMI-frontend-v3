@@ -77,7 +77,7 @@ const Faq = () => {
       <Container>
         <Box>
           <Accordion title="When is the mint date ?">
-            Our Public mint date is 8/25/2022 2pm PST. WL and OG mint will be
+            Our Public mint date is 9/8/2022 2pm PST. WL and OG mint will be
             announced soon.
           </Accordion>
           <Accordion title="What is our Total Supply and price ?">
