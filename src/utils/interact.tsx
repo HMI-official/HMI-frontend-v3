@@ -11,6 +11,7 @@ import { keccak256 } from "web3-utils";
 import { whitelist } from "../data/whitelist";
 import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
 import { getLeaf, getProof } from "./merkleTree";
+import { getRPCErrorMessage } from "./common";
 // import whitelist from ""
 // const whitelist = require("../scripts/whitelist.js");
 
@@ -255,6 +256,9 @@ export const publicMint = async (
       ),
     };
   } catch (error: any) {
+    // const reason = await getRPCErrorMessage(error);
+    // let message = JSON.parse(error);
+    console.log(error);
     return {
       success: false,
       status: "😞 Smth went wrong:" + error.message,

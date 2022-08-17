@@ -88,3 +88,28 @@ export const cutDecimalZero = (num: number, maxLenth: number): number => {
   const num2Float = Number.parseFloat(num2String);
   return num2Float;
 };
+
+export const changeTimeZone = (date: Date, timeZone: string) => {
+  if (typeof date === "string") {
+    return new Date(
+      new Date(date).toLocaleString("en-US", {
+        timeZone,
+      })
+    );
+  }
+
+  return new Date(
+    date.toLocaleString("en-US", {
+      timeZone,
+    })
+  );
+};
+
+export function getRPCErrorMessage(err: any) {
+  var open = err.stack.indexOf("{");
+  var close = err.stack.lastIndexOf("}");
+  var j_s = err.stack.substring(open, close + 1);
+  var j = JSON.parse(j_s);
+  var reason = j.data[Object.keys(j.data)[0]].reason;
+  return reason;
+}

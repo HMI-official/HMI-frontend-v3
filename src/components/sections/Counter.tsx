@@ -78,7 +78,10 @@ const Counter = () => {
             <TimeItem time={time?.sec ?? 0} indicator="seconds" />
           </TimeContainer>
           <InfoContainer>
-            <InfoItem title="price" description="$200 USD" />
+            <InfoItem
+              title="price"
+              description="WL(0.09ETH), Public(0.12ETH) "
+            />
             <InfoItem title="total supply" description="3,333" />
             <InfoItem title="mint date" description="THU, Sep 8th - 2pm PST" />
           </InfoContainer>

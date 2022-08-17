@@ -85,10 +85,13 @@ const Faq = () => {
             <br />
             OG : Free mint
             <br />
-            WL Price : $150 USD
+            WL Price : 0.09ETH
             <br />
-            Public Sales : $200 USD
+            Public Sales : 0.12ETH
           </Accordion>
+          {/* Public Sales : $200 USD */}
+          {/* WL Price : $150 USD */}
+          {/* WL(0.09ETH), Public(0.12ETH)  */}
         </Box>
         <Box>
           <Accordion title="How will I get the reward and How often ?">

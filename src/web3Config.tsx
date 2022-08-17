@@ -112,131 +112,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "error" as AbiType,
   },
   {
-    inputs: [],
-    name: "TransferCallerNotOwnerNorApproved",
-    type: "error" as AbiType,
-  },
-  {
-    inputs: [],
-    name: "TransferFromIncorrectOwner",
-    type: "error" as AbiType,
-  },
-  {
-    inputs: [],
-    name: "TransferToNonERC721ReceiverImplementer",
-    type: "error" as AbiType,
-  },
-  {
-    inputs: [],
-    name: "TransferToZeroAddress",
-    type: "error" as AbiType,
-  },
-  {
-    inputs: [],
-    name: "URIQueryForNonexistentToken",
-    type: "error" as AbiType,
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "approved",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "Approval",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "operator",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "approved",
-        type: "bool",
-      },
-    ],
-    name: "ApprovalForAll",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "fromTokenId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "toTokenId",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-    ],
-    name: "ConsecutiveTransfer",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
     inputs: [
       {
         internalType: "uint256",
@@ -377,29 +252,9 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "Transfer",
-    type: "event",
+    inputs: [],
+    name: "TransferCallerNotOwnerNorApproved",
+    type: "error" as AbiType,
   },
   {
     inputs: [
@@ -425,6 +280,11 @@ export const MINT_NFT_ABI: AbiItem[] = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "TransferFromIncorrectOwner",
+    type: "error" as AbiType,
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -436,6 +296,146 @@ export const MINT_NFT_ABI: AbiItem[] = [
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
+  },
+  {
+    inputs: [],
+    name: "TransferToNonERC721ReceiverImplementer",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "TransferToZeroAddress",
+    type: "error" as AbiType,
+  },
+  {
+    inputs: [],
+    name: "URIQueryForNonexistentToken",
+    type: "error" as AbiType,
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "approved",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "Approval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "operator",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "approved",
+        type: "bool",
+      },
+    ],
+    name: "ApprovalForAll",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "fromTokenId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "toTokenId",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+    ],
+    name: "ConsecutiveTransfer",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
   },
   {
     inputs: [],
@@ -591,30 +591,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
       },
     ],
     stateMutability: "pure",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_mintStart",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_mintEnd",
-        type: "uint256",
-      },
-    ],
-    name: "getMintTimeCompliance",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -890,261 +866,6 @@ export const MINT_NFT_ABI: AbiItem[] = [
 ];
 
 export const PROXY_ABI: AbiItem[] = [
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_tokenBaseURI",
-        type: "string",
-      },
-    ],
-    name: "setBaseURI",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_activatedTime",
-        type: "uint256",
-      },
-    ],
-    name: "setMarketActivatedTime",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint8",
-        name: "_maxMintAmountPerTx",
-        type: "uint8",
-      },
-    ],
-    name: "setMaxMintAmountPerTx",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint16",
-        name: "_maxSupply",
-        type: "uint16",
-      },
-    ],
-    name: "setMaxSupply",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint8",
-        name: "_policyIndex",
-        type: "uint8",
-      },
-      {
-        internalType: "uint256",
-        name: "_mintStart",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_mintEnd",
-        type: "uint256",
-      },
-    ],
-    name: "setMintTime",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes32",
-        name: "_merkleRoot",
-        type: "bytes32",
-      },
-    ],
-    name: "setOgMerkleRoot",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_price",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_startTime",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_endTime",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_paused",
-        type: "bool",
-      },
-      {
-        internalType: "uint8",
-        name: "_maxMintAmountLimit",
-        type: "uint8",
-      },
-    ],
-    name: "setOgsalePolicy",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_price",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_startTime",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_endTime",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_paused",
-        type: "bool",
-      },
-      {
-        internalType: "uint8",
-        name: "_maxMintAmountLimit",
-        type: "uint8",
-      },
-    ],
-    name: "setPresalePolicy",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_price",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_startTime",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_endTime",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_paused",
-        type: "bool",
-      },
-    ],
-    name: "setPublicsalePolicy",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes32",
-        name: "_merkleRoot",
-        type: "bytes32",
-      },
-    ],
-    name: "setWlMerkleRoot",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "toggleMarketActicated",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "toggleOgsale",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "togglePause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "togglePresale",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "togglePublicSale",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "toggleReveal",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
   {
     inputs: [],
     stateMutability: "nonpayable",
@@ -1785,6 +1506,261 @@ export const PROXY_ABI: AbiItem[] = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_tokenBaseURI",
+        type: "string",
+      },
+    ],
+    name: "setBaseURI",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_activatedTime",
+        type: "uint256",
+      },
+    ],
+    name: "setMarketActivatedTime",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "_maxMintAmountPerTx",
+        type: "uint8",
+      },
+    ],
+    name: "setMaxMintAmountPerTx",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "_maxSupply",
+        type: "uint16",
+      },
+    ],
+    name: "setMaxSupply",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "_policyIndex",
+        type: "uint8",
+      },
+      {
+        internalType: "uint256",
+        name: "_mintStart",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_mintEnd",
+        type: "uint256",
+      },
+    ],
+    name: "setMintTime",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "_merkleRoot",
+        type: "bytes32",
+      },
+    ],
+    name: "setOgMerkleRoot",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_paused",
+        type: "bool",
+      },
+      {
+        internalType: "uint8",
+        name: "_maxMintAmountLimit",
+        type: "uint8",
+      },
+    ],
+    name: "setOgsalePolicy",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_paused",
+        type: "bool",
+      },
+      {
+        internalType: "uint8",
+        name: "_maxMintAmountLimit",
+        type: "uint8",
+      },
+    ],
+    name: "setPresalePolicy",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_paused",
+        type: "bool",
+      },
+    ],
+    name: "setPublicsalePolicy",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "_merkleRoot",
+        type: "bytes32",
+      },
+    ],
+    name: "setWlMerkleRoot",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toggleMarketActicated",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toggleOgsale",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "togglePause",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "togglePresale",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "togglePublicSale",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "toggleReveal",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "wlPrice",
     outputs: [
@@ -1802,10 +1778,10 @@ export const PROXY_ABI: AbiItem[] = [
 // 생각해보니까 가능할듯
 // 왜냐면 하나만 (히든 이미지)포인팅하고 있다가 리빌로 풀면 유저들이 직접 새로고침 해야하니까 그거 하면 한개씩 자동으로 되는거니까
 
-export const MINT_NFT_ADDRESS = "0x8b96A642Dcb12E4c184c74C506b6451EefE52404";
+export const MINT_NFT_ADDRESS = "0x1df71Fface526F4630493cE6E9FBf671A85cA1a2";
 //
 export const PROXY_CONTRACT_ADDRESS =
-  "0x9A25F894C49190E8b2Cd2509d1b5445f58e1d0f3";
+  "0xFBe868ED9c3a22E1cb6ba9254bb2940c0Ae650e1";
 
 export const config = {
   MINT_NFT_ABI,
