@@ -27,6 +27,8 @@ import {
   presaleMint,
   ogSaleMint,
   publicMint,
+  getWlClaimed,
+  getOgClaimed,
 } from "../utils/interact";
 import { IMintStatus } from "../interfaces";
 // import { config } from "process";
@@ -64,15 +66,8 @@ const Minting: FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [mintConfig, setMintConfig] =
     useState<IMintComponentConfig>(mintCommonConfigInit);
-
-  // 5개 넘기면 10% 할인
-  // 10개는 20% 할인
-  // const totalPrice = isPreSale
-  //   ? cutDecimalZero(
-  //       config.wlPrice * mintAmount,
-  //       config.wlPrice.toString().length
-  //     )
-  //   : cutDecimalZero(config.price * mintAmount, config.price.toString().length);
+  const [wlClaimed, setWlClaimed] = useState<number>(0);
+  const [ogClaimed, setOgClaimed] = useState<number>(0);
 
   const wlTotalPrice = cutDecimalZero(
     config.wlPrice * mintAmount,
@@ -101,18 +96,18 @@ const Minting: FC = () => {
 
   // FIXME: onClick events
 
-  const getMaxMintAmount = async (
+  const getMaxMintAmount = (
     _isPublicSale: boolean,
     _isPreSale: boolean,
     _isOgSale: boolean
   ) => {
     switch (true) {
-      case await _isPublicSale:
+      case _isPublicSale:
         return config.maxMintAmount;
-      case await _isPreSale:
-        return config.presaleMaxMintAmount;
-      case await _isOgSale:
-        return config.ogMaxMintAmount;
+      case _isPreSale:
+        return config.presaleMaxMintAmount - wlClaimed;
+      case _isOgSale:
+        return config.ogMaxMintAmount - ogClaimed;
       default:
         return config.maxMintAmount;
     }
@@ -173,22 +168,18 @@ const Minting: FC = () => {
     // console.log(status);
   };
 
+  const onClickConnect = () =>
+    connect({ autoSelect: { label: "string", disableModals: false } });
+
   // FIXME:  setting onboard
   // initialize onboard
   useEffect(() => setOnboard(initOnboard), []);
 
   useEffect(() => {
-    console.log(mintConfig);
-  }, [mintConfig]);
-
-  useEffect(() => {
     if (!userWallet) return;
     const main = async () => {
       const _leaf = getLeaf(userWallet);
-      // console.log(userWallet);
-      console.log(`isPreSales: ${isPreSale}`);
-      console.log(`isPublicSale: ${isPublicSale}`);
-      console.log(`isOgSale: ${isOgSale}`);
+
       const _totalPrice = () => {
         if (isPreSale) {
           return wlTotalPrice.toString();
@@ -203,9 +194,7 @@ const Minting: FC = () => {
         _mintAmount: mintAmount,
         receiver: userWallet,
       };
-      // _merkleProof: getProof(WL_MERKLE_INFO.wlMerkleTree, _leaf),
       const proof = getProof(WL_MERKLE_INFO.wlMerkleTree, _leaf);
-      // console.log(proof);
       if (isPreSale) _mintConfig = { ..._mintConfig, _merkleProof: proof };
       setMintConfig(_mintConfig);
     };
@@ -258,19 +247,32 @@ const Minting: FC = () => {
       setIsPublicSale(_isPublicSale);
       setIsPreSale(_isPreSale);
       setIsOgSale(_isOgSale);
-
-      const _maxMintAmount = await getMaxMintAmount(
-        _isPublicSale,
-        _isPreSale,
-        _isOgSale
-      );
-      // console.log(`maxMintAmount: ${_maxMintAmount}`);
-
-      setMaxMintAmount(_maxMintAmount);
     };
 
     init();
   }, []);
+
+  useEffect(() => {
+    const init = async () => {
+      const _maxMintAmount = await getMaxMintAmount(
+        isPublicSale,
+        isPreSale,
+        isOgSale
+      );
+      setMaxMintAmount(_maxMintAmount);
+      // if (mintAmount > _maxMintAmount) setMintAmount(_maxMintAmount);
+    };
+    init();
+  }, [isPublicSale, isPreSale, isOgSale]);
+
+  useEffect(() => {
+    if (!userWallet) return;
+    const init = async () => {
+      setWlClaimed(await getWlClaimed(userWallet));
+      setOgClaimed(await getOgClaimed(userWallet));
+    };
+    init();
+  }, [userWallet]);
 
   useEffect(() => {
     const timer = setInterval(async () => {
@@ -291,10 +293,9 @@ const Minting: FC = () => {
 
   // FIXME: components
   const ButtonComponent = () => {
+    // TODO:  maxMintAmount 업데이트해주기 민팅한 다음에
     const isNotValid = paused || (!isPreSale && !isPublicSale && !isOgSale);
-
-    const onClickConnect = () =>
-      connect({ autoSelect: { label: "string", disableModals: false } });
+    const maxMintAmountExceeded = maxMintAmount === 0;
 
     const onClickMint = () => {
       if (isNotValid) return;
@@ -313,13 +314,28 @@ const Minting: FC = () => {
       }
     };
 
-    if (isMinting) return <Button isNotValid={isMinting}>ON PROCESS</Button>;
-
-    if (!wallet)
-      return <Button onClick={onClickConnect}>connect wallet</Button>;
-    if (wallet && isNotValid)
-      return <Button isNotValid={isNotValid}>disabled</Button>;
-    if (wallet) return <Button onClick={onClickMint}>Buy with ETH</Button>;
+    switch (true) {
+      case isMinting:
+        return <Button isNotValid={isMinting}>ON PROCESS</Button>;
+      case !wallet:
+        return (
+          <Button isNotValid={!wallet} onClick={onClickConnect}>
+            CONNECT
+          </Button>
+        );
+      case isNotValid:
+        return <Button isNotValid={isNotValid}>disabled</Button>;
+      case !isPublicSale && maxMintAmountExceeded:
+        return (
+          <Button isNotValid={true}>
+            you already claimed{" "}
+            {isPreSale ? config.presaleMaxMintAmount : config.ogMaxMintAmount}{" "}
+            tokens {isPreSale ? "(wl)" : "(og)"}
+          </Button>
+        );
+      default:
+        return <Button onClick={onClickMint}>Buy with ETH</Button>;
+    }
   };
 
   const TitleComponent = () => {

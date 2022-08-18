@@ -22,13 +22,13 @@ export const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_RPC_URL!);
 const mintNFTContract = new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_ADDRESS);
 const proxyContract = new web3.eth.Contract(PROXY_ABI, PROXY_CONTRACT_ADDRESS);
 
-export const wlClaimed = async (wallet: string): Promise<number> => {
-  const wlClaimed = await mintNFTContract.methods.wlClaimed().call();
+export const getWlClaimed = async (wallet: string): Promise<number> => {
+  const wlClaimed = await mintNFTContract.methods.wlClaimed(wallet).call();
   return Number(wlClaimed);
 };
 
-export const ogClaimed = async (wallet: string): Promise<number> => {
-  const ogClaimed = await mintNFTContract.methods.ogClaimed().call();
+export const getOgClaimed = async (wallet: string): Promise<number> => {
+  const ogClaimed = await mintNFTContract.methods.ogClaimed(wallet).call();
   return Number(ogClaimed);
 };
 
