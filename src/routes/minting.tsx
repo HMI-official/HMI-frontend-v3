@@ -318,11 +318,7 @@ const Minting: FC = () => {
       case isMinting:
         return <Button isNotValid={isMinting}>ON PROCESS</Button>;
       case !wallet:
-        return (
-          <Button isNotValid={!wallet} onClick={onClickConnect}>
-            CONNECT
-          </Button>
-        );
+        return <Button onClick={onClickConnect}>CONNECT</Button>;
       case isNotValid:
         return <Button isNotValid={isNotValid}>disabled</Button>;
       case !isPublicSale && maxMintAmountExceeded:

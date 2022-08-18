@@ -90,10 +90,7 @@ interface AccordionProps {
 const Accordion: FC<AccordionProps> = ({ title, children }) => {
   const [collapse, setCollapse] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {}, [collapse]);
-  // console.log(ref.current?.clientHeight);
   const height = ref.current?.offsetHeight ?? 0;
-  console.log(height);
 
   return (
     <Container onClick={() => setCollapse(!collapse)} clicked={collapse}>

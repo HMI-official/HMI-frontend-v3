@@ -105,21 +105,18 @@ const Collection = () => {
   return (
     <Section id="collection">
       <Wrapper>
+        <StatTitle>Estimated Distribution (annual)</StatTitle>
         <Stats>
           <RewardBox>
             <div className="reward__item1">
-              <RewardItemComponent
-                title="Expected rewards"
-                content="$4982.00"
-              />
-              <RewardItemComponent
-                title="Total rewarded dollar"
-                content="$10982.00"
-              />
+              <RewardItemComponent title="Total" content="$369,000" />
+              <RewardItemComponent title="Per NFT" content="$112" />
             </div>
+          </RewardBox>
+          <RewardBox>
             <div className="reward__item2">
               <RewardItemComponent
-                title="Rewards"
+                title="My Reward"
                 content="$1098.00"
                 desc="(only tokens which you’re holding for 1 month are possible to claim)"
               />
@@ -127,7 +124,7 @@ const Collection = () => {
             </div>
           </RewardBox>
           <TwitterBox>
-            <span>verify twitter</span>
+            <span>Twitter Post Verification</span>
             <div>
               <Check />
             </div>
@@ -351,7 +348,7 @@ const Stats = styled.div`
   /* padding: 1rem; */
 `;
 const RewardBox = styled.div`
-  flex: 2;
+  flex: 1;
   background: #2c2c2c;
   display: flex;
   border-radius: 0.75rem;
@@ -404,4 +401,10 @@ const ClaimButton = styled.div`
   cursor: pointer;
   font-size: 1.2rem;
   font-weight: 300;
+`;
+
+const StatTitle = styled.div`
+  font-weight: 200;
+  font-size: ${({ theme }) => theme.fontxl};
+  padding: 1rem 0;
 `;

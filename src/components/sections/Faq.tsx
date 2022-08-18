@@ -1,5 +1,3 @@
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { useEffect } from "react";
 import styled from "styled-components";
 import Accordion from "../Accordion";
 // import AccordionDemo from "../AccordionDemo";
@@ -93,7 +91,6 @@ const Faq = () => {
           {/* WL Price : $150 USD */}
           {/* WL(0.09ETH), Public(0.12ETH)  */}
         </Box>
-        {/* 봇 */}
         <Box>
           <Accordion title="How will I get the reward and How often ?">
             We will take a snapshot with the Token ID-based holder's wallet
