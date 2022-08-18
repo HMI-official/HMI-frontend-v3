@@ -3,7 +3,6 @@ import { MerkleTree } from "merkletreejs";
 
 import { keccak256 } from "web3-utils";
 import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
-import { getLeaf, getProof } from "./merkleTree";
 import { getOgPolicy, getPublicPolicy, getWlPolicy } from "./proxyInteract";
 import { getMintTimeDiff } from "./common";
 import { IMintPolicy } from "../interfaces/interact";
@@ -15,13 +14,23 @@ import {
   PROXY_ABI,
   PROXY_CONTRACT_ADDRESS,
 } from "../web3Config";
-// TODO: 민팅 시작 시간 지났거나 아직 안되었을 때 처리하는 함수 만들기 public og wl sale에
+
 // TODO: og랑 wl 둘 다 민팅 가능 횟수 체크해서 숫자만큼 민팅했으면 민팅 불가능하게 하기
 
 export const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_RPC_URL!);
 
 const mintNFTContract = new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_ADDRESS);
 const proxyContract = new web3.eth.Contract(PROXY_ABI, PROXY_CONTRACT_ADDRESS);
+
+export const wlClaimed = async (wallet: string): Promise<number> => {
+  const wlClaimed = await mintNFTContract.methods.wlClaimed().call();
+  return Number(wlClaimed);
+};
+
+export const ogClaimed = async (wallet: string): Promise<number> => {
+  const ogClaimed = await mintNFTContract.methods.ogClaimed().call();
+  return Number(ogClaimed);
+};
 
 export const getTotalMinted = async () => {
   const totalMinted = await mintNFTContract.methods.totalSupply().call();
