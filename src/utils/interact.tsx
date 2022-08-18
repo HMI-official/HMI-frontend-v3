@@ -6,29 +6,17 @@ import {
   PROXY_CONTRACT_ADDRESS,
 } from "../web3Config";
 import { createAlchemyWeb3 } from "@alch/alchemy-web3";
-import { MerkleTree } from "merkletreejs";
 import { keccak256 } from "web3-utils";
-import { whitelist } from "../data/whitelist";
 import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
 import { getLeaf, getProof } from "./merkleTree";
-import { getRPCErrorMessage } from "./common";
-// import whitelist from ""
-// const whitelist = require("../scripts/whitelist.js");
+
+// TODO: 민팅 시작 시간 지났거나 아직 안되었을 때 처리하는 함수 만들기 public og wl sale에
+// TODO: og랑 wl 둘 다 민팅 가능 횟수 체크해서 숫자만큼 민팅했으면 민팅 불가능하게 하기
 
 export const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_RPC_URL!);
 
-// const contract = require("../artifacts/contracts/BoredApe.sol/BoredApe.json");
 const mintNFTContract = new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_ADDRESS);
 const proxyContract = new web3.eth.Contract(PROXY_ABI, PROXY_CONTRACT_ADDRESS);
-
-// Calculate merkle root from the whitelist array
-// const wlLeafNodes = whitelist.map((addr: string) => keccak256(addr));
-// const wlMerkleTree = new MerkleTree(wlLeafNodes, keccak256, {
-// sortPairs: true,
-// });
-// const wlRoot = wlMerkleTree.getRoot();
-
-// const ogRoot = "";
 
 export const getTotalMinted = async () => {
   const totalMinted = await mintNFTContract.methods.totalSupply().call();
