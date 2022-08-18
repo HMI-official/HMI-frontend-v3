@@ -113,3 +113,14 @@ export function getRPCErrorMessage(err: any) {
   var reason = j.data[Object.keys(j.data)[0]].reason;
   return reason;
 }
+
+export const getUnixTime = (date: Date) => {
+  const unixTime = (date.getTime() / 1000).toFixed(0);
+  return Number(unixTime);
+};
+
+export const getMintTimeDiff = (time: number) => {
+  const now = getUnixTime(new Date());
+  const gap = time - now;
+  return gap;
+};

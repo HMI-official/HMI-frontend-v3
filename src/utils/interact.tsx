@@ -1,3 +1,13 @@
+import { createAlchemyWeb3 } from "@alch/alchemy-web3";
+import { MerkleTree } from "merkletreejs";
+
+import { keccak256 } from "web3-utils";
+import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
+import { getLeaf, getProof } from "./merkleTree";
+import { getOgPolicy, getPublicPolicy, getWlPolicy } from "./proxyInteract";
+import { getMintTimeDiff } from "./common";
+import { IMintPolicy } from "../interfaces/interact";
+
 import {
   config,
   MINT_NFT_ABI,
@@ -5,11 +15,6 @@ import {
   PROXY_ABI,
   PROXY_CONTRACT_ADDRESS,
 } from "../web3Config";
-import { createAlchemyWeb3 } from "@alch/alchemy-web3";
-import { keccak256 } from "web3-utils";
-import { OG_MERKLE_INFO, WL_MERKLE_INFO } from "../constants/merkleRoot";
-import { getLeaf, getProof } from "./merkleTree";
-
 // TODO: 민팅 시작 시간 지났거나 아직 안되었을 때 처리하는 함수 만들기 public og wl sale에
 // TODO: og랑 wl 둘 다 민팅 가능 횟수 체크해서 숫자만큼 민팅했으면 민팅 불가능하게 하기
 
@@ -74,18 +79,18 @@ export const presaleMint = async (mintAmount: number) => {
 
   const { wlMerkleTree, wlRoot } = WL_MERKLE_INFO;
 
-  const leaf = keccak256(_wallet);
-  const proof = wlMerkleTree.getHexProof(leaf);
+  const merkleProofResponse = merkleProofCompliance({
+    merkleTree: wlMerkleTree,
+    root: wlRoot,
+    wallet: _wallet,
+    mintType: "wl",
+  });
+  if (!merkleProofResponse.success) return merkleProofResponse;
+  const proof = merkleProofResponse.proof;
 
-  // Verify Merkle Proof
-  const isValid = wlMerkleTree.verify(proof, leaf, wlRoot);
-
-  if (!isValid) {
-    return {
-      success: false,
-      status: "Invalid Merkle Proof - You are not whitelisted yet",
-    };
-  }
+  const mintPolicy = await getWlPolicy();
+  const mintTimeResponse = mintTimeCompliance(mintPolicy, "Wl");
+  if (!mintTimeResponse.success) return mintTimeResponse;
 
   const nonce = await web3.eth.getTransactionCount(_wallet, "latest");
   // console.log(window.ethereum.selectedAddress, mintAmount, proof);
@@ -140,20 +145,18 @@ export const ogSaleMint = async (mintAmount: number) => {
 
   const _wallet = window.ethereum.selectedAddress;
   const { ogMerkleTree, ogRoot } = OG_MERKLE_INFO;
-  const leaf = getLeaf(_wallet);
-  const proof = getProof(ogMerkleTree, leaf);
+  const merkleProofResponse = merkleProofCompliance({
+    merkleTree: ogMerkleTree,
+    root: ogRoot,
+    wallet: _wallet,
+    mintType: "og",
+  });
+  if (!merkleProofResponse.success) return merkleProofResponse;
+  const proof = merkleProofResponse.proof;
 
-  // Verify Merkle Proof
-  const isValid = ogMerkleTree.verify(proof, leaf, ogRoot);
-  // console.log(ogRoot);
-  // console.log(`isValid: ${isValid}`);
-
-  if (!isValid) {
-    return {
-      success: false,
-      status: "Invalid Merkle Proof - You are not OG",
-    };
-  }
+  const mintPolicy = await getOgPolicy();
+  const mintTimeResponse = mintTimeCompliance(mintPolicy, "Og");
+  if (!mintTimeResponse.success) return mintTimeResponse;
 
   const nonce = await web3.eth.getTransactionCount(_wallet, "latest");
 
@@ -200,31 +203,35 @@ export const publicMint = async (
   wallet: string,
   price: string
 ) => {
-  if (!window.ethereum.selectedAddress) {
-    return {
-      success: false,
-      status: "To be able to mint, you need to connect your wallet",
-    };
-  }
-
-  // get nounce for preventing replay attacks
-  const nonce = await web3.eth.getTransactionCount(
-    window.ethereum.selectedAddress,
-    "latest"
-  );
-
-  // Set up our Ethereum transaction
-  const tx = {
-    to: config.MINT_NFT_ADDRESS,
-    from: window.ethereum.selectedAddress,
-    value: parseInt(web3.utils.toWei(String(price), "ether")).toString(16), // hex
-    data: mintNFTContract.methods
-      .publicSaleMint(mintAmount, wallet, wallet)
-      .encodeABI(),
-    nonce: nonce.toString(16),
-  };
-
   try {
+    if (!window.ethereum.selectedAddress) {
+      return {
+        success: false,
+        status: "To be able to mint, you need to connect your wallet",
+      };
+    }
+
+    const mintPolicy = await getPublicPolicy();
+    const mintTimeResponse = mintTimeCompliance(mintPolicy, "Public");
+    if (!mintTimeResponse.success) return mintTimeResponse;
+
+    // get nounce for preventing replay attacks
+    const nonce = await web3.eth.getTransactionCount(
+      window.ethereum.selectedAddress,
+      "latest"
+    );
+
+    // Set up our Ethereum transaction
+    const tx = {
+      to: config.MINT_NFT_ADDRESS,
+      from: window.ethereum.selectedAddress,
+      value: parseInt(web3.utils.toWei(String(price), "ether")).toString(16), // hex
+      data: mintNFTContract.methods
+        .publicSaleMint(mintAmount, wallet, wallet)
+        .encodeABI(),
+      nonce: nonce.toString(16),
+    };
+
     const txHash = await window.ethereum.request({
       method: "eth_sendTransaction",
       params: [tx],
@@ -244,12 +251,71 @@ export const publicMint = async (
       ),
     };
   } catch (error: any) {
-    // const reason = await getRPCErrorMessage(error);
-    // let message = JSON.parse(error);
     console.log(error);
     return {
       success: false,
       status: "😞 Smth went wrong:" + error.message,
     };
   }
+};
+
+const mintTimeCompliance = (
+  mintPolicy: IMintPolicy | null,
+  mintType: string
+) => {
+  if (!mintPolicy)
+    return {
+      success: false,
+      status: `${mintType} mint config is not set`,
+    };
+
+  const { startTime, endTime } = mintPolicy;
+  const isStarted = getMintTimeDiff(startTime) < 0;
+  const isEnded = getMintTimeDiff(endTime) < 0;
+
+  switch (true) {
+    case !isStarted:
+      return {
+        success: false,
+        status: "Public mint is not started yet",
+      };
+    case isEnded:
+      return {
+        success: false,
+        status: "Public mint is ended",
+      };
+    default:
+      return {
+        success: true,
+        status: "Public mint is ongoing",
+      };
+  }
+};
+
+interface MerkleProofComplianceProps {
+  merkleTree: MerkleTree;
+  root: string;
+  wallet: string;
+  mintType: "og" | "wl";
+}
+
+const merkleProofCompliance = ({
+  merkleTree,
+  root,
+  wallet,
+  mintType,
+}: MerkleProofComplianceProps) => {
+  const leaf = keccak256(wallet);
+  const proof = merkleTree.getHexProof(leaf);
+
+  // Verify Merkle Proof
+  const isValid = merkleTree.verify(proof, leaf, root);
+
+  return isValid
+    ? { success: true, proof }
+    : {
+        success: false,
+        status: `Invalid Merkle Proof || you're not ${mintType}`,
+        proof: [],
+      };
 };

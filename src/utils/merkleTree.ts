@@ -10,7 +10,7 @@ export const createTree = (wallets: Array<number | string>) => {
   return tree;
 };
 
-export const getRoot = (tree: MerkleTree) => buf2hex(tree.getRoot());
+export const getRoot = (tree: MerkleTree): string => buf2hex(tree.getRoot());
 
 export const getLeaf = (wallet: any) => buf2hex(keccak256(wallet));
 
