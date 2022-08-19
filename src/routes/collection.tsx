@@ -105,12 +105,18 @@ const Collection = () => {
   return (
     <Section id="collection">
       <Wrapper>
-        <StatTitle>Estimated Distribution (annual)</StatTitle>
+        {/* <StatTitle>Estimated Distribution (annual)</StatTitle> */}
         <Stats>
           <RewardBox>
             <div className="reward__item1">
-              <RewardItemComponent title="Total" content="$369,000" />
-              <RewardItemComponent title="Per NFT" content="$112" />
+              <RewardItemComponent
+                title="Estimated Distribution (annual)"
+                content="$369,000"
+              />
+              <RewardItemComponent
+                title="Per NFT (3,333 NFTs)"
+                content="$112"
+              />
             </div>
           </RewardBox>
           <RewardBox>
