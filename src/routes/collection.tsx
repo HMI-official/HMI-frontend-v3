@@ -381,6 +381,7 @@ const TwitterBox = styled.div`
   border-radius: 0.75rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   > span {
     font-size: 1.3rem;
