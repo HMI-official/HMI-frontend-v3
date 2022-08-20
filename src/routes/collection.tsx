@@ -359,10 +359,10 @@ const RewardBox = styled.div`
   display: flex;
   border-radius: 0.75rem;
 
+  padding: 2rem;
   .reward__item2,
   .reward__item1 {
-    flex: 1;
-    padding: 2rem;
+    /* flex: 1; */
     gap: 1rem;
     display: flex;
     flex-direction: column;
