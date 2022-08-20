@@ -122,9 +122,9 @@ const Collection = () => {
           <RewardBox>
             <div className="reward__item2">
               <RewardItemComponent
-                title="My Reward"
+                title="My Reward (Quarterly)"
                 content="$1098.00"
-                desc="(only tokens which you’re holding for 1 month are possible to claim)"
+                desc="(Minimum 30days of holding is required to claim)"
               />
               <ClaimButton>Claim</ClaimButton>
             </div>
@@ -393,6 +393,9 @@ const TwitterBox = styled.div`
     flex: 1;
     align-items: center;
     justify-content: center;
+    path {
+      fill: ${({ theme }) => theme.primary} !important;
+    }
   }
 `;
 
