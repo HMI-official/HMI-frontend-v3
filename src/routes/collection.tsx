@@ -369,6 +369,9 @@ const RewardBox = styled.div`
     /* align-items: center; */
     justify-content: space-between;
   }
+  .reward__item2 {
+    width: 100%;
+  }
   ${media[768]} {
     flex-direction: column;
   }
@@ -411,6 +414,8 @@ const ClaimButton = styled.div`
   cursor: pointer;
   font-size: 1.2rem;
   font-weight: 300;
+  align-self: center;
+  width: 90%;
 `;
 
 const StatTitle = styled.div`
