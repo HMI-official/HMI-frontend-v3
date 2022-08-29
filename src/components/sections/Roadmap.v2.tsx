@@ -216,14 +216,7 @@ const RoadmapV2 = () => {
     <Section id="roadmap">
       <SectionWrapper>
         <TitleContainer>
-          <Title
-            variants={titleVariants}
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: false, amount: 0.06 }}
-          >
-            ROADMAP
-          </Title>
+          <Title>ROADMAP</Title>
         </TitleContainer>
         <CarouselEl>
           {/* labtop */}

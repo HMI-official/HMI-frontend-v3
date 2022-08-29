@@ -9,10 +9,10 @@ import { onClickWebsite } from "../../utils/common";
 import { media } from "../../styles/Themes";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { motion } from "framer-motion";
-import {
-  subtitleVariants,
-  titleVariants,
-} from "../common/styles/framer-motion";
+// import {
+//   subtitleVariants,
+//   titleVariants,
+// } from "../common/styles/framer-motion";
 
 const localConfig = {
   isReversed: false,
@@ -23,22 +23,10 @@ const AboutV2 = () => {
     <Section id="about">
       <Container>
         <Box>
-          <Title
-            variants={titleVariants}
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: false, amount: 0.06 }}
-          >
-            REAL VALUE PROJECT
-          </Title>
+          <Title>REAL VALUE PROJECT</Title>
           {/* subtitleVariants */}
           <SubTextContainer>
-            <SubText
-              variants={subtitleVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.06 }}
-            >
+            <SubText>
               HI-PLANET is an NFT project by High Minded Intelligence, IRL ("in
               real life") Streetwear fashion company. HI-Planet shares its 50%
               of net profit to Planet holders in the concept of NFT Utility

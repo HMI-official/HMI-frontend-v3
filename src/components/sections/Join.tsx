@@ -31,33 +31,12 @@ const Join = () => {
   return (
     <Section>
       <Container>
-        <Title
-          variants={titleVariants}
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: false, amount: 0.06 }}
-        >
-          Story of HMI
-        </Title>
+        <Title>Story of HMI</Title>
         <Wrapper>
           <Box className="item1">
             {/* <TextBox> */}
-            <Text
-              variants={subtitleVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.06 }}
-            >
-              {text1}
-            </Text>
-            <Text
-              variants={subtitleVariantsR}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.06 }}
-            >
-              {text2}
-            </Text>
+            <Text>{text1}</Text>
+            <Text>{text2}</Text>
             <ButtonContainer>
               <Button onClick={() => onClickWebsite(ADDRESS.hmi)}>
                 Visit website

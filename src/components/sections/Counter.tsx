@@ -63,12 +63,7 @@ const Counter = () => {
     <Section>
       <Container>
         <ModalWindow>
-          <Title
-            variants={titleVariants}
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: false, amount: 0.06 }}
-          >
+          <Title>
             HI PLANET NFT will be <br /> available for minting in:{" "}
           </Title>
           <TimeContainer>

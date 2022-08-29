@@ -3,19 +3,11 @@ import React from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { media } from "../../styles/Themes";
-import { titleVariants } from "../common/styles/framer-motion";
 const Vimeo = () => {
   // https://vimeo.com/manage/videos/733240801
   return (
     <Section>
-      <MainTitle
-        variants={titleVariants}
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: false, amount: 0.06 }}
-      >
-        High Minded Intelligence
-      </MainTitle>
+      <MainTitle>High Minded Intelligence</MainTitle>
       <VimeoContainer>
         <ReactPlayer url="https://vimeo.com/733240801" width={`100%`} />
       </VimeoContainer>

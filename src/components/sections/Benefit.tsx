@@ -46,70 +46,18 @@ interface ItemProps {
 }
 const Item = ({ title, children, duration }: ItemProps) => {
   return (
-    <ItemContainer
-      variants={titleVariants}
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: false, amount: 0.1 }}
-    >
+    <ItemContainer>
       <Icon>
         <img src="/images/crown.png" alt="crown" />
       </Icon>
-      <Title
-        variants={titleVariants}
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {title}
-      </Title>
+      <Title>{title}</Title>
       <ContentContainer>
-        <Content
-          variants={contentVariants(duration)}
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {children}
-        </Content>
+        <Content>{children}</Content>
       </ContentContainer>
     </ItemContainer>
   );
 };
 
-const titleVariants: Variants = {
-  offscreen: {
-    y: 50,
-    opacity: 0,
-  },
-  onscreen: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.3,
-    },
-  },
-};
-
-const contentVariants = (dur: number): Variants => {
-  return {
-    offscreen: {
-      x: -50,
-      opacity: 0,
-    },
-    onscreen: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        bounce: 0,
-        duration: dur,
-      },
-    },
-  };
-};
 const durations = [0.1, 0.4, 0.7, 0.1, 0.4, 0.7];
 
 const Benefit = () => {
@@ -119,14 +67,7 @@ const Benefit = () => {
   return (
     <Section>
       <SectionWrapper>
-        <MainTitle
-          variants={titleVariants}
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: false, amount: 0.06 }}
-        >
-          benefits
-        </MainTitle>
+        <MainTitle>benefits</MainTitle>
         <Grid>
           {/* <Row> */}
           {benefitData.map((item, index) => (
