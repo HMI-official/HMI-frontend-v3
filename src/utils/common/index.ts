@@ -77,7 +77,8 @@ const diffDay_v2 = (date1: Date, date2: Date): ITime => {
 };
 
 export const cutDecimalZero = (num: number, maxLenth: number): number => {
-  const num2String = num.toString().slice(0, maxLenth);
+  const num2String = num.toString().slice(0, maxLenth + 1);
+  // const num2String = num.toString()
   while (true) {
     if (num2String[num2String.length - 1] === "0") {
       num2String.slice(0, num2String.length - 1);
@@ -86,7 +87,11 @@ export const cutDecimalZero = (num: number, maxLenth: number): number => {
     }
   }
   const num2Float = Number.parseFloat(num2String);
-  return num2Float;
+  // console.log(maxLenth);
+  const decimal = Math.pow(10, maxLenth - 2);
+  // 반올림
+  return Math.round(num2Float * decimal) / decimal;
+  // return num2Float;
 };
 
 export const changeTimeZone = (date: Date, timeZone: string) => {

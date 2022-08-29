@@ -286,20 +286,59 @@ const mintTimeCompliance = (
     case !isStarted:
       return {
         success: false,
-        status: "Public mint is not started yet",
+        status: `${mintType} mint is not started yet`,
       };
     case isEnded:
       return {
         success: false,
-        status: "Public mint is ended",
+        status: `${mintType} mint is ended`,
       };
     default:
       return {
         success: true,
-        status: "Public mint is ongoing",
+        status: `${mintType} mint is ongoing`,
       };
   }
 };
+
+export const initMintTimeCompliance =
+  async (): Promise<IInitMintTimeComplianceResponse> => {
+    try {
+      const publicPolicy = await getPublicPolicy();
+      const ogPolicy = await getOgPolicy();
+      const wlPolicy = await getWlPolicy();
+
+      const publicMintTimeResponse = mintTimeCompliance(publicPolicy, "Public");
+      const ogMintTimeResponse = mintTimeCompliance(ogPolicy, "Og");
+      const wlMintTimeResponse = mintTimeCompliance(wlPolicy, "Whitelist");
+      return {
+        publicMintTimeResponse,
+        ogMintTimeResponse,
+        wlMintTimeResponse,
+      };
+    } catch (error: any) {
+      return {
+        publicMintTimeResponse: mintTimeResponseInit,
+        ogMintTimeResponse: mintTimeResponseInit,
+        wlMintTimeResponse: mintTimeResponseInit,
+      };
+    }
+  };
+const mintTimeResponseInit = {
+  success: false,
+  status: "Mint config is not set",
+};
+
+interface IInitMintTimeComplianceResponse {
+  publicMintTimeResponse: IMintTimeResponse;
+  ogMintTimeResponse: IMintTimeResponse;
+  wlMintTimeResponse: IMintTimeResponse;
+}
+
+interface IMintTimeResponse {
+  success: boolean;
+  status: string;
+}
 
 interface MerkleProofComplianceProps {
   merkleTree: MerkleTree;

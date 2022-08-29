@@ -29,6 +29,7 @@ import {
   publicMint,
   getWlClaimed,
   getOgClaimed,
+  initMintTimeCompliance,
 } from "../utils/interact";
 import { IMintStatus } from "../interfaces";
 // import { config } from "process";
@@ -241,9 +242,15 @@ const Minting: FC = () => {
       setTotalMinted(await getTotalMinted());
 
       setPaused(await isPausedState());
-      const _isPublicSale = await isPublicSaleState();
-      const _isPreSale = await isPreSaleState();
-      const _isOgSale = await isOgSaleState();
+      const { ogMintTimeResponse, publicMintTimeResponse, wlMintTimeResponse } =
+        await initMintTimeCompliance();
+
+      const _isPublicSale =
+        (await isPublicSaleState()) && publicMintTimeResponse.success;
+      const _isPreSale = (await isPreSaleState()) && wlMintTimeResponse.success;
+      const _isOgSale = (await isOgSaleState()) && ogMintTimeResponse.success;
+      // 여기서 시간도 가지고오기
+
       setIsPublicSale(_isPublicSale);
       setIsPreSale(_isPreSale);
       setIsOgSale(_isOgSale);

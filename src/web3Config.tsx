@@ -1521,6 +1521,53 @@ export const PROXY_ABI: AbiItem[] = [
   {
     inputs: [
       {
+        internalType: "uint16",
+        name: "_maxSupply",
+        type: "uint16",
+      },
+      {
+        internalType: "uint8",
+        name: "_maxMintAmountPerTx",
+        type: "uint8",
+      },
+      {
+        internalType: "string",
+        name: "_baseURI",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_hiddenURI",
+        type: "string",
+      },
+    ],
+    name: "setConfig",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_tokenHiddenURI",
+        type: "string",
+      },
+    ],
+    name: "setHiddenURI",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "_activatedTime",
         type: "uint256",
@@ -1778,10 +1825,10 @@ export const PROXY_ABI: AbiItem[] = [
 // 생각해보니까 가능할듯
 // 왜냐면 하나만 (히든 이미지)포인팅하고 있다가 리빌로 풀면 유저들이 직접 새로고침 해야하니까 그거 하면 한개씩 자동으로 되는거니까
 
-export const MINT_NFT_ADDRESS = "0x1df71Fface526F4630493cE6E9FBf671A85cA1a2";
+export const MINT_NFT_ADDRESS = "0xE57715749C8c016EeAC6716C1076B9617003CE1B";
 //
 export const PROXY_CONTRACT_ADDRESS =
-  "0xFBe868ED9c3a22E1cb6ba9254bb2940c0Ae650e1";
+  "0x65F678BD2fb93b450d4F2115822DB99B91556c3a";
 
 export const config = {
   MINT_NFT_ABI,
@@ -1789,7 +1836,7 @@ export const config = {
   maxMintAmount: 10,
   presaleMaxMintAmount: 5,
   ogMaxMintAmount: 1,
-  price: 0.001,
-  wlPrice: 0.001,
+  price: 0.12,
+  wlPrice: 0.09,
   ogPrice: 0,
 };
