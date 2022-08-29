@@ -131,18 +131,23 @@ const Minting: FC = () => {
       message: status,
     });
     setIsMinting(false);
+    await handleGetMaxMintAmount();
   };
 
   const handlePresaleMint = async () => {
     setIsMinting(true);
 
-    const { success, status } = await presaleMint(mintAmount);
+    const { success, status } = await presaleMint(
+      mintAmount,
+      mintConfig.totalPrice
+    );
 
     setMintStatus({
       success,
       message: status,
     });
     setIsMinting(false);
+    await handleGetMaxMintAmount();
   };
 
   const handlePublicMint = async () => {
@@ -171,6 +176,15 @@ const Minting: FC = () => {
 
   const onClickConnect = () =>
     connect({ autoSelect: { label: "string", disableModals: false } });
+
+  const handleGetMaxMintAmount = async () => {
+    const _maxMintAmount = await getMaxMintAmount(
+      isPublicSale,
+      isPreSale,
+      isOgSale
+    );
+    setMaxMintAmount(_maxMintAmount);
+  };
 
   // FIXME:  setting onboard
   // initialize onboard
@@ -261,12 +275,13 @@ const Minting: FC = () => {
 
   useEffect(() => {
     const init = async () => {
-      const _maxMintAmount = await getMaxMintAmount(
-        isPublicSale,
-        isPreSale,
-        isOgSale
-      );
-      setMaxMintAmount(_maxMintAmount);
+      await handleGetMaxMintAmount();
+      // const _maxMintAmount = await getMaxMintAmount(
+      //   isPublicSale,
+      //   isPreSale,
+      //   isOgSale
+      // );
+      // setMaxMintAmount(_maxMintAmount);
       // if (mintAmount > _maxMintAmount) setMintAmount(_maxMintAmount);
     };
     init();
@@ -304,17 +319,19 @@ const Minting: FC = () => {
     const isNotValid = paused || (!isPreSale && !isPublicSale && !isOgSale);
     const maxMintAmountExceeded = maxMintAmount === 0;
 
-    const onClickMint = () => {
+    const onClickMint = async () => {
       if (isNotValid) return;
       switch (true) {
         case isOgSale:
-          handleOgSaleMint();
+          await handleOgSaleMint();
+          // await handleGetMaxMintAmount();
           break;
         case isPreSale:
-          handlePresaleMint();
+          await handlePresaleMint();
+
           break;
         case isPublicSale:
-          handlePublicMint();
+          await handlePublicMint();
           break;
         default:
           break;
@@ -408,9 +425,6 @@ const Minting: FC = () => {
                   </div>
                 </Receipt>
                 {ButtonComponent()}
-                {/* CreditCardButtonComponent() */}
-                {/* <Button>MINT</Button> */}
-                {/* </Wrapper> */}
                 <CrossmintPayButton
                   collectionTitle={
                     crossmintConfig()?.collectionTitle ?? "smth went wrong"
