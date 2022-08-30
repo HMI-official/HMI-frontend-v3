@@ -100,6 +100,15 @@ export const presaleMint = async (mintAmount: number, totalPrice: string) => {
   const mintPolicy = await getWlPolicy();
   const mintTimeResponse = mintTimeCompliance(mintPolicy, "Wl");
   if (!mintTimeResponse.success) return mintTimeResponse;
+  // TODO: 토큰 몇개 민팅했는지도 체크하는 기능 만들기
+
+  const wlClaimed = await getWlClaimed(_wallet);
+  const availableTokens = config.presaleMaxMintAmount - wlClaimed;
+  if (availableTokens === 0)
+    return {
+      success: false,
+      status: "You have already minted all of your tokens",
+    };
 
   const nonce = await web3.eth.getTransactionCount(_wallet, "latest");
   // console.log(window.ethereum.selectedAddress, mintAmount, proof);
@@ -164,6 +173,14 @@ export const ogSaleMint = async (mintAmount: number) => {
   const mintPolicy = await getOgPolicy();
   const mintTimeResponse = mintTimeCompliance(mintPolicy, "Og");
   if (!mintTimeResponse.success) return mintTimeResponse;
+
+  const ogClaimed = await getOgClaimed(_wallet);
+  const availableTokens = config.ogMaxMintAmount - ogClaimed;
+  if (availableTokens === 0)
+    return {
+      success: false,
+      status: "You have already minted all of your tokens",
+    };
 
   const nonce = await web3.eth.getTransactionCount(_wallet, "latest");
 
@@ -322,6 +339,7 @@ export const initMintTimeCompliance =
       };
     }
   };
+
 const mintTimeResponseInit = {
   success: false,
   status: "Mint config is not set",
