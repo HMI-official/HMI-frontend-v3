@@ -1826,7 +1826,6 @@ export const PROXY_ABI: AbiItem[] = [
 // 왜냐면 하나만 (히든 이미지)포인팅하고 있다가 리빌로 풀면 유저들이 직접 새로고침 해야하니까 그거 하면 한개씩 자동으로 되는거니까
 
 export const MINT_NFT_ADDRESS = "0x832B3477f9a210d94538Eb057E022920be092105";
-//
 export const PROXY_CONTRACT_ADDRESS =
   "0x65F678BD2fb93b450d4F2115822DB99B91556c3a";
 

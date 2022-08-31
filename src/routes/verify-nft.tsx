@@ -70,8 +70,8 @@ const VerifyNft = () => {
   useEffect(() => {
     const body = document.querySelector("body");
     if (!body) return;
-    body.style.backgroundImage =
-      "linear-gradient(to right, #434343 10%, black 100%)";
+    // body.style.backgroundImage =
+    // "linear-gradient(to right, #434343 10%, black 100%)";
     // /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
     return () => {
       body.style.backgroundImage = "";
@@ -111,9 +111,9 @@ const VerifyNft = () => {
       <span className="title">verify wallet</span>
       <div className="btn__container">
         {!verified.verified && (
-          <span className="bn5" onClick={onClickVerify}>
+          <Btn className="" onClick={onClickVerify}>
             verify
-          </span>
+          </Btn>
         )}
       </div>
       {verified.sent && StatusComponent}
@@ -124,6 +124,13 @@ const VerifyNft = () => {
 };
 
 export default VerifyNft;
+
+const Btn = styled.span`
+  border: 2px solid white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+`;
 
 const glowingbn5 = keyframes`
   0% {
