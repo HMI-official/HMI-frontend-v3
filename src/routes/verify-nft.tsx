@@ -21,6 +21,7 @@ interface IVerified {
   message: string;
   sent: boolean;
   wallet?: string;
+  balanceOf?: number;
 }
 
 const verifyInit = { verified: false, message: "", sent: false };
@@ -30,27 +31,39 @@ const VerifyNft = () => {
   const getAccount = useAccount()?.getAccount;
 
   const onClickVerify = async () => {
-    if (!getAccount) return;
-    const account = await getAccount();
-    if (!account) return;
-    const { signature, message } = await signAccount(account);
-    const { accessToken, tokenType } = tokenInfo;
-    if (accessToken.length === 0 || tokenType.length === 0) return;
-    const result = await fetchWallet({
-      account,
-      signature,
-      message,
-      token: `${tokenType} ${accessToken}`,
-    });
-    console.log(result);
-    if (!result) return;
-    const { status, message: resultMsg, data } = result;
-    if (status) {
-      const { wallet } = data;
-      setVerified({ verified: true, message: resultMsg, sent: true, wallet });
-    } else {
-      console.log(resultMsg);
-      setVerified({ verified: false, message: resultMsg, sent: true });
+    try {
+      if (!getAccount) return;
+      const account = await getAccount();
+      if (!account) return;
+      const { signature, message } = await signAccount(account);
+      // const { accessToken, tokenType } = tokenInfo;
+      // if (accessToken.length === 0 || tokenType.length === 0) return;
+      const tokenType = "bearer";
+      const accessToken = "tmp";
+      const result = await fetchWallet({
+        account,
+        signature,
+        message,
+        token: `${tokenType} ${accessToken}`,
+      });
+      console.log(result);
+      if (!result) return;
+      const { status, message: resultMsg, data } = result;
+      if (status) {
+        const { wallet, balanceOf } = data;
+        setVerified({
+          verified: true,
+          message: resultMsg,
+          sent: true,
+          wallet,
+          balanceOf: Number(balanceOf),
+        });
+      } else {
+        console.log(resultMsg);
+        setVerified({ verified: false, message: resultMsg, sent: true });
+      }
+    } catch (error: any) {
+      console.log(error.message);
     }
   };
 
@@ -88,7 +101,7 @@ const VerifyNft = () => {
       </div>
       <TokenInfoContainer verified={verified.verified}>
         <StatusTitle isHighlighted={false}>HI-PLANET TOKEN NUMBER</StatusTitle>
-        <StatusText>3</StatusText>
+        <StatusText>{verified.balanceOf}</StatusText>
       </TokenInfoContainer>
       <CouponInfoContainer verified={verified.verified}>
         <StatusTitle isHighlighted={false}>Welcome-Package Coupon</StatusTitle>

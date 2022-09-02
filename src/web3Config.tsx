@@ -142,9 +142,9 @@ export const MINT_NFT_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_mintAmount",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "address",
@@ -901,9 +901,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "string",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "maxMintAmountPerTx",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "bool",
@@ -959,9 +959,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "string",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "maxMintAmountPerTx",
-            type: "uint8",
+            type: "uint256",
           },
           {
             internalType: "bool",
@@ -1031,9 +1031,9 @@ export const PROXY_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_policyIndex",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     name: "getMintTimeDiff",
@@ -1079,9 +1079,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "string",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "index",
-            type: "uint8",
+            type: "uint256",
           },
           {
             internalType: "bool",
@@ -1094,9 +1094,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "bytes32",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "maxMintAmountLimit",
-            type: "uint8",
+            type: "uint256",
           },
         ],
         internalType: "struct IHIPLANET.MintPolicy",
@@ -1134,9 +1134,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "string",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "index",
-            type: "uint8",
+            type: "uint256",
           },
           {
             internalType: "bool",
@@ -1149,9 +1149,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "bytes32",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "maxMintAmountLimit",
-            type: "uint8",
+            type: "uint256",
           },
         ],
         internalType: "struct IHIPLANET.MintPolicy",
@@ -1189,9 +1189,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "string",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "index",
-            type: "uint8",
+            type: "uint256",
           },
           {
             internalType: "bool",
@@ -1204,9 +1204,9 @@ export const PROXY_ABI: AbiItem[] = [
             type: "bytes32",
           },
           {
-            internalType: "uint8",
+            internalType: "uint256",
             name: "maxMintAmountLimit",
-            type: "uint8",
+            type: "uint256",
           },
         ],
         internalType: "struct IHIPLANET.MintPolicy",
@@ -1310,9 +1310,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "string",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "index",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "bool",
@@ -1325,9 +1325,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "bytes32",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "maxMintAmountLimit",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -1384,9 +1384,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "string",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "index",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "bool",
@@ -1399,9 +1399,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "bytes32",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "maxMintAmountLimit",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -1458,9 +1458,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "string",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "index",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "bool",
@@ -1473,9 +1473,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "bytes32",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "maxMintAmountLimit",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -1484,9 +1484,9 @@ export const PROXY_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_mintAmount",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -1526,9 +1526,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "uint16",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_maxMintAmountPerTx",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "string",
@@ -1581,9 +1581,9 @@ export const PROXY_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_maxMintAmountPerTx",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     name: "setMaxMintAmountPerTx",
@@ -1607,9 +1607,9 @@ export const PROXY_ABI: AbiItem[] = [
   {
     inputs: [
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_policyIndex",
-        type: "uint8",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -1663,9 +1663,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "bool",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_maxMintAmountLimit",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     name: "setOgsalePolicy",
@@ -1702,9 +1702,9 @@ export const PROXY_ABI: AbiItem[] = [
         type: "bool",
       },
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "_maxMintAmountLimit",
-        type: "uint8",
+        type: "uint256",
       },
     ],
     name: "setPresalePolicy",
@@ -1825,9 +1825,9 @@ export const PROXY_ABI: AbiItem[] = [
 // 생각해보니까 가능할듯
 // 왜냐면 하나만 (히든 이미지)포인팅하고 있다가 리빌로 풀면 유저들이 직접 새로고침 해야하니까 그거 하면 한개씩 자동으로 되는거니까
 
-export const MINT_NFT_ADDRESS = "0x832B3477f9a210d94538Eb057E022920be092105";
+export const MINT_NFT_ADDRESS = "0x394238774799869019e103e86fd063D48297922c";
 export const PROXY_CONTRACT_ADDRESS =
-  "0x65F678BD2fb93b450d4F2115822DB99B91556c3a";
+  "0xF4F9E4beBD17C07e56E5a35BdE4B9cFfc5Ec7dDa";
 
 export const config = {
   MINT_NFT_ABI,

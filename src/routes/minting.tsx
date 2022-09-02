@@ -437,9 +437,9 @@ const Minting: FC = () => {
                     crossmintConfig()?.collectionPhoto ?? "smth went wrong"
                   }
                   clientId={crossmintConfig()?.clientId ?? "smth went wrong"}
-                  environment={
-                    crossmintConfig()?.environment ?? "smth went wrong"
-                  }
+                  // environment={
+                  //   crossmintConfig()?.environment ?? "smth went wrong"
+                  // }
                   mintConfig={mintConfig as any}
                   disabled={
                     !userWallet || (!isPreSale && !isPublicSale && !isOgSale)
@@ -451,7 +451,7 @@ const Minting: FC = () => {
               {StatusComponent()}
               <h2>CONTRACT ADDRESS</h2>
               <a
-                href={`https://rinkeby.etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
+                href={`https://etherscan.io/address/${config.MINT_NFT_ADDRESS}#readContract`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

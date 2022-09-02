@@ -9,7 +9,7 @@ export const publicCrossmintConfig = {
   collectionTitle: common.collectionTitle,
   collectionDescription: "HI-PLANET(public-mint)",
   collectionPhoto: common.collectionPhoto,
-  clientId: "3a070582-3c09-41a0-8b3c-6ebc1287a51a",
+  clientId: "77c67d76-973a-4c4e-bfce-cbe8a7267751",
   environment: common.environment,
 };
 
@@ -17,6 +17,6 @@ export const wlCrossmintConfig = {
   collectionTitle: common.collectionTitle,
   collectionDescription: "HI-PLANET(wl-mint)",
   collectionPhoto: common.collectionPhoto,
-  clientId: "75051c41-d72e-43f5-90a6-1b604b5f7bce",
+  clientId: "7250e76b-0afe-46b1-9118-0aa1252a63e1",
   environment: common.environment,
 };

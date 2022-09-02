@@ -5,7 +5,7 @@ interface FetchWalletProps {
   account: string;
   signature: string;
   message: string;
-  token: string;
+  token?: string;
 }
 
 export const fetchWallet = async (props: FetchWalletProps) => {

@@ -134,12 +134,12 @@ export const presaleMint = async (mintAmount: number, totalPrice: string) => {
       success: true,
       status: (
         <a
-          href={`https://rinkeby.etherscan.io/tx/${txHash}`}
+          href={`https://etherscan.io/tx/${txHash}`}
           target="_blank"
           rel="noreferrer"
         >
           <p>✅ Check out your transaction on Etherscan:</p>
-          <p>{`https://rinkeby.etherscan.io/tx/${txHash}`}</p>
+          <p>{`https://etherscan.io/tx/${txHash}`}</p>
         </a>
       ),
     };
@@ -205,12 +205,12 @@ export const ogSaleMint = async (mintAmount: number) => {
       success: true,
       status: (
         <a
-          href={`https://rinkeby.etherscan.io/tx/${txHash}`}
+          href={`https://etherscan.io/tx/${txHash}`}
           target="_blank"
           rel="noreferrer"
         >
           <p>✅ Check out your transaction on Etherscan:</p>
-          <p>{`https://rinkeby.etherscan.io/tx/${txHash}`}</p>
+          <p>{`https://etherscan.io/tx/${txHash}`}</p>
         </a>
       ),
     };
@@ -265,12 +265,12 @@ export const publicMint = async (
       success: true,
       status: (
         <a
-          href={`https://rinkeby.etherscan.io/tx/${txHash}`}
+          href={`https://etherscan.io/tx/${txHash}`}
           target="_blank"
           rel="noreferrer"
         >
           <p>✅ Check out your transaction on Etherscan:</p>
-          <p>{`https://rinkeby.etherscan.io/tx/${txHash}`}</p>
+          <p>{`https://etherscan.io/tx/${txHash}`}</p>
         </a>
       ),
     };
