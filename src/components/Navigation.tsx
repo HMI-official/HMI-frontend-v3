@@ -229,8 +229,8 @@ const Navigation = () => {
           <MenuItem onClick={() => scrollTo("team")}>Team</MenuItem>
           <MenuItem onClick={() => scrollTo("faq")}>Faq</MenuItem>
           <MenuItem>
-            <Link to="/">Mint</Link>
-            {/* <Link to="/mint">Mint</Link> */}
+            {/* <Link to="/">Mint</Link> */}
+            <Link to="/mint">Mint</Link>
           </MenuItem>
           <MobileBtnComponent />
           <DesktopBtnComponent />

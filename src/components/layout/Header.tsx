@@ -232,12 +232,12 @@ const Header = () => {
           <MenuItem onClick={() => scrollTo("team")}>Team</MenuItem>
           <MenuItem onClick={() => scrollTo("faq")}>Faq</MenuItem>
           <MenuItem>
-            <Link to="/" onClick={() => setClick(!click)}>
+            <Link to="/mint" onClick={() => setClick(false)}>
               Mint
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/collection" onClick={() => setClick(!click)}>
+            <Link to="/collection" onClick={() => setClick(false)}>
               My Collection
             </Link>
           </MenuItem>
