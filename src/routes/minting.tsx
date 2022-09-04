@@ -395,7 +395,14 @@ const Minting: FC = () => {
             <Body>
               <Box className="box1">
                 <ImgWarpper>
-                  <MainImg src={HMI_GIF} alt="gif" />
+                  {/* <MainImg src={HMI_GIF} alt="gif" /> */}
+                  <MainVideo
+                    src="/vid/hidden-vid.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
 
                   <Indicator>
                     <span>{totalMinted}</span> \ {maxSupply}
@@ -763,4 +770,17 @@ const StatusWrapper = styled.div`
   background: var(--clr-selection-bg);
 
   word-break: break-word;
+`;
+
+const MainVideo = styled.video`
+  /* width: 60%; */
+
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  object-fit: cover;
+  /* position: absolute; */
+  /* ${media[768]} {
+    width: 100%;
+  } */
 `;
