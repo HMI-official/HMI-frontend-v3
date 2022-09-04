@@ -1,5 +1,5 @@
 export const mintCommonConfigInit = {
-  totalPrice: "0.001",
+  totalPrice: "0.012",
   _mintAmount: 1,
   receiver: "0x1",
   _merkleProof: [],

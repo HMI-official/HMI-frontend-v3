@@ -192,6 +192,10 @@ const Minting: FC = () => {
 
   useEffect(() => {
     if (!userWallet) return;
+  }, []);
+
+  useEffect(() => {
+    if (!userWallet) return;
     const main = async () => {
       const _leaf = getLeaf(userWallet);
 
