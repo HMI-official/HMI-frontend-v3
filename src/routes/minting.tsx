@@ -424,7 +424,12 @@ const Minting: FC = () => {
                     <AiOutlinePlus />
                   </button>
                 </Counter>
-                <div>Max Mint Amount: {config.maxMintAmount}</div>
+                <div>
+                  Max Mint Amount:{" "}
+                  {isPreSale
+                    ? config.presaleMaxMintAmount
+                    : config.maxMintAmount}
+                </div>
                 <Receipt>
                   <div className="item1"> Total</div>{" "}
                   <div className="item2">
