@@ -383,3 +383,13 @@ const merkleProofCompliance = ({
         proof: [],
       };
 };
+
+export const tokensOfOwner = async (wallet: string): Promise<string[]> => {
+  try {
+    const tokens = await mintNFTContract.methods.tokensOfOwner(wallet).call();
+    return tokens;
+  } catch (error: any) {
+    console.log(error.message);
+    return [];
+  }
+};

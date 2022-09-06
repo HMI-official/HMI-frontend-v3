@@ -9,12 +9,16 @@ import { IMetadata } from "../interfaces/metadata";
 import { media } from "../styles/Themes";
 import RewardItemComponent from "../components/collection/RewardItemComponent";
 import Check from "../components/Icons/Check";
+import axios from "axios";
+import { useAccount } from "../contexts/AccountContext";
+import { tokensOfOwner } from "../utils/interact";
 
 // const ranks = ["silver", "gold", "diamond"];
 
 // console.log(fakeDataRanks);
 
 const Collection = () => {
+  const account = useAccount()?.account;
   const [currRanks, setCurrRanks] = useState<string[]>([]);
   const [currPlanets, setCurrPlanets] = useState<string[]>([]);
   const [filterd, setFilterd] = useState<IMetadata[]>([]);
@@ -54,6 +58,18 @@ const Collection = () => {
     // scroll to top
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (!account) return;
+    const init = async () => {
+      const tokens = await tokensOfOwner(
+        "0x6f4A16Ab8385F6ca15fB1427C837c019e1A054ab"
+      );
+
+      console.log(tokens);
+    };
+    init();
+  }, [account]);
 
   const planetFilters = PLANET_NAMES.map((planet, index) => {
     const isClicked = currPlanets.includes(planet);
