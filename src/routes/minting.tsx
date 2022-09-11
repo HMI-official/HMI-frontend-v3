@@ -440,6 +440,10 @@ const Minting: FC = () => {
                     <span>+ GAS</span>
                   </div>
                 </Receipt>
+                <Desc>
+                  <span>(When you buy 5+ : 10% Discount)</span>
+                  <span>(When you buy 10 : 20% Discount)</span>
+                </Desc>
                 {ButtonComponent()}
                 <CrossmintPayButton
                   collectionTitle={
@@ -676,7 +680,7 @@ const Receipt = styled.div`
 const Button = styled.button<{ isNotValid?: boolean }>`
   width: 100%;
   font-size: calc(${(props) => props.theme.fontxl} - 7px);
-  margin-top: 3.4rem;
+  margin-top: 2rem;
   border-radius: 10px;
   padding: 0.4rem 0;
   cursor: ${({ isNotValid }) => (isNotValid ? "not-allowed" : "pointer")};
@@ -792,4 +796,14 @@ const MainVideo = styled.video`
   /* ${media[768]} {
     width: 100%;
   } */
+`;
+
+const Desc = styled.span`
+  color: ${(props) => props.theme.colors.gray400};
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 1rem;
+  gap: 0.35rem;
 `;
