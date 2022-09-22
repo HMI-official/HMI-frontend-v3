@@ -63,22 +63,20 @@ const Counter = () => {
     <Section>
       <Container>
         <ModalWindow>
-          <Title>
-            HI PLANET NFT will be <br /> available for minting in:{" "}
-          </Title>
-          <TimeContainer>
-            <TimeItem time={time?.day ?? 0} indicator="days" />
+          <Title>Minting LIVE !</Title>
+          {/* <TimeContainer> */}
+          {/* <TimeItem time={time?.day ?? 0} indicator="days" />
             <TimeItem time={time?.hour ?? 0} indicator="hours" />
             <TimeItem time={time?.min ?? 0} indicator="minutes" />
-            <TimeItem time={time?.sec ?? 0} indicator="seconds" />
-          </TimeContainer>
+            <TimeItem time={time?.sec ?? 0} indicator="seconds" /> */}
+          {/* </TimeContainer> */}
           <InfoContainer>
-            <InfoItem
+            {/* <InfoItem
               title="price"
               description="WL(0.09ETH), Public(0.12ETH) "
-            />
-            <InfoItem title="total supply" description="3,333" />
-            <InfoItem title="mint date" description="THU, Sep 8th - 2pm PST" />
+            /> */}
+            {/* <InfoItem title="total supply" description="3,333" /> */}
+            {/* <InfoItem title="mint date" description="THU, Sep 8th - 2pm PST" /> */}
           </InfoContainer>
           {/* <Link to="/"> */}
           <Link to="/mint">
